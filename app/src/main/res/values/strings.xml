@@ -1,3 +1,30 @@
 <resources>
     <string name="app_name">Proyecto_PDM_G10</string>
+    <string name="title_activity_entidad_capacitadora_menu">EntidadCapacitadoraActivity</string>
+    <string name="title_activity_area_interes_menu">AreaDeInteresActivity</string>
+
+    <string name="title_entidad_capacitadora_insertar">EntidadCapacitadoraInsertarActivity</string>
+    <string name="title_entidad_capacitadora_eliminar">EntidadCapacitadoraEliminarActivity</string>
+    <string name="title_activity_entidad_capacitadora_actualizar">EntidadCapacitadoraActualizarActivity</string>
+    <string name="title_activity_entidad_capacitadora_consultar">EntidadCapacitadoraConsultarActivity</string>
+
+    <string name="EntidadCapacitadora_menu">Funcion a ejecutar Entidad Capacitadora</string>
+
+
+    <!--General para todos-->
+    <string name="insertar_registro">Insertar Registro</string>
+    <string name="eliminar_registro">Eliminar Registro</string>
+    <string name="consultar_registro">Consultar Registro</string>
+    <string name="actualizar_registro">Actualizar Registro</string>
+    <string name="opciones">Opciones:</string>
+    <string name="limpiar">Limpiar</string>
+    <string name="codigo">Codigo:</string>
+    <string name="nombre">Nombre:</string>
+    <string name="descripcion">Descripcion:</string>
+    <string name="insertar">Insertar:</string>
+    <string name="consultar">Consultar</string>
+    <string name="actualizar">Actualizar</string>
+    <string name="eliminar">Eliminar</string>
+
+
 </resources>

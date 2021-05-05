@@ -1,3 +1,30 @@
 <resources>
     <string name="app_name">Proyecto_PDM_G10</string>
+    <string name="title_activity_entidad_capacitadora_menu">TrainingEntityMenuActivity</string>
+    <string name="title_activity_area_interes_menu">AreaOfInteresActivity</string>
+
+    <string name="title_entidad_capacitadora_insertar">InsertTrainingEntityActivity</string>
+    <string name="title_entidad_capacitadora_eliminar">DeleteTrainingEntityActivity</string>
+    <string name="title_activity_entidad_capacitadora_actualizar">UpdateTrainingEntityActivity</string>
+    <string name="title_activity_entidad_capacitadora_consultar">ReadTrainingEntityActivity</string>
+
+    <string name="EntidadCapacitadora_menu">Funtion to be executed Training Entity</string>
+
+    <!--General para todos-->
+    <string name="insertar_registro">Insert Register</string>
+    <string name="eliminar_registro">Delete Register</string>
+    <string name="consultar_registro">Read Register</string>
+    <string name="actualizar_registro">Update Register</string>
+    <string name="opciones">Options:</string>
+    <string name="limpiar">Clear</string>
+
+    <string name="codigo">Code:</string>
+    <string name="nombre">Name:</string>
+    <string name="descripcion">Description:</string>
+    <string name="insertar">Insert:</string>
+    <string name="consultar">Consultar</string>
+    <string name="actualizar">Actualizar</string>
+    <string name="eliminar">Eliminar</string>
+
+
 </resources>
