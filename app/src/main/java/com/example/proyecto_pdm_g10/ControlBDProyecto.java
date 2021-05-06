@@ -49,6 +49,7 @@ public class ControlBDProyecto {
     public void cerrar(){
         DBHelper.close();
     }
+    //Area de interes crud
     public String insertar(AreaInteres areaInteres){
         String regInsertados="Registro Insertado Nº= ";
         long contador=0;
@@ -107,6 +108,75 @@ public class ControlBDProyecto {
             return null;
         }
     }
+    //Fin crud area de interes
+
+    //Inicio crud entidad Capacitadora
+    public String insertar(EntidadCapacitadora entidadCapacitadora){
+        String regInsertados="Registro Insertado Nº= ";
+        long contador=0;
+        ContentValues entidad = new ContentValues();
+        entidad.put("codigo", entidadCapacitadora.getCodigo());
+        entidad.put("nombre", entidadCapacitadora.getNombre());
+        entidad.put("descripcion", entidadCapacitadora.getDescripcion());
+        entidad.put("telefono", entidadCapacitadora.getTelefono());
+        entidad.put("correo", entidadCapacitadora.getCorreo());
+
+        contador=db.insert("entidadCapacitadora", null, entidad);
+        if(contador==-1 || contador==0)
+        {
+            regInsertados= "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
+        }
+        else {
+            regInsertados=regInsertados+contador;
+        }
+        return regInsertados;
+
+    }
+    public String actualizar(EntidadCapacitadora entidadCapacitadora){
+        if(verificarIntegridad(entidadCapacitadora, 2)){
+            String[] id = {entidadCapacitadora.getCodigo()};
+            ContentValues cv = new ContentValues();
+            cv.put("nombre", entidadCapacitadora.getNombre());
+            cv.put("descripcion", entidadCapacitadora.getDescripcion());
+            cv.put("telefono", entidadCapacitadora.getTelefono());
+            cv.put("correo", entidadCapacitadora.getCorreo());
+
+            db.update("entidadCapacitadora", cv, "codigo = ?", id);
+            return "Registro Actualizado Correctamente";
+        }else{
+            return "Registro con codigo " + entidadCapacitadora.getCodigo() + " no existe";
+        }
+    }
+    public String eliminar(EntidadCapacitadora entidadCapacitadora){
+        String regAfectados="filas afectadas= ";
+        int contador=0;
+        //Verificar si se encuentra en otra tabla
+        /*if (verificarIntegridad(areaInteres,3)) {
+            contador+=db.delete("nota", "carnet='"+alumno.getCarnet()+"'", null);
+        }*/
+        contador+=db.delete("entidadCapacitadora", "codigo='"+entidadCapacitadora.getCodigo()+"'", null);
+        regAfectados+=contador;
+        return regAfectados;
+    }
+    public EntidadCapacitadora consultarEntidadCapacitadora(String codigo){
+        String[] id = {codigo};
+        Cursor cursor = db.query("entidadCapacitadora", camposEntidadCapacitadora, "codigo = ?",
+                id, null, null, null);
+        if(cursor.moveToFirst()){
+            EntidadCapacitadora entidadCapacitadora = new EntidadCapacitadora();
+            entidadCapacitadora.setCodigo(cursor.getString(0));
+            entidadCapacitadora.setNombre(cursor.getString(1));
+            entidadCapacitadora.setDescripcion(cursor.getString(2));
+            entidadCapacitadora.setTelefono(cursor.getString(3));
+            entidadCapacitadora.setCorreo(cursor.getString(4));
+
+            return entidadCapacitadora;
+        }else{
+            return null;
+        }
+    }
+    //FIN entidad capacitadora
+
     private boolean verificarIntegridad(Object dato, int relacion) throws SQLException {
         switch (relacion) {
             //Verificando si existe el area de interes antes de actualizarlo
@@ -116,6 +186,19 @@ public class ControlBDProyecto {
                 String[] id = {areaInteres.getCodigo()};
                 abrir();
                 Cursor c2 = db.query("areaInteres", null, "codigo = ?", id, null, null,
+                        null);
+                if (c2.moveToFirst()) {
+                    return true;
+                }
+                return false;
+            }
+            //Verificando si existe la entidad capacitadora antes de actualizarla
+            case 2:
+            {
+                EntidadCapacitadora entidadCapacitadora = (EntidadCapacitadora) dato;
+                String[] id = {entidadCapacitadora.getCodigo()};
+                abrir();
+                Cursor c2 = db.query("entidadCapacitadora", null, "codigo = ?", id, null, null,
                         null);
                 if (c2.moveToFirst()) {
                     return true;

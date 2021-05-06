@@ -25,6 +25,8 @@
     <string name="consultar">Consultar</string>
     <string name="actualizar">Actualizar</string>
     <string name="eliminar">Eliminar</string>
+    <string name="telefono">Telefono:</string>
+    <string name="correo">Correo:</string>
 
 
 </resources>
