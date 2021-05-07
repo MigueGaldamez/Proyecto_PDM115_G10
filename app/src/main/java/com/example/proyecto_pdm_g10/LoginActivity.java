@@ -29,16 +29,20 @@ public class LoginActivity extends Activity {
         Usuario usuario = BDhelper.consultarUsuario(editUsuario.getText().toString(), editClave.getText().toString());
         BDhelper.cerrar();
         if(usuario == null)
-            Toast.makeText(this, "Usuario no registrado",
-                    Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Usuario no registrado", Toast.LENGTH_SHORT).show();
 
         else{
-            Toast.makeText(this, "Logeado", Toast.LENGTH_LONG).show();
-            try {
+            Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show();
+
+
+
+           try {
+                String value=usuario.getIdUsuario();
                 //editNotafinal.setText(String.valueOf(nota.getNotafinal()));
 
                 Class<?> clase = Class.forName("com.example.proyecto_pdm_g10." + main);
                 Intent inte = new Intent(this, clase);
+                inte.putExtra("idsesion",value);
                 this.startActivity(inte);
             } catch(ClassNotFoundException e){
             e.printStackTrace();

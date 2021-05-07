@@ -40,4 +40,5 @@ public class AreaInteresActualizarActivity extends Activity {
         editDescripcion.setText("");
 
     }
+
 }

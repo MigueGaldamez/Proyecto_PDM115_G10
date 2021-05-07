@@ -136,6 +136,31 @@ public class ControlBDProyecto {
             return null;
         }
     }
+    public Usuario consultarUsuario(String idusuario){
+        String[] id = {idusuario};
+        Cursor cursor = db.query("usuario", camposUsuario, "idUsuario = ?", id, null, null, null);
+        if(cursor.moveToFirst()){
+            Usuario usu = new Usuario();
+            usu.setIdUsuario(cursor.getString(0));
+            usu.setNomUsuario(cursor.getString(1));
+            usu.setClave(cursor.getString(2));
+            return usu;
+        }else{
+            return null;
+        }
+    }
+    public AccesoUsuario consultarAccesoUsuario(String idusuario, String idopcion){
+        String[] id = {idusuario, idopcion};
+        Cursor cursor = db.query("accesoUsuario", camposAccesoUsuario, "idUsuario = ? AND idOpcion = ?", id, null, null, null);
+        if(cursor.moveToFirst()){
+            AccesoUsuario acceso = new AccesoUsuario();
+            acceso.setIdUsuario(cursor.getString(0));
+            acceso.setIdOpcion(cursor.getString(1));
+            return acceso;
+        }else{
+            return null;
+        }
+    }
 
 
     //FIN INSERTAR
@@ -321,13 +346,13 @@ public class ControlBDProyecto {
 
 
     public String llenarBDUsuario() {
-        final String[] VAidUsuario = {"01","02","03"};
-        final String[] VAnomUsuario = {"Carlos","Alberto","Hernan"};
-        final String[] VAclave = {"Ch1q2","jA3f2","gD21d"};
+        final String[] VAidUsuario = {"01","02","03","04","05"};
+        final String[] VAnomUsuario = {"GC18090","PT18003","VM13068","AA15020","CZ13016"};
+        final String[] VAclave = {"admin","admin","admin","admin","admin"};
 
-        final String[] VBidOpcion = {"010","011","012","024","034"};
-        final String[] VBdesOpcion = {"Menu de Area Interes","Adicion Area Interes","Modificacion Area Interes","Consulta de Materia","Consulta de Nota"};
-        final int[] VBnumCrud = {0,1,2,4,4};
+        final String[] VBidOpcion = {"00","010","011","012","024","034"};
+        final String[] VBdesOpcion = {"Acceso General","Menu de Area Interes","Adicion Area Interes","Modificacion Area Interes","Consulta de Entidad Capacitadora","Consulta de Nota"};
+        final int[] VBnumCrud = {0,0,1,2,4,4};
 
         final String[] VCidOpcion = {"010","011","024","034"};
         final String[] VCidUsuario = {"01","01","03","03"};
@@ -337,14 +362,14 @@ public class ControlBDProyecto {
         db.execSQL("DELETE FROM accesoUsuario");
 
         Usuario usuario = new Usuario();
-        for(int i=0;i<3;i++){
+        for(int i=0;i<5;i++){
             usuario.setIdUsuario(VAidUsuario[i]);
             usuario.setNomUsuario(VAnomUsuario[i]);
             usuario.setClave(VAclave[i]);
             insertar(usuario);
         }
         OpcionCrud opcionCrud = new OpcionCrud();
-        for(int i=0;i<5;i++){
+        for(int i=0;i<6;i++){
             opcionCrud.setIdOpcion(VBidOpcion[i]);
             opcionCrud.setDesOpcion(VBdesOpcion[i]);
             opcionCrud.setNumCrud(VBnumCrud[i]);
