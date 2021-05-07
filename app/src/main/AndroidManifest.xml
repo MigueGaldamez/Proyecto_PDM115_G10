@@ -9,7 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Proyecto_PDM_G10">
-        <activity android:name=".EntidadCapacitadoraInsertarActivity"></activity>
+        <activity android:name=".LoginActivity"><intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter></activity>
+        <activity android:name=".EntidadCapacitadoraInsertarActivity" />
         <activity android:name=".EntidadCapacitadoraEliminarActivity" />
         <activity android:name=".EntidadCapacitadoraConsultarActivity" />
         <activity android:name=".EntidadCapacitadoraActualizarActivity" />
@@ -20,11 +25,7 @@
         <activity android:name=".EntidadCapacitadoraMenuActivity" />
         <activity android:name=".AreaInteresMenuActivity" />
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

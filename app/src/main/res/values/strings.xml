@@ -27,6 +27,9 @@
     <string name="eliminar">Eliminar</string>
     <string name="telefono">Telefono:</string>
     <string name="correo">Correo:</string>
+    <string name="clave">Clave:</string>
+    <string name="Usuario">Usuario:</string>
+    <string name="Llenarbase">Llenar Base</string>
 
 
 </resources>

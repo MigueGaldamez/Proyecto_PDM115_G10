@@ -7,10 +7,17 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.security.acl.AclEntry;
+
 public class ControlBDProyecto {
 
     private static final String[]camposAreaInteres = new String [] {"codigo","nombre","descripcion"};
     private static final String[]camposEntidadCapacitadora = new String []   {"codigo", "nombre", "descripcion", "telefono", "correo"};
+
+
+    private static final String[]camposOpcionCrud = new String [] {"idOpcion","desOpcion","numCrud"};
+    private static final String[]camposUsuario = new String [] {"idUsuario","nomUsuario","clave"};
+    private static final String[]camposAccesoUsuario = new String [] {"idOpcion","idUsuario"};
 
     private final Context context;
     private DatabaseHelper DBHelper;
@@ -32,6 +39,12 @@ public class ControlBDProyecto {
                 db.execSQL("CREATE TABLE areaInteres(codigo VARCHAR(7) NOT NULL PRIMARY KEY,nombre VARCHAR(30),descripcion VARCHAR(100));");
                 db.execSQL("CREATE TABLE entidadCapacitadora(codigo VARCHAR(6) NOT NULL PRIMARY KEY,nombre VARCHAR(30),descripcion VARCHAR(100),telefono VARCHAR(20),correo VARCHAR(100));");
 
+                db.execSQL("CREATE TABLE usuario(idUsuario CHAR(2) NOT NULL PRIMARY KEY,nomUsuario VARCHAR(30),clave CHAR(5));");
+                db.execSQL("CREATE TABLE opcionCrud(idOpcion CHAR(3) NOT NULL PRIMARY KEY,desOpcion VARCHAR(30),numCrud INTEGER);");
+                db.execSQL("CREATE TABLE accesoUsuario(idUsuario VARCHAR(2) NOT NULL ,idOpcion VARCHAR(3) NOT NULL  ,PRIMARY KEY(idOpcion,idUsuario));");
+
+
+
             }catch(SQLException e){
                 e.printStackTrace();
             }
@@ -49,6 +62,84 @@ public class ControlBDProyecto {
     public void cerrar(){
         DBHelper.close();
     }
+
+    //Insertar USUARIOS , OPCIONESCRUD y ACCESOUSUARIO
+    public String insertar(Usuario usuario){
+        String regInsertados="Registro Insertado Nº= ";
+        long contador=0;
+        ContentValues usu = new ContentValues();
+        usu.put("idUsuario", usuario.getIdUsuario());
+        usu.put("nomUsuario", usuario.getNomUsuario());
+        usu.put("clave", usuario.getClave());
+
+        contador=db.insert("usuario", null, usu);
+        if(contador==-1 || contador==0)
+        {
+            regInsertados= "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
+        }
+        else {
+            regInsertados=regInsertados+contador;
+        }
+        return regInsertados;
+
+    }
+
+    public String insertar(OpcionCrud opcionCrud){
+        String regInsertados="Registro Insertado Nº= ";
+        long contador=0;
+        ContentValues opcion = new ContentValues();
+        opcion.put("idOpcion", opcionCrud.getIdOpcion());
+        opcion.put("desOpcion", opcionCrud.getDesOpcion());
+        opcion.put("numCrud", opcionCrud.getNumCrud());
+
+        contador=db.insert("opcionCrud", null, opcion);
+        if(contador==-1 || contador==0)
+        {
+            regInsertados= "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
+        }
+        else {
+            regInsertados=regInsertados+contador;
+        }
+        return regInsertados;
+
+    }
+    public String insertar(AccesoUsuario accesoUsuario){
+        String regInsertados="Registro Insertado Nº= ";
+        long contador=0;
+        if(verificarIntegridad(accesoUsuario,3))
+        {
+            ContentValues acceso = new ContentValues();
+            acceso.put("idOpcion", accesoUsuario.getIdOpcion());
+            acceso.put("idUsuario", accesoUsuario.getIdUsuario());
+            contador=db.insert("accesoUsuario", null, acceso);
+        }
+        if(contador==-1 || contador==0)
+        {
+            regInsertados= "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
+        }
+        else {
+            regInsertados=regInsertados+contador;
+        }
+        return regInsertados;
+    }
+
+    public Usuario consultarUsuario(String idusuario, String clave){
+        String[] id = {idusuario, clave};
+        Cursor cursor = db.query("usuario", camposUsuario, "nomUsuario = ? AND clave = ?", id, null, null, null);
+        if(cursor.moveToFirst()){
+            Usuario usu = new Usuario();
+            usu.setIdUsuario(cursor.getString(0));
+            usu.setNomUsuario(cursor.getString(1));
+            usu.setClave(cursor.getString(2));
+            return usu;
+        }else{
+            return null;
+        }
+    }
+
+
+    //FIN INSERTAR
+
     //Area de interes crud
     public String insertar(AreaInteres areaInteres){
         String regInsertados="Registro Insertado Nº= ";
@@ -176,7 +267,6 @@ public class ControlBDProyecto {
         }
     }
     //FIN entidad capacitadora
-
     private boolean verificarIntegridad(Object dato, int relacion) throws SQLException {
         switch (relacion) {
             //Verificando si existe el area de interes antes de actualizarlo
@@ -205,6 +295,24 @@ public class ControlBDProyecto {
                 }
                 return false;
             }
+            case 3:
+            {
+//verificar que al insertar nota exista el codigo del usuario y el codigo de crud
+                AccesoUsuario accesoUsuario = (AccesoUsuario) dato;
+                String[] id1 = {accesoUsuario.getIdOpcion()};
+                String[] id2 = {accesoUsuario.getIdUsuario()};
+//abrir();
+                Cursor cursor1 = db.query("opcionCrud", null, "idOpcion = ?", id1, null,
+                        null, null);
+                Cursor cursor2 = db.query("usuario", null, "idUsuario = ?", id2,
+                        null, null, null);
+                if(cursor1.moveToFirst() && cursor2.moveToFirst()){
+//Se encontraron datos
+                    return true;
+                }
+                return false;
+            }
+
             default:
                 return false;
         }
@@ -212,7 +320,45 @@ public class ControlBDProyecto {
     }
 
 
-    public String llenarBDCarnet() {
+    public String llenarBDUsuario() {
+        final String[] VAidUsuario = {"01","02","03"};
+        final String[] VAnomUsuario = {"Carlos","Alberto","Hernan"};
+        final String[] VAclave = {"Ch1q2","jA3f2","gD21d"};
+
+        final String[] VBidOpcion = {"010","011","012","024","034"};
+        final String[] VBdesOpcion = {"Menu de Area Interes","Adicion Area Interes","Modificacion Area Interes","Consulta de Materia","Consulta de Nota"};
+        final int[] VBnumCrud = {0,1,2,4,4};
+
+        final String[] VCidOpcion = {"010","011","024","034"};
+        final String[] VCidUsuario = {"01","01","03","03"};
+        abrir();
+        db.execSQL("DELETE FROM usuario");
+        db.execSQL("DELETE FROM opcionCrud");
+        db.execSQL("DELETE FROM accesoUsuario");
+
+        Usuario usuario = new Usuario();
+        for(int i=0;i<3;i++){
+            usuario.setIdUsuario(VAidUsuario[i]);
+            usuario.setNomUsuario(VAnomUsuario[i]);
+            usuario.setClave(VAclave[i]);
+            insertar(usuario);
+        }
+        OpcionCrud opcionCrud = new OpcionCrud();
+        for(int i=0;i<5;i++){
+            opcionCrud.setIdOpcion(VBidOpcion[i]);
+            opcionCrud.setDesOpcion(VBdesOpcion[i]);
+            opcionCrud.setNumCrud(VBnumCrud[i]);
+            insertar(opcionCrud);
+        }
+
+        AccesoUsuario accesoUsuario = new AccesoUsuario();
+        for(int i=0;i<4;i++){
+            accesoUsuario.setIdOpcion(VCidOpcion[i]);
+            accesoUsuario.setIdUsuario(VCidUsuario[i]);
+            insertar(accesoUsuario);
+        }
+
+
         cerrar();
         return "Guardo Correctamente";
     }
