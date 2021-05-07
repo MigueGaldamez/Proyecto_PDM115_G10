@@ -72,6 +72,7 @@ public class AreaInteresMenuActivity extends ListActivity {
         try{
             Class<?> clase=Class.forName("com.example.proyecto_pdm_g10."+nombreValue);
             Intent inte = new Intent(this,clase);
+            inte.putExtra("idsesion",idsesion);
             this.startActivity(inte);
         }catch(ClassNotFoundException e){
             e.printStackTrace();

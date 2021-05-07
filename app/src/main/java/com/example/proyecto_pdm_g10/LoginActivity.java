@@ -34,8 +34,6 @@ public class LoginActivity extends Activity {
         else{
             Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show();
 
-
-
            try {
                 String value=usuario.getIdUsuario();
                 //editNotafinal.setText(String.valueOf(nota.getNotafinal()));

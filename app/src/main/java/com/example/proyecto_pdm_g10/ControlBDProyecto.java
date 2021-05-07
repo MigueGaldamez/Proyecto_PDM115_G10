@@ -10,10 +10,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.security.acl.AclEntry;
 
 public class ControlBDProyecto {
-
+    //PARA CADA TABLA HAY QUE LISTAR LOS CAMPOS
     private static final String[]camposAreaInteres = new String [] {"codigo","nombre","descripcion"};
     private static final String[]camposEntidadCapacitadora = new String []   {"codigo", "nombre", "descripcion", "telefono", "correo"};
-
 
     private static final String[]camposOpcionCrud = new String [] {"idOpcion","desOpcion","numCrud"};
     private static final String[]camposUsuario = new String [] {"idUsuario","nomUsuario","clave"};
@@ -36,14 +35,13 @@ public class ControlBDProyecto {
         @Override
         public void onCreate(SQLiteDatabase db) {
             try{
+                //AQUI AGREGAMOS LAS TABLAS
                 db.execSQL("CREATE TABLE areaInteres(codigo VARCHAR(7) NOT NULL PRIMARY KEY,nombre VARCHAR(30),descripcion VARCHAR(100));");
                 db.execSQL("CREATE TABLE entidadCapacitadora(codigo VARCHAR(6) NOT NULL PRIMARY KEY,nombre VARCHAR(30),descripcion VARCHAR(100),telefono VARCHAR(20),correo VARCHAR(100));");
 
                 db.execSQL("CREATE TABLE usuario(idUsuario CHAR(2) NOT NULL PRIMARY KEY,nomUsuario VARCHAR(30),clave CHAR(5));");
                 db.execSQL("CREATE TABLE opcionCrud(idOpcion CHAR(3) NOT NULL PRIMARY KEY,desOpcion VARCHAR(30),numCrud INTEGER);");
                 db.execSQL("CREATE TABLE accesoUsuario(idUsuario VARCHAR(2) NOT NULL ,idOpcion VARCHAR(3) NOT NULL  ,PRIMARY KEY(idOpcion,idUsuario));");
-
-
 
             }catch(SQLException e){
                 e.printStackTrace();
@@ -63,7 +61,7 @@ public class ControlBDProyecto {
         DBHelper.close();
     }
 
-    //Insertar USUARIOS , OPCIONESCRUD y ACCESOUSUARIO
+    //Insertar USUARIOS , OPCIONESCRUD y ACCESOUSUARIO y LOGIN y VERIFICACION DE PERMISOS
     public String insertar(Usuario usuario){
         String regInsertados="Registro Insertado Nº= ";
         long contador=0;
@@ -292,6 +290,9 @@ public class ControlBDProyecto {
         }
     }
     //FIN entidad capacitadora
+
+    //VERIFICACION DE INEGRACION, SIRVE CUANDO ACTUALIZAMOS,
+    // CUANDO INGRESEMOS TABLAS CON LLAVES FORANEAS Y CUANDO BORREMOS CAMPOS DEPENDIENTES
     private boolean verificarIntegridad(Object dato, int relacion) throws SQLException {
         switch (relacion) {
             //Verificando si existe el area de interes antes de actualizarlo
@@ -322,17 +323,17 @@ public class ControlBDProyecto {
             }
             case 3:
             {
-//verificar que al insertar nota exista el codigo del usuario y el codigo de crud
+                //verificar que al insertar un accesoUsuario exista el codigo del usuario y el codigo de crud
                 AccesoUsuario accesoUsuario = (AccesoUsuario) dato;
                 String[] id1 = {accesoUsuario.getIdOpcion()};
                 String[] id2 = {accesoUsuario.getIdUsuario()};
-//abrir();
+                //abrir();
                 Cursor cursor1 = db.query("opcionCrud", null, "idOpcion = ?", id1, null,
                         null, null);
                 Cursor cursor2 = db.query("usuario", null, "idUsuario = ?", id2,
                         null, null, null);
                 if(cursor1.moveToFirst() && cursor2.moveToFirst()){
-//Se encontraron datos
+                    //Se encontraron datos
                     return true;
                 }
                 return false;
@@ -344,18 +345,19 @@ public class ControlBDProyecto {
 
     }
 
-
+    //Llenar la base de datos para USUARIOS, OPCIONESCRUD Y ACCESOUSUARIO
     public String llenarBDUsuario() {
         final String[] VAidUsuario = {"01","02","03","04","05"};
         final String[] VAnomUsuario = {"GC18090","PT18003","VM13068","AA15020","CZ13016"};
         final String[] VAclave = {"admin","admin","admin","admin","admin"};
 
-        final String[] VBidOpcion = {"00","010","011","012","024","034"};
-        final String[] VBdesOpcion = {"Acceso General","Menu de Area Interes","Adicion Area Interes","Modificacion Area Interes","Consulta de Entidad Capacitadora","Consulta de Nota"};
-        final int[] VBnumCrud = {0,0,1,2,4,4};
+        final String[] VBidOpcion = {"010","011","012","013","014","020","024","034"};
+        final String[] VBdesOpcion = {"Menu de Area Interes","Adicion Area Interes","Modificacion Area Interes","Eliminar Area Interes","Consulta Area Interes",
+                "Menu Entidad Capacitadora","Consulta de Entidad Capacitadora","Consulta de Nota"};
+        final int[] VBnumCrud = {0,1,2,3,4,0,4,4};
 
-        final String[] VCidOpcion = {"010","011","024","034"};
-        final String[] VCidUsuario = {"01","01","03","03"};
+        final String[] VCidOpcion = {"010","011","012","013","014","020","010"};
+        final String[] VCidUsuario = {"01","01","01","01","01","01","02"};
         abrir();
         db.execSQL("DELETE FROM usuario");
         db.execSQL("DELETE FROM opcionCrud");
@@ -369,7 +371,7 @@ public class ControlBDProyecto {
             insertar(usuario);
         }
         OpcionCrud opcionCrud = new OpcionCrud();
-        for(int i=0;i<6;i++){
+        for(int i=0;i<8;i++){
             opcionCrud.setIdOpcion(VBidOpcion[i]);
             opcionCrud.setDesOpcion(VBdesOpcion[i]);
             opcionCrud.setNumCrud(VBnumCrud[i]);
@@ -377,7 +379,7 @@ public class ControlBDProyecto {
         }
 
         AccesoUsuario accesoUsuario = new AccesoUsuario();
-        for(int i=0;i<4;i++){
+        for(int i=0;i<7;i++){
             accesoUsuario.setIdOpcion(VCidOpcion[i]);
             accesoUsuario.setIdUsuario(VCidUsuario[i]);
             insertar(accesoUsuario);
