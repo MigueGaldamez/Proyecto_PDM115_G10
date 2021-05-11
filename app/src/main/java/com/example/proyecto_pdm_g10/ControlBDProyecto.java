@@ -18,6 +18,10 @@ public class ControlBDProyecto {
     private static final String[]camposUsuario = new String [] {"idUsuario","nomUsuario","clave"};
     private static final String[]camposAccesoUsuario = new String [] {"idOpcion","idUsuario"};
 
+    private static final String[]camposDiplomado = new String [] {"idDiplomado","titulo","descripcion","capacidades"};
+    private static final String[]camposAreaDiplomado = new String [] {"idAreaDiplomado","nombre","descripcion","idDiplomado"};
+    private static final String[]camposCapacitador = new String [] {"idCapacitador","nombres","apellidos","telefono","idEntidadCapacitadora","correo","profesion"};
+
     private final Context context;
     private DatabaseHelper DBHelper;
     private SQLiteDatabase db;
@@ -42,6 +46,10 @@ public class ControlBDProyecto {
                 db.execSQL("CREATE TABLE usuario(idUsuario CHAR(2) NOT NULL PRIMARY KEY,nomUsuario VARCHAR(30),clave CHAR(5));");
                 db.execSQL("CREATE TABLE opcionCrud(idOpcion CHAR(3) NOT NULL PRIMARY KEY,desOpcion VARCHAR(30),numCrud INTEGER);");
                 db.execSQL("CREATE TABLE accesoUsuario(idUsuario VARCHAR(2) NOT NULL ,idOpcion VARCHAR(3) NOT NULL  ,PRIMARY KEY(idOpcion,idUsuario));");
+
+                db.execSQL("CREATE TABLE diplomado(idDiplomado CHAR(5) NOT NULL PRIMARY KEY,titulo VARCHAR(30),descripcion VARCHAR(100),capacidades VARCHAR(100));");
+                db.execSQL("CREATE TABLE areaDiplomado(idAreaDiplomado CHAR(5) NOT NULL PRIMARY KEY,nombre VARCHAR(20),descripcion VARCHAR(100),idDiplomado VARCHAR(5));");
+                db.execSQL("CREATE TABLE capacitador(idCapacitador CHAR(5) NOT NULL PRIMARY KEY,nombres VARCHAR(40),apellidos VARCHAR(40),telefono VARCHAR(20),idEntidadCapacitadora VARCHAR(6),correo VARCHAR(100),profesion VARCHAR(30));");
 
             }catch(SQLException e){
                 e.printStackTrace();
@@ -290,6 +298,131 @@ public class ControlBDProyecto {
         }
     }
     //FIN entidad capacitadora
+    
+    //INICIO CRUD DIPLOMADO
+    public String insertar(Diplomado diplomado){
+        String regInsertados="Registro Insertado Nº= ";
+        long contador=0;
+        ContentValues diplo = new ContentValues();
+        diplo.put("idDiplomado", diplomado.getIdDiplomado());
+        diplo.put("titulo", diplomado.getTitulo());
+        diplo.put("descripcion", diplomado.getDescripcion());
+        diplo.put("capacidades", diplomado.getCapacidades());
+        contador=db.insert("diplomado", null, diplo);
+        if(contador==-1 || contador==0)
+        {
+            regInsertados= "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
+        }
+        else {
+            regInsertados=regInsertados+contador;
+        }
+        return regInsertados;
+    }
+    public Diplomado consultarDiplomado(String idDiploma){
+        String[] id = {idDiploma};
+        Cursor cursor = db.query("diplomado", camposDiplomado, "idDiplomado = ?",
+                id, null, null, null);
+        if(cursor.moveToFirst()){
+            Diplomado diplomado = new Diplomado();
+            diplomado.setIdDiplomado(cursor.getString(0));
+            diplomado.setTitulo(cursor.getString(1));
+            diplomado.setDescripcion(cursor.getString(2));
+            diplomado.setCapacidades(cursor.getString(3));
+            return diplomado;
+        }else{
+            return null;
+        }
+    }
+    public String actualizar(Diplomado diplomado){
+        if(verificarIntegridad(diplomado, 17)){
+            String[] id = {diplomado.getIdDiplomado()};
+            ContentValues cv = new ContentValues();
+            cv.put("titulo", diplomado.getTitulo());
+            cv.put("descripcion", diplomado.getDescripcion());
+            cv.put("capacidades", diplomado.getCapacidades());
+            db.update("diplomado", cv, "idDiplomado = ?", id);
+            return "Registro Actualizado Correctamente";
+        }else{
+            return "Registro con codigo " + diplomado.getIdDiplomado() + " no existe";
+        }
+    }
+
+    public String eliminar(Diplomado diplomado){
+        String regAfectados="filas afectadas= ";
+        int contador=0;
+        if(verificarIntegridad(diplomado,19)) {
+            contador+=db.delete("areaDiplomado", "idDiplomado='"+diplomado.getIdDiplomado()+"'", null);
+        }
+        contador+=db.delete("diplomado", "idDiplomado='"+diplomado.getIdDiplomado()+"'", null);
+        regAfectados+=contador;
+        return regAfectados;
+    }
+    //FIN CRUD DIPLOMADO
+
+    //INICIO CRUD Area DIplomadp
+    public String insertar(AreaDiplomado areaDiplomado){
+        String regInsertados="Registro Insertado Nº= ";
+        long contador=0;
+        if(verificarIntegridad(areaDiplomado,20)) {
+            ContentValues areadi = new ContentValues();
+            areadi.put("idAreaDiplomado", areaDiplomado.getIdAreaDiplomado());
+            areadi.put("nombre", areaDiplomado.getNombre());
+            areadi.put("descripcion", areaDiplomado.getDescripcion());
+            areadi.put("idDiplomado", areaDiplomado.getIdDiplomado());
+            contador=db.insert("areaDiplomado", null, areadi);
+        }
+
+        if(contador==-1 || contador==0)
+        {
+            regInsertados= "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
+        }
+        else {
+            regInsertados=regInsertados+contador;
+        }
+        return regInsertados;
+    }
+
+    public AreaDiplomado consultarAreaDiplomado(String idAreaDiploma){
+        String[] id = {idAreaDiploma};
+        Cursor cursor = db.query("areaDiplomado", camposAreaDiplomado, "idAreaDiplomado = ?",
+                id, null, null, null);
+        if(cursor.moveToFirst()){
+            AreaDiplomado areaDiplomado = new AreaDiplomado();
+            areaDiplomado.setIdAreaDiplomado(cursor.getString(0));
+            areaDiplomado.setNombre(cursor.getString(1));
+            areaDiplomado.setDescripcion(cursor.getString(2));
+            areaDiplomado.setIdDiplomado(cursor.getString(3));
+            return areaDiplomado;
+        }else{
+            return null;
+        }
+    }
+    public String actualizar(AreaDiplomado areaDiplomado){
+        if(verificarIntegridad(areaDiplomado, 18)){
+            String[] id = {areaDiplomado.getIdAreaDiplomado()};
+            ContentValues cv = new ContentValues();
+            cv.put("nombre", areaDiplomado.getNombre());
+            cv.put("descripcion", areaDiplomado.getDescripcion());
+            cv.put("idDiplomado", areaDiplomado.getIdDiplomado());
+            db.update("areaDiplomado", cv, "idAreaDiplomado = ?", id);
+            return "Registro Actualizado Correctamente";
+        }else{
+            return "Registro con codigo " + areaDiplomado.getIdAreaDiplomado() + " no existe";
+        }
+    }
+
+    public String eliminar(AreaDiplomado areaDiplomado){
+        String regAfectados="filas afectadas= ";
+        int contador=0;
+       /* if (verificarIntegridad(alumno,3)) {
+            contador+=db.delete("nota", "carnet='"+alumno.getCarnet()+"'", null);
+        }*/ //NO APLICA
+        contador+=db.delete("AreaDiplomado", "idAreaDiplomado='"+areaDiplomado.getIdAreaDiplomado()+"'", null);
+        regAfectados+=contador;
+        return regAfectados;
+    }
+    //FIN CRUD AREA DIPLOMADO
+    
 
     //VERIFICACION DE INEGRACION, SIRVE CUANDO ACTUALIZAMOS,
     // CUANDO INGRESEMOS TABLAS CON LLAVES FORANEAS Y CUANDO BORREMOS CAMPOS DEPENDIENTES
@@ -338,6 +471,62 @@ public class ControlBDProyecto {
                 }
                 return false;
             }
+
+            //Verificando si Diplomado antes de actualizarlo
+            case 17:
+            {
+                Diplomado diplomado = (Diplomado) dato;
+                String[] id = {diplomado.getIdDiplomado()};
+                abrir();
+                Cursor c2 = db.query("diplomado", null, "idDiplomado = ?", id, null, null,
+                        null);
+                if (c2.moveToFirst()) {
+                    return true;
+                }
+                return false;
+            }
+            //Verificando si Area Diplomado antes de actualizarlo
+            case 18:
+            {
+                AreaDiplomado areaDiplomado = (AreaDiplomado) dato;
+                String[] id = {areaDiplomado.getIdAreaDiplomado()};
+                abrir();
+                Cursor c2 = db.query("areaDiplomado", null, "idAreaDiplomado = ?", id, null, null,
+                        null);
+                if (c2.moveToFirst()) {
+                    return true;
+                }
+                return false;
+            }
+            // verificar que al borrar un Diplomado no este en algun areaDiplomado
+            case 19:
+            {
+                Diplomado diplomado = (Diplomado) dato;
+                Cursor c=db.query(true, "areaDiplomado", new String[] {
+                                "idDiplomado" }, "idDiplomado='"+diplomado.getIdDiplomado()+"'",null,
+                        null, null, null, null);
+                if(c.moveToFirst())
+                    return true;
+                else
+                    return false;
+            }
+            case 20:
+            {
+                //verificar que al insertar area Diplomado exista dipplomado
+
+                AreaDiplomado areaDiplomado = (AreaDiplomado) dato;
+                String[] id1 = {areaDiplomado.getIdDiplomado()};
+
+                Cursor cursor1 = db.query("diplomado", null, "idDiplomado = ?", id1, null,
+                        null, null);
+
+                if(cursor1.moveToFirst()){
+
+                    return true;
+                }
+                return false;
+            }
+
 
             default:
                 return false;

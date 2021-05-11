@@ -30,6 +30,10 @@
     <string name="clave">Clave:</string>
     <string name="Usuario">Usuario:</string>
     <string name="Llenarbase">Llenar Base</string>
+    <string name="idDiplomado">Codigo Diplomado:</string>
+    <string name="titulo">Titulo:</string>
+    <string name="capacidades">Capacidades:</string>
+    <string name="idAreaDiplomado">Codigo Area Diplomado:</string>
 
 
 </resources>
