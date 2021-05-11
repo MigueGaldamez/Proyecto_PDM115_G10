@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import java.security.acl.AclEntry;
 
@@ -273,9 +274,9 @@ public class ControlBDProyecto {
         String regAfectados="filas afectadas= ";
         int contador=0;
         //Verificar si se encuentra en otra tabla
-        /*if (verificarIntegridad(areaInteres,3)) {
-            contador+=db.delete("nota", "carnet='"+alumno.getCarnet()+"'", null);
-        }*/
+        if (verificarIntegridad(entidadCapacitadora,23)) {
+            contador+=db.delete("capacitador", "idEntidadCapacitadora='"+entidadCapacitadora.getCodigo()+"'", null);
+        }
         contador+=db.delete("entidadCapacitadora", "codigo='"+entidadCapacitadora.getCodigo()+"'", null);
         regAfectados+=contador;
         return regAfectados;
@@ -422,7 +423,78 @@ public class ControlBDProyecto {
         return regAfectados;
     }
     //FIN CRUD AREA DIPLOMADO
-    
+
+    //INICIO CRUD CAPACITADOR
+    public String insertar(Capacitador capacitador){
+        String regInsertados="Registro Insertado Nº= ";
+        long contador=0;
+        if(verificarIntegridad(capacitador,21)) {
+            ContentValues capa = new ContentValues();
+            capa.put("idCapacitador", capacitador.getIdCapacitador());
+            capa.put("nombres", capacitador.getNombres());
+            capa.put("apellidos", capacitador.getApellidos());
+            capa.put("telefono", capacitador.getTelefono());
+            capa.put("idEntidadCapacitadora", capacitador.getIdEntidadCapacitadora());
+            capa.put("correo", capacitador.getCorreo());
+            capa.put("profesion", capacitador.getProfesion());
+            contador=db.insert("capacitador", null, capa);
+        }
+
+        if(contador==-1 || contador==0)
+        {
+            regInsertados= "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
+        }
+        else {
+            regInsertados=regInsertados+contador;
+        }
+        return regInsertados;
+    }
+    public Capacitador consultarCapacitador(String idCapacitador){
+        String[] id = {idCapacitador};
+        Cursor cursor = db.query("capacitador", camposCapacitador, "idCapacitador = ?",
+                id, null, null, null);
+        if(cursor.moveToFirst()){
+            Capacitador capacitador = new Capacitador();
+            capacitador.setIdCapacitador(cursor.getString(0));
+            capacitador.setNombres(cursor.getString(1));
+            capacitador.setApellidos(cursor.getString(2));
+            capacitador.setTelefono(cursor.getString(3));
+            capacitador.setIdEntidadCapacitadora(cursor.getString(4));
+            capacitador.setCorreo(cursor.getString(5));
+            capacitador.setProfesion(cursor.getString(6));
+            return capacitador;
+        }else{
+            return null;
+        }
+    }
+    public String actualizar(Capacitador capacitador){
+        if(verificarIntegridad(capacitador, 22)){
+            String[] id = {capacitador.getIdCapacitador()};
+            ContentValues cv = new ContentValues();
+            cv.put("nombres", capacitador.getNombres());
+            cv.put("apellidos", capacitador.getApellidos());
+            cv.put("telefono", capacitador.getTelefono());
+            cv.put("idEntidadCapacitadora", capacitador.getIdEntidadCapacitadora());
+            cv.put("correo", capacitador.getCorreo());
+            cv.put("profesion", capacitador.getProfesion());
+            db.update("capacitador", cv, "idCapacitador = ?", id);
+            return "Registro Actualizado Correctamente";
+        }else{
+            return "Registro con codigo " + capacitador.getIdCapacitador() + " no existe";
+        }
+    }
+
+    public String eliminar(Capacitador capacitador){
+        String regAfectados="filas afectadas= ";
+        int contador=0;
+       /* if (verificarIntegridad(alumno,3)) {
+            contador+=db.delete("nota", "carnet='"+alumno.getCarnet()+"'", null);
+        }*/ //NO APLICA HASTA QUE SE HAGA LA RELACION
+        contador+=db.delete("capacitador", "idCapacitador='"+capacitador.getIdCapacitador()+"'", null);
+        regAfectados+=contador;
+        return regAfectados;
+    }
+    //FIN CRUD CAPACITADOR
 
     //VERIFICACION DE INEGRACION, SIRVE CUANDO ACTUALIZAMOS,
     // CUANDO INGRESEMOS TABLAS CON LLAVES FORANEAS Y CUANDO BORREMOS CAMPOS DEPENDIENTES
@@ -472,7 +544,7 @@ public class ControlBDProyecto {
                 return false;
             }
 
-            //Verificando si Diplomado antes de actualizarlo
+            //Verificando si existe Diplomado antes de actualizarlo
             case 17:
             {
                 Diplomado diplomado = (Diplomado) dato;
@@ -485,15 +557,18 @@ public class ControlBDProyecto {
                 }
                 return false;
             }
-            //Verificando si Area Diplomado antes de actualizarlo
+            //Verificando si existe Area Diplomado antes de actualizarlo
             case 18:
             {
                 AreaDiplomado areaDiplomado = (AreaDiplomado) dato;
                 String[] id = {areaDiplomado.getIdAreaDiplomado()};
+                String[] id2 = {areaDiplomado.getIdDiplomado()};
                 abrir();
                 Cursor c2 = db.query("areaDiplomado", null, "idAreaDiplomado = ?", id, null, null,
                         null);
-                if (c2.moveToFirst()) {
+                Cursor c1 = db.query("diplomado", null, "idDiplomado = ?", id2, null, null,
+                        null);
+                if (c2.moveToFirst() && c1.moveToFirst()) {
                     return true;
                 }
                 return false;
@@ -527,6 +602,51 @@ public class ControlBDProyecto {
                 return false;
             }
 
+            case 21:
+            {
+                //verificar que al insertar Capacitador  exista Entidad capacitadora
+
+                Capacitador capacitador = (Capacitador) dato;
+                String[] id1 = {capacitador.getIdEntidadCapacitadora()};
+
+                Cursor cursor1 = db.query("entidadCapacitadora", null, "codigo = ?", id1, null,
+                        null, null);
+
+                if(cursor1.moveToFirst()){
+
+                    return true;
+                }
+                return false;
+            }
+
+            case 22:
+            {
+                //verificar que al modificar Capacitador, exista y exista endidad capacitadora
+                Capacitador capacitador1 = (Capacitador) dato;
+                String[] ids = {capacitador1.getIdCapacitador()};
+                String[] id2 = {capacitador1.getIdEntidadCapacitadora()};
+
+                abrir();
+                Cursor c1 = db.query("capacitador", null, "idCapacitador = ?", ids, null, null, null);
+                Cursor c2 = db.query("entidadCapacitadora", null, "codigo = ?", id2, null, null, null);
+
+                if(c1.moveToFirst() && c2.moveToFirst()){
+                    //Se encontraron datos
+                    return true;
+                }
+                return false;
+            }
+            case 23:
+            {   //verificar que al borrar una entidad capacitadora no este en algun capacitador
+                EntidadCapacitadora entidadCapacitadora = (EntidadCapacitadora) dato;
+                Cursor c=db.query(true, "capacitador", new String[] {
+                                "idEntidadCapacitadora" }, "idEntidadCapacitadora='"+entidadCapacitadora.getCodigo()+"'",null,
+                        null, null, null, null);
+                if(c.moveToFirst())
+                    return true;
+                else
+                    return false;
+            }
 
             default:
                 return false;

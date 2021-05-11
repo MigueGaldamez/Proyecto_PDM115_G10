@@ -1,9 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".CapacitadorActualizarActivity">
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dip"
+    android:stretchColumns="1" >
+    <TableRow>
+        <TextView android:text="@string/idCapacitador" />
+        <EditText
+            android:id="@+id/editIdCapacitador"
+            android:inputType="text"
+            android:maxLength="5" />
+    </TableRow>
+    <TableRow>
+        <TextView android:text="@string/nombres" />
+        <EditText
+            android:id="@+id/editNombres"
+            android:inputType="text"
+            android:maxLength="40" />
+    </TableRow>
+    <TableRow>
+        <TextView android:text="@string/apellidos" />
+        <EditText
+            android:id="@+id/editApellidos"
+            android:inputType="text"
+            android:maxLength="40" />
+    </TableRow>
+    <TableRow>
+        <TextView android:text="@string/telefono" />
+        <EditText
+            android:id="@+id/editTelefono"
+            android:inputType="text"
+            android:maxLength="20" />
+    </TableRow>
+    <TableRow>
+        <TextView android:text="@string/correo" />
+        <EditText
+            android:id="@+id/editCorreo"
+            android:inputType="text"
+            android:maxLength="100" />
+    </TableRow>
+    <TableRow>
+        <TextView android:text="@string/profesion" />
+        <EditText
+            android:id="@+id/editProfesion"
+            android:inputType="text"
+            android:maxLength="30" />
+    </TableRow>
+    <TableRow>
+        <TextView android:text="@string/IdEntidadCapacitadora" />
+        <EditText
+            android:id="@+id/editIdEntidadCapacitadora"
+            android:inputType="text"
+            android:maxLength="6" />
+    </TableRow>
+    <TableRow>
+        <Button
+            android:onClick="actualizarCapacitador"
+            android:text="@string/actualizar" />
+    </TableRow>
+    <TableRow>
+        <Button
+            android:onClick="limpiarTexto"
+            android:text="@string/limpiar" />
+    </TableRow>
+</TableLayout>

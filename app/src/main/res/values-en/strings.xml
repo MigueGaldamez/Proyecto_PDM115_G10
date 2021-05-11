@@ -34,6 +34,11 @@
     <string name="titulo">Titulo:</string>
     <string name="capacidades">Capacidades:</string>
     <string name="idAreaDiplomado">Codigo Area Diplomado:</string>
+    <string name="idCapacitador">Codigo Capacitador:</string>
+    <string name="apellidos">Apellidos</string>
+    <string name="IdEntidadCapacitadora">Codigo Entidad Capacitadora:</string>
+    <string name="nombres">Nombres:</string>
+    <string name="profesion">Profesion:</string>
 
 
 </resources>
