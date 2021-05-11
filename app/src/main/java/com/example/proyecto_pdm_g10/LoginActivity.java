@@ -18,7 +18,7 @@ public class LoginActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cz13016_insertar_capacitacion);
+        setContentView(R.layout.activity_login);
         BDhelper = new ControlBDProyecto(this);
         editUsuario = (EditText) findViewById(R.id.editUsuario);
         editClave = (EditText) findViewById(R.id.editClave);

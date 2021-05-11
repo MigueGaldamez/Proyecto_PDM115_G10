@@ -46,6 +46,7 @@ public class CapacitacionCrud {
 
        // db.execSQL("CREATE TABLE capacitacion(idCapacitacion INTEGER NOT NULL PRIMARY KEY autoincrement,descripcion VARCHAR(100),precio REAL,idLocal INTEGER, idAreasDip INTEGER, idAreaIn INTEGER, idCapacitador INTEGER);");
 
+        capaci.put("idCapacitacion",capacitacion.getIdCapacitacion());
         capaci.put("descripcion", capacitacion.getDescrip());
         capaci.put("precio", capacitacion.getPrecio());
         capaci.put("idLocal", capacitacion.getIdLocal());
