@@ -9,6 +9,27 @@
     <string name="title_activity_entidad_capacitadora_consultar">ReadTrainingEntityActivity</string>
 
     <string name="EntidadCapacitadora_menu">Funtion to be executed Training Entity</string>
+    <!--_________________________________________________________________________________-->
+    <string name="title_activity_facultad_menu">FacultadMenuActivity</string>
+    <string name="title_activity_facultad_insertar">FacultadInsertarActivity</string>
+    <string name="title_activity_facultad_eliminar">FacultadEliminarActivity</string>
+    <string name="title_activity_facultad_actualizar">FacultadActualizarActivity</string>
+    <string name="title_activity_facultad_consultar">FacultadConsultarActivity</string>
+    <string name="facultad_menu">Función a Ejecutar Facultad</string>
+    <string name="idFacultad">ID Facultad</string>
+    <string name="nombreFacultad">Nombre Facultad</string>
+
+    <string name="title_activity_ubicacion_menu">UbicacionMenuActivity</string>
+    <string name="title_activity_ubicacion_insertar">UbicacionInsertarActivity</string>
+    <string name="title_activity_ubicacion_eliminar">UbicacionEliminarActivity</string>
+    <string name="title_activity_ubicacion_actualizar">UbicacionActualizarActivity</string>
+    <string name="title_activity_ubicacion_consultar">UbicacionConsultarActivity</string>
+    <string name="ubicacion_menu">Función a Ejecutar Ubicacion</string>
+    <string name="idUbicacion">ID Ubicacion</string>
+    <string name="nombre_ubicacion">Nombre Ubicacion</string>
+
+
+    <!--_________________________________________________________________________________-->
 
     <!--General para todos-->
     <string name="insertar_registro">Insert Register</string>
@@ -30,6 +51,9 @@
     <string name="clave">Clave:</string>
     <string name="Usuario">Usuario:</string>
     <string name="Llenarbase">Llenar Base</string>
+
+
+
 
 
 </resources>

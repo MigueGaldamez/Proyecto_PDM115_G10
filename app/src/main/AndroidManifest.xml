@@ -9,11 +9,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Proyecto_PDM_G10">
-        <activity android:name=".LoginActivity"><intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".FacultadMenuActivity"/>
+        <activity android:name=".UbicacionMainActivity" />
+        <activity android:name=".UbicacionInsertarActivity" />
+        <activity android:name=".UbicacionEliminarActivity" />
+        <activity android:name=".UbicacionConsultarActivity" />
+        <activity android:name=".UbicacionActualizarActivity" />
+        <activity android:name=".FacultadConsultarActivity" />
+        <activity android:name=".FacultadActualizarActivity" />
+        <activity android:name=".FacultadEliminarActivity" />
+        <activity android:name=".FacultadInsertarActivity" />
+        <activity android:name=".LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".EntidadCapacitadoraInsertarActivity" />
         <activity android:name=".EntidadCapacitadoraEliminarActivity" />
         <activity android:name=".EntidadCapacitadoraConsultarActivity" />
@@ -24,9 +36,7 @@
         <activity android:name=".AreaInteresInsertarActivity" />
         <activity android:name=".EntidadCapacitadoraMenuActivity" />
         <activity android:name=".AreaInteresMenuActivity" />
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

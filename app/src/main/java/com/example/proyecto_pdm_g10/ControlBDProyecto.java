@@ -17,6 +17,11 @@ public class ControlBDProyecto {
     private static final String[]camposOpcionCrud = new String [] {"idOpcion","desOpcion","numCrud"};
     private static final String[]camposUsuario = new String [] {"idUsuario","nomUsuario","clave"};
     private static final String[]camposAccesoUsuario = new String [] {"idOpcion","idUsuario"};
+    //____________________________________________________________________________________________________________________________________________________________________________________________________________________
+    private static final String[]camposFacultad = new String [] {"id","nombre"};
+    private static final String[]camposUbicacion = new String [] {"id","idFacultad","nombre"};
+    //________________________________________________________________________________________________________________________________________________________________________________________________________________________
+
 
     private final Context context;
     private DatabaseHelper DBHelper;
@@ -38,7 +43,10 @@ public class ControlBDProyecto {
                 //AQUI AGREGAMOS LAS TABLAS
                 db.execSQL("CREATE TABLE areaInteres(codigo VARCHAR(7) NOT NULL PRIMARY KEY,nombre VARCHAR(30),descripcion VARCHAR(100));");
                 db.execSQL("CREATE TABLE entidadCapacitadora(codigo VARCHAR(6) NOT NULL PRIMARY KEY,nombre VARCHAR(30),descripcion VARCHAR(100),telefono VARCHAR(20),correo VARCHAR(100));");
-
+                //____________________________________________________________________________________________________________________________________________________________________________________________________________________
+                db.execSQL("CREATE TABLE facultad(id VARCHAR(7) NOT NULL PRIMARY KEY,nombre VARCHAR(35));");
+                db.execSQL("CREATE TABLE ubicacion(id VARCHAR(7) NOT NULL ,idFacultad INTEGER NOT NULL, nombre VARCHAR(35) NOT NULL ,PRIMARY KEY(id, idFacultad));");
+                //________________________________________________________________________________________________________________________________________________________________________________________________________________________
                 db.execSQL("CREATE TABLE usuario(idUsuario CHAR(2) NOT NULL PRIMARY KEY,nomUsuario VARCHAR(30),clave CHAR(5));");
                 db.execSQL("CREATE TABLE opcionCrud(idOpcion CHAR(3) NOT NULL PRIMARY KEY,desOpcion VARCHAR(30),numCrud INTEGER);");
                 db.execSQL("CREATE TABLE accesoUsuario(idUsuario VARCHAR(2) NOT NULL ,idOpcion VARCHAR(3) NOT NULL  ,PRIMARY KEY(idOpcion,idUsuario));");
@@ -60,8 +68,155 @@ public class ControlBDProyecto {
     public void cerrar(){
         DBHelper.close();
     }
+    //____________________________________________________________________________________________________________________________________________________________________________________________________________________
+    public String insertar(Facultad facultad)
+    {
+        String regInsertados="Registro Insertado Nº= ";
+        long contador=0;
+        ContentValues facu = new ContentValues();
+        facu.put("id", facultad.getIdFacultad());
+        facu.put("nombre", facultad.getnombre());
+        contador=db.insert("facultad", null, facu);
+        if(contador==-1 || contador==0)
+        {
+            regInsertados= "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
+        }
+        else {
+            regInsertados=regInsertados+contador;
+        }
+        return regInsertados;
 
-    //Insertar USUARIOS , OPCIONESCRUD y ACCESOUSUARIO y LOGIN y VERIFICACION DE PERMISOS
+    }
+    public Facultad consultarFacultad(String id)
+    {
+        String[] idFacultad = {id};
+        Cursor cursor  = db.query("facultad", camposFacultad, "id = ?", idFacultad, null, null, null);
+        if(cursor.moveToFirst())
+        {
+            Facultad facultad = new Facultad();
+            facultad.setIdFacultad(cursor.getString(0));
+            facultad.setnombre(cursor.getString(1));
+            return facultad;
+        }
+        else
+        {
+            return null;
+        }
+
+    }
+    public String actualizar(Facultad facultad)
+    {
+        if(verificarIntegridad2(facultad, 4))
+        {
+            String[] id = {facultad.getIdFacultad()};
+            ContentValues cv = new ContentValues();
+            cv.put("nombre", facultad.getnombre());
+            db.update("facultad", cv, "id = ?", id);
+            return "Registro Actualizado Correctamente";
+        }else
+            {
+            return "Registro con carnet " + facultad.getIdFacultad() + " no existe";
+        }
+    }
+    public String eliminar(Facultad facultad)
+    {
+        String regAfectados="filas afectadas= ";
+        int contador=0;
+        if (verificarIntegridad2(facultad,3))
+        {
+            contador+=db.delete("ubicacion", "idFacultad='"+facultad.getIdFacultad()+"'", null);
+        }
+        contador+=db.delete("facultad", "id='"+facultad.getIdFacultad()+"'", null);
+        regAfectados+=contador;
+        return regAfectados;
+
+    }
+
+
+    public String insertar(Ubicacion ubicacion)
+    {
+        return null;
+    }
+    public String consultar(int id, int idFacultad, String nombre)
+    {
+        return null;
+    }
+    public String actualizar(Ubicacion ubicacion)
+    {
+        return null;
+    }
+    public String eliminar(Ubicacion ubicacion)
+    {
+        return null;
+    }
+
+    private boolean verificarIntegridad2(Object dato, int relacion) throws SQLException
+    {
+        switch(relacion)
+        {
+            case 1:
+            {
+                //verificar que al insertar ubicacion exista carnet del facultad y elcodigo de materia
+                Ubicacion ubicacion = (Ubicacion)dato;
+                String[] id1 = {Integer.toString(ubicacion.getIdFacultad())};
+                //abrir();
+                Cursor cursor1 = db.query("facultad", null, "id = ?", id1, null,
+                        null, null);
+                if(cursor1.moveToFirst())
+                {
+                    //Se encontraron datos
+                    return true;
+                }
+                return false;
+            }
+            case 2:
+            {
+                //verificar que al modificar ubicacion exista carnet del facultad, elcodigo de materia y el ciclo
+                Ubicacion ubicacion1 = (Ubicacion)dato;
+                String[] ids = {Integer.toString(ubicacion1.getIdFacultad())};
+                abrir();
+                Cursor c = db.query("ubicacion", null, "idFacultad = ? ", ids, null, null, null);
+                if(c.moveToFirst())
+                {
+                    //Se encontraron datos
+                    return true;
+                }
+                return false;
+            }
+            case 3:
+            {
+                Facultad facultad = (Facultad)dato;
+                Cursor c=db.query(true, "ubicacion", new String[] {"idFacultad" }, "idFacultad='"+facultad.getIdFacultad()+"'",null, null, null, null, null);
+                if(c.moveToFirst())
+                    return true;
+                else
+                    return false;
+            }
+            case 4:
+            {
+                //verificar que exista facultad
+                Facultad facultad2 = (Facultad)dato;
+                String[] id = {facultad2.getIdFacultad()};
+                abrir();
+                Cursor c2 = db.query("facultad", null, "id = ?", id, null, null,
+                        null);
+                if(c2.moveToFirst())
+                {
+                    //Se encontro Facultad
+                    return true;
+                }
+                return false;
+            }
+            default:
+                return false;
+        }
+    }
+
+    //________________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+
+
+        //Insertar USUARIOS , OPCIONESCRUD y ACCESOUSUARIO y LOGIN y VERIFICACION DE PERMISOS
     public String insertar(Usuario usuario){
         String regInsertados="Registro Insertado Nº= ";
         long contador=0;
@@ -201,7 +356,7 @@ public class ControlBDProyecto {
         int contador=0;
         //Verificar si se encuentra en otra tabla
         /*if (verificarIntegridad(areaInteres,3)) {
-            contador+=db.delete("nota", "carnet='"+alumno.getCarnet()+"'", null);
+            contador+=db.delete("ubicacion", "carnet='"+alumno.getCarnet()+"'", null);
         }*/
         contador+=db.delete("areaInteres", "codigo='"+areaInteres.getCodigo()+"'", null);
         regAfectados+=contador;
@@ -266,7 +421,7 @@ public class ControlBDProyecto {
         int contador=0;
         //Verificar si se encuentra en otra tabla
         /*if (verificarIntegridad(areaInteres,3)) {
-            contador+=db.delete("nota", "carnet='"+alumno.getCarnet()+"'", null);
+            contador+=db.delete("ubicacion", "carnet='"+alumno.getCarnet()+"'", null);
         }*/
         contador+=db.delete("entidadCapacitadora", "codigo='"+entidadCapacitadora.getCodigo()+"'", null);
         regAfectados+=contador;
@@ -346,14 +501,15 @@ public class ControlBDProyecto {
     }
 
     //Llenar la base de datos para USUARIOS, OPCIONESCRUD Y ACCESOUSUARIO
-    public String llenarBDUsuario() {
+    public String llenarBDUsuario()
+    {
         final String[] VAidUsuario = {"01","02","03","04","05"};
         final String[] VAnomUsuario = {"GC18090","PT18003","VM13068","AA15020","CZ13016"};
         final String[] VAclave = {"admin","admin","admin","admin","admin"};
 
         final String[] VBidOpcion = {"010","011","012","013","014","020","024","034"};
         final String[] VBdesOpcion = {"Menu de Area Interes","Adicion Area Interes","Modificacion Area Interes","Eliminar Area Interes","Consulta Area Interes",
-                "Menu Entidad Capacitadora","Consulta de Entidad Capacitadora","Consulta de Nota"};
+                "Menu Entidad Capacitadora","Consulta de Entidad Capacitadora","Consulta de Ubicacion"};
         final int[] VBnumCrud = {0,1,2,3,4,0,4,4};
 
         final String[] VCidOpcion = {"010","011","012","013","014","020","010"};
@@ -384,7 +540,33 @@ public class ControlBDProyecto {
             accesoUsuario.setIdUsuario(VCidUsuario[i]);
             insertar(accesoUsuario);
         }
+        //___________________________________________________________________________________________________________________
+        final String[] VFid = {"1","2","3"};
+        final String[] VFnombre = {"Ingenieria y Arquitectura","Economia","Agronomia"};
+        final String[] VUid = {"1","2"};
+        final int[] VUidFacultad = {3,2};
+        final String[] VUnombre = {"Biblioteca","Edificio K"};
+        abrir();
+        db.execSQL("DELETE FROM facultad");
+        db.execSQL("DELETE FROM ubicacion");
 
+        Facultad facultad = new Facultad();
+        for(int i=0;i<3;i++)
+        {
+            facultad.setIdFacultad(VFid[i]);
+            facultad.setnombre(VFnombre[i]);
+            insertar(facultad);
+        }
+        Ubicacion ubicacion = new Ubicacion();
+        for(int i=0;i<2;i++)
+        {
+            ubicacion.setIdUbicacion(VUid[i]);
+            ubicacion.setIdFacultad(VUidFacultad[i]);
+            ubicacion.setnombre(VUnombre[i]);
+            insertar(ubicacion);
+        }
+
+        //___________________________________________________________________________________________________________________
 
         cerrar();
         return "Guardo Correctamente";
