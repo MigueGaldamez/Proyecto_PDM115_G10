@@ -9,8 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Proyecto_PDM_G10">
-        <activity android:name=".FacultadMenuActivity"/>
-        <activity android:name=".UbicacionMainActivity" />
+        <activity android:name=".UbicacionMenuActivity"></activity>
+        <activity android:name=".FacultadMenuActivity" />
         <activity android:name=".UbicacionInsertarActivity" />
         <activity android:name=".UbicacionEliminarActivity" />
         <activity android:name=".UbicacionConsultarActivity" />
