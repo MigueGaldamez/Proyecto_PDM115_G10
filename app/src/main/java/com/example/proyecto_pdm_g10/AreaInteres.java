@@ -16,6 +16,11 @@ public class AreaInteres {
         this.descripcion = descripcion;
     }
 
+    public AreaInteres(String codigo, String nombre) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+    }
+
     public String getCodigo() {
         return codigo;
     }

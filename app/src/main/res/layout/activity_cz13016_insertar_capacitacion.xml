@@ -68,7 +68,8 @@
             android:id="@+id/idLocal"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:inputType="number"
+            android:onClick="obtenerLocal"
+            android:editable="false"
          />
 
     </LinearLayout>
@@ -89,7 +90,8 @@
             android:id="@+id/idAreaDip"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:inputType="number"
+            android:onClick="obtenerAreaDis"
+            android:editable="false"
             />
 
     </LinearLayout>
@@ -110,7 +112,8 @@
             android:id="@+id/idAreaIn"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:inputType="number"
+            android:onClick="obtenerAreaInte"
+            android:editable="false"
            />
 
     </LinearLayout>
@@ -131,7 +134,8 @@
             android:id="@+id/idCapacitador"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:inputType="number"
+            android:onClick="obtenerCapacitador"
+            android:editable="false"
              />
 
     </LinearLayout>

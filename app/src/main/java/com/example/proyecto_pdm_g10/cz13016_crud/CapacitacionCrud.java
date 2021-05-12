@@ -2,12 +2,16 @@ package com.example.proyecto_pdm_g10.cz13016_crud;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.proyecto_pdm_g10.AreaInteres;
 import com.example.proyecto_pdm_g10.ControlBDProyecto;
 import com.example.proyecto_pdm_g10.cz13016_entities.Capacitacion;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class CapacitacionCrud {
@@ -64,5 +68,19 @@ public class CapacitacionCrud {
         }
         return regInsertados;
 
+    }
+
+    public List<AreaInteres> allAreasInteres(){
+        ArrayList<AreaInteres> listAreaIn = new ArrayList<>();
+
+
+        Cursor cursor= db.rawQuery("select * from areaInteres",null);
+        if (cursor.moveToFirst()){
+            do {
+                AreaInteres  areaInteres = new AreaInteres(cursor.getString(0),cursor.getString(1));
+                listAreaIn.add(areaInteres);
+            }while (cursor.moveToNext());
+        }
+        return listAreaIn;
     }
 }

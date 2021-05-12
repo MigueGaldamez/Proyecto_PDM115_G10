@@ -19,6 +19,7 @@ public class MainActivity extends ListActivity {
     String[] menu={"Tabla AreaInteres","Tabla EntidadCapacitadora", "01 Tabla Capacitacion"};
     String[] activities={"AreaInteresMenuActivity","EntidadCapacitadoraMenuActivity", "CZ13016InsertarCapacitacion"};
 
+
     ControlBDProyecto BDhelper;
     //variable de la sesion de usuario
     String idsesion;
