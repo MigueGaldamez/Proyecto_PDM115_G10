@@ -14,8 +14,9 @@ import android.widget.Toast;
 public class MainActivity extends ListActivity {
 
     //Agregen las tablas y las activities de las tablas
-    String[] menu={"Tabla AreaInteres","Tabla EntidadCapacitadora"};
-    String[] activities={"AreaInteresMenuActivity","EntidadCapacitadoraMenuActivity"};
+    String[] menu={"Tabla AreaInteres","Tabla EntidadCapacitadora", "01 Tabla Capacitacion", "Agregar Capacitor"};
+    String[] activities={"AreaInteresMenuActivity","EntidadCapacitadoraMenuActivity", "CZ13016CapacitacionMenuActivity","CapacitadorInsertarActivity"};
+
 
 
     ControlBDProyecto BDhelper;
@@ -41,15 +42,25 @@ public class MainActivity extends ListActivity {
         super.onListItemClick(l, v, position, id);
 
             String nombreValue=activities[position];
+        String miOpcion = nombreValue.substring(0,7);
+        Toast.makeText(this, miOpcion, Toast.LENGTH_SHORT).show();
 
-            try{
+        try{
+            if (miOpcion.equals("CZ13016")){
+                Class<?> clase=Class.forName("com.example.proyecto_pdm_g10.cz13016_activities."+nombreValue);
+                Intent inte = new Intent(this,clase);
+                inte.putExtra("idsesion",idsesion);
+                this.startActivity(inte);
+            }else {
                 Class<?> clase=Class.forName("com.example.proyecto_pdm_g10."+nombreValue);
                 Intent inte = new Intent(this,clase);
                 inte.putExtra("idsesion",idsesion);
                 this.startActivity(inte);
-            }catch(ClassNotFoundException e){
-                e.printStackTrace();
             }
+
+        }catch(ClassNotFoundException e){
+            e.printStackTrace();
+        }
 
     }
 

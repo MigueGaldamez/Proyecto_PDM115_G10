@@ -279,4 +279,11 @@ public class CZ13016InsertarCapacitacion extends AppCompatActivity {
         list.add(idDescripcion.getText().toString());
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent myIntent = new Intent(this,CZ13016CapacitacionMenuActivity.class);
+        startActivity(myIntent);
+    }
 }

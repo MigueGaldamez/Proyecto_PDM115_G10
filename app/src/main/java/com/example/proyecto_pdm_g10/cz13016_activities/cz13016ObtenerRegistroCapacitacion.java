@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.proyecto_pdm_g10.AreaInteres;
+import com.example.proyecto_pdm_g10.Capacitador;
 import com.example.proyecto_pdm_g10.R;
 import com.example.proyecto_pdm_g10.cz13016_crud.CapacitacionCrud;
 
@@ -19,7 +20,7 @@ import java.util.List;
 public class cz13016ObtenerRegistroCapacitacion extends AppCompatActivity {
 
     CapacitacionCrud helper;
-    List<AreaInteres> listAreain;
+
 
     ListView listRegistros;
     ArrayList<String> listItem = new ArrayList<>();
@@ -76,10 +77,10 @@ public class cz13016ObtenerRegistroCapacitacion extends AppCompatActivity {
             case 1:
 
 
-                for (int i=0; i < listAreain.size(); i++){
+               /* for (int i=0; i < listAreain.size(); i++){
                     datoItem = listItem.get(1);
                     listItem.add(datoItem);
-                }
+                }*/
                 break;
             case 2:
                 for (int i=0; i<2; i++){
@@ -89,7 +90,7 @@ public class cz13016ObtenerRegistroCapacitacion extends AppCompatActivity {
                 break;
             case 3:
                 helper.abrir();
-                listAreain  = helper.allAreasInteres();
+                List<AreaInteres> listAreain = helper.allAreasInteres();
                 helper.cerrar();
 
                 for (int i=0; i<listAreain.size(); i++){
@@ -98,8 +99,13 @@ public class cz13016ObtenerRegistroCapacitacion extends AppCompatActivity {
                 }
                 break;
             case 4:
-                for (int i=0; i<2; i++){
-                    datoItem = "Capacitador N°"+(i+1);
+
+                helper.abrir();
+                List<Capacitador> listCapacitador = helper.allCapacitador();
+                helper.cerrar();
+
+                for (int i=0; i<listCapacitador.size(); i++){
+                    datoItem = listCapacitador.get(i).getNombres();
                     listItem.add(datoItem);
                 }
                 break;
