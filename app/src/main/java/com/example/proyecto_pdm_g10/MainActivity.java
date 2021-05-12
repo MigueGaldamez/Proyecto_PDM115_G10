@@ -49,9 +49,22 @@ public class MainActivity extends ListActivity {
                     break;
                 case 3:idopcionS = "040";
                     break;
-                case 4:idopcionS = "050";
-                    break;
+                //case 4:idopcionS = "050";
+                    //break;
                 default:
+                    //temporal
+                    String nombreValue = activities[position];
+
+                    try {
+                        Class<?> clase = Class.forName("com.example.proyecto_pdm_g10." + nombreValue);
+
+                        Intent inte = new Intent(this, clase);
+
+                        inte.putExtra("idsesion", idsesion);
+                        this.startActivity(inte);
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
                     break;
             }
             //Verificacion usuario
