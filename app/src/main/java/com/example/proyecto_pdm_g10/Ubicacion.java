@@ -3,12 +3,12 @@ package com.example.proyecto_pdm_g10;
 public class Ubicacion
 {
     private String idUbicacion;
-    private int idFacultad;
+    private String idFacultad;
     private String nombre;
     public Ubicacion()
     {
     }
-    public Ubicacion(String idUbicacion, int idFacultad, String nombre)
+    public Ubicacion(String idUbicacion, String idFacultad, String nombre)
     {
         this.idUbicacion = idUbicacion;
         this.idFacultad = idFacultad;
@@ -22,12 +22,12 @@ public class Ubicacion
     {
         this.idUbicacion=idUbicacion;
     }
-    public int getIdFacultad()
+    public String getIdFacultad()
     {
         return idFacultad;
     }
 
-    public void setIdFacultad(int idFacultad)
+    public void setIdFacultad(String idFacultad)
     {
         this.idFacultad = idFacultad;
     }

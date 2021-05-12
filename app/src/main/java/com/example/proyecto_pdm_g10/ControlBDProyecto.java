@@ -45,7 +45,7 @@ public class ControlBDProyecto {
                 db.execSQL("CREATE TABLE entidadCapacitadora(codigo VARCHAR(6) NOT NULL PRIMARY KEY,nombre VARCHAR(30),descripcion VARCHAR(100),telefono VARCHAR(20),correo VARCHAR(100));");
                 //____________________________________________________________________________________________________________________________________________________________________________________________________________________
                 db.execSQL("CREATE TABLE facultad(id VARCHAR(7) NOT NULL PRIMARY KEY,nombre VARCHAR(35));");
-                db.execSQL("CREATE TABLE ubicacion(id VARCHAR(7) NOT NULL ,idFacultad INTEGER NOT NULL, nombre VARCHAR(35) NOT NULL ,PRIMARY KEY(id, idFacultad));");
+                db.execSQL("CREATE TABLE ubicacion(id VARCHAR(7) NOT NULL ,idFacultad VARCHAR(7) NOT NULL, nombre VARCHAR(35) NOT NULL ,PRIMARY KEY(id, idFacultad));");
                 //________________________________________________________________________________________________________________________________________________________________________________________________________________________
                 db.execSQL("CREATE TABLE usuario(idUsuario CHAR(2) NOT NULL PRIMARY KEY,nomUsuario VARCHAR(30),clave CHAR(5));");
                 db.execSQL("CREATE TABLE opcionCrud(idOpcion CHAR(3) NOT NULL PRIMARY KEY,desOpcion VARCHAR(30),numCrud INTEGER);");
@@ -131,23 +131,71 @@ public class ControlBDProyecto {
         return regAfectados;
 
     }
-
-
     public String insertar(Ubicacion ubicacion)
     {
-        return null;
+        String regInsertados="Registro Insertado Nº= ";
+        long contador=0;
+        if(verificarIntegridad2(ubicacion,1))
+        {
+            ContentValues ubicaciones = new ContentValues();
+            ubicaciones.put("id", ubicacion.getIdUbicacion());
+            ubicaciones.put("idFacultad", ubicacion.getIdFacultad());
+            ubicaciones.put("nombre", ubicacion.getnombre());
+            contador=db.insert("ubicacion", null, ubicaciones);
+        }
+        if(contador==-1 || contador==0)
+        {
+            regInsertados= "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
+        }
+        else {
+            regInsertados=regInsertados+contador;
+        }
+        return regInsertados;
     }
-    public String consultar(int id, int idFacultad, String nombre)
+    public Ubicacion consultarUbicacion(String id)
     {
-        return null;
+        String[] idUbicacion = {id};
+        //select u.id, f.nombre, u.nombre from ubicacion u JOIN facultad f on u.idFacultad = f.id;
+        Cursor cursor = db.query("ubicacion", camposUbicacion, "id = ?", idUbicacion, null, null, null);
+        if(cursor.moveToFirst())
+        {
+            Ubicacion ubicacion = new Ubicacion();
+            ubicacion.setIdUbicacion(cursor.getString(0));
+            ubicacion.setIdFacultad(cursor.getString(1));
+            ubicacion.setnombre(cursor.getString(2));
+            return ubicacion;
+        }
+        else
+            {
+            return null;
+        }
     }
     public String actualizar(Ubicacion ubicacion)
     {
-        return null;
+        if(verificarIntegridad2(ubicacion, 2))
+        {
+            String[] id = {ubicacion.getIdUbicacion()};
+            ContentValues cv = new ContentValues();
+            cv.put("idFacultad", ubicacion.getIdFacultad());
+            cv.put("nombre",ubicacion.getnombre());
+            db.update("ubicacion", cv, "id = ?", id);
+            return "Registro Actualizado Correctamente";
+        }
+        else
+        {
+            return "Registro no Existe";
+        }
+
     }
     public String eliminar(Ubicacion ubicacion)
     {
-        return null;
+        String regAfectados="filas afectadas= ";
+        int contador=0;
+        String where="id='"+ubicacion.getIdUbicacion()+"'";
+        contador+=db.delete("ubicacion", where, null);
+        regAfectados+=contador;
+        return regAfectados;
+
     }
 
     private boolean verificarIntegridad2(Object dato, int relacion) throws SQLException
@@ -156,9 +204,9 @@ public class ControlBDProyecto {
         {
             case 1:
             {
-                //verificar que al insertar ubicacion exista carnet del facultad y elcodigo de materia
+                //verificar que al insertar ubicacion exista carnet del facultad
                 Ubicacion ubicacion = (Ubicacion)dato;
-                String[] id1 = {Integer.toString(ubicacion.getIdFacultad())};
+                String[] id1 = {ubicacion.getIdFacultad()};
                 //abrir();
                 Cursor cursor1 = db.query("facultad", null, "id = ?", id1, null,
                         null, null);
@@ -173,7 +221,7 @@ public class ControlBDProyecto {
             {
                 //verificar que al modificar ubicacion exista carnet del facultad, elcodigo de materia y el ciclo
                 Ubicacion ubicacion1 = (Ubicacion)dato;
-                String[] ids = {Integer.toString(ubicacion1.getIdFacultad())};
+                String[] ids = {ubicacion1.getIdFacultad()};
                 abrir();
                 Cursor c = db.query("ubicacion", null, "idFacultad = ? ", ids, null, null, null);
                 if(c.moveToFirst())
@@ -192,6 +240,15 @@ public class ControlBDProyecto {
                 else
                     return false;
             }
+            /*case 5:
+            {
+                Ubicacion ubicacion = (Ubicacion) dato;
+                Cursor c=db.query(true, "ubicacion", new String[] {"idFacultad" }, "idFacultad='"+facultad.getIdFacultad()+"'",null, null, null, null, null);
+                if(c.moveToFirst())
+                    return true;
+                else
+                    return false;
+            }*/
             case 4:
             {
                 //verificar que exista facultad
@@ -203,6 +260,18 @@ public class ControlBDProyecto {
                 if(c2.moveToFirst())
                 {
                     //Se encontro Facultad
+                    return true;
+                }
+                return false;
+            }
+            case 5:
+            {
+                Ubicacion ubicacion5 = (Ubicacion)dato;
+                String[] id = {ubicacion5.getIdUbicacion()};
+                abrir();
+                Cursor c5 = db.query("ubicacion",null,"id=?",id,null,null,null);
+                if(c5.moveToFirst())
+                {
                     return true;
                 }
                 return false;
@@ -543,8 +612,9 @@ public class ControlBDProyecto {
         //___________________________________________________________________________________________________________________
         final String[] VFid = {"1","2","3"};
         final String[] VFnombre = {"Ingenieria y Arquitectura","Economia","Agronomia"};
+
         final String[] VUid = {"1","2"};
-        final int[] VUidFacultad = {3,2};
+        final String[] VUidFacultad = {"3","2"};
         final String[] VUnombre = {"Biblioteca","Edificio K"};
         abrir();
         db.execSQL("DELETE FROM facultad");

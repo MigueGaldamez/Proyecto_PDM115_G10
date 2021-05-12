@@ -1,14 +1,32 @@
 package com.example.proyecto_pdm_g10;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
-public class UbicacionEliminarActivity extends AppCompatActivity {
 
+public class UbicacionEliminarActivity extends Activity
+{
+    EditText editId;
+    ControlBDProyecto controlhelper;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ubicacion_eliminar);
+        controlhelper=new ControlBDProyecto (this);
+        editId=(EditText)findViewById(R.id.editid);
+    }
+    public void eliminarUbicacion(View v)
+    {
+        String regEliminadas;
+        Ubicacion ubicacion=new Ubicacion();
+        ubicacion.setIdUbicacion(editId.getText().toString());
+        controlhelper.abrir();
+        regEliminadas=controlhelper.eliminar(ubicacion);
+        controlhelper.cerrar();
+        Toast.makeText(this, regEliminadas, Toast.LENGTH_SHORT).show();
     }
 }

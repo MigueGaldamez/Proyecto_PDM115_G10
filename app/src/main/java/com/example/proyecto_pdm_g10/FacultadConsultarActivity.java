@@ -19,14 +19,13 @@ public class FacultadConsultarActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_facultad_consultar);
-            helper = new ControlBDProyecto(this);
+        helper = new ControlBDProyecto(this);
         editId = (EditText) findViewById(R.id.editid);
         editNombre = (EditText) findViewById(R.id.editNombre);
     }
     public void consultarFacultad(View v) {
         helper.abrir();
-        Facultad facultad =
-                helper.consultarFacultad(editId.getText().toString());
+        Facultad facultad = helper.consultarFacultad(editId.getText().toString());
         helper.cerrar();
         if(facultad == null)
             Toast.makeText(this, "Facultad con id " +
