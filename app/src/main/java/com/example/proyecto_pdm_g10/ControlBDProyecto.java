@@ -13,7 +13,7 @@ import java.security.acl.AclEntry;
 public class ControlBDProyecto {
     //PARA CADA TABLA HAY QUE LISTAR LOS CAMPOS
     private static final String[]camposAreaInteres = new String [] {"codigo","nombre","descripcion"};
-    private static final String[]camposEntidadCapacitadora = new String []   {"codigo", "nombre", "descripcion", "telefono", "correo"};
+    private static final String[]camposEntidadCapacitadora = new String []   {"codigo", "nombre", "descripcion", "telefono", "correo","tipo"};
 
     private static final String[]camposOpcionCrud = new String [] {"idOpcion","desOpcion","numCrud"};
     private static final String[]camposUsuario = new String [] {"idUsuario","nomUsuario","clave"};
@@ -42,7 +42,7 @@ public class ControlBDProyecto {
             try{
                 //AQUI AGREGAMOS LAS TABLAS
                 db.execSQL("CREATE TABLE areaInteres(codigo VARCHAR(7) NOT NULL PRIMARY KEY,nombre VARCHAR(30),descripcion VARCHAR(100));");
-                db.execSQL("CREATE TABLE entidadCapacitadora(codigo VARCHAR(6) NOT NULL PRIMARY KEY,nombre VARCHAR(30),descripcion VARCHAR(100),telefono VARCHAR(20),correo VARCHAR(100));");
+                db.execSQL("CREATE TABLE entidadCapacitadora(codigo VARCHAR(6) NOT NULL PRIMARY KEY,nombre VARCHAR(30),descripcion VARCHAR(100),telefono VARCHAR(20),correo VARCHAR(100),tipo CHAR(1));");
 
                 db.execSQL("CREATE TABLE usuario(idUsuario CHAR(2) NOT NULL PRIMARY KEY,nomUsuario VARCHAR(30),clave CHAR(5));");
                 db.execSQL("CREATE TABLE opcionCrud(idOpcion CHAR(3) NOT NULL PRIMARY KEY,desOpcion VARCHAR(30),numCrud INTEGER);");
@@ -243,6 +243,7 @@ public class ControlBDProyecto {
         entidad.put("descripcion", entidadCapacitadora.getDescripcion());
         entidad.put("telefono", entidadCapacitadora.getTelefono());
         entidad.put("correo", entidadCapacitadora.getCorreo());
+        entidad.put("tipo", entidadCapacitadora.getTipo());
 
         contador=db.insert("entidadCapacitadora", null, entidad);
         if(contador==-1 || contador==0)
@@ -263,6 +264,7 @@ public class ControlBDProyecto {
             cv.put("descripcion", entidadCapacitadora.getDescripcion());
             cv.put("telefono", entidadCapacitadora.getTelefono());
             cv.put("correo", entidadCapacitadora.getCorreo());
+            cv.put("tipo",entidadCapacitadora.getTipo());
 
             db.update("entidadCapacitadora", cv, "codigo = ?", id);
             return "Registro Actualizado Correctamente";
@@ -292,6 +294,7 @@ public class ControlBDProyecto {
             entidadCapacitadora.setDescripcion(cursor.getString(2));
             entidadCapacitadora.setTelefono(cursor.getString(3));
             entidadCapacitadora.setCorreo(cursor.getString(4));
+            entidadCapacitadora.setTipo(cursor.getString(5));
 
             return entidadCapacitadora;
         }else{
@@ -660,13 +663,33 @@ public class ControlBDProyecto {
         final String[] VAnomUsuario = {"GC18090","PT18003","VM13068","AA15020","CZ13016"};
         final String[] VAclave = {"admin","admin","admin","admin","admin"};
 
-        final String[] VBidOpcion = {"010","011","012","013","014","020","024","034"};
-        final String[] VBdesOpcion = {"Menu de Area Interes","Adicion Area Interes","Modificacion Area Interes","Eliminar Area Interes","Consulta Area Interes",
-                "Menu Entidad Capacitadora","Consulta de Entidad Capacitadora","Consulta de Nota"};
-        final int[] VBnumCrud = {0,1,2,3,4,0,4,4};
+        final String[] VBidOpcion = {"010","011","012","013","014",
+                "020","021","022","023","024",
+                "030","031","032","033","034",
+                "040","041","042","043","044",
+                "050","051","052","053","054"};
+        final String[] VBdesOpcion = {
+                "MenuAreaInteres","AdicionAreaInteres","ModificacionAreaInteres","EliminarAreaInteres","ConsultaAreaInteres",
+                "MenuEntidadCapacitadora","AdicionEntidadCapacitadora","ModificacionEntidadCapacitadora","EliminarEntidadCapacitadora","ConsultaEntidadCapacitadora",
+                "MenuCapacitador","AdicionCapacitador","ModificacionCapacitador","EliminarCapacitador","ConsultaCapacitador",
+                "MenuDiplomado","AdicionDiplomado","ModificacionDiplomado","EliminarDiplomado","ConsultaDiplomado",
+                "MenuAreaDiplomado","AdicionAreaDiplomado","ModificacionAreaDiplomado","EliminarAreaDiplomado","ConsultaAreaDiplomado",
+        };
+        final int[] VBnumCrud = {0,1,2,3,4,0,1,2,3,4,0,1,2,3,4,0,1,2,3,4,0,1,2,3,4};
 
-        final String[] VCidOpcion = {"010","011","012","013","014","020","010"};
-        final String[] VCidUsuario = {"01","01","01","01","01","01","02"};
+        final String[] VCidOpcion = {"010","011","012","013","014",
+                "020","021","022","023","024",
+                "030","031","032","033","034",
+                "040","041","042","043","044",
+                "050","051","052","053","054",
+                "010","020","030","040","050"
+        };
+        final String[] VCidUsuario = {"01","01","01","01","01",
+                "01","01","01","01","01",
+                "01","01","01","01","01",
+                "01","01","01","01","01",
+                "01","01","01","01","01",
+                "02","02","02","02","02"};
         abrir();
         db.execSQL("DELETE FROM usuario");
         db.execSQL("DELETE FROM opcionCrud");
@@ -680,7 +703,7 @@ public class ControlBDProyecto {
             insertar(usuario);
         }
         OpcionCrud opcionCrud = new OpcionCrud();
-        for(int i=0;i<8;i++){
+        for(int i=0;i<25;i++){
             opcionCrud.setIdOpcion(VBidOpcion[i]);
             opcionCrud.setDesOpcion(VBdesOpcion[i]);
             opcionCrud.setNumCrud(VBnumCrud[i]);
@@ -688,7 +711,7 @@ public class ControlBDProyecto {
         }
 
         AccesoUsuario accesoUsuario = new AccesoUsuario();
-        for(int i=0;i<7;i++){
+        for(int i=0;i<30;i++){
             accesoUsuario.setIdOpcion(VCidOpcion[i]);
             accesoUsuario.setIdUsuario(VCidUsuario[i]);
             insertar(accesoUsuario);

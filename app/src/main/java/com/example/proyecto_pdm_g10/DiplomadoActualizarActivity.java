@@ -15,6 +15,7 @@ public class DiplomadoActualizarActivity extends Activity {
     EditText editDescripcion;
     EditText editCapacidades;
 
+
     ControlBDProyecto BDhelper = new ControlBDProyecto(this);
     String idsesion;
     @Override

@@ -2,7 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_margin="30dp">
+    <TextView
+        android:id="@+id/Encabezado"
+        android:textSize="30dp"
+        android:textStyle="italic"
+        android:text="@string/consultarAreaDiplomado"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -22,13 +32,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/consultar"
-            android:onClick="consultarAreaDiplomado"/>
+            android:onClick="consultarAreaDiplomado"
+            android:layout_margin="6dp"/>
         <Button
             android:id="@+id/botonLimpiar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/limpiar"
-            android:onClick="limpiarTexto"/>
+            android:onClick="limpiarTexto"
+            android:layout_margin="6dp"/>
     </LinearLayout>
 
     <TextView

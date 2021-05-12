@@ -3,8 +3,17 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:paddingTop="10dip"
-    android:stretchColumns="1" >
-
+    android:stretchColumns="1"
+    android:layout_margin="30dp">
+    <TextView
+        android:id="@+id/Encabezado"
+        android:textSize="30dp"
+        android:textStyle="italic"
+        android:text="@string/actualizarAreaInteres"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
     <TableRow>
         <TextView android:text="@string/codigo" />
         <EditText
@@ -30,11 +39,12 @@
     <TableRow>
         <Button
             android:onClick="actualizarAreaInteres"
-            android:text="@string/actualizar" />
-    </TableRow>
-    <TableRow>
+            android:text="@string/actualizar"
+            android:layout_margin="6dp"/>
+
         <Button
             android:onClick="limpiarTexto"
-            android:text="@string/limpiar" />
+            android:text="@string/limpiar"
+            android:layout_margin="6dp"/>
     </TableRow>
 </TableLayout>

@@ -2,12 +2,13 @@ package com.example.proyecto_pdm_g10;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class DiplomadoEliminarActivity extends AppCompatActivity {
+public class DiplomadoEliminarActivity extends Activity {
     ControlBDProyecto helper;
     EditText editIdDiplomado;
     ControlBDProyecto BDhelper = new ControlBDProyecto(this);

@@ -3,7 +3,17 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:paddingTop="30dip"
-    android:stretchColumns="1" >
+    android:stretchColumns="1"
+    android:layout_margin="30dp">
+    <TextView
+        android:id="@+id/Encabezado"
+        android:textSize="30dp"
+        android:textStyle="italic"
+        android:text="@string/insertarAreaInteres"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
     <TableRow>
         <TextView android:text="@string/codigo"/>
         <EditText
@@ -34,9 +44,11 @@
     <TableRow>
         <Button
             android:onClick="insertarAreaInteres"
-            android:text="@string/insertar" />
+            android:text="@string/insertar"
+            android:layout_margin="6dp"/>
         <Button
             android:onClick="limpiarTexto"
-            android:text="@string/limpiar" />
+            android:text="@string/limpiar"
+            android:layout_margin="6dp"/>
     </TableRow>
 </TableLayout>
