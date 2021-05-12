@@ -1,0 +1,66 @@
+<resources>
+    <string name="app_name">Proyecto_PDM_G10</string>
+    <string name="title_activity_entidad_capacitadora_menu">TrainingEntityMenuActivity</string>
+    <string name="title_activity_area_interes_menu">AreaOfInteresActivity</string>
+
+    <string name="title_entidad_capacitadora_insertar">InsertTrainingEntityActivity</string>
+    <string name="title_entidad_capacitadora_eliminar">DeleteTrainingEntityActivity</string>
+    <string name="title_activity_entidad_capacitadora_actualizar">UpdateTrainingEntityActivity</string>
+    <string name="title_activity_entidad_capacitadora_consultar">ReadTrainingEntityActivity</string>
+
+    <string name="EntidadCapacitadora_menu">Funtion to be executed Training Entity</string>
+
+    <!--General para todos-->
+    <string name="insertar_registro">Insert Register</string>
+    <string name="eliminar_registro">Delete Register</string>
+    <string name="consultar_registro">Read Register</string>
+    <string name="actualizar_registro">Update Register</string>
+    <string name="opciones">Options:</string>
+    <string name="limpiar">Clear</string>
+
+    <string name="codigo">Code:</string>
+    <string name="nombre">Name:</string>
+    <string name="descripcion">Description:</string>
+    <string name="insertar">Insert</string>
+    <string name="consultar">Read</string>
+    <string name="actualizar">Update</string>
+    <string name="eliminar">Delete</string>
+    <string name="telefono">Telephone:</string>
+    <string name="correo">Email:</string>
+    <string name="clave">Password:</string>
+    <string name="Usuario">Username:</string>
+    <string name="Llenarbase">Fill up Database</string>
+    <string name="idDiplomado">Certificate Id:</string>
+    <string name="titulo">Title:</string>
+    <string name="capacidades">Habilities:</string>
+    <string name="idAreaDiplomado"> Certificate Area Id:</string>
+    <string name="idCapacitador">Trainer Id:</string>
+    <string name="apellidos">Last Names</string>
+    <string name="IdEntidadCapacitadora">Training Entity Id:</string>
+    <string name="nombres">Names:</string>
+    <string name="profesion">Occupation:</string>
+    <string name="TipoEntidad">Entity Type:</string>
+    <string name="Iniciarsesion">Log In</string>
+    <string name="InsertarEntidad">Insert Training Entity</string>
+    <string name="consultarEntidad">Update Training Entity</string>
+    <string name="eliminarEntidad">Delete Training Entity</string>
+    <string name="insertarDiplomado">Insert Certificate</string>
+    <string name="eliminarDiplomado">Delete Certificate</string>
+    <string name="consultarDiplomado">Read Certificate</string>
+    <string name="actualizarDiplomado">Update Certificate</string>
+    <string name="actualizarEntidad">Update Training Entity</string>
+    <string name="insertarCapacitador">Insert Trainer</string>
+    <string name="eliminarCapacitador">Delete Trainer</string>
+    <string name="consultarCapacitador">Read Trainer</string>
+    <string name="actualizarCapacitador">Update Trainer</string>
+    <string name="insertarAreaInteres">Insert Area of Interest</string>
+    <string name="eliminarAreaInteres">Delete Area of Interest</string>
+    <string name="consultarAreaInteres">Read Area of Interest</string>
+    <string name="actualizarAreaInteres">Update Area of Interest</string>
+    <string name="insertarAreaDiplomado">Insert Certificate Area</string>
+    <string name="eliminarAreaDiplomado">Delete Certificate Area</string>
+    <string name="consultarAreaDiplomado">Read Certificate Area</string>
+    <string name="actualizarAreaDiplomado">Update Certificate Area</string>
+
+
+</resources>
