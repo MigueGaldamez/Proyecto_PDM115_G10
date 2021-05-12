@@ -3,6 +3,7 @@ package com.example.proyecto_pdm_g10;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -15,8 +16,6 @@ public class DiplomadoInsertarActivity extends Activity {
     EditText editDescripcion;
     EditText editCapacidades;
 
-    ControlBDProyecto BDhelper = new ControlBDProyecto(this);
-    String idsesion;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +25,8 @@ public class DiplomadoInsertarActivity extends Activity {
         editTitulo = (EditText) findViewById(R.id.editTitulo);
         editDescripcion = (EditText) findViewById(R.id.editDescripcion);
         editCapacidades = (EditText) findViewById(R.id.editCapacidades);
+
+
     }
     public void insertarDiplomado(View v) {
         String idDiplomado = editIdDiplomado.getText().toString();

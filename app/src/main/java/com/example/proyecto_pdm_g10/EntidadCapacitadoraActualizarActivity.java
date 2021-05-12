@@ -3,6 +3,7 @@ package com.example.proyecto_pdm_g10;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -32,6 +33,7 @@ public class EntidadCapacitadoraActualizarActivity extends Activity {
 
         radioExterna = (RadioButton) findViewById(R.id.radio_externa);
         radioInterna = (RadioButton) findViewById(R.id.radio_interna);
+
     }
     public void actualizarEntidadCapacitadora(View v) {
         EntidadCapacitadora entidadCapacitadora = new EntidadCapacitadora();
