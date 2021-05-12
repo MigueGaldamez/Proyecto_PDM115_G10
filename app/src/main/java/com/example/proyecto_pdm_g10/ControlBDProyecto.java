@@ -20,6 +20,8 @@ public class ControlBDProyecto {
     //____________________________________________________________________________________________________________________________________________________________________________________________________________________
     private static final String[]camposFacultad = new String [] {"id","nombre"};
     private static final String[]camposUbicacion = new String [] {"id","idFacultad","nombre"};
+    private  static final String[]camposUbicacion2 = new String[] {"u.id","f.nombre"," u.nombre"};
+
     //________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
 
@@ -135,7 +137,7 @@ public class ControlBDProyecto {
     {
         String regInsertados="Registro Insertado Nº= ";
         long contador=0;
-        if(verificarIntegridad2(ubicacion,1))
+        if(verificarIntegridad2(ubicacion,5) && verificarIntegridad2(ubicacion,1))
         {
             ContentValues ubicaciones = new ContentValues();
             ubicaciones.put("id", ubicacion.getIdUbicacion());
@@ -147,7 +149,8 @@ public class ControlBDProyecto {
         {
             regInsertados= "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
         }
-        else {
+        else
+        {
             regInsertados=regInsertados+contador;
         }
         return regInsertados;
@@ -156,7 +159,7 @@ public class ControlBDProyecto {
     {
         String[] idUbicacion = {id};
         //select u.id, f.nombre, u.nombre from ubicacion u JOIN facultad f on u.idFacultad = f.id;
-        Cursor cursor = db.query("ubicacion", camposUbicacion, "id = ?", idUbicacion, null, null, null);
+        Cursor cursor = db.query("ubicacion u JOIN facultad f on u.idFacultad = f.id", camposUbicacion2, "u.id = ?", idUbicacion, null, null, null);
         if(cursor.moveToFirst())
         {
             Ubicacion ubicacion = new Ubicacion();
@@ -272,9 +275,9 @@ public class ControlBDProyecto {
                 Cursor c5 = db.query("ubicacion",null,"id=?",id,null,null,null);
                 if(c5.moveToFirst())
                 {
-                    return true;
+                    return false;
                 }
-                return false;
+                return true;
             }
             default:
                 return false;
