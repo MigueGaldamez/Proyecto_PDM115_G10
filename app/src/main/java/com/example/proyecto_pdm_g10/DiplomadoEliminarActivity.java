@@ -9,26 +9,23 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class EntidadCapacitadoraEliminarActivity extends Activity {
-    EditText editCodigo;
+public class DiplomadoEliminarActivity extends Activity {
     ControlBDProyecto helper;
-
+    EditText editIdDiplomado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_entidad_capacitadora_eliminar);
-
+        setContentView(R.layout.activity_diplomado_eliminar);
         helper = new ControlBDProyecto(this);
-        editCodigo = (EditText) findViewById(R.id.editCodigo);
-
+        editIdDiplomado = (EditText) findViewById(R.id.editIdDiplomado);
     }
-    public void eliminarEntidadCapacitadora(View v){
+    public void eliminarDiplomado(View v){
         String regEliminadas;
-        EntidadCapacitadora entidadCapacitadora=new EntidadCapacitadora();
-        entidadCapacitadora.setCodigo(editCodigo.getText().toString());
+        Diplomado diplomado=new Diplomado();
+        diplomado.setIdDiplomado(editIdDiplomado.getText().toString());
         helper.abrir();
-        regEliminadas=helper.eliminar(entidadCapacitadora);
+        regEliminadas=helper.eliminar(diplomado);
         helper.cerrar();
         Toast.makeText(this, regEliminadas, Toast.LENGTH_SHORT).show();
     }

@@ -3,12 +3,12 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:layout_margin= "30dp">
+    android:layout_margin="30dp">
     <TextView
         android:id="@+id/Encabezado"
         android:textSize="30dp"
         android:textStyle="italic"
-        android:text="@string/consultarEntidad"
+        android:text="@string/consultarCapacitador"
         android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,9 +16,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/codigo"/>
+        android:text="@string/idCapacitador"/>
     <EditText
-        android:id="@+id/editCodigo"
+        android:id="@+id/editIdCapacitador"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:inputType="text"
@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/consultar"
-            android:onClick="consultarEntidadCapacitadora"
+            android:onClick="consultarCapacitador"
             android:layout_margin="6dp"/>
         <Button
             android:id="@+id/botonLimpiar"
@@ -46,9 +46,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/nombre" />
+        android:text="@string/nombres" />
     <EditText
-        android:id="@+id/editNombre"
+        android:id="@+id/editNombres"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
@@ -61,17 +61,17 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/descripcion" />
+        android:text="@string/apellidos" />
     <EditText
-        android:id="@+id/editDescripcion"
+        android:id="@+id/editApellidos"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
-        android:enabled="false"
+        android:enabled ="false"
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:cursorVisible="false"
-        android:longClickable="false"/>
+        android:longClickable="false" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -102,28 +102,33 @@
         android:focusableInTouchMode="false"
         android:cursorVisible="false"
         android:longClickable="false"/>
-
-
-    <TextView android:text="@string/TipoEntidad"
+    <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <RadioGroup   android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <RadioButton
-            android:id="@+id/radio_interna"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
-            android:checked="false"
-            android:enabled="false"
-            android:text="Entidad Interna" />
+        android:layout_height="wrap_content"
+        android:text="@string/profesion" />
+    <EditText
+        android:id="@+id/editProfesion"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:enabled="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:cursorVisible="false"
+        android:longClickable="false"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/IdEntidadCapacitadora" />
+    <EditText
+        android:id="@+id/editIdEntidadCapacitadora"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:enabled="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:cursorVisible="false"
+        android:longClickable="false"/>
 
-        <RadioButton
-            android:id="@+id/radio_externa"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:enabled="false"
-            android:text="Entidad externa" />
-    </RadioGroup>
 </LinearLayout>

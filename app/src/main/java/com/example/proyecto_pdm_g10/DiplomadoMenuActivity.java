@@ -11,9 +11,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class EntidadCapacitadoraMenuActivity extends ListActivity {
+public class DiplomadoMenuActivity extends ListActivity {
     String[] menu={"Insertar Registro","Eliminar Registro","Consultar Registro", "Actualizar Registro"};
-    String[] activities={"EntidadCapacitadoraInsertarActivity","EntidadCapacitadoraEliminarActivity","EntidadCapacitadoraConsultarActivity", "EntidadCapacitadoraActualizarActivity"};
+    String[] activities={"DiplomadoInsertarActivity","DiplomadoEliminarActivity","DiplomadoConsultarActivity", "DiplomadoActualizarActivity"};
+
 
     ControlBDProyecto BDhelper= new ControlBDProyecto(this);
     String idsesion;
@@ -26,26 +27,26 @@ public class EntidadCapacitadoraMenuActivity extends ListActivity {
                 ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, menu);
         setListAdapter(adapter);
 
-        //sirve para manejar el id de la sesion del usuario
+        //INICIO VALIDACION DE ROL
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             idsesion = extras.getString("idsesion");
-            //The key argument here must match that used in the other activity
         }
-
+        //FIN VERIFICACION
     }
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id){
         super.onListItemClick(l, v, position, id);
+
         String idopcionS = "000";
         switch(position) {
-            case 0:  idopcionS = "021";
+            case 0:  idopcionS = "041";
                 break;
-            case 1:idopcionS = "023";
+            case 1:idopcionS = "043";
                 break;
-            case 2:idopcionS = "024";
+            case 2:idopcionS = "044";
                 break;
-            case 3:idopcionS = "022";
+            case 3:idopcionS = "042";
                 break;
             default:
                 break;
@@ -73,7 +74,6 @@ public class EntidadCapacitadoraMenuActivity extends ListActivity {
                 e.printStackTrace();
             }
         }
-
 
     }
 }

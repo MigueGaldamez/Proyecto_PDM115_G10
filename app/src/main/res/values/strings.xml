@@ -30,6 +30,37 @@
     <string name="clave">Clave:</string>
     <string name="Usuario">Usuario:</string>
     <string name="Llenarbase">Llenar Base</string>
+    <string name="idDiplomado">Codigo Diplomado:</string>
+    <string name="titulo">Titulo:</string>
+    <string name="capacidades">Capacidades:</string>
+    <string name="idAreaDiplomado">Codigo Area Diplomado:</string>
+    <string name="idCapacitador">Codigo Capacitador:</string>
+    <string name="nombres">Nombres:</string>
+    <string name="apellidos">Apellidos</string>
+    <string name="profesion">Profesion:</string>
+    <string name="IdEntidadCapacitadora">Codigo Entidad Capacitadora:</string>
+    <string name="TipoEntidad">Tipo Entidad:</string>
+    <string name="Iniciarsesion">Iniciar Sesión</string>
+    <string name="InsertarEntidad">Insertar Entidad Capacitadora</string>
+    <string name="consultarEntidad">Consultar Entidad Capacitora</string>
+    <string name="eliminarEntidad">Eliminar Entidad Capacitadora</string>
+    <string name="insertarDiplomado">Insertar Diplomado</string>
+    <string name="eliminarDiplomado">Eliminar Diplomado</string>
+    <string name="consultarDiplomado">Consultar Diplomado</string>
+    <string name="actualizarDiplomado">Actualizar Diplomado</string>
+    <string name="actualizarEntidad">Actualizar Entidad Capacitadora</string>
+    <string name="insertarCapacitador">Insertar Capacitador</string>
+    <string name="eliminarCapacitador">Eliminar Capacitador</string>
+    <string name="consultarCapacitador">Consultar Capacitador</string>
+    <string name="actualizarCapacitador">Actualizar Capacitador</string>
+    <string name="insertarAreaInteres">Insertar Area Interes</string>
+    <string name="eliminarAreaInteres">Eliminar Area Interes</string>
+    <string name="consultarAreaInteres">Consultar Area Interes</string>
+    <string name="actualizarAreaInteres">Actualizar Area Interes</string>
+    <string name="insertarAreaDiplomado">Insertar Area Diplomado</string>
+    <string name="eliminarAreaDiplomado">Eliminar Area Diplomado</string>
+    <string name="consultarAreaDiplomado">Consultar Area Diplomado</string>
+    <string name="actualizarAreaDiplomado">Actualizar Area Diplomado</string>
 
 
 </resources>

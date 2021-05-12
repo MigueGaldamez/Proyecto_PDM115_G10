@@ -9,22 +9,22 @@
         android:id="@+id/Encabezado"
         android:textSize="30dp"
         android:textStyle="italic"
-        android:text="@string/insertarAreaInteres"
+        android:text="@string/insertarDiplomado"
         android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />
     <TableRow>
-        <TextView android:text="@string/codigo"/>
+        <TextView android:text="@string/idDiplomado"/>
         <EditText
-            android:id="@+id/editCodigo"
+            android:id="@+id/editIdDiplomado"
             android:inputType="text"
-            android:maxLength="7" />
+            android:maxLength="5" />
     </TableRow>
     <TableRow>
-        <TextView android:text="@string/nombre" />
+        <TextView android:text="@string/titulo" />
         <EditText
-            android:id="@+id/editNombre"
+            android:id="@+id/editTitulo"
             android:inputType="text"
             android:maxLength="30" />
     </TableRow>
@@ -35,7 +35,13 @@
             android:inputType="text"
             android:maxLength="100" />
     </TableRow>
-
+    <TableRow>
+        <TextView android:text="@string/capacidades" />
+        <EditText
+            android:id="@+id/editCapacidades"
+            android:inputType="text"
+            android:maxLength="100" />
+    </TableRow>
 
     <TableRow>
         <TextView android:text="@string/opciones" />
@@ -43,9 +49,10 @@
 
     <TableRow>
         <Button
-            android:onClick="insertarAreaInteres"
+            android:onClick="insertarDiplomado"
             android:text="@string/insertar"
             android:layout_margin="6dp"/>
+
         <Button
             android:onClick="limpiarTexto"
             android:text="@string/limpiar"

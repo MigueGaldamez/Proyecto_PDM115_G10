@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -15,6 +16,7 @@ public class LoginActivity extends Activity {
     ControlBDProyecto BDhelper;
     EditText editUsuario;
     EditText editClave;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +24,7 @@ public class LoginActivity extends Activity {
         BDhelper = new ControlBDProyecto(this);
         editUsuario = (EditText) findViewById(R.id.editUsuario);
         editClave = (EditText) findViewById(R.id.editClave);
+
     }
     public void consultarUsuario(View v) {
         String main = "MainActivity";

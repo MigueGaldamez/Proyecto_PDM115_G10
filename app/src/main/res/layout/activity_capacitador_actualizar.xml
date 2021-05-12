@@ -9,78 +9,69 @@
         android:id="@+id/Encabezado"
         android:textSize="30dp"
         android:textStyle="italic"
-        android:text="@string/actualizarEntidad"
+        android:text="@string/actualizarCapacitador"
         android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />
     <TableRow>
-        <TextView android:text="@string/codigo" />
+        <TextView android:text="@string/idCapacitador" />
         <EditText
-            android:id="@+id/editCodigo"
+            android:id="@+id/editIdCapacitador"
             android:inputType="text"
-            android:maxLength="7" />
+            android:maxLength="5" />
     </TableRow>
     <TableRow>
-        <TextView android:text="@string/nombre" />
+        <TextView android:text="@string/nombres" />
         <EditText
-            android:id="@+id/editNombre"
+            android:id="@+id/editNombres"
             android:inputType="text"
-            android:maxLength="30" />
+            android:maxLength="40" />
     </TableRow>
     <TableRow>
-        <TextView android:text="@string/descripcion" />
+        <TextView android:text="@string/apellidos" />
         <EditText
-            android:id="@+id/editDescripcion"
+            android:id="@+id/editApellidos"
             android:inputType="text"
-            android:maxLength="30" />
+            android:maxLength="40" />
     </TableRow>
-
     <TableRow>
         <TextView android:text="@string/telefono" />
         <EditText
             android:id="@+id/editTelefono"
             android:inputType="text"
-            android:maxLength="30" />
+            android:maxLength="20" />
     </TableRow>
     <TableRow>
         <TextView android:text="@string/correo" />
         <EditText
             android:id="@+id/editCorreo"
             android:inputType="text"
+            android:maxLength="100" />
+    </TableRow>
+    <TableRow>
+        <TextView android:text="@string/profesion" />
+        <EditText
+            android:id="@+id/editProfesion"
+            android:inputType="text"
             android:maxLength="30" />
     </TableRow>
     <TableRow>
-        <TextView android:text="@string/TipoEntidad" />
-        <RadioGroup>
-            <RadioButton
-                android:id="@+id/radio_interna"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="16dp"
-                android:checked="true"
-                android:text="Entidad Interna" />
-
-            <RadioButton
-                android:id="@+id/radio_externa"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="false"
-                android:text="Entidad externa" />
-        </RadioGroup>
-
-
+        <TextView android:text="@string/IdEntidadCapacitadora" />
+        <EditText
+            android:id="@+id/editIdEntidadCapacitadora"
+            android:inputType="text"
+            android:maxLength="6" />
     </TableRow>
-
     <TableRow>
         <Button
-            android:onClick="actualizarEntidadCapacitadora"
+            android:onClick="actualizarCapacitador"
             android:text="@string/actualizar"
             android:layout_margin="6dp"/>
+
         <Button
             android:onClick="limpiarTexto"
             android:text="@string/limpiar"
             android:layout_margin="6dp"/>
     </TableRow>
-
 </TableLayout>

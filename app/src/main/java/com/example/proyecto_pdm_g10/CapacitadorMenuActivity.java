@@ -11,9 +11,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class EntidadCapacitadoraMenuActivity extends ListActivity {
+public class CapacitadorMenuActivity extends ListActivity {
     String[] menu={"Insertar Registro","Eliminar Registro","Consultar Registro", "Actualizar Registro"};
-    String[] activities={"EntidadCapacitadoraInsertarActivity","EntidadCapacitadoraEliminarActivity","EntidadCapacitadoraConsultarActivity", "EntidadCapacitadoraActualizarActivity"};
+    String[] activities={"CapacitadorInsertarActivity","CapacitadorEliminarActivity","CapacitadorConsultarActivity", "CapacitadorActualizarActivity"};
 
     ControlBDProyecto BDhelper= new ControlBDProyecto(this);
     String idsesion;
@@ -26,26 +26,25 @@ public class EntidadCapacitadoraMenuActivity extends ListActivity {
                 ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, menu);
         setListAdapter(adapter);
 
-        //sirve para manejar el id de la sesion del usuario
+        //INICIO VALIDACION DE ROL
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             idsesion = extras.getString("idsesion");
-            //The key argument here must match that used in the other activity
         }
-
+        //FIN VERIFICACION
     }
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id){
         super.onListItemClick(l, v, position, id);
         String idopcionS = "000";
         switch(position) {
-            case 0:  idopcionS = "021";
+            case 0:  idopcionS = "031";
                 break;
-            case 1:idopcionS = "023";
+            case 1:idopcionS = "033";
                 break;
-            case 2:idopcionS = "024";
+            case 2:idopcionS = "034";
                 break;
-            case 3:idopcionS = "022";
+            case 3:idopcionS = "032";
                 break;
             default:
                 break;
@@ -53,7 +52,6 @@ public class EntidadCapacitadoraMenuActivity extends ListActivity {
         //Verificacion usuario
         BDhelper.abrir();
         Usuario usuario = BDhelper.consultarUsuario(idsesion);
-        //AQUI SE AGREGA EL CODIGO DE ACCESO, SOLO CAMBIAR EL idopcion al numero que sea
         AccesoUsuario accesoUsuario = BDhelper.consultarAccesoUsuario(usuario.getIdUsuario(),idopcionS);
         BDhelper.cerrar();
         //fin verificacion
@@ -63,7 +61,6 @@ public class EntidadCapacitadoraMenuActivity extends ListActivity {
         }
         else {
             String nombreValue = activities[position];
-
             try {
                 Class<?> clase = Class.forName("com.example.proyecto_pdm_g10." + nombreValue);
                 Intent inte = new Intent(this, clase);
@@ -72,8 +69,7 @@ public class EntidadCapacitadoraMenuActivity extends ListActivity {
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
+
         }
-
-
     }
 }
