@@ -21,7 +21,9 @@ public class ControlBDProyecto {
     private static final String[]camposDiplomado = new String [] {"idDiplomado","titulo","descripcion","capacidades"};
     private static final String[]camposAreaDiplomado = new String [] {"idAreaDiplomado","nombre","descripcion","idDiplomado"};
     private static final String[]camposCapacitador = new String [] {"idCapacitador","nombres","apellidos","telefono","idEntidadCapacitadora","correo","profesion"};
+
     private static final String[]camposEmpleado=new String[] {"idEmpleado", "nombreEmpleado","apellidoEmpleado","profesion","cargo"};
+    private static final String[]camposSolicitud= new String[]{"idSolicitud","fechaSolicitud","estadoSolicitud","capacitacionId"};
 
     private final Context context;
     private DatabaseHelper DBHelper;
@@ -53,6 +55,7 @@ public class ControlBDProyecto {
                 db.execSQL("CREATE TABLE capacitador(idCapacitador CHAR(5) NOT NULL PRIMARY KEY,nombres VARCHAR(40),apellidos VARCHAR(40),telefono VARCHAR(20),idEntidadCapacitadora VARCHAR(6),correo VARCHAR(100),profesion VARCHAR(30));");
 
                 db.execSQL("CREATE TABLE empleado(idEmpleado CHAR(5) NOT NULL PRIMARY KEY, nombreEmpleado VARCHAR(40),apellidoEmpleado VARCHAR(40),profesion VARCHAR(20),cargo VARCHAR(20));");
+                db.execSQL("CREATE TABLE solicitud(idSolicitud CHAR(5) NOT NULL PRIMARY KEY, fechaSolicitud VARCHAR(40),estadoSolicitud VARCHAR(40),capacitacionId VARCHAR(10));");
 
             }catch(SQLException e){
                 e.printStackTrace();
@@ -303,6 +306,73 @@ public class ControlBDProyecto {
     }
     //fin crud empleado
 
+    //Inicio Crud solicitud
+    public String insertar(Solicitud solicitud){
+        String regInsertados="Registro Insertado Nº= ";
+        long contador=0;
+        ContentValues soli = new ContentValues();
+        soli.put("idSolicitud", solicitud.getIdSolicitud());
+        soli.put("fechaSolicitud", solicitud.getFechaSolicitud());
+        soli.put("estadoSolicitud", solicitud.getEstadoSolicitud());
+        soli.put("capacitacionId", solicitud.getCapacitacionId());
+
+        contador=db.insert("solicitud", null, soli);
+
+        if(contador==-1 || contador==0)
+        {
+            regInsertados= "Error al Insertar el registro, Verificar inserción= ";
+
+        }
+        else {
+            regInsertados=regInsertados+contador;
+        }
+        return regInsertados;
+    }
+
+    public Solicitud consultarSolicitud(String idSolicitud){
+        String[] id = {idSolicitud};
+        Cursor cursor = db.query("solicitud", camposSolicitud, "idSolicitud = ?",
+                id, null, null, null);
+        if(cursor.moveToFirst()){
+            Solicitud solicitud = new Solicitud();
+            solicitud.setIdSolicitud(cursor.getString(0));
+            solicitud.setFechaSolicitud(cursor.getString(1));
+            solicitud.setEstadoSolicitud(cursor.getString(2));
+            solicitud.setCapacitacionId(cursor.getString(3));
+
+            return solicitud;
+        }else{
+            return null;
+        }
+    }
+
+    public String actualizar(Solicitud solicitud){
+        if(verificarIntegridad(solicitud, 6)){
+            String[] id = {solicitud.getIdSolicitud()};
+            ContentValues cv = new ContentValues();
+            cv.put("fechaSolicitud", solicitud.getFechaSolicitud());
+            cv.put("estadoSolicitud", solicitud.getEstadoSolicitud());
+            cv.put("capacitacionId", solicitud.getCapacitacionId());
+
+
+            db.update("solicitud", cv, "idSolicitud = ?", id);
+            return "Registro Actualizado Correctamente";
+        }else{
+            return "Registro con codigo " + solicitud.getIdSolicitud() + " no existe";
+        }
+    }
+    public String eliminar(Solicitud solicitud){
+        String regAfectados="filas afectadas= ";
+        int contador=0;
+        //Verificar si se encuentra en otra tabla
+        /*if (verificarIntegridad(areaInteres,3)) {
+            contador+=db.delete("nota", "carnet='"+alumno.getCarnet()+"'", null);
+        }*/
+        contador+=db.delete("solicitud", "idSolicitud='"+solicitud.getIdSolicitud()+"'", null);
+        regAfectados+=contador;
+        return regAfectados;
+    }
+
     //Inicio crud entidad Capacitadora
     public String insertar(EntidadCapacitadora entidadCapacitadora){
         String regInsertados="Registro Insertado Nº= ";
@@ -549,6 +619,18 @@ public class ControlBDProyecto {
                 String[] id = {empleado.getIdEmpleado()};
                 abrir();
                 Cursor c2 = db.query("empleado", null, "idEmpleado = ?", id, null, null,
+                        null);
+                if (c2.moveToFirst()) {
+                    return true;
+                }
+                return false;
+            }
+            case 6:
+            {
+                Solicitud solicitud = (Solicitud) dato;
+                String[] id = {solicitud.getIdSolicitud()};
+                abrir();
+                Cursor c2 = db.query("solicitud", null, "idSolicitud = ?", id, null, null,
                         null);
                 if (c2.moveToFirst()) {
                     return true;

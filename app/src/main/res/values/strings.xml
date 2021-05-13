@@ -39,6 +39,10 @@
     <string name="apellidoEmpleado">Apellido Empleado:</string>
     <string name="profesion">Profesion:</string>
     <string name="cargo">Cargo:</string>
+    <string name="idSolicitud">Id Solicitud:</string>
+    <string name="fechaSolicitud">Fecha:</string>
+    <string name="estadoSolicitud">Estado:</string>
+    <string name="capacitacionId">Id de la capacitacion</string>
 
 
 

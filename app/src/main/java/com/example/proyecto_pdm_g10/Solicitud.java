@@ -5,8 +5,9 @@ import java.util.Date;
 
 public class Solicitud {
     private String idSolicitud;
-    private Date fechaSolicitud;
-    private Boolean estado;
+    private  String fechaSolicitud;
+    private String estadoSolicitud;
+    private String capacitacionId;
 
 
 
@@ -14,10 +15,11 @@ public class Solicitud {
     public Solicitud() {
     }
 
-    public Solicitud(String idSolicitud, Date fechaSolicitud, Boolean estado ) {
+    public Solicitud(String idSolicitud, String fechaSolicitud, String estadoSolicitud, String  capacitacionId ) {
         this.idSolicitud = idSolicitud;
         this.fechaSolicitud = fechaSolicitud;
-        this.estado = estado;
+        this.estadoSolicitud = estadoSolicitud;
+        this.capacitacionId= capacitacionId;
 
     }
 
@@ -25,23 +27,28 @@ public class Solicitud {
         return idSolicitud;
     }
 
-    public void setIdSolicitud(String idDiplomado) {
-        this.idSolicitud = idDiplomado;
+    public void setIdSolicitud(String idSolicitud) {
+        this.idSolicitud = idSolicitud;
     }
 
-    public Date getFechaSolicitud() {
+    public String getFechaSolicitud() {
         return fechaSolicitud;
     }
 
-    public void setFechaSolicitud(Date fechaSolicitud) { this.fechaSolicitud = fechaSolicitud;}
+    public void setFechaSolicitud(String fechaSolicitud) { this.fechaSolicitud = fechaSolicitud;}
 
-    public Boolean getEstado() {
-        return estado;
+    public String getEstadoSolicitud() { return estadoSolicitud; }
+
+    public void setEstadoSolicitud(String estadoSolicitud) {
+        this.estadoSolicitud =  estadoSolicitud;
     }
 
-    public void setEstado(Boolean estado) {
-        this.estado =  estado;
+    public String getCapacitacionId() {
+        return capacitacionId;
     }
 
+    public void setCapacitacionId(String capacitacionId) {
+        this.capacitacionId =  capacitacionId;
+    }
 
 }
