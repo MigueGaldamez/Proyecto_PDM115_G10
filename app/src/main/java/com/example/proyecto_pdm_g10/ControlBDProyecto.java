@@ -22,7 +22,8 @@ public class ControlBDProyecto {
     private static final String[]camposUbicacion = new String [] {"id","idFacultad","nombre"};
     private static final String[]camposUbicacion2 = new String[] {"u.id","f.nombre"," u.nombre"};
     private static final String[]camposTipoUbicacion = new String[]{"id","nombre"};
-
+    private static final String[]camposLocal = new String[]{"id","idUbicacion","idTipoUbicacion","nombre"};
+    private static final String[]camposLocal1 = new String[]{"l.id","u.nombre","t.nombre","l.nombre"};
     //________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
 
@@ -50,6 +51,7 @@ public class ControlBDProyecto {
                 db.execSQL("CREATE TABLE facultad(id VARCHAR(7) NOT NULL PRIMARY KEY,nombre VARCHAR(35));");
                 db.execSQL("CREATE TABLE ubicacion(id VARCHAR(7) NOT NULL ,idFacultad VARCHAR(7) NOT NULL, nombre VARCHAR(35) NOT NULL ,PRIMARY KEY(id, idFacultad));");
                 db.execSQL("CREATE TABLE tipoUbicacion(id VARCHAR(7) NOT NULL PRIMARY KEY,nombre VARCHAR(35));");
+                db.execSQL("CREATE TABLE local(id VARCHAR(7) NOT NULL ,idUbicacion VARCHAR(7) NOT NULL, idTipoUbicacion VARCHAR(7) NOT NULL, nombre VARCHAR(35) NOT NULL ,PRIMARY KEY(id, idUbicacion, idTipoUbicacion));");
                 //________________________________________________________________________________________________________________________________________________________________________________________________________________________
                 db.execSQL("CREATE TABLE usuario(idUsuario CHAR(2) NOT NULL PRIMARY KEY,nomUsuario VARCHAR(30),clave CHAR(5));");
                 db.execSQL("CREATE TABLE opcionCrud(idOpcion CHAR(3) NOT NULL PRIMARY KEY,desOpcion VARCHAR(30),numCrud INTEGER);");
@@ -259,6 +261,41 @@ public class ControlBDProyecto {
         regAfectados+=contador;
         return regAfectados;
     }
+    public String insertar(Local local)
+    {
+        String regInsertados="Registro Insertado Nº= ";
+        long contador=0;
+        if(verificarIntegridad2(local,9))
+        {
+            ContentValues locales = new ContentValues();
+            locales.put("id", local.getIdLocal());
+            locales.put("idUbicacion", local.getIdUbicacion());
+            locales.put("idTipoUbicacion", local.getIdTipoUbicacion());
+            locales.put("nombre", local.getNombre());
+            contador=db.insert("local", null, locales);
+        }
+        if(contador==-1 || contador==0)
+        {
+            regInsertados= "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
+        }
+        else
+        {
+            regInsertados=regInsertados+contador;
+        }
+        return regInsertados;
+    }
+    public Local consultarLocal(String id)
+    {
+        return null;
+    }
+    public String actualizar(Local local)
+    {
+        return null;
+    }
+    public String eliminar(Local local)
+    {
+        return null;
+    }
 
     private boolean verificarIntegridad2(Object dato, int relacion) throws SQLException
     {
@@ -302,15 +339,6 @@ public class ControlBDProyecto {
                 else
                     return false;
             }
-            /*case 5:
-            {
-                Ubicacion ubicacion = (Ubicacion) dato;
-                Cursor c=db.query(true, "ubicacion", new String[] {"idFacultad" }, "idFacultad='"+facultad.getIdFacultad()+"'",null, null, null, null, null);
-                if(c.moveToFirst())
-                    return true;
-                else
-                    return false;
-            }*/
             case 4:
             {
                 //verificar que exista facultad
@@ -369,6 +397,54 @@ public class ControlBDProyecto {
             {
                 TipoUbicacion tipoUbicacion3 = (TipoUbicacion) dato;
                 Cursor c=db.query(true, "local", new String[] {"idTipoUbicacion" }, "idTipoUbicacion='"+tipoUbicacion3.getId()+"'",null, null, null, null, null);
+                if(c.moveToFirst())
+                    return true;
+                else
+                    return false;
+            }
+            case 9:
+            {
+                //verificar que al insertar local exista id de la ubicacion y el id de tipoUbicacion
+                Local local = (Local) dato;
+                String[] id1 = {local.getIdUbicacion()};
+                String[] id2 = {local.getIdTipoUbicacion()};
+                //abrir();
+                Cursor cursor1 = db.query("ubicacion", null, "id = ?", id1, null, null, null);
+                Cursor cursor2 = db.query("tipoUbicacion", null, "id = ?", id2, null, null, null);
+                if(cursor1.moveToFirst() && cursor2.moveToFirst())
+                {
+                    //Se encontraron datos
+                    return true;
+                }
+                return false;
+            }
+            case 10:
+            {
+                //verificar que al modificar local exista id del ubicacion, el id de tipoUbicacion
+                Local local1 = (Local)dato;
+                String[] ids = {local1.getIdUbicacion(), local1.getIdTipoUbicacion()};
+                abrir();
+                Cursor c = db.query("local", null, "idUbicacion = ? AND idTipoUbicacion = ? ", ids, null, null, null);
+                if(c.moveToFirst())
+                {
+                //Se encontraron datos
+                    return true;
+                }
+                return false;
+            }
+            case 11:
+            {
+                Ubicacion ubicacion = (Ubicacion) dato;
+                Cursor c=db.query(true, "local", new String[] {"idUbicacion" }, "idUbicacion='"+ubicacion.getIdUbicacion()+"'",null, null, null, null, null);
+                if(c.moveToFirst())
+                    return true;
+                else
+                    return false;
+            }
+            case 12:
+            {
+                TipoUbicacion tipoUbicacion = (TipoUbicacion) dato;
+                Cursor c=db.query(true, "local", new String[] {"idTipoUbicacion" }, "idTipoUbicacion='"+tipoUbicacion.getId()+"'",null, null, null, null, null);
                 if(c.moveToFirst())
                     return true;
                 else
@@ -717,11 +793,17 @@ public class ControlBDProyecto {
         /* Llenar Tipo Ubicacion*/
         final String[] VTUid ={"1","2","3","4"};
         final String[] VTUnombre ={"Edificio","Aula","Salon","Biblioteca"};
-
+        /* Llenar local */
+        final String[] VLid = {"1","2","3"};
+        final String[] VLidUbicacion = {"2","1","2"};
+        final String[] VLidTipoUbicacion= {"1","2","3"};
+        final String[] VLnombre = {"C11 ","A68","Z"};
         abrir();
         db.execSQL("DELETE FROM facultad");
         db.execSQL("DELETE FROM ubicacion");
         db.execSQL("DELETE FROM tipoUbicacion");
+        db.execSQL("DELETE FROM local");
+
 
         Facultad facultad = new Facultad();
         for(int i=0;i<3;i++)
@@ -744,6 +826,15 @@ public class ControlBDProyecto {
             tipoUbicacion.setId(VTUid[i]);
             tipoUbicacion.setNombre(VTUnombre[i]);
             insertar(tipoUbicacion);
+        }
+        Local local = new Local();
+        for (int i=0;i<3;i++)
+        {
+            local.setIdLocal(VLid[i]);
+            local.setIdUbicacion(VLidUbicacion[i]);
+            local.setIdTipoUbicacion(VLidTipoUbicacion[i]);
+            local.setNombre(VLnombre[i]);
+            insertar(local);
         }
 
         //___________________________________________________________________________________________________________________

@@ -9,7 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Proyecto_PDM_G10">
-        <activity android:name=".TipoUbicacionActualizarActivity"></activity>
+        <activity android:name=".LocalInsertarActivity"></activity>
+        <activity android:name=".LocalEliminarActivity" />
+        <activity android:name=".LocalConsultarActivity" />
+        <activity android:name=".LocalActualizarActivity" />
+        <activity android:name=".LocalMenuActivity" />
+        <activity android:name=".TipoUbicacionActualizarActivity" />
         <activity android:name=".TipoUbicacionConsultarActivity" />
         <activity android:name=".TipoUbicacionEliminarActivity" />
         <activity android:name=".TipoUbicacionInsertarActivity" />

@@ -37,6 +37,19 @@
     <string name="idTipoUbicacion">ID Tipo Ubicacion</string>
     <string name="nombreTipoUbicacion">Nombre Tipo Ubicacion</string>
 
+    <string name="title_activity_local_menu">LocalMenuActivity</string>
+    <string name="title_activity_local_insertar">LocalInsertarActivity</string>
+    <string name="title_activity_local_eliminar">LocalEliminarActivity</string>
+    <string name="title_activity_local_actualizar">LocalActualizarActivity</string>
+    <string name="title_activity_local_consultar">LocalConsultarActivity</string>
+    <string name="local_menu">Función a Ejecutar Local</string>
+    <string name="idLocal">ID Local</string>
+
+    <string name="idNombreUbicacion">Nombre  Ubicacion</string>
+
+    <string name="idNombreTipoUbicacion">Nombre Tipo Ubicacion</string>
+    <string name="nombreLocal">Nombre Local</string>
+
     <!--_________________________________________________________________________________-->
 
     <!--General para todos-->
