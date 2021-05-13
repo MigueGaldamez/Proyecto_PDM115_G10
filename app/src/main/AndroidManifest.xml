@@ -24,6 +24,8 @@
         <activity android:name=".CapacitadorMenuActivity" />
         <activity android:name=".AreaDiplomadoMenuActivity" />
         <activity android:name=".DiplomadoMenuActivity" />
+        <activity android:name=".EmpleadoMenuActivity" />
+        <activity android:name=".EmpleadoInsertarActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
