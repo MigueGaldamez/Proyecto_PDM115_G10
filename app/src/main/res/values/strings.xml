@@ -28,6 +28,14 @@
     <string name="idUbicacion">ID Ubicacion</string>
     <string name="nombre_ubicacion">Nombre Ubicacion</string>
 
+    <string name="title_activity_tipoUbicacion_menu">TipoUbicacionMenuActivity</string>
+    <string name="title_activity_tipoUbicacion_insertar">TipoUbicacionInsertarActivity</string>
+    <string name="title_activity_tipoUbicacion_eliminar">TipoUbicacionEliminarActivity</string>
+    <string name="title_activity_tipoUbicacion_actualizar">TipoUbicacionActualizarActivity</string>
+    <string name="title_activity_tipoUbicacion_consultar">TipoUbicacionConsultarActivity</string>
+    <string name="tipoUbicacion_menu">Función a Ejecutar Tipo Ubicacion</string>
+    <string name="idTipoUbicacion">ID Tipo Ubicacion</string>
+    <string name="nombreTipoUbicacion">Nombre Tipo Ubicacion</string>
 
     <!--_________________________________________________________________________________-->
 

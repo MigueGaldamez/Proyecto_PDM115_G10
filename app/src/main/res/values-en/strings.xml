@@ -16,7 +16,7 @@
     <string name="title_activity_facultad_actualizar">FacultadActualizarActivity</string>
     <string name="title_activity_facultad_consultar">FacultadConsultarActivity</string>
     <string name="facultad_menu">Función a Ejecutar Facultad</string>
-    <string name="idFacultad">ID Facultad</string>
+    <string name="idFacultad">Nombre Facultad</string>
     <string name="nombreFacultad">Nombre Facultad</string>
 
     <string name="title_activity_ubicacion_menu">UbicacionMenuActivity</string>
@@ -28,6 +28,14 @@
     <string name="idUbicacion">ID Ubicacion</string>
     <string name="nombre_ubicacion">Nombre Ubicacion</string>
 
+    <string name="title_activity_tipoUbicacion_menu">TipoUbicacionMenuActivity</string>
+    <string name="title_activity_tipoUbicacion_insertar">TipoUbicacionInsertarActivity</string>
+    <string name="title_activity_tipoUbicacion_eliminar">TipoUbicacionEliminarActivity</string>
+    <string name="title_activity_tipoUbicacion_actualizar">TipoUbicacionActualizarActivity</string>
+    <string name="title_activity_tipoUbicacion_consultar">TipoUbicacionConsultarActivity</string>
+    <string name="tipoUbicacion_menu">Función a Ejecutar Tipo Ubicacion</string>
+    <string name="idTipoUbicacion">ID Tipo Ubicacion</string>
+    <string name="nombreTipoUbicacion">Nombre Tipo Ubicacion</string>
 
     <!--_________________________________________________________________________________-->
 

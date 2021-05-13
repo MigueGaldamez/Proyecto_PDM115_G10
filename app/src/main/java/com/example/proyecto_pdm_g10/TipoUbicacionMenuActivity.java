@@ -1,4 +1,5 @@
 package com.example.proyecto_pdm_g10;
+
 import android.app.ListActivity;
 import android.content.Intent;
 import android.graphics.Color;
@@ -8,18 +9,18 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class FacultadMenuActivity  extends ListActivity
+public class TipoUbicacionMenuActivity extends ListActivity
 {
     String[] menu={"Insertar Registro","Eliminar Registro","Consultar Registro", "Actualizar Registro"};
-    String[] activities={"FacultadInsertarActivity","FacultadEliminarActivity","FacultadConsultarActivity", "FacultadActualizarActivity"};
+    String[] activities={"TipoUbicacionInsertarActivity","TipoUbicacionEliminarActivity","TipoUbicacionConsultarActivity", "TipoUbicacionActualizarActivity"};
     ControlBDProyecto BDhelper= new ControlBDProyecto(this);
     String idsesion;
     @Override
-    public void onCreate(Bundle savedInstanceState)
+    protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         ListView listView = getListView();
-        listView.setBackgroundColor(Color.rgb(0, 0, 255));
+        listView.setBackgroundColor(Color.rgb(92, 27, 108));
         ArrayAdapter<String> adapter = new
                 ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, menu);
         setListAdapter(adapter);
@@ -56,8 +57,6 @@ public class FacultadMenuActivity  extends ListActivity
         }
         //FIN VERIFICACION
     }
-
-
     @Override
     protected void onListItemClick(ListView l,View v,int position,long id)
     {
@@ -65,7 +64,7 @@ public class FacultadMenuActivity  extends ListActivity
 
         String nombreValue=activities[position];
 
-        l.getChildAt(position).setBackgroundColor(Color.rgb(128, 128, 255));
+        l.getChildAt(position).setBackgroundColor(Color.rgb(92, 27, 110));
 
         try{
 

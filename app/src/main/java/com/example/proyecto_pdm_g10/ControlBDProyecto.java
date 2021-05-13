@@ -20,7 +20,8 @@ public class ControlBDProyecto {
     //____________________________________________________________________________________________________________________________________________________________________________________________________________________
     private static final String[]camposFacultad = new String [] {"id","nombre"};
     private static final String[]camposUbicacion = new String [] {"id","idFacultad","nombre"};
-    private  static final String[]camposUbicacion2 = new String[] {"u.id","f.nombre"," u.nombre"};
+    private static final String[]camposUbicacion2 = new String[] {"u.id","f.nombre"," u.nombre"};
+    private static final String[]camposTipoUbicacion = new String[]{"id","nombre"};
 
     //________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
@@ -48,6 +49,7 @@ public class ControlBDProyecto {
                 //____________________________________________________________________________________________________________________________________________________________________________________________________________________
                 db.execSQL("CREATE TABLE facultad(id VARCHAR(7) NOT NULL PRIMARY KEY,nombre VARCHAR(35));");
                 db.execSQL("CREATE TABLE ubicacion(id VARCHAR(7) NOT NULL ,idFacultad VARCHAR(7) NOT NULL, nombre VARCHAR(35) NOT NULL ,PRIMARY KEY(id, idFacultad));");
+                db.execSQL("CREATE TABLE tipoUbicacion(id VARCHAR(7) NOT NULL PRIMARY KEY,nombre VARCHAR(35));");
                 //________________________________________________________________________________________________________________________________________________________________________________________________________________________
                 db.execSQL("CREATE TABLE usuario(idUsuario CHAR(2) NOT NULL PRIMARY KEY,nomUsuario VARCHAR(30),clave CHAR(5));");
                 db.execSQL("CREATE TABLE opcionCrud(idOpcion CHAR(3) NOT NULL PRIMARY KEY,desOpcion VARCHAR(30),numCrud INTEGER);");
@@ -87,7 +89,6 @@ public class ControlBDProyecto {
             regInsertados=regInsertados+contador;
         }
         return regInsertados;
-
     }
     public Facultad consultarFacultad(String id)
     {
@@ -104,7 +105,6 @@ public class ControlBDProyecto {
         {
             return null;
         }
-
     }
     public String actualizar(Facultad facultad)
     {
@@ -117,7 +117,7 @@ public class ControlBDProyecto {
             return "Registro Actualizado Correctamente";
         }else
             {
-            return "Registro con carnet " + facultad.getIdFacultad() + " no existe";
+            return "Registro con id " + facultad.getIdFacultad() + " no existe";
         }
     }
     public String eliminar(Facultad facultad)
@@ -131,7 +131,6 @@ public class ControlBDProyecto {
         contador+=db.delete("facultad", "id='"+facultad.getIdFacultad()+"'", null);
         regAfectados+=contador;
         return regAfectados;
-
     }
     public String insertar(Ubicacion ubicacion)
     {
@@ -200,6 +199,66 @@ public class ControlBDProyecto {
         return regAfectados;
 
     }
+    public String insertar(TipoUbicacion tipoUbicacion)
+    {
+        String regInsertados="Registro Insertado Nº= ";
+        long contador=0;
+        ContentValues tipoU = new ContentValues();
+        tipoU.put("id", tipoUbicacion.getId());
+        tipoU.put("nombre", tipoUbicacion.getNombre());
+        contador=db.insert("tipoUbicacion", null, tipoU);
+        if(contador==-1 || contador==0)
+        {
+            regInsertados= "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
+        }
+        else {
+            regInsertados=regInsertados+contador;
+        }
+        return regInsertados;
+    }
+    public TipoUbicacion consultarTipoUbicacion(String id)
+    {
+        String[] idTipoUbicacion = {id};
+        Cursor cursor  = db.query("tipoUbicacion", camposTipoUbicacion, "id = ?", idTipoUbicacion, null, null, null);
+        if(cursor.moveToFirst())
+        {
+            TipoUbicacion tipoUbicacion = new TipoUbicacion();
+            tipoUbicacion.setId(cursor.getString(0));
+            tipoUbicacion.setNombre(cursor.getString(1));
+            return tipoUbicacion;
+        }
+        else
+        {
+            return null;
+        }
+    }
+    public String actualizar(TipoUbicacion tipoUbicacion)
+    {
+        if(verificarIntegridad2(tipoUbicacion, 7))
+        {
+            String[] id = {tipoUbicacion.getId()};
+            ContentValues cv = new ContentValues();
+            cv.put("nombre", tipoUbicacion.getNombre());
+            db.update("tipoUbicacion", cv, "id = ?", id);
+            return "Registro Actualizado Correctamente";
+        }else
+        {
+            return "Registro con id " + tipoUbicacion.getId() + " no existe";
+        }
+    }
+    public String eliminar(TipoUbicacion tipoUbicacion)
+    {
+        String regAfectados="filas afectadas= ";
+        int contador=0;
+        /*if (verificarIntegridad2(tipoUbicacion,8))
+        {
+            contador+=db.delete("local", "idTipoUbicacion='"+tipoUbicacion.getId()+"'", null);
+        }
+         */
+        contador+=db.delete("tipoUbicacion", "id='"+tipoUbicacion.getId()+"'", null);
+        regAfectados+=contador;
+        return regAfectados;
+    }
 
     private boolean verificarIntegridad2(Object dato, int relacion) throws SQLException
     {
@@ -267,7 +326,7 @@ public class ControlBDProyecto {
                 }
                 return false;
             }
-            case 5:
+            case 5://para verificar que no exista otro id de ubicacion
             {
                 Ubicacion ubicacion5 = (Ubicacion)dato;
                 String[] id = {ubicacion5.getIdUbicacion()};
@@ -278,6 +337,42 @@ public class ControlBDProyecto {
                     return false;
                 }
                 return true;
+            }
+            case 6://para verificar que no exista otro id de tipoUbicacion
+            {
+                TipoUbicacion tipoUbicacion = (TipoUbicacion) dato;
+                String[] id = {tipoUbicacion.getId()};
+                abrir();
+                Cursor c5 = db.query("tipoUbicacion",null,"id=?",id,null,null,null);
+                if(c5.moveToFirst())
+                {
+                    return false;
+                }
+                return true;
+            }
+            case 7:
+            {
+                //verificar que exista tipoUbicacion
+                TipoUbicacion tipoUbicacion2 = (TipoUbicacion)dato;
+                String[] id = {tipoUbicacion2.getId()};
+                abrir();
+                Cursor c2 = db.query("tipoUbicacion", null, "id = ?", id, null, null,
+                        null);
+                if(c2.moveToFirst())
+                {
+                    //Se encontro TipoUbicacion
+                    return true;
+                }
+                return false;
+            }
+            case 8:
+            {
+                TipoUbicacion tipoUbicacion3 = (TipoUbicacion) dato;
+                Cursor c=db.query(true, "local", new String[] {"idTipoUbicacion" }, "idTipoUbicacion='"+tipoUbicacion3.getId()+"'",null, null, null, null, null);
+                if(c.moveToFirst())
+                    return true;
+                else
+                    return false;
             }
             default:
                 return false;
@@ -580,8 +675,7 @@ public class ControlBDProyecto {
         final String[] VAclave = {"admin","admin","admin","admin","admin"};
 
         final String[] VBidOpcion = {"010","011","012","013","014","020","024","034"};
-        final String[] VBdesOpcion = {"Menu de Area Interes","Adicion Area Interes","Modificacion Area Interes","Eliminar Area Interes","Consulta Area Interes",
-                "Menu Entidad Capacitadora","Consulta de Entidad Capacitadora","Consulta de Ubicacion"};
+        final String[] VBdesOpcion = {"Menu de Area Interes","Adicion Area Interes","Modificacion Area Interes","Eliminar Area Interes","Consulta Area Interes", "Menu Entidad Capacitadora","Consulta de Entidad Capacitadora","Consulta de Ubicacion"};
         final int[] VBnumCrud = {0,1,2,3,4,0,4,4};
 
         final String[] VCidOpcion = {"010","011","012","013","014","020","010"};
@@ -613,15 +707,21 @@ public class ControlBDProyecto {
             insertar(accesoUsuario);
         }
         //___________________________________________________________________________________________________________________
+        /* Llenar Facultad */
         final String[] VFid = {"1","2","3"};
         final String[] VFnombre = {"Ingenieria y Arquitectura","Economia","Agronomia"};
-
+        /* Llenar Ubicacion*/
         final String[] VUid = {"1","2"};
         final String[] VUidFacultad = {"3","2"};
         final String[] VUnombre = {"Biblioteca","Edificio K"};
+        /* Llenar Tipo Ubicacion*/
+        final String[] VTUid ={"1","2","3","4"};
+        final String[] VTUnombre ={"Edificio","Aula","Salon","Biblioteca"};
+
         abrir();
         db.execSQL("DELETE FROM facultad");
         db.execSQL("DELETE FROM ubicacion");
+        db.execSQL("DELETE FROM tipoUbicacion");
 
         Facultad facultad = new Facultad();
         for(int i=0;i<3;i++)
@@ -637,6 +737,13 @@ public class ControlBDProyecto {
             ubicacion.setIdFacultad(VUidFacultad[i]);
             ubicacion.setnombre(VUnombre[i]);
             insertar(ubicacion);
+        }
+        TipoUbicacion tipoUbicacion = new TipoUbicacion();
+        for (int i=0;i<4;i++)
+        {
+            tipoUbicacion.setId(VTUid[i]);
+            tipoUbicacion.setNombre(VTUnombre[i]);
+            insertar(tipoUbicacion);
         }
 
         //___________________________________________________________________________________________________________________
