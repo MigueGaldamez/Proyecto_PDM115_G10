@@ -29,8 +29,11 @@ public class FacultadConsultarActivity extends Activity
         Facultad facultad = helper.consultarFacultad(editId.getText().toString());
         helper.cerrar();
         if(facultad == null)
+        {
             Toast.makeText(this, "Facultad con id " + editId.getText().toString() + " no encontrado", Toast.LENGTH_LONG).show();
-        else{
+        }
+        else
+        {
             editNombre.setText(facultad.getnombre());
         }
     }

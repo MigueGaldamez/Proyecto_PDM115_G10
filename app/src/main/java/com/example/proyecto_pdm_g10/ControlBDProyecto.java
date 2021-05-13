@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.security.acl.AclEntry;
 
@@ -19,10 +20,8 @@ public class ControlBDProyecto {
     private static final String[]camposAccesoUsuario = new String [] {"idOpcion","idUsuario"};
     //____________________________________________________________________________________________________________________________________________________________________________________________________________________
     private static final String[]camposFacultad = new String [] {"id","nombre"};
-    private static final String[]camposUbicacion = new String [] {"id","idFacultad","nombre"};
     private static final String[]camposUbicacion2 = new String[] {"u.id","f.nombre"," u.nombre"};
     private static final String[]camposTipoUbicacion = new String[]{"id","nombre"};
-    private static final String[]camposLocal = new String[]{"id","idUbicacion","idTipoUbicacion","nombre"};
     private static final String[]camposLocal1 = new String[]{"l.id","u.nombre","t.nombre","l.nombre"};
     //________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
@@ -138,7 +137,7 @@ public class ControlBDProyecto {
     {
         String regInsertados="Registro Insertado Nº= ";
         long contador=0;
-        if(verificarIntegridad2(ubicacion,5) && verificarIntegridad2(ubicacion,1))
+        if(verificarIntegridad2(ubicacion,1) && verificarIntegridad2(ubicacion,5))
         {
             ContentValues ubicaciones = new ContentValues();
             ubicaciones.put("id", ubicacion.getIdUbicacion());
@@ -176,7 +175,7 @@ public class ControlBDProyecto {
     }
     public String actualizar(Ubicacion ubicacion)
     {
-        if(verificarIntegridad2(ubicacion, 2))
+        if(verificarIntegridad2(ubicacion, 1) && verificarIntegridad2(ubicacion,13))
         {
             String[] id = {ubicacion.getIdUbicacion()};
             ContentValues cv = new ContentValues();
@@ -265,7 +264,7 @@ public class ControlBDProyecto {
     {
         String regInsertados="Registro Insertado Nº= ";
         long contador=0;
-        if(verificarIntegridad2(local,9))
+        if(verificarIntegridad2(local,9) && verificarIntegridad2(local,10))
         {
             ContentValues locales = new ContentValues();
             locales.put("id", local.getIdLocal());
@@ -286,24 +285,57 @@ public class ControlBDProyecto {
     }
     public Local consultarLocal(String id)
     {
-        return null;
+        // select l.id, u.nombre, t.nombre, l.nombre from local l INNER JOIN ubicacion u on l.idUbicacion = u.id INNER JOIN tipoUbicacion t on l.idTipoUbicacion= t.id;
+        String[] idLocal = {id};
+        Cursor cursor = db.query("local l INNER JOIN ubicacion u on l.idUbicacion = u.id INNER JOIN tipoUbicacion t on l.idTipoUbicacion= t.id", camposLocal1, "l.id = ?", idLocal, null, null, null);
+        if(cursor.moveToFirst())
+        {
+            Local local = new Local();
+            local.setIdLocal(cursor.getString(0));
+            local.setIdUbicacion(cursor.getString(1));
+            local.setIdTipoUbicacion(cursor.getString(2));
+            local.setNombre(cursor.getString(3));
+            return local;
+        }
+        else
+        {
+            return null;
+        }
     }
     public String actualizar(Local local)
     {
-        return null;
+        if(verificarIntegridad2(local, 9 ) && verificarIntegridad2(local,11))
+        {
+            String[] id = {local.getIdLocal()};
+            ContentValues cv = new ContentValues();
+            cv.put("idUbicacion",local.getIdUbicacion());
+            cv.put("idTipoUbicacion",local.getIdTipoUbicacion());
+            cv.put("nombre",local.getNombre());
+            db.update("local", cv, "id = ?", id);
+            return "Registro Actualizado Correctamente";
+        }
+        else
+        {
+            return "Registro no Existe";
+        }
     }
     public String eliminar(Local local)
     {
-        return null;
+        String regAfectados="filas afectadas= ";
+        int contador=0;
+        String where="id='"+local.getIdLocal()+"'";
+        contador+=db.delete("local", where, null);
+        regAfectados+=contador;
+        return regAfectados;
     }
 
     private boolean verificarIntegridad2(Object dato, int relacion) throws SQLException
     {
         switch(relacion)
         {
-            case 1:
+            case 1: //verificar que al insertar ubicacion exista id del facultad
             {
-                //verificar que al insertar ubicacion exista carnet del facultad
+
                 Ubicacion ubicacion = (Ubicacion)dato;
                 String[] id1 = {ubicacion.getIdFacultad()};
                 //abrir();
@@ -316,7 +348,7 @@ public class ControlBDProyecto {
                 }
                 return false;
             }
-            case 2:
+            case 2://no sirve v:
             {
                 //verificar que al modificar ubicacion exista carnet del facultad, elcodigo de materia y el ciclo
                 Ubicacion ubicacion1 = (Ubicacion)dato;
@@ -354,7 +386,7 @@ public class ControlBDProyecto {
                 }
                 return false;
             }
-            case 5://para verificar que no exista otro id de ubicacion
+            case 5://para verificar que no exista otro id de ubicacion al insertar
             {
                 Ubicacion ubicacion5 = (Ubicacion)dato;
                 String[] id = {ubicacion5.getIdUbicacion()};
@@ -418,21 +450,31 @@ public class ControlBDProyecto {
                 }
                 return false;
             }
-            case 10:
+            case 10://para verificar que no exista otro id de local al insertar
             {
-                //verificar que al modificar local exista id del ubicacion, el id de tipoUbicacion
-                Local local1 = (Local)dato;
-                String[] ids = {local1.getIdUbicacion(), local1.getIdTipoUbicacion()};
+               Local local2 = (Local) dato;
+                String[] id = {local2.getIdLocal()};
                 abrir();
-                Cursor c = db.query("local", null, "idUbicacion = ? AND idTipoUbicacion = ? ", ids, null, null, null);
-                if(c.moveToFirst())
+                Cursor c5 = db.query("local",null,"id=?",id,null,null,null);
+                if(c5.moveToFirst())
                 {
-                //Se encontraron datos
+                    return false;
+                }
+                return true;
+            }
+            case 11://para verificar que si exista el id al actualizar
+            {
+                Local local2 = (Local) dato;
+                String[] id = {local2.getIdLocal()};
+                abrir();
+                Cursor c5 = db.query("local",null,"id=?",id,null,null,null);
+                if(c5.moveToFirst())
+                {
                     return true;
                 }
                 return false;
             }
-            case 11:
+            case 12:
             {
                 Ubicacion ubicacion = (Ubicacion) dato;
                 Cursor c=db.query(true, "local", new String[] {"idUbicacion" }, "idUbicacion='"+ubicacion.getIdUbicacion()+"'",null, null, null, null, null);
@@ -441,15 +483,27 @@ public class ControlBDProyecto {
                 else
                     return false;
             }
-            case 12:
+            case 13://para verificar que si exista el id de ubicacion al insertar
             {
-                TipoUbicacion tipoUbicacion = (TipoUbicacion) dato;
-                Cursor c=db.query(true, "local", new String[] {"idTipoUbicacion" }, "idTipoUbicacion='"+tipoUbicacion.getId()+"'",null, null, null, null, null);
+                Ubicacion ubicacion5 = (Ubicacion)dato;
+                String[] id = {ubicacion5.getIdUbicacion()};
+                abrir();
+                Cursor c5 = db.query("ubicacion",null,"id=?",id,null,null,null);
+                if(c5.moveToFirst())
+                {
+                    return true;
+                }
+                return false;
+            }
+            /*case 12:
+            {
+                TipoUbicacion tipoUbicacion5 = (TipoUbicacion) dato;
+                Cursor c=db.query(true, "local", new String[] {"idTipoUbicacion" }, "idTipoUbicacion='"+tipoUbicacion5.getId()+"'",null, null, null, null, null);
                 if(c.moveToFirst())
                     return true;
                 else
                     return false;
-            }
+            }*/
             default:
                 return false;
         }
