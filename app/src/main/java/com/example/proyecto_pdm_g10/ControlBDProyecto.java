@@ -250,7 +250,7 @@ public class ControlBDProyecto {
 
         if(contador==-1 || contador==0)
         {
-            regInsertados= "Error al Insertar el registro pendejo, Verificar inserción= "+ contador+" nombre= "+ empleado.getNombreEmpleado()+" apellido= "+ empleado.getApellidoEmpleado()+" Profesion= "+ empleado.getProfesion();
+            regInsertados= "Error al Insertar el registro, Verificar inserción= "+ contador+" nombre= "+ empleado.getNombreEmpleado()+" apellido= "+ empleado.getApellidoEmpleado()+" Profesion= "+ empleado.getProfesion();
 
         }
         else {
@@ -276,11 +276,11 @@ public class ControlBDProyecto {
         }
     }
     public String actualizar(Empleado empleado){
-        if(verificarIntegridad(empleado, 1)){
+        if(verificarIntegridad(empleado, 5)){
             String[] id = {empleado.getIdEmpleado()};
             ContentValues cv = new ContentValues();
-            cv.put("nombre empleado", empleado.getNombreEmpleado());
-            cv.put("apellido", empleado.getApellidoEmpleado());
+            cv.put("nombreEmpleado", empleado.getNombreEmpleado());
+            cv.put("apellidoEmpleado", empleado.getApellidoEmpleado());
             cv.put("profesion", empleado.getProfesion());
             cv.put("cargo", empleado.getCargo());
 
@@ -539,6 +539,18 @@ public class ControlBDProyecto {
                         null, null, null);
                 if(cursor1.moveToFirst() && cursor2.moveToFirst()){
                     //Se encontraron datos
+                    return true;
+                }
+                return false;
+            }
+            case 5:
+            {
+                Empleado empleado = (Empleado) dato;
+                String[] id = {empleado.getIdEmpleado()};
+                abrir();
+                Cursor c2 = db.query("empleado", null, "idEmpleado = ?", id, null, null,
+                        null);
+                if (c2.moveToFirst()) {
                     return true;
                 }
                 return false;
