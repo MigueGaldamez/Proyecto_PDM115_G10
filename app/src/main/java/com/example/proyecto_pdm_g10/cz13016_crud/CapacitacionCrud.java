@@ -98,4 +98,26 @@ public class CapacitacionCrud {
         }
         return listCapacitador;
     }
+
+    public String eliminarCapacitacion(Integer idCap){
+        String regAfectados;
+        int contador=0;
+        if (buscarCapacitacion(idCap)) {
+            contador+=db.delete("capacitacion", "idCapacitacion='"+idCap+"'", null);
+            regAfectados = "Eliminado con exito";
+        }else
+            regAfectados = "No se encontro ningun registro";
+
+        return  regAfectados;
+    }
+
+    public boolean buscarCapacitacion(Integer idCapacitacion){
+        Cursor cursor = db.rawQuery("SELECT * FROM capacitacion WHERE idCapacitacion = '"+idCapacitacion+"'",null);
+        if(cursor.moveToFirst())
+          return  true;
+
+        return false;
+
+    }
+
 }

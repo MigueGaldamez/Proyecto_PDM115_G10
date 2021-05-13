@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Proyecto_PDM_G10">
-        <activity android:name=".cz13016_activities.CZ13016CapacitacionMenuActivity"></activity>
+        <activity android:name=".cz13016_activities.CZ13016EliminarCapacitacionActivity"></activity>
+        <activity android:name=".cz13016_activities.CZ13016CapacitacionMenuActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,7 +31,7 @@
         <activity android:name=".CapacitadorInsertarActivity" />
         <activity android:name=".cz13016_activities.CZ13016InsertarCapacitacion" />
         <activity android:name=".cz13016_activities.cz13016ObtenerRegistroCapacitacion" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

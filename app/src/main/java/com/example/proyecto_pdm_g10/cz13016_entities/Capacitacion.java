@@ -6,15 +6,16 @@ private Integer idCapacitacion;
 private String descrip;
 private float precio;
 private Integer idLocal;
-private Integer idAreaDip;
-private Integer idAreaIn;
-private Integer idCapacitador;
+
+private String idAreaDip;
+private String idAreaIn;
+private String idCapacitador;
 
     public Capacitacion() {
 
     }
 
-    public Capacitacion(Integer idCapacitacion, String descrip, float precio, Integer idLocal, Integer idAreaDip, Integer idAreaIn, Integer idCapacitador) {
+    public Capacitacion(Integer idCapacitacion, String descrip, float precio, Integer idLocal, String idAreaDip, String idAreaIn, String idCapacitador) {
         this.idCapacitacion = idCapacitacion;
         this.descrip = descrip;
         this.precio = precio;
@@ -56,27 +57,27 @@ private Integer idCapacitador;
         this.idLocal = idLocal;
     }
 
-    public Integer getIdAreaDip() {
+    public String getIdAreaDip() {
         return idAreaDip;
     }
 
-    public void setIdAreaDip(Integer idAreaDip) {
+    public void setIdAreaDip(String idAreaDip) {
         this.idAreaDip = idAreaDip;
     }
 
-    public Integer getIdAreaIn() {
+    public String getIdAreaIn() {
         return idAreaIn;
     }
 
-    public void setIdAreaIn(Integer idAreaIn) {
+    public void setIdAreaIn(String idAreaIn) {
         this.idAreaIn = idAreaIn;
     }
 
-    public Integer getIdCapacitador() {
+    public String getIdCapacitador() {
         return idCapacitador;
     }
 
-    public void setIdCapacitador(Integer idCapacitador) {
+    public void setIdCapacitador(String idCapacitador) {
         this.idCapacitador = idCapacitador;
     }
 }
