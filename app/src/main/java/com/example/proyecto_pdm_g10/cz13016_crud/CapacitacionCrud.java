@@ -6,9 +6,11 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.proyecto_pdm_g10.AreaDiplomado;
 import com.example.proyecto_pdm_g10.AreaInteres;
 import com.example.proyecto_pdm_g10.Capacitador;
 import com.example.proyecto_pdm_g10.ControlBDProyecto;
+import com.example.proyecto_pdm_g10.Local;
 import com.example.proyecto_pdm_g10.cz13016_entities.Capacitacion;
 
 import java.util.ArrayList;
@@ -71,6 +73,20 @@ public class CapacitacionCrud {
 
     }
 
+    public List<Local> allLoca(){
+        ArrayList<Local> lisLocal = new ArrayList<>();
+
+//Obtne el listado de areas
+        Cursor cursor= db.rawQuery("select * from local",null);
+        if (cursor.moveToFirst()){
+            do {
+                Local  local = new Local(cursor.getString(0),cursor.getString(1),cursor.getString(2),cursor.getString(3));
+                lisLocal.add(local);
+            }while (cursor.moveToNext());
+        }
+        return lisLocal;
+    }
+
     public List<AreaInteres> allAreasInteres(){
         ArrayList<AreaInteres> listAreaIn = new ArrayList<>();
 
@@ -85,6 +101,20 @@ public class CapacitacionCrud {
         return listAreaIn;
     }
 
+    public List<AreaDiplomado> allAreaDip(){
+        ArrayList<AreaDiplomado> listAreaDip = new ArrayList<>();
+//                db.execSQL("CREATE TABLE areaDiplomado(idAreaDiplomado CHAR(5) NOT NULL PRIMARY KEY,nombre VARCHAR(20),descripcion VARCHAR(100),idDiplomado VARCHAR(5));");
+//Obtne el listado de areas
+        Cursor cursor= db.rawQuery("select * from areaDiplomado",null);
+        if (cursor.moveToFirst()){
+            do {
+                AreaDiplomado  areaDip = new AreaDiplomado(cursor.getString(0),cursor.getString(1));
+                listAreaDip.add(areaDip);
+            }while (cursor.moveToNext());
+        }
+        return listAreaDip;
+    }
+
     public List<Capacitador> allCapacitador(){
         ArrayList<Capacitador> listCapacitador = new ArrayList<>();
 
@@ -92,7 +122,7 @@ public class CapacitacionCrud {
         Cursor cursor= db.rawQuery("select * from capacitador",null);
         if (cursor.moveToFirst()){
             do {
-                Capacitador  capacitador = new Capacitador(cursor.getString(0),cursor.getString(1));
+                Capacitador  capacitador = new Capacitador(cursor.getString(0),cursor.getString(1), cursor.getString(2));
                 listCapacitador.add(capacitador);
             }while (cursor.moveToNext());
         }
@@ -117,6 +147,34 @@ public class CapacitacionCrud {
           return  true;
 
         return false;
+
+    }
+
+
+
+
+
+    //**************************************************************************************************************
+    public String insertarLocal(Local local){
+        String regInsertados="Registro Insertado Nº= ";
+        long contador=0;
+        ContentValues localContent = new ContentValues();
+
+//                db.execSQL("CREATE TABLE local(id VARCHAR(7) NOT NULL ,idUbicacion VARCHAR(7) NOT NULL, idTipoUbicacion VARCHAR(7) NOT NULL, nombre VARCHAR(35) NOT NULL ,PRIMARY KEY(id, idUbicacion, idTipoUbicacion));");
+        localContent.put("id", local.getIdLocal());
+        localContent.put("idUbicacion", local.getIdUbicacion());
+        localContent.put("idTipoUbicacion", local.getIdTipoUbicacion());
+        localContent.put("nombre", local.getNombre());
+
+        contador=db.insert("local", null, localContent);
+        if(contador==-1 || contador==0)
+        {
+            regInsertados= "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
+        }
+        else {
+            regInsertados=regInsertados+contador;
+        }
+        return regInsertados;
 
     }
 

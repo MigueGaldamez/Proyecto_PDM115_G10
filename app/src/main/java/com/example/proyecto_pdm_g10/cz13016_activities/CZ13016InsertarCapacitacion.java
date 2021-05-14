@@ -3,13 +3,16 @@ package com.example.proyecto_pdm_g10.cz13016_activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.proyecto_pdm_g10.Local;
 import com.example.proyecto_pdm_g10.R;
 import com.example.proyecto_pdm_g10.cz13016_crud.CapacitacionCrud;
 import com.example.proyecto_pdm_g10.cz13016_entities.Capacitacion;
@@ -20,7 +23,6 @@ import java.util.ArrayList;
 public class CZ13016InsertarCapacitacion extends AppCompatActivity {
     CapacitacionCrud helper;
 
-    ArrayList<String> list = new ArrayList<>();
 
     EditText idCapacitacion;
     EditText idPrecio;
@@ -34,12 +36,21 @@ public class CZ13016InsertarCapacitacion extends AppCompatActivity {
    Bundle myBundleRetornado;
    Bundle myBundle;
 
+    SharedPreferences.Editor editor;
+
     int opcion;
+
+    Context thisContex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cz13016_insertar_capacitacion);
+
+        thisContex = this;
+        SharedPreferences sharprefs = getSharedPreferences("thisInstance", thisContex.MODE_PRIVATE);
+
+
        helper  = new CapacitacionCrud(this);
 
        myBundle = new Bundle();
@@ -66,6 +77,10 @@ public class CZ13016InsertarCapacitacion extends AppCompatActivity {
 
     private void detEditTex() {
          myBundleRetornado = this.getIntent().getExtras();
+
+        SharedPreferences sharprefs;
+
+
         if (myBundleRetornado != null){
             int opcion = myBundleRetornado.getInt("op");
             ArrayList<String> lista = myBundleRetornado.getStringArrayList("lista");
@@ -73,111 +88,50 @@ public class CZ13016InsertarCapacitacion extends AppCompatActivity {
             switch (opcion){
 
                 case 1:
-                    EditText idLocal = findViewById(R.id.idLocal);
-                    idLocal.setText(myBundleRetornado.getString("idItem"));
+                   // idLocal.setText(myBundleRetornado.getString("idItem"));
+                    sharprefs = getPreferences(thisContex.MODE_PRIVATE);
+                    editor = sharprefs.edit();
 
+                    editor.putString("idL",myBundleRetornado.getString("idItem"));
+                    editor.putString("localKey",myBundleRetornado.getString("foreignKey"));
+                    editor.commit();
+                    getDataSave();
 
-
-
-                    idCapacitacion = findViewById(R.id.idCapacitacion);
-                    idCapacitacion.setText(lista.get(0).toString());
-
-                    idPrecio = findViewById(R.id.idPrecio);
-                    idPrecio.setText(lista.get(1).toString());
-
-                    idAreaDip = findViewById(R.id.idAreaDip);
-                    idAreaDip.setText(lista.get(3).toString());
-
-                    idAreaIn = findViewById(R.id.idAreaIn);
-                    idAreaIn.setText(lista.get(4).toString());
-
-                    idCapacitador = findViewById(R.id.idCapacitador);
-                    idCapacitador.setText(lista.get(5).toString());
-
-                    idDescripcion = findViewById(R.id.idDescripcion);
-                    idDescripcion.setText(lista.get(6).toString());
-
+                    Toast.makeText(this, myBundleRetornado.getString("foreignKey"), Toast.LENGTH_SHORT).show();
                     break;
                 case 2:
-                    EditText idAreaDip = findViewById(R.id.idAreaDip);
-                    idAreaDip.setText(myBundleRetornado.getString("idItem"));
 
+                    sharprefs = getPreferences(thisContex.MODE_PRIVATE);
+                    editor = sharprefs.edit();
 
+                    editor.putString("idAdip",myBundleRetornado.getString("idItem"));
+                    editor.putString("areaDiKey",myBundleRetornado.getString("foreignKey"));
+                    editor.commit();
+                    getDataSave();
 
-                    idCapacitacion = findViewById(R.id.idCapacitacion);
-                    idCapacitacion.setText(lista.get(0).toString());
-
-                    idPrecio = findViewById(R.id.idPrecio);
-                    idPrecio.setText(lista.get(1).toString());
-
-                    idLocal = findViewById(R.id.idLocal);
-                    idLocal.setText(lista.get(2).toString());
-
-                    idAreaIn = findViewById(R.id.idAreaIn);
-                    idAreaIn.setText(lista.get(4).toString());
-
-                    idCapacitador = findViewById(R.id.idCapacitador);
-                    idCapacitador.setText(lista.get(5).toString());
-
-                    idDescripcion = findViewById(R.id.idDescripcion);
-                    idDescripcion.setText(lista.get(6).toString());
-
+                    Toast.makeText(this, myBundleRetornado.getString("foreignKey"), Toast.LENGTH_SHORT).show();
                     break;
                 case 3:
-                    EditText idAreaIn = findViewById(R.id.idAreaIn);
-                    idAreaIn.setText(myBundleRetornado.getString("idItem"));
+                    sharprefs = getPreferences(thisContex.MODE_PRIVATE);
+                    editor = sharprefs.edit();
 
-                    idCapacitacion = findViewById(R.id.idCapacitacion);
-                    idCapacitacion.setText(lista.get(0).toString());
+                    editor.putString("idAin",myBundleRetornado.getString("idItem"));
+                    editor.putString("areaInDiKey",myBundleRetornado.getString("foreignKey"));
+                    editor.commit();
+                    getDataSave();
 
-                    idPrecio = findViewById(R.id.idPrecio);
-                    idPrecio.setText(lista.get(1).toString());
-
-                    idLocal = findViewById(R.id.idLocal);
-                    idLocal.setText(lista.get(2).toString());
-
-                    idAreaDip = findViewById(R.id.idAreaDip);
-                    idAreaDip.setText(lista.get(3).toString());
-
-                    idCapacitador = findViewById(R.id.idCapacitador);
-                    idCapacitador.setText(lista.get(5).toString());
-
-                    idDescripcion = findViewById(R.id.idDescripcion);
-                    idDescripcion.setText(lista.get(6).toString());
-
-                  /* list.add(idCapacitacion.getText().toString());
-                    list.add(idPrecio.getText().toString());
-                    list.add(idLocal.getText().toString());
-                    list.add(idAreaDip.getText().toString());
-                    list.add(idAreaIn.getText().toString());
-                    list.add(idCapacitador.getText().toString());
-                    list.add(idDescripcion.getText().toString());*/
-
+                    Toast.makeText(this, myBundleRetornado.getString("foreignKey"), Toast.LENGTH_SHORT).show();
                     break;
                 case 4:
-                    EditText idCapacitador = findViewById(R.id.idCapacitador);
-                    idCapacitador.setText(myBundleRetornado.getString("idItem"));
+                     sharprefs = getPreferences(thisContex.MODE_PRIVATE);
+                     editor = sharprefs.edit();
 
-                    idCapacitacion = findViewById(R.id.idCapacitacion);
-                    idCapacitacion.setText(lista.get(0).toString());
+                    editor.putString("idCor",myBundleRetornado.getString("idItem"));
+                    editor.putString("capacitorKey",myBundleRetornado.getString("foreignKey"));
+                    editor.commit();
+                    getDataSave();
 
-                    idPrecio = findViewById(R.id.idPrecio);
-                    idPrecio.setText(lista.get(1).toString());
-
-                    idLocal = findViewById(R.id.idLocal);
-                    idLocal.setText(lista.get(2).toString());
-
-
-                    idAreaDip = findViewById(R.id.idAreaDip);
-                    idAreaDip.setText(lista.get(3).toString());
-
-                    idAreaIn = findViewById(R.id.idAreaIn);
-                    idAreaIn.setText(lista.get(4).toString());
-
-
-                    idDescripcion = findViewById(R.id.idDescripcion);
-                    idDescripcion.setText(lista.get(6).toString());
-
+                    Toast.makeText(this, myBundleRetornado.getString("foreignKey"), Toast.LENGTH_SHORT).show();
                     break;
 
             }
@@ -185,48 +139,44 @@ public class CZ13016InsertarCapacitacion extends AppCompatActivity {
 
     }
 
-    private void completarEditText(int opcion) {
-        switch (opcion){
-
-            case 1:
-                EditText idLocal = findViewById(R.id.idLocal);
-                idLocal.setText(myBundleRetornado.getString("item"));
-                break;
-            case 2:
-                EditText idAreaDip = findViewById(R.id.idAreaDip);
-                idAreaDip.setText(myBundleRetornado.getString("item"));
-                break;
-            case 3:
-                EditText idAreaIn = findViewById(R.id.idAreaIn);
-                idAreaIn.setText(myBundleRetornado.getString("item"));
-                break;
-            case 4:
-                EditText idCapacitador = findViewById(R.id.idCapacitador);
-                idCapacitador.setText(myBundleRetornado.getString("item"));
-                break;
-
-        }
-    }
 
     public void guardarCap(View view) {
+
+        SharedPreferences sharprefs = getPreferences(thisContex.MODE_PRIVATE);
+
+
         String regInsertados = "none";
         Capacitacion cap = new Capacitacion();
-        cap.setIdCapacitacion(11);
-        cap.setDescrip("Descripcion del proyecto");
-        cap.setPrecio(50);
-        cap.setIdLocal(2);/**/
-        cap.setIdAreaDip("ggggg");
-        cap.setIdAreaIn("kkkkkkk");
-        cap.setIdCapacitador("bbbbb");
-       // db.execSQL("CREATE TABLE capacitacion(idCapacitacion INTEGER NOT NULL PRIMARY KEY,descripcion VARCHAR(100),precio REAL,idLocal INTEGER, idAreasDip CHAR(5), idAreaIn VARCHAR(7), idCapacitador CHAR(5));");
 
-       helper.abrir();
-       regInsertados = helper.insertarCapacitacion(cap);
-       helper.cerrar();
-       Toast.makeText(this, regInsertados, Toast.LENGTH_SHORT).show();
+        if (!(idCapacitacion.getText().toString().isEmpty() || idPrecio.getText().toString().isEmpty() || idLocal.getText().toString().isEmpty() || idAreaDip.getText().toString().isEmpty() || idAreaIn.getText().toString().isEmpty() || idCapacitador.getText().toString().isEmpty() || idDescripcion.getText().toString().isEmpty())){
+
+            cap.setIdCapacitacion(Integer.parseInt(idCapacitacion.getText().toString()));
+            cap.setDescrip(idDescripcion.getText().toString());
+            cap.setPrecio(Integer.parseInt(idPrecio.getText().toString()));
+
+            cap.setIdLocal(sharprefs.getString("localKey",""));/**/
+            cap.setIdAreaDip(sharprefs.getString("areaDiKey",""));
+            cap.setIdAreaIn(sharprefs.getString("areaInDiKey",""));
+            cap.setIdCapacitador(sharprefs.getString("capacitorKey",""));
+            // db.execSQL("CREATE TABLE capacitacion(idCapacitacion INTEGER NOT NULL PRIMARY KEY,descripcion VARCHAR(100),precio REAL,idLocal INTEGER, idAreasDip CHAR(5), idAreaIn VARCHAR(7), idCapacitador CHAR(5));");
+            helper.abrir();
+            regInsertados = helper.insertarCapacitacion(cap);
+            helper.cerrar();
+            Toast.makeText(this, regInsertados, Toast.LENGTH_SHORT).show();
+        }else
+            Toast.makeText(this, "Ingrese todos los campos", Toast.LENGTH_SHORT).show();
+
     }
 
     public void limpiarText(View view) {
+        idCapacitacion.setText("");
+        idPrecio.setText("");
+        idLocal.setText("");
+        idAreaDip.setText("");
+        idAreaIn.setText("");
+        idCapacitador.setText("");
+        idDescripcion.setText("");
+
     }
 
     public void obtenerLocal(View view) {
@@ -236,7 +186,6 @@ public class CZ13016InsertarCapacitacion extends AppCompatActivity {
         Intent myIntent = new Intent(CZ13016InsertarCapacitacion.this, cz13016ObtenerRegistroCapacitacion.class);
         //onSaveInstanceState();
         myIntent.putExtra("opcion", opcion);
-        myIntent.putExtra("listacapa", list);
         startActivity(myIntent);
     }
 
@@ -247,7 +196,6 @@ public class CZ13016InsertarCapacitacion extends AppCompatActivity {
         Intent myIntent = new Intent(this, cz13016ObtenerRegistroCapacitacion.class);
         //onSaveInstanceState();
         myIntent.putExtra("opcion", opcion);
-        myIntent.putExtra("listacapa", list);
         startActivity(myIntent);
     }
 
@@ -256,7 +204,6 @@ public class CZ13016InsertarCapacitacion extends AppCompatActivity {
         opcion = 3;
         Intent myIntent = new Intent(this, cz13016ObtenerRegistroCapacitacion.class);
         myIntent.putExtra("opcion", opcion);
-        myIntent.putExtra("listacapa", list);
         startActivity(myIntent);
     }
 
@@ -266,25 +213,82 @@ public class CZ13016InsertarCapacitacion extends AppCompatActivity {
 
         Intent myIntent = new Intent(this, cz13016ObtenerRegistroCapacitacion.class);
         myIntent.putExtra("opcion", opcion);
-        myIntent.putExtra("listacapa", list);
         startActivity(myIntent);
     }
 
     private void setTearPara() {
-        list.add(idCapacitacion.getText().toString());
-        list.add(idPrecio.getText().toString());
-        list.add(idLocal.getText().toString());
-        list.add(idAreaDip.getText().toString());
-        list.add(idAreaIn.getText().toString());
-        list.add(idCapacitador.getText().toString());
-        list.add(idDescripcion.getText().toString());
+        SharedPreferences sharprefs = getPreferences(thisContex.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharprefs.edit();
 
+        editor.putString("idCon",idCapacitacion.getText().toString());
+        editor.putString("idP",idPrecio.getText().toString());
+        editor.putString("idL",idLocal.getText().toString());
+        editor.putString("idAdip",idAreaDip.getText().toString());
+        editor.putString("idAin",idAreaIn.getText().toString());
+        editor.putString("idCor",idCapacitador.getText().toString());
+        editor.putString("descrip",idDescripcion.getText().toString());
+        editor.commit();
+
+    }
+
+    private void getDataSave(){
+
+        SharedPreferences sharprefs = getPreferences(thisContex.MODE_PRIVATE);
+
+
+        idCapacitacion = findViewById(R.id.idCapacitacion);
+        idCapacitacion.setText(sharprefs.getString("idCon",""));
+
+        idPrecio = findViewById(R.id.idPrecio);
+        idPrecio.setText(sharprefs.getString("idP",""));
+
+        idLocal = findViewById(R.id.idLocal);
+        idLocal.setText(sharprefs.getString("idL",""));
+
+
+        idAreaDip = findViewById(R.id.idAreaDip);
+        idAreaDip.setText(sharprefs.getString("idAdip",""));
+
+        idAreaIn = findViewById(R.id.idAreaIn);
+        idAreaIn.setText(sharprefs.getString("idAin",""));
+
+        idCapacitador = findViewById(R.id.idCapacitador);
+        idCapacitador.setText(sharprefs.getString("idCor",""));
+
+        idDescripcion = findViewById(R.id.idDescripcion);
+        idDescripcion.setText(sharprefs.getString("descrip",""));
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        editor.remove("thisInstance").commit();
         Intent myIntent = new Intent(this,CZ13016CapacitacionMenuActivity.class);
         startActivity(myIntent);
+    }
+
+    public void llenadoTemporal(View view) {
+        //***********LOCALES*************************************************************************
+        //db.execSQL("CREATE TABLE local(id VARCHAR(7) NOT NULL ,idUbicacion VARCHAR(7) NOT NULL, idTipoUbicacion VARCHAR(7) NOT NULL, nombre VARCHAR(35) NOT NULL ,PRIMARY KEY(id, idUbicacion, idTipoUbicacion));");
+        Local l= new Local();
+        l.setIdLocal("xxxxxxx");
+        l.setIdTipoUbicacion("lllllll");
+        l.setIdUbicacion("ccccccc");
+        l.setNombre("Salon el Espino");
+
+        Local l1= new Local();
+        l1.setIdLocal("xxxxkkk");
+        l1.setIdTipoUbicacion("llllllj");
+        l1.setIdUbicacion("cccccww");
+        l1.setNombre("Salon el Marmol");
+
+        helper.abrir();
+        helper.insertarLocal(l);
+        String incert =  helper.insertarLocal(l1);
+        helper.cerrar();
+
+        Toast.makeText(this, " Local "+ incert, Toast.LENGTH_SHORT).show();
+        //*******************************************************************************************
+
     }
 }

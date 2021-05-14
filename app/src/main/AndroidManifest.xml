@@ -29,6 +29,8 @@
         <activity android:name=".EntidadCapacitadoraMenuActivity" />
         <activity android:name=".AreaInteresMenuActivity" />
         <activity android:name=".CapacitadorInsertarActivity" />
+        <activity android:name=".AreaDiplomadoInsertarActivity" />
+        <activity android:name=".DiplomadoInsertarActivity" />
         <activity android:name=".cz13016_activities.CZ13016InsertarCapacitacion" />
         <activity android:name=".cz13016_activities.cz13016ObtenerRegistroCapacitacion" />
         <activity android:name=".MainActivity" />

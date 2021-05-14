@@ -9,8 +9,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.proyecto_pdm_g10.AreaDiplomado;
 import com.example.proyecto_pdm_g10.AreaInteres;
 import com.example.proyecto_pdm_g10.Capacitador;
+import com.example.proyecto_pdm_g10.Local;
 import com.example.proyecto_pdm_g10.R;
 import com.example.proyecto_pdm_g10.cz13016_crud.CapacitacionCrud;
 
@@ -20,6 +22,13 @@ import java.util.List;
 public class cz13016ObtenerRegistroCapacitacion extends AppCompatActivity {
 
     CapacitacionCrud helper;
+
+    List<Local> listLocal;
+    List<AreaInteres> listAreain;
+    List<Capacitador> listCapacitador;
+    List<AreaDiplomado> listAreaDip;
+
+    List<String> listForeignKey = new ArrayList<>();
 
 
     ListView listRegistros;
@@ -48,11 +57,13 @@ public class cz13016ObtenerRegistroCapacitacion extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+               // id, idUbicacion, idTipoUbicacion
+                String foreign_key = listForeignKey.get(position);
+
                 Intent myIntent = new Intent(cz13016ObtenerRegistroCapacitacion.this, CZ13016InsertarCapacitacion.class);
                 myBundleRetorno.putInt("op", op);
                 myBundleRetorno.putString("idItem",listItem.get(position));
-                myBundleRetorno.putStringArrayList("lista", myBundle.getStringArrayList("listacapa"));
-               // editText();
+                myBundleRetorno.putString("foreignKey", foreign_key);
                 myIntent.putExtras(myBundleRetorno);
                 startActivity(myIntent);
 
@@ -75,38 +86,54 @@ public class cz13016ObtenerRegistroCapacitacion extends AppCompatActivity {
         String datoItem;
         switch (op){
             case 1:
+                helper.abrir();
+               listLocal = helper.allLoca();
+                helper.cerrar();
 
-
-               /* for (int i=0; i < listAreain.size(); i++){
-                    datoItem = listItem.get(1);
+                for (int i=0; i < listLocal.size(); i++){
+                    datoItem = listLocal.get(i).getNombre();
                     listItem.add(datoItem);
-                }*/
+
+                    String foreignkey = listLocal.get(i).getIdLocal()+listLocal.get(i).getIdUbicacion()+listLocal.get(i).getIdTipoUbicacion();
+                    listForeignKey.add(foreignkey);
+
+                }
                 break;
             case 2:
-                for (int i=0; i<2; i++){
-                  datoItem = "Area de Diplomado N°"+(i+1);
+                helper.abrir();
+            listAreaDip = helper.allAreaDip();
+                helper.cerrar();
+
+                for (int i=0; i<listAreaDip.size(); i++){
+                  datoItem = listAreaDip.get(i).getNombre();
                     listItem.add(datoItem);
+
+                    listForeignKey.add(listAreaDip.get(i).getIdAreaDiplomado());
                 }
                 break;
             case 3:
                 helper.abrir();
-                List<AreaInteres> listAreain = helper.allAreasInteres();
+                listAreain = helper.allAreasInteres();
                 helper.cerrar();
 
                 for (int i=0; i<listAreain.size(); i++){
                     datoItem = listAreain.get(i).getNombre();
                     listItem.add(datoItem);
+
+                    listForeignKey.add(listAreain.get(i).getCodigo());
                 }
                 break;
             case 4:
 
                 helper.abrir();
-                List<Capacitador> listCapacitador = helper.allCapacitador();
+                listCapacitador = helper.allCapacitador();
                 helper.cerrar();
 
                 for (int i=0; i<listCapacitador.size(); i++){
-                    datoItem = listCapacitador.get(i).getNombres();
+                    datoItem = listCapacitador.get(i).getNombres()+" "+listCapacitador.get(i).getApellidos();
                     listItem.add(datoItem);
+
+                    listForeignKey.add(listCapacitador.get(i).getIdCapacitador());
                 }
                 break;
         }

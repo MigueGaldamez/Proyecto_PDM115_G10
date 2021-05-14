@@ -5,7 +5,8 @@ public class Capacitacion {
 private Integer idCapacitacion;
 private String descrip;
 private float precio;
-private Integer idLocal;
+
+private String idLocal;
 
 private String idAreaDip;
 private String idAreaIn;
@@ -15,7 +16,7 @@ private String idCapacitador;
 
     }
 
-    public Capacitacion(Integer idCapacitacion, String descrip, float precio, Integer idLocal, String idAreaDip, String idAreaIn, String idCapacitador) {
+    public Capacitacion(Integer idCapacitacion, String descrip, float precio, String idLocal, String idAreaDip, String idAreaIn, String idCapacitador) {
         this.idCapacitacion = idCapacitacion;
         this.descrip = descrip;
         this.precio = precio;
@@ -49,11 +50,11 @@ private String idCapacitador;
         this.precio = precio;
     }
 
-    public Integer getIdLocal() {
+    public String getIdLocal() {
         return idLocal;
     }
 
-    public void setIdLocal(Integer idLocal) {
+    public void setIdLocal(String idLocal) {
         this.idLocal = idLocal;
     }
 
