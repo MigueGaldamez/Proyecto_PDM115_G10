@@ -754,10 +754,12 @@ public class ControlBDProyecto {
 
     //Llenar la base de datos para USUARIOS, OPCIONESCRUD Y ACCESOUSUARIO
     public String llenarBDUsuario() {
+        //DATOS DE USUARIOS
         final String[] VAidUsuario = {"01","02","03","04","05"};
         final String[] VAnomUsuario = {"GC18090","PT18003","VM13068","AA15020","CZ13016"};
         final String[] VAclave = {"admin","admin","admin","admin","admin"};
 
+        //DATOS DE OPCION USUARIO
         final String[] VBidOpcion = {"010","011","012","013","014",
                 "020","021","022","023","024",
                 "030","031","032","033","034",
@@ -772,6 +774,7 @@ public class ControlBDProyecto {
         };
         final int[] VBnumCrud = {0,1,2,3,4,0,1,2,3,4,0,1,2,3,4,0,1,2,3,4,0,1,2,3,4};
 
+        //DATOS DE ACCESO USURAIO
         final String[] VCidOpcion = {"010","011","012","013","014",
                 "020","021","022","023","024",
                 "030","031","032","033","034",
@@ -785,10 +788,54 @@ public class ControlBDProyecto {
                 "01","01","01","01","01",
                 "01","01","01","01","01",
                 "02","02","02","02","02"};
+
+
+
+        //DATOS ENTIDAD CAPACITADORA
+        final String[] V1codigo={"ENTCA1","ENTCA2","ENTCA3"};
+        final String[] V1nombre={"Entidad capacitadora 1","Entidad capacitadora 2","Entidad capacitadora 3"};
+        final String[] V1descripcion={"Capacitadora en Ciencias de la computación","Capacitadora en Ciencias meedicas","Capacitadora en Ciencias sociales"};
+        final String[] V1telefono={"2235-0001","2235-0002","2235-0003"};
+        final String[] V1correo={"entCa1@ues.edu.sv","entCa2@ues.edu.sv","entCa3@ues.edu.sv"};
+        final String[] V1tipo={"I","E","I"};
+
+        //DATOS DIPLOMADO
+        final String[] v2id={"DIP01","DIP02","DIP03"};
+        final String[] v2titulo={"Diplomado 1","Diplomado 2","Diplomado 3"};
+        final String[] v2descripcion={"Diplomado de Prevencion de ataques DDoS","Diplomado de primeros auxilios","Diplomado de Marketing"};
+        final String[] v2capacidades={"Prevencion y reconocimiento de Ataques","primeros auxilios y manejo de la situacion","Estrategias de ventas y publicidad"};
+
+        //DATOS AREA INTERES
+        final String[] v3codigo ={"ARINT01","ARINT02","ARINT03"};
+        final String[] v3nombre ={"Area interes 1","Area interes 2","Area interes 3"};
+        final String[] v3descripcion ={"Descripcion del area de interes 1","Descripcion del area de interes 2","Descripcion del area de interes 3"};
+
+        //DATOS AREA DIPLOMADO
+        final String[] v4codigo = {"ADIP1","ADIP2","ADIP3"};
+        final String[] v4nombre = {"Area Diplomado 1","Area Diplomado 2","Area Diplomado 3"};
+        final String[] v4descripcion = {"Ciencias de la Computacion","Medicina","Humanistica"};
+        final String[] v4idDiplomado = {"DIP01","DIP02","DIP03"};
+
+        //DATOS CAPACITADOR
+        final String[] v5codigo = {"CAP01","CAP02","CAP03"};
+        final String[] v5nombres = {"Miguel Angel","Jose Walter","Alexa Esmeralda"};
+        final String[] v5apellidos = {"Galdamez Canales","Perez Tejada","Perez Molina"};
+        final String[] v5telefono = {"22350100","22350200","22350300"};
+        final String[] v5idEntidad = {"ENTCA1","ENTCA2","ENTCA3"};
+        final String[] v5correo = {"gc18090@ues.edu.sv","pt18003@ues.edu.sv","PM18090@ues.edu.sv"};
+        final String[] v5profesion = {"Estudiante","Ingeniero","Diseñadora"};
+
+
         abrir();
         db.execSQL("DELETE FROM usuario");
         db.execSQL("DELETE FROM opcionCrud");
         db.execSQL("DELETE FROM accesoUsuario");
+
+        db.execSQL("DELETE FROM entidadCapacitadora");
+        db.execSQL("DELETE FROM areaInteres");
+        db.execSQL("DELETE FROM diplomado");
+        db.execSQL("DELETE FROM areaDiplomado");
+        db.execSQL("DELETE FROM capacitador");
 
         Usuario usuario = new Usuario();
         for(int i=0;i<5;i++){
@@ -812,6 +859,54 @@ public class ControlBDProyecto {
             insertar(accesoUsuario);
         }
 
+        EntidadCapacitadora entidadCapacitadora = new EntidadCapacitadora();
+        for(int i=0;i<3;i++){
+            entidadCapacitadora.setCodigo(V1codigo[i]);
+            entidadCapacitadora.setNombre(V1nombre[i]);
+            entidadCapacitadora.setDescripcion(V1descripcion[i]);
+            entidadCapacitadora.setCorreo(V1correo[i]);
+            entidadCapacitadora.setTelefono(V1telefono[i]);
+            entidadCapacitadora.setTipo(V1tipo[i]);
+            insertar(entidadCapacitadora);
+        }
+
+        Diplomado diplomado = new Diplomado();
+        for(int i=0;i<3;i++){
+            diplomado.setIdDiplomado(v2id[i]);
+            diplomado.setTitulo(v2titulo[i]);
+            diplomado.setDescripcion(v2descripcion[i]);
+            diplomado.setCapacidades(v2capacidades[i]);
+            insertar(diplomado);
+        }
+
+        AreaInteres areaInteres = new AreaInteres();
+        for(int i=0;i<3;i++){
+            areaInteres.setCodigo(v3codigo[i]);
+            areaInteres.setDescripcion(v3descripcion[i]);
+            areaInteres.setNombre(v3nombre[i]);
+            insertar(areaInteres);
+        }
+
+        AreaDiplomado areaDiplomado = new AreaDiplomado();
+        for(int i=0;i<3;i++){
+            areaDiplomado.setIdAreaDiplomado(v4codigo[i]);
+            areaDiplomado.setNombre(v4nombre[i]);
+            areaDiplomado.setDescripcion(v4descripcion[i]);
+            areaDiplomado.setIdDiplomado(v4idDiplomado[i]);
+            insertar(areaDiplomado);
+        }
+
+        Capacitador capacitador = new Capacitador();
+        for(int i=0;i<3;i++){
+            capacitador.setIdCapacitador(v5codigo[i]);
+            capacitador.setIdEntidadCapacitadora(v5idEntidad[i]);
+            capacitador.setProfesion(v5profesion[i]);
+            capacitador.setCorreo(v5correo[i]);
+            capacitador.setTelefono(v5telefono[i]);
+            capacitador.setApellidos(v5apellidos[i]);
+            capacitador.setNombres(v5nombres[i]);
+            insertar(capacitador);
+        }
 
         cerrar();
         return "Guardo Correctamente";

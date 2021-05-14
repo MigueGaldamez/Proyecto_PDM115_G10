@@ -1,102 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/gradient"
-    tools:context=".LoginActivity">
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:stretchColumns="1"
+    android:background="@drawable/gradient">
 
-    <LinearLayout
+    <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="@drawable/layout_bg"
         android:orientation="vertical"
         android:padding="30dp"
-        android:layout_margin="10dp"
-
-        tools:ignore="MissingConstraints">
+        android:layout_margin="20dp">
 
         <TextView
             android:id="@+id/Encabezado"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/Iniciarsesion"
             android:textSize="30dp"
             android:layout_marginTop="90dp"
-            tools:ignore="MissingConstraints" />
+             />
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:gravity="center">
+                <TableRow android:gravity="center">
                 <TextView
                     android:id="@+id/textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:text="@string/Usuario"
-                    tools:ignore="MissingConstraints" />
+                    android:gravity="center"
+                     />
                 <EditText
                     android:id="@+id/editUsuario"
                     android:layout_width="160dp"
-                    android:layout_height="wrap_content"
                     android:inputType="text"
                     android:maxLength="7"
-                    tools:ignore="MissingConstraints" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:gravity="center">
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/clave"
-                    app:layout_constraintBottom_toTopOf="@+id/botonConsultar"
-                    app:layout_constraintEnd_toStartOf="@+id/editClave"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:ignore="MissingConstraints" />
+                     />
 
-                <EditText
-                    android:id="@+id/editClave"
-                    android:layout_width="160dp"
-                    android:layout_height="wrap_content"
+                </TableRow>
 
-                    android:inputType="text"
-                    android:maxLength="7"
-                    android:password="true"
-                    app:layout_constraintBottom_toTopOf="@+id/botonConsultar"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/textView2"
-                    tools:ignore="MissingConstraints" />
-            </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:gravity="center">
+                <TableRow android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/clave"
+                        android:gravity="center"
+                        />
+
+                    <EditText
+                        android:id="@+id/editClave"
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+
+                        android:inputType="text"
+                        android:maxLength="7"
+                        android:password="true"
+                      />
+                </TableRow>
+        <TableRow>
+            <TextView android:text="@string/opciones" />
+        </TableRow>
+        <TableRow android:gravity="center">
             <Button
                 android:id="@+id/botonConsultar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:onClick="consultarUsuario"
                 android:text="@string/Iniciarsesion"
                 android:layout_margin="6dp"
-               />
+                android:backgroundTint="@color/black"
+                android:textColor="@color/white"
+                />
 
             <Button
                 android:id="@+id/botonLimpiar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:onClick="limpiarTexto"
                 android:text="@string/limpiar"
                 android:layout_margin="6dp"
-               />
-        </LinearLayout>
+                android:backgroundTint="@color/black"
+                android:textColor="@color/white"
+                />
+        </TableRow>
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -108,8 +89,10 @@
                 android:layout_height="wrap_content"
                 android:onClick="LlenarBaseUsuario"
                 android:text="@string/Llenarbase"
+                android:backgroundTint="@color/black"
+                android:textColor="@color/white"
                 />
         </LinearLayout>
 
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </TableLayout>
+</TableLayout>

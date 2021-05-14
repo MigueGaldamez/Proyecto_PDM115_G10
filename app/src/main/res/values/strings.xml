@@ -21,7 +21,7 @@
     <string name="codigo">Codigo:</string>
     <string name="nombre">Nombre:</string>
     <string name="descripcion">Descripcion:</string>
-    <string name="insertar">Insertar:</string>
+    <string name="insertar">Insertar</string>
     <string name="consultar">Consultar</string>
     <string name="actualizar">Actualizar</string>
     <string name="eliminar">Eliminar</string>
@@ -38,7 +38,7 @@
     <string name="nombres">Nombres:</string>
     <string name="apellidos">Apellidos</string>
     <string name="profesion">Profesion:</string>
-    <string name="IdEntidadCapacitadora">Codigo Entidad Capacitadora:</string>
+    <string name="IdEntidadCapacitadora">Id Entidad Capacitadora:</string>
     <string name="TipoEntidad">Tipo Entidad:</string>
     <string name="Iniciarsesion">Iniciar Sesión</string>
     <string name="InsertarEntidad">Insertar Entidad Capacitadora</string>

@@ -1,56 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:paddingTop="10dip"
+    android:layout_height="fill_parent"
     android:stretchColumns="1"
-    android:layout_margin="30dp">
-    <TextView
-        android:id="@+id/Encabezado"
-        android:textSize="30dp"
-        android:textStyle="italic"
-        android:text="@string/actualizarAreaDiplomado"
-        android:gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
-    <TableRow>
-        <TextView android:text="@string/idAreaDiplomado" />
-        <EditText
-            android:id="@+id/editIdAreaDiplomado"
-            android:inputType="text"
-            android:maxLength="5" />
-    </TableRow>
-    <TableRow>
-        <TextView android:text="@string/nombre" />
-        <EditText
-            android:id="@+id/editNombre"
-            android:inputType="text"
-            android:maxLength="20" />
-    </TableRow>
-    <TableRow>
-        <TextView android:text="@string/descripcion" />
-        <EditText
-            android:id="@+id/editDescripcion"
-            android:inputType="text"
-            android:maxLength="100" />
-    </TableRow>
-    <TableRow>
-        <TextView android:text="@string/idDiplomado" />
-        <EditText
-            android:id="@+id/editIdDiplomado"
-            android:inputType="text"
-            android:maxLength="5" />
-    </TableRow>
-    <TableRow>
-        <Button
-            android:onClick="actualizarAreaDiplomado"
-            android:text="@string/actualizar"
-            android:layout_margin="6dp"/>
+    android:background="@drawable/gradient">
+    <TableLayout
 
-        <Button
-            android:onClick="limpiarTexto"
-            android:text="@string/limpiar"
-            android:layout_margin="6dp"/>
-    </TableRow>
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/layout_bg"
+        android:orientation="vertical"
+        android:padding="30dp"
+        android:layout_margin="20dp"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/Encabezado"
+            android:textSize="30dp"
+            android:textStyle="italic"
+            android:text="@string/actualizarAreaDiplomado"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+        <TableRow android:gravity="center">
+            <TextView android:text="@string/idAreaDiplomado" />
+            <EditText
+                android:id="@+id/editIdAreaDiplomado"
+                android:inputType="text"
+                android:maxLength="5" />
+        </TableRow>
+        <TableRow android:gravity="center">
+            <TextView android:text="@string/nombre" />
+            <EditText
+                android:id="@+id/editNombre"
+                android:inputType="text"
+                android:maxLength="20" />
+        </TableRow>
+        <TableRow android:gravity="center">
+            <TextView android:text="@string/descripcion" />
+            <EditText
+                android:id="@+id/editDescripcion"
+                android:inputType="text"
+                android:maxLength="100" />
+        </TableRow>
+        <TableRow android:gravity="center">
+            <TextView android:text="@string/idDiplomado" />
+            <EditText
+                android:id="@+id/editIdDiplomado"
+                android:inputType="text"
+                android:maxLength="5" />
+        </TableRow>
+        <TableRow android:gravity="center">
+            <Button
+                android:onClick="actualizarAreaDiplomado"
+                android:text="@string/actualizar"
+                android:layout_margin="6dp"/>
+
+            <Button
+                android:layout_width="155dp"
+                android:onClick="limpiarTexto"
+                android:text="@string/limpiar"
+                android:layout_margin="6dp"/>
+        </TableRow>
+    </TableLayout>
 </TableLayout>
