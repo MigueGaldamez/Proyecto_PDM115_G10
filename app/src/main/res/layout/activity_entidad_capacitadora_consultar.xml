@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_margin="30dp"
+        android:layout_margin="20dp"
         android:background="@drawable/layout_bg"
         android:orientation="vertical"
         android:padding="30dp">
@@ -151,5 +151,20 @@
                 android:enabled="false"
                 android:text="Entidad externa" />
         </RadioGroup>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Elementos"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"/>
+        <ListView
+            android:id="@+id/lvlItems"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:dividerHeight="10.0sp"
+            android:divider="#FFFFFF">
+
+        </ListView>
     </LinearLayout>
 </LinearLayout>

@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Proyecto_PDM_G10">
-        <activity android:name=".CapacitadorConsultarActivity"></activity>
+        <activity android:name=".CapacitadorConsultarActivity" />
         <activity android:name=".CapacitadorActualizarActivity" />
         <activity android:name=".CapacitadorEliminarActivity" />
         <activity android:name=".CapacitadorInsertarActivity" />

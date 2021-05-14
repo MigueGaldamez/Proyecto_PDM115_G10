@@ -3,11 +3,19 @@ package com.example.proyecto_pdm_g10;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.List;
 
 public class CapacitadorConsultarActivity extends Activity {
     ControlBDProyecto helper;
@@ -31,6 +39,56 @@ public class CapacitadorConsultarActivity extends Activity {
         editCorreo = (EditText) findViewById(R.id.editCorreo);
         editProfesion = (EditText) findViewById(R.id.editProfesion);
         editIdEntidadCapacitadora = (EditText) findViewById(R.id.editIdEntidadCapacitadora);
+
+        helper.abrir();
+        List<Capacitador> listacapacitador = helper.getCapacitadorList();
+        helper.cerrar();
+
+        if(listacapacitador.size() > 0){
+
+            // Create the adapter to convert the array to views
+            CapacitadorAdapter adapter= new CapacitadorAdapter(this, listacapacitador);
+            // Attach the adapter to a ListView
+            ListView listView = (ListView) findViewById(R.id.lvlItems);
+            listView.setAdapter(adapter);
+        }
+        else{
+            Toast.makeText(this, "No hay Areas de diplomados en la base", Toast.LENGTH_SHORT).show();
+        }
+    }
+    public class CapacitadorAdapter extends ArrayAdapter<Capacitador> {
+        public CapacitadorAdapter(Context context, List<Capacitador> capacitadors) {
+            super(context, 0, capacitadors);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            // Get the data item for this position
+            Capacitador capacitador = getItem(position);
+            // Check if an existing view is being reused, otherwise inflate the view
+            if (convertView == null) {
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_capacitador, parent, false);
+            }
+            // Lookup view for data population
+            TextView codigo = (TextView) convertView.findViewById(R.id.codigocapacitador);
+            TextView nombres = (TextView) convertView.findViewById(R.id.nombres);
+            TextView apellidos = (TextView) convertView.findViewById(R.id.apellidos);
+
+            TextView telefono = (TextView) convertView.findViewById(R.id.telefono);
+            TextView correo = (TextView) convertView.findViewById(R.id.correo);
+            TextView profesion = (TextView) convertView.findViewById(R.id.profesion);
+            TextView codigoentidad = (TextView) convertView.findViewById(R.id.identidadcapacitadora);
+            // Populate the data into the template view using the data object
+            codigo.setText(capacitador.getIdCapacitador());
+            nombres.setText(capacitador.getNombres());
+            apellidos.setText(capacitador.getApellidos());
+            telefono.setText(capacitador.getTelefono());
+            correo.setText(capacitador.getCorreo());
+            profesion.setText(capacitador.getProfesion());
+            // Return the completed view to render on screen
+            codigoentidad.setText(capacitador.getIdEntidadCapacitadora());
+            return convertView;
+        }
     }
     public void consultarCapacitador(View v) {
         helper.abrir();

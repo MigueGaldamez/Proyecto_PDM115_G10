@@ -19,6 +19,7 @@ public class CapacitadorMenuActivity extends ListActivity {
     String idsesion;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         ListView listView = getListView();
         ArrayAdapter<String> adapter = new

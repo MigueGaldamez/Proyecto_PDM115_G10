@@ -9,6 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
 import java.security.acl.AclEntry;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ControlBDProyecto {
     //PARA CADA TABLA HAY QUE LISTAR LOS CAMPOS
@@ -231,6 +233,23 @@ public class ControlBDProyecto {
             return null;
         }
     }
+
+    public List<AreaInteres> getAreaInteresList(){
+        String sql = " SELECT * FROM areaInteres" ;
+
+        List<AreaInteres> listaAreaInteres = new ArrayList<>();
+        Cursor cursor = db.rawQuery(sql,null);
+        if (cursor.moveToFirst()){
+            do {
+                String codigo = cursor.getString(0);
+                String nombre = cursor.getString(1);
+                String descripcion = cursor.getString(2);
+                listaAreaInteres.add(new AreaInteres(codigo,nombre,descripcion));
+            }while (cursor.moveToNext());
+        }
+
+        return listaAreaInteres;
+    }
     //Fin crud area de interes
 
     //Inicio crud entidad Capacitadora
@@ -301,6 +320,25 @@ public class ControlBDProyecto {
             return null;
         }
     }
+    public List<EntidadCapacitadora> getEntidadCapacitadoraList(){
+        String sql = " SELECT * FROM entidadCapacitadora" ;
+
+        List<EntidadCapacitadora> listaEntidadCapacitadora = new ArrayList<>();
+        Cursor cursor = db.rawQuery(sql,null);
+        if (cursor.moveToFirst()){
+            do {
+                String codigo = cursor.getString(0);
+                String nombre = cursor.getString(1);
+                String descripcion = cursor.getString(2);
+                String telefono = cursor.getString(3);
+                String correo = cursor.getString(4);
+                String tipo = cursor.getString(5);
+                listaEntidadCapacitadora.add(new EntidadCapacitadora(codigo,nombre,descripcion,telefono,correo,tipo));
+            }while (cursor.moveToNext());
+        }
+
+        return listaEntidadCapacitadora;
+    }
     //FIN entidad capacitadora
     
     //INICIO CRUD DIPLOMADO
@@ -360,6 +398,23 @@ public class ControlBDProyecto {
         contador+=db.delete("diplomado", "idDiplomado='"+diplomado.getIdDiplomado()+"'", null);
         regAfectados+=contador;
         return regAfectados;
+    }
+    public List<Diplomado> getDiplomadoList(){
+        String sql = " SELECT * FROM diplomado" ;
+
+        List<Diplomado> listaDiplomado = new ArrayList<>();
+        Cursor cursor = db.rawQuery(sql,null);
+        if (cursor.moveToFirst()){
+            do {
+                String codigo = cursor.getString(0);
+                String nombre = cursor.getString(1);
+                String descripcion = cursor.getString(2);
+                String capacidades = cursor.getString(3);
+                listaDiplomado.add(new Diplomado(codigo,nombre,descripcion,capacidades));
+            }while (cursor.moveToNext());
+        }
+
+        return listaDiplomado;
     }
     //FIN CRUD DIPLOMADO
 
@@ -424,6 +479,24 @@ public class ControlBDProyecto {
         contador+=db.delete("AreaDiplomado", "idAreaDiplomado='"+areaDiplomado.getIdAreaDiplomado()+"'", null);
         regAfectados+=contador;
         return regAfectados;
+    }
+
+    public List<AreaDiplomado> getAreaDiplomadoList(){
+        String sql = " SELECT * FROM areaDiplomado" ;
+
+        List<AreaDiplomado> listaAreaDiplomado = new ArrayList<>();
+        Cursor cursor = db.rawQuery(sql,null);
+        if (cursor.moveToFirst()){
+            do {
+                String codigo = cursor.getString(0);
+                String nombre = cursor.getString(1);
+                String descripcion = cursor.getString(2);
+                String codigoDiplomado = cursor.getString(3);
+                listaAreaDiplomado.add(new AreaDiplomado(codigo,nombre,descripcion,codigoDiplomado));
+            }while (cursor.moveToNext());
+        }
+
+        return listaAreaDiplomado;
     }
     //FIN CRUD AREA DIPLOMADO
 
@@ -497,6 +570,28 @@ public class ControlBDProyecto {
         regAfectados+=contador;
         return regAfectados;
     }
+
+    public List<Capacitador> getCapacitadorList(){
+        String sql = " SELECT * FROM capacitador" ;
+
+        List<Capacitador> listaCapacitador = new ArrayList<>();
+        Cursor cursor = db.rawQuery(sql,null);
+        if (cursor.moveToFirst()){
+            do {
+                String codigo = cursor.getString(0);
+                String nombres = cursor.getString(1);
+                String apellidos = cursor.getString(2);
+                String telefono = cursor.getString(3);
+                String identidadcapacitadora = cursor.getString(4);
+                String correo = cursor.getString(5);
+                String profesion = cursor.getString(6);
+                listaCapacitador.add(new Capacitador(codigo,nombres, apellidos,telefono,identidadcapacitadora,correo,profesion));
+            }while (cursor.moveToNext());
+        }
+
+        return listaCapacitador;
+    }
+
     //FIN CRUD CAPACITADOR
 
     //VERIFICACION DE INEGRACION, SIRVE CUANDO ACTUALIZAMOS,
