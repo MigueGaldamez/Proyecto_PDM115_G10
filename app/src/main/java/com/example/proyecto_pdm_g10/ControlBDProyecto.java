@@ -25,6 +25,9 @@ public class ControlBDProyecto {
     private static final String[]camposAreaDiplomado = new String [] {"idAreaDiplomado","nombre","descripcion","idDiplomado"};
     private static final String[]camposCapacitador = new String [] {"idCapacitador","nombres","apellidos","telefono","idEntidadCapacitadora","correo","profesion"};
 
+    private static final String[]camposEmpleado=new String[] {"idEmpleado", "nombreEmpleado","apellidoEmpleado","profesion","cargo"};
+    private static final String[]camposSolicitud= new String[]{"idSolicitud","fechaSolicitud","estadoSolicitud","capacitacionId"};
+
     private final Context context;
     private DatabaseHelper DBHelper;
     private SQLiteDatabase db;
@@ -53,6 +56,9 @@ public class ControlBDProyecto {
                 db.execSQL("CREATE TABLE diplomado(idDiplomado CHAR(5) NOT NULL PRIMARY KEY,titulo VARCHAR(30),descripcion VARCHAR(100),capacidades VARCHAR(100));");
                 db.execSQL("CREATE TABLE areaDiplomado(idAreaDiplomado CHAR(5) NOT NULL PRIMARY KEY,nombre VARCHAR(20),descripcion VARCHAR(100),idDiplomado VARCHAR(5));");
                 db.execSQL("CREATE TABLE capacitador(idCapacitador CHAR(5) NOT NULL PRIMARY KEY,nombres VARCHAR(40),apellidos VARCHAR(40),telefono VARCHAR(20),idEntidadCapacitadora VARCHAR(6),correo VARCHAR(100),profesion VARCHAR(30));");
+
+                db.execSQL("CREATE TABLE empleado(idEmpleado CHAR(5) NOT NULL PRIMARY KEY, nombreEmpleado VARCHAR(40),apellidoEmpleado VARCHAR(40),profesion VARCHAR(20),cargo VARCHAR(20));");
+                db.execSQL("CREATE TABLE solicitud(idSolicitud CHAR(5) NOT NULL PRIMARY KEY, fechaSolicitud VARCHAR(40),estadoSolicitud VARCHAR(40),capacitacionId VARCHAR(10));");
 
             }catch(SQLException e){
                 e.printStackTrace();
@@ -104,7 +110,7 @@ public class ControlBDProyecto {
         contador=db.insert("opcionCrud", null, opcion);
         if(contador==-1 || contador==0)
         {
-            regInsertados= "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
+            regInsertados= "Error al Insertar , Registro Duplicado. Verificar inserción";
         }
         else {
             regInsertados=regInsertados+contador;
@@ -252,6 +258,141 @@ public class ControlBDProyecto {
     }
     //Fin crud area de interes
 
+
+    //Inicio crud empleado
+    public String insertar(Empleado empleado){
+        String regInsertados="Registro Insertado Nº= ";
+        long contador=0;
+        ContentValues emple = new ContentValues();
+        emple.put("idEmpleado", empleado.getIdEmpleado());
+        emple.put("nombreEmpleado", empleado.getNombreEmpleado());
+        emple.put("apellidoEmpleado", empleado.getApellidoEmpleado());
+        emple.put("profesion", empleado.getProfesion());
+        emple.put("cargo", empleado.getCargo());
+        contador=db.insert("empleado", null, emple);
+
+        if(contador==-1 || contador==0)
+        {
+            regInsertados= "Error al Insertar el registro, Verificar inserción= "+ contador+" nombre= "+ empleado.getNombreEmpleado()+" apellido= "+ empleado.getApellidoEmpleado()+" Profesion= "+ empleado.getProfesion();
+
+        }
+        else {
+            regInsertados=regInsertados+contador;
+        }
+        return regInsertados;
+    }
+
+    public Empleado consultarEmpleado(String idEmpleado){
+        String[] id = {idEmpleado};
+        Cursor cursor = db.query("empleado", camposEmpleado, "idEmpleado = ?",
+                id, null, null, null);
+        if(cursor.moveToFirst()){
+            Empleado empleado = new Empleado();
+            empleado.setIdEmpleado(cursor.getString(0));
+            empleado.setNombreEmpleado(cursor.getString(1));
+            empleado.setApellidoEmpleado(cursor.getString(2));
+            empleado.setProfesion(cursor.getString(3));
+            empleado.setCargo(cursor.getString(4));
+            return empleado;
+        }else{
+            return null;
+        }
+    }
+    public String actualizar(Empleado empleado){
+        if(verificarIntegridad(empleado, 5)){
+            String[] id = {empleado.getIdEmpleado()};
+            ContentValues cv = new ContentValues();
+            cv.put("nombreEmpleado", empleado.getNombreEmpleado());
+            cv.put("apellidoEmpleado", empleado.getApellidoEmpleado());
+            cv.put("profesion", empleado.getProfesion());
+            cv.put("cargo", empleado.getCargo());
+
+            db.update("empleado", cv, "idEmpleado = ?", id);
+            return "Registro Actualizado Correctamente";
+        }else{
+            return "Registro con codigo " + empleado.getIdEmpleado() + " no existe";
+        }
+    }
+    public String eliminar(Empleado empleado){
+        String regAfectados="filas afectadas= ";
+        int contador=0;
+        //Verificar si se encuentra en otra tabla
+        /*if (verificarIntegridad(areaInteres,3)) {
+            contador+=db.delete("nota", "carnet='"+alumno.getCarnet()+"'", null);
+        }*/
+        contador+=db.delete("empleado", "idEmpleado='"+empleado.getIdEmpleado()+"'", null);
+        regAfectados+=contador;
+        return regAfectados;
+    }
+    //fin crud empleado
+
+    //Inicio Crud solicitud
+    public String insertar(Solicitud solicitud){
+        String regInsertados="Registro Insertado Nº= ";
+        long contador=0;
+        ContentValues soli = new ContentValues();
+        soli.put("idSolicitud", solicitud.getIdSolicitud());
+        soli.put("fechaSolicitud", solicitud.getFechaSolicitud());
+        soli.put("estadoSolicitud", solicitud.getEstadoSolicitud());
+        soli.put("capacitacionId", solicitud.getCapacitacionId());
+
+        contador=db.insert("solicitud", null, soli);
+
+        if(contador==-1 || contador==0)
+        {
+            regInsertados= "Error al Insertar el registro, Verificar inserción= ";
+
+        }
+        else {
+            regInsertados=regInsertados+contador;
+        }
+        return regInsertados;
+    }
+
+    public Solicitud consultarSolicitud(String idSolicitud){
+        String[] id = {idSolicitud};
+        Cursor cursor = db.query("solicitud", camposSolicitud, "idSolicitud = ?",
+                id, null, null, null);
+        if(cursor.moveToFirst()){
+            Solicitud solicitud = new Solicitud();
+            solicitud.setIdSolicitud(cursor.getString(0));
+            solicitud.setFechaSolicitud(cursor.getString(1));
+            solicitud.setEstadoSolicitud(cursor.getString(2));
+            solicitud.setCapacitacionId(cursor.getString(3));
+
+            return solicitud;
+        }else{
+            return null;
+        }
+    }
+
+    public String actualizar(Solicitud solicitud){
+        if(verificarIntegridad(solicitud, 6)){
+            String[] id = {solicitud.getIdSolicitud()};
+            ContentValues cv = new ContentValues();
+            cv.put("fechaSolicitud", solicitud.getFechaSolicitud());
+            cv.put("estadoSolicitud", solicitud.getEstadoSolicitud());
+            cv.put("capacitacionId", solicitud.getCapacitacionId());
+
+
+            db.update("solicitud", cv, "idSolicitud = ?", id);
+            return "Registro Actualizado Correctamente";
+        }else{
+            return "Registro con codigo " + solicitud.getIdSolicitud() + " no existe";
+        }
+    }
+    public String eliminar(Solicitud solicitud){
+        String regAfectados="filas afectadas= ";
+        int contador=0;
+        //Verificar si se encuentra en otra tabla
+        /*if (verificarIntegridad(areaInteres,3)) {
+            contador+=db.delete("nota", "carnet='"+alumno.getCarnet()+"'", null);
+        }*/
+        contador+=db.delete("solicitud", "idSolicitud='"+solicitud.getIdSolicitud()+"'", null);
+        regAfectados+=contador;
+        return regAfectados;
+    }
+
     //Inicio crud entidad Capacitadora
     public String insertar(EntidadCapacitadora entidadCapacitadora){
         String regInsertados="Registro Insertado Nº= ";
@@ -340,6 +481,7 @@ public class ControlBDProyecto {
         return listaEntidadCapacitadora;
     }
     //FIN entidad capacitadora
+
     
     //INICIO CRUD DIPLOMADO
     public String insertar(Diplomado diplomado){
@@ -637,6 +779,30 @@ public class ControlBDProyecto {
                         null, null, null);
                 if(cursor1.moveToFirst() && cursor2.moveToFirst()){
                     //Se encontraron datos
+                    return true;
+                }
+                return false;
+            }
+            case 5:
+            {
+                Empleado empleado = (Empleado) dato;
+                String[] id = {empleado.getIdEmpleado()};
+                abrir();
+                Cursor c2 = db.query("empleado", null, "idEmpleado = ?", id, null, null,
+                        null);
+                if (c2.moveToFirst()) {
+                    return true;
+                }
+                return false;
+            }
+            case 6:
+            {
+                Solicitud solicitud = (Solicitud) dato;
+                String[] id = {solicitud.getIdSolicitud()};
+                abrir();
+                Cursor c2 = db.query("solicitud", null, "idSolicitud = ?", id, null, null,
+                        null);
+                if (c2.moveToFirst()) {
                     return true;
                 }
                 return false;

@@ -21,6 +21,7 @@
     <string name="codigo">Code:</string>
     <string name="nombre">Name:</string>
     <string name="descripcion">Description:</string>
+<<<<<<< HEAD
     <string name="insertar">Insert</string>
     <string name="consultar">Read</string>
     <string name="actualizar">Update</string>
@@ -61,6 +62,31 @@
     <string name="eliminarAreaDiplomado">Delete Certificate Area</string>
     <string name="consultarAreaDiplomado">Read Certificate Area</string>
     <string name="actualizarAreaDiplomado">Update Certificate Area</string>
+=======
+    <string name="insertar">Insert:</string>
+    <string name="consultar">Consultar</string>
+    <string name="actualizar">Actualizar</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="telefono">Telefono:</string>
+    <string name="correo">Correo:</string>
+    <string name="clave">Clave:</string>
+    <string name="Usuario">Usuario:</string>
+    <string name="Llenarbase">Llenar Base</string>
+    <string name="idDiplomado">Codigo Diplomado:</string>
+    <string name="idEmpleado">Codigo Empleado:</string>
+    <string name="titulo">Titulo:</string>
+    <string name="capacidades">Capacidades:</string>
+    <string name="idAreaDiplomado">Codigo Area Diplomado:</string>
+    <string name="nombreEmpleado">Nommbre Empleado:</string>
+    <string name="apellidoEmpleado">Apellido Empleado:</string>
+    <string name="profesion">Profesion:</string>
+    <string name="cargo">Cargo:</string>
+
+    <string name="idSolicitud">Id Solicitud:</string>
+    <string name="fechaSolicitud">Fecha</string>
+    <string name="estadoSolicitud">Estado</string>
+    <string name="capacitacionId">ID de la capacitacion</string>
+>>>>>>> abd09c053bc4896a4ef057dfed7ef1701da48609
 
 
     <string name="register">REGISTER</string>
