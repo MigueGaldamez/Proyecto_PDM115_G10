@@ -21,6 +21,13 @@ import java.util.List;
 
 public class cz13016ObtenerRegistroCapacitacion extends AppCompatActivity {
 
+    //op es asignada a un parametro que se le envia de de la ctivity CZ13016Insertar... o CZ13016Actualizar..
+    //Si op = 1; entonces esta activiy manda a la xml que renderize los locales
+    //Si op = 2; entonces esta activiy manda a la xml que renderize las Areas de Diplomado
+    //Si op = 3; entonces esta activiy manda a la xml que renderize las Areas de Inters
+    //Si op = 4; entonces esta activiy manda a la xml que renderize los Capacitadores
+
+
     CapacitacionCrud helper;
 
     List<Local> listLocal;
@@ -60,12 +67,22 @@ public class cz13016ObtenerRegistroCapacitacion extends AppCompatActivity {
                // id, idUbicacion, idTipoUbicacion
                 String foreign_key = listForeignKey.get(position);
 
-                Intent myIntent = new Intent(cz13016ObtenerRegistroCapacitacion.this, CZ13016InsertarCapacitacion.class);
                 myBundleRetorno.putInt("op", op);
                 myBundleRetorno.putString("idItem",listItem.get(position));
                 myBundleRetorno.putString("foreignKey", foreign_key);
-                myIntent.putExtras(myBundleRetorno);
-                startActivity(myIntent);
+
+                int activity = myBundle.getInt("activity");
+                if (activity == 1) {
+                    Intent myIntent = new Intent(cz13016ObtenerRegistroCapacitacion.this, CZ13016InsertarCapacitacion.class);
+                    myIntent.putExtras(myBundleRetorno);
+                    startActivity(myIntent);
+                }else {
+                    Intent myIntent = new Intent(cz13016ObtenerRegistroCapacitacion.this, CZ13016ActualizarCapacitacionActivity.class);
+                    myIntent.putExtras(myBundleRetorno);
+                    startActivity(myIntent);
+                }
+
+
 
             }
         });

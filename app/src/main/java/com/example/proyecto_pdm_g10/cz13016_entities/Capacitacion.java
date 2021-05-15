@@ -4,6 +4,7 @@ public class Capacitacion {
     // db.execSQL("CREATE TABLE capacitacion(idCapacitacion ,descripcion VARCHAR(100),precio REAL,idLocal INTEGER, idAreasDip INTEGER, idAreaIn INTEGER, idCapacitador INTEGER);");
 private Integer idCapacitacion;
 private String descrip;
+
 private float precio;
 
 private String idLocal;
@@ -13,7 +14,6 @@ private String idAreaIn;
 private String idCapacitador;
 
     public Capacitacion() {
-
     }
 
     public Capacitacion(Integer idCapacitacion, String descrip, float precio, String idLocal, String idAreaDip, String idAreaIn, String idCapacitador) {

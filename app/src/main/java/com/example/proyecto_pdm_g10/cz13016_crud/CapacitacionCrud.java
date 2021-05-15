@@ -6,12 +6,15 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.proyecto_pdm_g10.Diplomado;
+import com.example.proyecto_pdm_g10.cz13016_entities.Capacitacion;
+
 import com.example.proyecto_pdm_g10.AreaDiplomado;
 import com.example.proyecto_pdm_g10.AreaInteres;
 import com.example.proyecto_pdm_g10.Capacitador;
 import com.example.proyecto_pdm_g10.ControlBDProyecto;
 import com.example.proyecto_pdm_g10.Local;
-import com.example.proyecto_pdm_g10.cz13016_entities.Capacitacion;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -141,16 +144,47 @@ public class CapacitacionCrud {
         return  regAfectados;
     }
 
+    public Capacitacion extraerCapacitacion(Integer idCapacitacion){
+
+        Capacitacion  capacitacion;
+
+        Cursor cursor = db.rawQuery("SELECT * FROM capacitacion WHERE idCapacitacion = '"+idCapacitacion+"'",null);
+        if(cursor.moveToFirst()){
+            capacitacion = new Capacitacion(cursor.getInt(0),cursor.getString(1),cursor.getFloat(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6));
+            return capacitacion;
+
+        }
+        return null;
+
+    }
+
     public boolean buscarCapacitacion(Integer idCapacitacion){
         Cursor cursor = db.rawQuery("SELECT * FROM capacitacion WHERE idCapacitacion = '"+idCapacitacion+"'",null);
         if(cursor.moveToFirst())
-          return  true;
+            return  true;
 
         return false;
 
     }
 
+    public String actualizarCapacitacion(Capacitacion capacitacion){
+        if(buscarCapacitacion(capacitacion.getIdCapacitacion())){
 
+            ContentValues capaci = new ContentValues();
+
+            capaci.put("descripcion", capacitacion.getDescrip());
+            capaci.put("precio", capacitacion.getPrecio());
+            capaci.put("idLocal", capacitacion.getIdLocal());
+            capaci.put("idAreasDip", capacitacion.getIdAreaDip());
+            capaci.put("idAreaIn", capacitacion.getIdAreaIn());
+            capaci.put("idCapacitador", capacitacion.getIdCapacitador());
+
+            db.update("capacitacion", capaci, "idCapacitacion='"+capacitacion.getIdCapacitacion()+"'", null);
+            return "Registro Actualizado Correctamente";
+        }else{
+            return "Registro con codigo " + capacitacion.getIdCapacitacion() + " no existe";
+        }
+    }
 
 
 
@@ -160,7 +194,7 @@ public class CapacitacionCrud {
         long contador=0;
         ContentValues localContent = new ContentValues();
 
-//                db.execSQL("CREATE TABLE local(id VARCHAR(7) NOT NULL ,idUbicacion VARCHAR(7) NOT NULL, idTipoUbicacion VARCHAR(7) NOT NULL, nombre VARCHAR(35) NOT NULL ,PRIMARY KEY(id, idUbicacion, idTipoUbicacion));");
+//      db.execSQL("CREATE TABLE local(id VARCHAR(7) NOT NULL ,idUbicacion VARCHAR(7) NOT NULL, idTipoUbicacion VARCHAR(7) NOT NULL, nombre VARCHAR(35) NOT NULL ,PRIMARY KEY(id, idUbicacion, idTipoUbicacion));");
         localContent.put("id", local.getIdLocal());
         localContent.put("idUbicacion", local.getIdUbicacion());
         localContent.put("idTipoUbicacion", local.getIdTipoUbicacion());
@@ -178,4 +212,21 @@ public class CapacitacionCrud {
 
     }
 
+    public Local extraerLocal(String primaryKey){
+
+        Local localRetorno;
+
+        // SELECT * FROM tabla WHERE nombre||apellido='Alonso'
+        Cursor cursor = db.rawQuery("SELECT * FROM local WHERE id || idUbicacion || idTipoUbicacion = '"+primaryKey+"'",null);
+        if(cursor.moveToFirst()){
+            localRetorno = new Local(cursor.getString(0),cursor.getString(1),cursor.getString(2), cursor.getString(3));
+            return localRetorno;
+
+        }
+        return null;
+
+    }
+
+
 }
+

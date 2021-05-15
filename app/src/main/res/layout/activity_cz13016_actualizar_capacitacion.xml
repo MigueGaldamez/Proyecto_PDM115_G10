@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:padding="20dp"
     android:orientation="vertical"
-    tools:context=".cz13016_activities.CZ13016InsertarCapacitacion">
+    tools:context=".cz13016_activities.CZ13016ActualizarCapacitacionActivity">
 
 
     <LinearLayout
@@ -16,19 +16,24 @@
         android:gravity="center">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="28dp"
-            android:text="Numero de Capacitacion"
-            android:layout_marginRight="45dp"
-            />
+            android:layout_width="63dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:text="ID " />
 
         <EditText
             android:id="@+id/idCapacitacion"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_width="127dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
             android:inputType="number"
-            android:gravity="right"
             />
+
+        <Button
+            android:layout_width="144dp"
+            android:layout_height="wrap_content"
+            android:onClick="getCapacitacionItem"
+            android:text="Obtener" />
     </LinearLayout>
 
     <LinearLayout
@@ -51,7 +56,7 @@
             android:inputType="numberDecimal"
             android:gravity="right"
             android:layout_alignParentRight="true"
-           />
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -65,7 +70,7 @@
             android:layout_height="wrap_content"
             android:text="Local"
             android:layout_marginRight="50dp"
-          />
+            />
 
         <EditText
             android:id="@+id/idLocal"
@@ -75,7 +80,7 @@
             android:gravity="right"
             android:editable="false"
             android:layout_alignParentRight="true"
-         />
+            />
 
     </LinearLayout>
 
@@ -121,7 +126,7 @@
             android:onClick="obtenerAreaInte"
             android:gravity="right"
             android:editable="false"
-           />
+            />
 
     </LinearLayout>
 
@@ -145,7 +150,7 @@
             android:gravity="right"
             android:editable="false"
 
-             />
+            />
 
     </LinearLayout>
 
@@ -179,30 +184,12 @@
 
         <Button
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="Incertar"
-            android:layout_marginRight="10dp"
-            android:onClick="guardarCap"
+            android:layout_height="match_parent"
+            android:text="Actualizar Registro"
+            android:onClick="actualizarCap"
             />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="Locales"
-            android:layout_marginRight="10dp"
-            android:onClick="llenadoTemporal"
-            />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="Limpiar"
-            android:onClick="limpiarText"
-            />
-
 
     </LinearLayout>
-
-
-
 
 
 </LinearLayout>
