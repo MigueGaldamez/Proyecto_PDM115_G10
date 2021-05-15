@@ -36,6 +36,8 @@
         android:layout_height="wrap_content"
         android:text="@string/eliminar"
         android:onClick="eliminarAreaInteres"
-        android:layout_margin="6dp"/>
+        android:layout_margin="6dp"
+        android:backgroundTint="@color/boton_fondo"
+        android:textColor="@color/boton_texto"/>
     </LinearLayout>
 </LinearLayout>

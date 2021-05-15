@@ -55,12 +55,16 @@
             <Button
                 android:onClick="insertarAreaInteres"
                 android:text="@string/insertar"
-                android:layout_margin="6dp"/>
+                android:layout_margin="6dp"
+                android:backgroundTint="@color/boton_fondo"
+                android:textColor="@color/boton_texto"/>
             <Button
                 android:layout_width="192dp"
                 android:onClick="limpiarTexto"
                 android:text="@string/limpiar"
-                android:layout_margin="6dp"/>
+                android:layout_margin="6dp"
+                android:backgroundTint="@color/boton_fondo"
+                android:textColor="@color/boton_texto"/>
         </TableRow>
     </TableLayout>
 </TableLayout>

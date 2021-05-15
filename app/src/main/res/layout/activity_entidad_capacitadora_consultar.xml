@@ -48,7 +48,8 @@
                 android:layout_margin="6dp"
                 android:onClick="consultarEntidadCapacitadora"
                 android:text="@string/consultar"
-                app:backgroundTint="@color/purple_500" />
+                android:backgroundTint="@color/boton_fondo"
+                android:textColor="@color/boton_texto" />
 
             <Button
                 android:id="@+id/botonLimpiar"
@@ -57,7 +58,8 @@
                 android:layout_margin="6dp"
                 android:onClick="limpiarTexto"
                 android:text="@string/limpiar"
-                app:backgroundTint="@color/purple_500" />
+                android:backgroundTint="@color/boton_fondo"
+                android:textColor="@color/boton_texto" />
         </LinearLayout>
 
         <TextView

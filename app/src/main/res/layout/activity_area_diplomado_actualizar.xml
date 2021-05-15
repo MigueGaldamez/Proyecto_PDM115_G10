@@ -57,13 +57,17 @@
             <Button
                 android:onClick="actualizarAreaDiplomado"
                 android:text="@string/actualizar"
-                android:layout_margin="6dp"/>
+                android:layout_margin="6dp"
+                android:backgroundTint="@color/boton_fondo"
+                android:textColor="@color/boton_texto"/>
 
             <Button
                 android:layout_width="155dp"
                 android:onClick="limpiarTexto"
                 android:text="@string/limpiar"
-                android:layout_margin="6dp"/>
+                android:layout_margin="6dp"
+                android:backgroundTint="@color/boton_fondo"
+                android:textColor="@color/boton_texto"/>
         </TableRow>
     </TableLayout>
 </TableLayout>

@@ -65,8 +65,8 @@
                 android:onClick="consultarUsuario"
                 android:text="@string/Iniciarsesion"
                 android:layout_margin="6dp"
-                android:backgroundTint="@color/black"
-                android:textColor="@color/white"
+                android:backgroundTint="@color/boton_fondo"
+                android:textColor="@color/boton_texto"
                 />
 
             <Button
@@ -74,8 +74,8 @@
                 android:onClick="limpiarTexto"
                 android:text="@string/limpiar"
                 android:layout_margin="6dp"
-                android:backgroundTint="@color/black"
-                android:textColor="@color/white"
+                android:backgroundTint="@color/boton_fondo"
+                android:textColor="@color/boton_texto"
                 />
         </TableRow>
         <LinearLayout
@@ -89,8 +89,8 @@
                 android:layout_height="wrap_content"
                 android:onClick="LlenarBaseUsuario"
                 android:text="@string/Llenarbase"
-                android:backgroundTint="@color/black"
-                android:textColor="@color/white"
+                android:backgroundTint="@color/boton_fondo"
+                android:textColor="@color/boton_texto"
                 />
         </LinearLayout>
 

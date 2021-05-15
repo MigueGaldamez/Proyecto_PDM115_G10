@@ -41,14 +41,18 @@
                 android:layout_height="wrap_content"
                 android:text="@string/consultar"
                 android:onClick="consultarCapacitador"
-                android:layout_margin="6dp"/>
+                android:layout_margin="6dp"
+                android:backgroundTint="@color/boton_fondo"
+                android:textColor="@color/boton_texto"/>
             <Button
                 android:id="@+id/botonLimpiar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/limpiar"
                 android:onClick="limpiarTexto"
-                android:layout_margin="6dp"/>
+                android:layout_margin="6dp"
+                android:backgroundTint="@color/boton_fondo"
+                android:textColor="@color/boton_texto"/>
         </LinearLayout>
 
         <TextView
