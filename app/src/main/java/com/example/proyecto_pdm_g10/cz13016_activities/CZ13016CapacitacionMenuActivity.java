@@ -17,8 +17,8 @@ public class CZ13016CapacitacionMenuActivity extends ListActivity {
 
     ListView capacitacionMenu;
 
-    String[] menu = {"Insertar Capacitacion", "Elininar Capacitacin","Actualizar Capacitacion"};
-    String[] activities = {"CZ13016InsertarCapacitacion","CZ13016EliminarCapacitacionActivity","CZ13016ActualizarCapacitacionActivity"};
+    String[] menu = {"Insertar Capacitacion", "Elininar Capacitacin","Actualizar Capacitacion", "Consultar Capacitaicon"};
+    String[] activities = {"CZ13016InsertarCapacitacion","CZ13016EliminarCapacitacionActivity","CZ13016ActualizarCapacitacionActivity", "CZ13016ConsultarCapacitacionActivity"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

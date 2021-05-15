@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Proyecto_PDM_G10">
+        <activity android:name=".cz13016_activities.CZ13016ConsultarCapacitacionActivity"></activity>
         <activity android:name=".cz13016_activities.CZ13016ActualizarCapacitacionActivity" />
         <activity android:name=".cz13016_activities.CZ13016EliminarCapacitacionActivity" />
         <activity android:name=".cz13016_activities.CZ13016CapacitacionMenuActivity" />
