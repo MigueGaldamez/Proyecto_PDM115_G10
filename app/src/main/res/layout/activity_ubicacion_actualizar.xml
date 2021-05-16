@@ -13,11 +13,13 @@
             android:maxLength="7" />
     </TableRow>
     <TableRow>
-        <TextView android:text="@string/idFacultad" />
-        <EditText
-            android:id="@+id/editidfacultad"
-            android:inputType="text"
-            android:maxLength="30" />
+        <TextView android:text="@string/nombreFacultad"/>
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/idFacultad"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
     </TableRow>
     <TableRow>
         <TextView android:text="@string/nombre_ubicacion" />

@@ -7,8 +7,10 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 
 import java.security.acl.AclEntry;
+import java.util.ArrayList;
 
 public class ControlBDProyecto {
     //PARA CADA TABLA HAY QUE LISTAR LOS CAMPOS
@@ -74,6 +76,73 @@ public class ControlBDProyecto {
         DBHelper.close();
     }
     //____________________________________________________________________________________________________________________________________________________________________________________________________________________
+    public ArrayList<String> listaObjeto;
+    public void consultarListaObjeto(int tipo, String objeto, String[]campos)
+    {
+        switch (tipo)
+        {
+            case 1:
+            {
+                ArrayList<Facultad> objetoList;
+                Facultad facultad = null;
+                objetoList = new ArrayList<Facultad>();
+                Cursor cursor = db.query(objeto,campos,null,null,null,null,null);
+                while (cursor.moveToNext())
+                {
+                    facultad = new Facultad();
+                    facultad.setIdFacultad(cursor.getString(0));
+                    facultad.setnombre(cursor.getString(1));
+                    objetoList.add(facultad);
+                }
+                listaObjeto = new ArrayList<String>();
+                listaObjeto.add("Seleccione");
+                for (int i=0; i<objetoList.size();i++)
+                {
+                    listaObjeto.add(objetoList.get(i).getIdFacultad()+" - "+objetoList.get(i).getnombre());
+                }
+            }
+            case 2:
+            {
+                ArrayList<Ubicacion> objetoList;
+                Ubicacion ubicacion =  null;
+                objetoList = new ArrayList<Ubicacion>();
+                Cursor cursor = db.query(objeto,campos,null,null,null,null,null);
+                while (cursor.moveToNext())
+                {
+                    ubicacion = new Ubicacion();
+                    ubicacion.setIdUbicacion(cursor.getString(0));
+                    ubicacion.setnombre(cursor.getString(1));
+                    objetoList.add(ubicacion);
+                }
+                listaObjeto = new ArrayList<String>();
+                listaObjeto.add("Seleccione");
+                for (int i=0; i<objetoList.size();i++)
+                {
+                    listaObjeto.add(objetoList.get(i).getIdUbicacion()+" - "+objetoList.get(i).getnombre());
+                }
+            }
+            case 3:
+            {
+                ArrayList<TipoUbicacion> objetoList;
+                TipoUbicacion tipoUbicacion =  null;
+                objetoList = new ArrayList<TipoUbicacion>();
+                Cursor cursor = db.query(objeto,campos,null,null,null,null,null);
+                while (cursor.moveToNext())
+                {
+                    tipoUbicacion = new TipoUbicacion();
+                    tipoUbicacion.setId(cursor.getString(0));
+                    tipoUbicacion.setNombre(cursor.getString(1));
+                    objetoList.add(tipoUbicacion);
+                }
+                listaObjeto = new ArrayList<String>();
+                listaObjeto.add("Seleccione");
+                for (int i=0; i<objetoList.size();i++)
+                {
+                    listaObjeto.add(objetoList.get(i).getId()+" - "+objetoList.get(i).getNombre());
+                }
+            }
+        }
+    }
     public String insertar(Facultad facultad)
     {
         String regInsertados="Registro Insertado Nº= ";
@@ -452,7 +521,7 @@ public class ControlBDProyecto {
             }
             case 10://para verificar que no exista otro id de local al insertar
             {
-               Local local2 = (Local) dato;
+                Local local2 = (Local) dato;
                 String[] id = {local2.getIdLocal()};
                 abrir();
                 Cursor c5 = db.query("local",null,"id=?",id,null,null,null);
