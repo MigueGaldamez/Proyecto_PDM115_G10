@@ -9,6 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Proyecto_PDM_G10">
+        <activity android:name=".DiaActualizarActivity"></activity>
+        <activity android:name=".DiaEliminarActivity" />
+        <activity android:name=".DiaConsultarActivity" />
+        <activity android:name=".DiaInsertarActivity" />
+        <activity android:name=".DiaMenuActivity" />
+        <activity android:name=".CapacitadorConsultarActivity" />
         <activity android:name=".LocalInsertarActivity"></activity>
         <activity android:name=".LocalEliminarActivity" />
         <activity android:name=".LocalConsultarActivity" />

@@ -31,6 +31,8 @@ public class ControlBDProyecto {
     private static final String[]camposAsistenciaEmpleado= new String[]{"idAsistenciaEmpleado","asistencia","empleadoId","capacitacionId"};
 
 
+    private static final String[]camposDia = new String[] {"idDia","nomDia","fecha"};
+
     private final Context context;
     private DatabaseHelper DBHelper;
     private SQLiteDatabase db;
@@ -69,6 +71,8 @@ public class ControlBDProyecto {
                 db.execSQL("CREATE TABLE asistenciaEmpleado(idAsistenciaEmpleado CHAR(5) NOT NULL PRIMARY KEY, asistencia VARCHAR(40),empleadoId VARCHAR(40),capacitacionId VARCHAR(10));");
 
 
+                db.execSQL("CREATE TABLE dia(idDia CHAR(5) NOT NULL PRIMARY KEY, nomDia VARCHAR(12),fecha VARCHAR(10))");
+                db.execSQL("CREATE TABLE horario(idHorario char(5) NOT NULL PRIMARY KEY,horaInicio TIME, horaFin TIME)");
             }catch(SQLException e){
                 e.printStackTrace();
             }
@@ -1321,6 +1325,63 @@ public class ControlBDProyecto {
 
     //FIN CRUD CAPACITADOR
 
+    //INICIO CRUD DIA
+    public String insertarDia(Dia dia){
+        String regInsertados="Registro Insertado Nº= ";
+        long contador=0;
+        ContentValues dias = new ContentValues();
+        dias.put("idDia", dia.getIdDia());
+        dias.put("nomDia", dia.getNomDia());
+        dias.put("fecha", dia.getFecha());
+        contador=db.insert("dia", null, dias);
+        if(contador==-1 || contador==0)
+        {
+            regInsertados= "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
+        }
+        else {
+            regInsertados=regInsertados+contador;
+        }
+        return regInsertados;
+    }
+    public Dia consultarDia(String idDia){
+        String[] id = {idDia};
+        Cursor cursor = db.query("dia", camposDia, "idDia = ?",
+                id, null, null, null);
+        if(cursor.moveToFirst()){
+            Dia dia = new Dia();
+            dia.setIdDia(cursor.getString(0));
+            dia.setNomDia(cursor.getString(1));
+            dia.setFecha(cursor.getString(2));
+            return dia;
+        }else{
+            return null;
+        }
+    }
+    public String actualizarDia(Dia dia){
+        if(verificarIntegridad(dia, 24)){
+            String[] id = {dia.getIdDia()};
+            ContentValues cv = new ContentValues();
+            cv.put("nomDia", dia.getNomDia());
+            cv.put("fecha", dia.getFecha());
+            db.update("dia", cv, "idDia = ?", id);
+            return "Registro Actualizado Correctamente";
+        }else{
+            return "Registro con codigo " + dia.getIdDia() + " no existe";
+        }
+    }
+
+    public String eliminarDia(Dia dia){
+        String regAfectados="filas afectadas= ";
+        int contador=0;
+        /*if(verificarIntegridad(dia,25)) {
+            contador+=db.delete("horario", "idDia='"+dia.getIdDia()+"'", null);
+        }*/ //MODIFICAR ESTO HASTA CREAR TABLA HORARIO
+        contador+=db.delete("dia", "idDia='"+dia.getIdDia()+"'", null);
+        regAfectados+=contador;
+        return regAfectados;
+    }
+    //FIN CRUD DIA
+
     //VERIFICACION DE INEGRACION, SIRVE CUANDO ACTUALIZAMOS,
     // CUANDO INGRESEMOS TABLAS CON LLAVES FORANEAS Y CUANDO BORREMOS CAMPOS DEPENDIENTES
     private boolean verificarIntegridad(Object dato, int relacion) throws SQLException {
@@ -1502,6 +1563,30 @@ public class ControlBDProyecto {
                 EntidadCapacitadora entidadCapacitadora = (EntidadCapacitadora) dato;
                 Cursor c=db.query(true, "capacitador", new String[] {
                                 "idEntidadCapacitadora" }, "idEntidadCapacitadora='"+entidadCapacitadora.getCodigo()+"'",null,
+                        null, null, null, null);
+                if(c.moveToFirst())
+                    return true;
+                else
+                    return false;
+            }
+            //Verificando si existe Dia antes de actualizarlo
+            case 24:
+            {
+                Dia dia = (Dia) dato;
+                String[] id = {dia.getIdDia()};
+                abrir();
+                Cursor c2 = db.query("dia", null, "idDia = ?", id, null, null,
+                        null);
+                if (c2.moveToFirst()) {
+                    return true;
+                }
+                return false;
+            }// verificar que al borrar un Dia no este en la tabla Horario
+            case 25:
+            {
+                Dia dias = (Dia) dato;
+                Cursor c=db.query(true, "horario", new String[] {
+                                "idDia" }, "idDia='"+dias.getIdDia()+"'",null,
                         null, null, null, null);
                 if(c.moveToFirst())
                     return true;

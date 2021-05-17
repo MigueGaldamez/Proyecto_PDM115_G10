@@ -14,8 +14,8 @@ import android.widget.Toast;
 public class MainActivity extends ListActivity {
 
     //Agregen las tablas y las activities de las tablas
-    String[] menu={"Tabla AreaInteres","Tabla EntidadCapacitadora","Tabla Diplomado","Tabla Area Diplomado","Tabla Capacitador", "Tabla Empleado","Tabla Solicitud","Tabla Facultad","Tabla Ubicacion","Tabla TipoUbicacion","Tabla Local","Tabla Asistencia de empleado"};
-    String[] activities={"AreaInteresMenuActivity","EntidadCapacitadoraMenuActivity","DiplomadoMenuActivity","AreaDiplomadoMenuActivity","CapacitadorMenuActivity","EmpleadoMenuActivity","SolicitudMenuActivity","FacultadMenuActivity","UbicacionMenuActivity","TipoUbicacionMenuActivity","LocalMenuActivity" ,"AsistenciaEmpleadoMenuActivity"};
+    String[] menu={"Tabla AreaInteres","Tabla EntidadCapacitadora","Tabla Diplomado","Tabla Area Diplomado","Tabla Capacitador", "Tabla Empleado","Tabla Solicitud","Tabla Facultad","Tabla Ubicacion","Tabla TipoUbicacion","Tabla Local","Tabla Asistencia de empleado","Tabla Dia"};
+    String[] activities={"AreaInteresMenuActivity","EntidadCapacitadoraMenuActivity","DiplomadoMenuActivity","AreaDiplomadoMenuActivity","CapacitadorMenuActivity","EmpleadoMenuActivity","SolicitudMenuActivity","FacultadMenuActivity","UbicacionMenuActivity","TipoUbicacionMenuActivity","LocalMenuActivity" ,"AsistenciaEmpleadoMenuActivity","DiaMenuActivity"};
 
 
     ControlBDProyecto BDhelper;
