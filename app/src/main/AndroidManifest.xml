@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Proyecto_PDM_G10">
-        <activity android:name=".cz13016_activities.CZ13016ActualizarHorarioActivity"></activity>
+        <activity android:name=".cz13016_activities.CZ13016EliminarHorarioActivity"></activity>
+        <activity android:name=".cz13016_activities.CZ13016ActualizarHorarioActivity" />
         <activity android:name=".cz13016_activities.CZ13016ConsultarHorarioActivity" />
         <activity android:name=".cz13016_activities.CZ13016ObtenerRegistroHorarioActivity" />
         <activity android:name=".cz13016_activities.CZ13016InsertarHorarioActivity" />

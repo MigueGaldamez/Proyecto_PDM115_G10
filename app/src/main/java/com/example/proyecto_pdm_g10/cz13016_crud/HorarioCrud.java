@@ -142,4 +142,16 @@ public class HorarioCrud {
         }
     }
 
+    public String eliminarHorario(Integer idHrio){
+        String regAfectados;
+        int contador=0;
+        if (buscarHorario(idHrio)) {
+            contador+=db.delete("horario", "idHorario='"+idHrio+"'", null);
+            regAfectados = "Eliminado con exito";
+        }else
+            regAfectados = "No se encontro ningun registro";
+
+        return  regAfectados;
+    }
+
 }
