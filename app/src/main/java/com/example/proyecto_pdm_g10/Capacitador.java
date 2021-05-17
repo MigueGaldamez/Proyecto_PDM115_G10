@@ -13,6 +13,12 @@ public class Capacitador {
     public Capacitador() {
     }
 
+    public Capacitador(String idCapacitador, String nombres, String apellidos) {
+        this.idCapacitador = idCapacitador;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+    }
+
     public Capacitador(String idCapacitador, String nombres, String apellidos, String telefono, String idEntidadCapacitadora, String correo, String profesion) {
         this.idCapacitador = idCapacitador;
         this.nombres = nombres;

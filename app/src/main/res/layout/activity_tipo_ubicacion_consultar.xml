@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="@drawable/gradient"
     android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="20dp"
+        android:background="@drawable/layout_bg"
+        android:orientation="vertical"
+        android:padding="30dp">
+
+        <TextView
+            android:id="@+id/Encabezado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/consultarTipoUbi"
+            android:textColor="@color/black"
+            android:textSize="30dp"
+            android:textStyle="italic" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -22,13 +42,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/consultar"
-            android:onClick="consultarTipoUbicacion"/>
+            android:onClick="consultarTipoUbicacion"
+            android:backgroundTint="@color/boton_fondo"
+            android:textColor="@color/boton_texto"
+            android:layout_margin="6dp"/>
         <Button
             android:id="@+id/botonLimpiar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/limpiar"
-            android:onClick="limpiarTexto"/>
+            android:onClick="limpiarTexto"
+            android:backgroundTint="@color/boton_fondo"
+            android:textColor="@color/boton_texto"
+            android:layout_margin="6dp"/>
     </LinearLayout>
 
     <TextView
@@ -45,5 +71,5 @@
         android:focusableInTouchMode="false"
         android:cursorVisible="false"
         android:longClickable="false" />
-
+    </LinearLayout>
 </LinearLayout>

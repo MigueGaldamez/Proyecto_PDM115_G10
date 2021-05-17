@@ -11,6 +11,11 @@ public class AreaDiplomado {
     public AreaDiplomado() {
     }
 
+    public AreaDiplomado(String idAreaDiplomado, String nombre) {
+        this.idAreaDiplomado = idAreaDiplomado;
+        this.nombre = nombre;
+    }
+
     public AreaDiplomado(String idAreaDiplomado, String nombre, String descripcion, String idDiplomado) {
         this.idAreaDiplomado = idAreaDiplomado;
         this.nombre = nombre;

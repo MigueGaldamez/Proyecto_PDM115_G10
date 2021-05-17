@@ -32,6 +32,14 @@
             android:inputType="text"
             android:maxLength="100" />
     </TableRow>
+    <TableRow>
+
+        <TextView android:text="Codigo del empleado" />
+        <EditText
+            android:id="@+id/editEmpleadoId"
+            android:inputType="text"
+            android:maxLength="100" />
+    </TableRow>
 
     <TableRow>
         <Button
