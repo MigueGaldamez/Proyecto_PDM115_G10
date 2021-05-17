@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
 public class ControlBDProyecto {
@@ -43,16 +45,15 @@ public class ControlBDProyecto {
         @Override
         public void onCreate(SQLiteDatabase db) {
             try{
+
                 //AQUI AGREGAMOS LAS TABLAS
                 db.execSQL("CREATE TABLE areaInteres(codigo VARCHAR(7) NOT NULL PRIMARY KEY,nombre VARCHAR(30),descripcion VARCHAR(100));");
-                db.execSQL("CREATE TABLE entidadCapacitadora(codigo VARCHAR(6) NOT NULL PRIMARY KEY,nombre VARCHAR(30),descripcion VARCHAR(100),telefono VARCHAR(20),correo VARCHAR(100));");
-                //____________________________________________________________________________________________________________________________________________________________________________________________________________________
+                db.execSQL("CREATE TABLE entidadCapacitadora(codigo VARCHAR(6) NOT NULL PRIMARY KEY,nombre VARCHAR(30),descripcion VARCHAR(100),telefono VARCHAR(20),correo VARCHAR(100),tipo CHAR(1));");
                 db.execSQL("CREATE TABLE facultad(id VARCHAR(7) NOT NULL PRIMARY KEY,nombre VARCHAR(35));");
                 db.execSQL("CREATE TABLE ubicacion(id VARCHAR(7) NOT NULL ,idFacultad VARCHAR(7) NOT NULL, nombre VARCHAR(35) NOT NULL ,PRIMARY KEY(id, idFacultad));");
                 db.execSQL("CREATE TABLE tipoUbicacion(id VARCHAR(7) NOT NULL PRIMARY KEY,nombre VARCHAR(35));");
                 db.execSQL("CREATE TABLE local(id VARCHAR(7) NOT NULL ,idUbicacion VARCHAR(7) NOT NULL, idTipoUbicacion VARCHAR(7) NOT NULL, nombre VARCHAR(35) NOT NULL ,PRIMARY KEY(id, idUbicacion, idTipoUbicacion));");
-                //________________________________________________________________________________________________________________________________________________________________________________________________________________________
-                db.execSQL("CREATE TABLE entidadCapacitadora(codigo VARCHAR(6) NOT NULL PRIMARY KEY,nombre VARCHAR(30),descripcion VARCHAR(100),telefono VARCHAR(20),correo VARCHAR(100),tipo CHAR(1));");
+
                 db.execSQL("CREATE TABLE usuario(idUsuario CHAR(2) NOT NULL PRIMARY KEY,nomUsuario VARCHAR(30),clave CHAR(5));");
                 db.execSQL("CREATE TABLE opcionCrud(idOpcion CHAR(3) NOT NULL PRIMARY KEY,desOpcion VARCHAR(30),numCrud INTEGER);");
                 db.execSQL("CREATE TABLE accesoUsuario(idUsuario VARCHAR(2) NOT NULL ,idOpcion VARCHAR(3) NOT NULL  ,PRIMARY KEY(idOpcion,idUsuario));");
@@ -1502,7 +1503,21 @@ public class ControlBDProyecto {
         final String[] v5correo = {"gc18090@ues.edu.sv","pt18003@ues.edu.sv","PM18090@ues.edu.sv"};
         final String[] v5profesion = {"Estudiante","Ingeniero","Diseñadora"};
 
-
+        /* Llenar Facultad */
+        final String[] VFid = {"1","2","3"};
+        final String[] VFnombre = {"Ingenieria y Arquitectura","Economia","Agronomia"};
+        /* Llenar Ubicacion*/
+        final String[] VUid = {"1","2"};
+        final String[] VUidFacultad = {"3","2"};
+        final String[] VUnombre = {"Biblioteca","Edificio K"};
+        /* Llenar Tipo Ubicacion*/
+        final String[] VTUid ={"1","2","3","4"};
+        final String[] VTUnombre ={"Edificio","Aula","Salon","Biblioteca"};
+        /* Llenar local */
+        final String[] VLid = {"1","2","3"};
+        final String[] VLidUbicacion = {"2","1","2"};
+        final String[] VLidTipoUbicacion= {"1","2","3"};
+        final String[] VLnombre = {"C11 ","A68","Z"};
         abrir();
         db.execSQL("DELETE FROM usuario");
         db.execSQL("DELETE FROM opcionCrud");
@@ -1513,6 +1528,11 @@ public class ControlBDProyecto {
         db.execSQL("DELETE FROM diplomado");
         db.execSQL("DELETE FROM areaDiplomado");
         db.execSQL("DELETE FROM capacitador");
+
+        db.execSQL("DELETE FROM facultad");
+        db.execSQL("DELETE FROM ubicacion");
+        db.execSQL("DELETE FROM tipoUbicacion");
+        db.execSQL("DELETE FROM local");
 
         Usuario usuario = new Usuario();
         for(int i=0;i<5;i++){
@@ -1535,62 +1555,7 @@ public class ControlBDProyecto {
             accesoUsuario.setIdUsuario(VCidUsuario[i]);
             insertar(accesoUsuario);
         }
-        //___________________________________________________________________________________________________________________
-        /* Llenar Facultad */
-        final String[] VFid = {"1","2","3"};
-        final String[] VFnombre = {"Ingenieria y Arquitectura","Economia","Agronomia"};
-        /* Llenar Ubicacion*/
-        final String[] VUid = {"1","2"};
-        final String[] VUidFacultad = {"3","2"};
-        final String[] VUnombre = {"Biblioteca","Edificio K"};
-        /* Llenar Tipo Ubicacion*/
-        final String[] VTUid ={"1","2","3","4"};
-        final String[] VTUnombre ={"Edificio","Aula","Salon","Biblioteca"};
-        /* Llenar local */
-        final String[] VLid = {"1","2","3"};
-        final String[] VLidUbicacion = {"2","1","2"};
-        final String[] VLidTipoUbicacion= {"1","2","3"};
-        final String[] VLnombre = {"C11 ","A68","Z"};
-        abrir();
-        db.execSQL("DELETE FROM facultad");
-        db.execSQL("DELETE FROM ubicacion");
-        db.execSQL("DELETE FROM tipoUbicacion");
-        db.execSQL("DELETE FROM local");
-
-
-        Facultad facultad = new Facultad();
-        for(int i=0;i<3;i++)
-        {
-            facultad.setIdFacultad(VFid[i]);
-            facultad.setnombre(VFnombre[i]);
-            insertar(facultad);
-        }
-        Ubicacion ubicacion = new Ubicacion();
-        for(int i=0;i<2;i++)
-        {
-            ubicacion.setIdUbicacion(VUid[i]);
-            ubicacion.setIdFacultad(VUidFacultad[i]);
-            ubicacion.setnombre(VUnombre[i]);
-            insertar(ubicacion);
-        }
-        TipoUbicacion tipoUbicacion = new TipoUbicacion();
-        for (int i=0;i<4;i++)
-        {
-            tipoUbicacion.setId(VTUid[i]);
-            tipoUbicacion.setNombre(VTUnombre[i]);
-            insertar(tipoUbicacion);
-        }
-        Local local = new Local();
-        for (int i=0;i<3;i++)
-        {
-            local.setIdLocal(VLid[i]);
-            local.setIdUbicacion(VLidUbicacion[i]);
-            local.setIdTipoUbicacion(VLidTipoUbicacion[i]);
-            local.setNombre(VLnombre[i]);
-            insertar(local);
-        }
-        //___________________________________________________________________________________________________________________
-        EntidadCapacitadora entidadCapacitadora = new EntidadCapacitadora();
+       EntidadCapacitadora entidadCapacitadora = new EntidadCapacitadora();
         for(int i=0;i<3;i++){
             entidadCapacitadora.setCodigo(V1codigo[i]);
             entidadCapacitadora.setNombre(V1nombre[i]);
@@ -1638,7 +1603,44 @@ public class ControlBDProyecto {
             capacitador.setNombres(v5nombres[i]);
             insertar(capacitador);
         }
+        //___________________________________________________________________________________________________________________
+
+        Facultad facultad = new Facultad();
+        for(int i=0;i<3;i++)
+        {
+            facultad.setIdFacultad(VFid[i]);
+            facultad.setnombre(VFnombre[i]);
+            insertar(facultad);
+        }
+        Ubicacion ubicacion = new Ubicacion();
+        for(int i=0;i<2;i++)
+        {
+            ubicacion.setIdUbicacion(VUid[i]);
+            ubicacion.setIdFacultad(VUidFacultad[i]);
+            ubicacion.setnombre(VUnombre[i]);
+            insertar(ubicacion);
+        }
+        TipoUbicacion tipoUbicacion = new TipoUbicacion();
+        for (int i=0;i<4;i++)
+        {
+            tipoUbicacion.setId(VTUid[i]);
+            tipoUbicacion.setNombre(VTUnombre[i]);
+            insertar(tipoUbicacion);
+        }
+        Local local = new Local();
+        for (int i=0;i<3;i++)
+        {
+            local.setIdLocal(VLid[i]);
+            local.setIdUbicacion(VLidUbicacion[i]);
+            local.setIdTipoUbicacion(VLidTipoUbicacion[i]);
+            local.setNombre(VLnombre[i]);
+            insertar(local);
+        }
+        //___________________________________________________________________________________________________________________
+
         cerrar();
+
+
         return "Guardo Correctamente";
     }
 
