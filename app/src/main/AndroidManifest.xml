@@ -9,7 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Proyecto_PDM_G10">
-        <activity android:name=".DiaActualizarActivity"></activity>
+        <activity android:name=".cz13016_activities.CZ13016ObtenerRegistroHorarioActivity"></activity>
+        <activity android:name=".cz13016_activities.CZ13016InsertarHorarioActivity" />
+        <activity android:name=".cz13016_activities.CZ13016MenuHorarioActivity" />
+        <activity android:name=".cz13016_activities.CZ13016ConsultarCapacitacionActivity" />
+        <activity android:name=".cz13016_activities.CZ13016ActualizarCapacitacionActivity" />
+        <activity android:name=".cz13016_activities.CZ13016EliminarCapacitacionActivity" />
+        <activity android:name=".cz13016_activities.CZ13016CapacitacionMenuActivity" />
+        <activity android:name=".DiaActualizarActivity" />
         <activity android:name=".DiaEliminarActivity" />
         <activity android:name=".DiaConsultarActivity" />
         <activity android:name=".DiaInsertarActivity" />
@@ -86,6 +93,11 @@
         <activity android:name=".AreaInteresInsertarActivity" />
         <activity android:name=".EntidadCapacitadoraMenuActivity" />
         <activity android:name=".AreaInteresMenuActivity" />
+        <activity android:name=".CapacitadorInsertarActivity" />
+        <activity android:name=".AreaDiplomadoInsertarActivity" />
+        <activity android:name=".DiplomadoInsertarActivity" />
+        <activity android:name=".cz13016_activities.CZ13016InsertarCapacitacion" />
+        <activity android:name=".cz13016_activities.cz13016ObtenerRegistroCapacitacion" />
         <activity android:name=".MainActivity" />
     </application>
 

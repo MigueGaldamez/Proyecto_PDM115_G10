@@ -33,6 +33,8 @@ public class ControlBDProyecto {
 
     private static final String[]camposDia = new String[] {"idDia","nomDia","fecha"};
 
+    private static final String[]camposDia = new String[] {"idDia","nomDia","fecha"};
+
     private final Context context;
     private DatabaseHelper DBHelper;
     private SQLiteDatabase db;
@@ -40,8 +42,18 @@ public class ControlBDProyecto {
     public ControlBDProyecto(Context ctx){
         this.context = ctx;
         DBHelper = new DatabaseHelper(context);
+        setDBHelper(DBHelper);
     }
-    private static class DatabaseHelper extends SQLiteOpenHelper {
+
+    public DatabaseHelper getDBHelper() {
+        return DBHelper;
+    }
+
+    public void setDBHelper(DatabaseHelper DBHelper) {
+        this.DBHelper = DBHelper;
+    }
+
+    public static class DatabaseHelper extends SQLiteOpenHelper {
         private static final String BASE_DATOS = "capacitacion.s3db";
         private static final int VERSION = 1;
         public DatabaseHelper(Context context) {
@@ -58,6 +70,9 @@ public class ControlBDProyecto {
                 db.execSQL("CREATE TABLE tipoUbicacion(id VARCHAR(7) NOT NULL PRIMARY KEY,nombre VARCHAR(35));");
                 db.execSQL("CREATE TABLE local(id VARCHAR(7) NOT NULL ,idUbicacion VARCHAR(7) NOT NULL, idTipoUbicacion VARCHAR(7) NOT NULL, nombre VARCHAR(35) NOT NULL ,PRIMARY KEY(id, idUbicacion, idTipoUbicacion));");
 
+                db.execSQL("CREATE TABLE capacitacion(idCapacitacion INTEGER NOT NULL PRIMARY KEY,descripcion VARCHAR(100),precio REAL,idLocal VARCHAR(7), idAreasDip CHAR(5), idAreaIn VARCHAR(7), idCapacitador CHAR(5));");
+
+
                 db.execSQL("CREATE TABLE usuario(idUsuario CHAR(2) NOT NULL PRIMARY KEY,nomUsuario VARCHAR(30),clave CHAR(5));");
                 db.execSQL("CREATE TABLE opcionCrud(idOpcion CHAR(3) NOT NULL PRIMARY KEY,desOpcion VARCHAR(30),numCrud INTEGER);");
                 db.execSQL("CREATE TABLE accesoUsuario(idUsuario VARCHAR(2) NOT NULL ,idOpcion VARCHAR(3) NOT NULL  ,PRIMARY KEY(idOpcion,idUsuario));");
@@ -73,6 +88,8 @@ public class ControlBDProyecto {
 
                 db.execSQL("CREATE TABLE dia(idDia CHAR(5) NOT NULL PRIMARY KEY, nomDia VARCHAR(12),fecha VARCHAR(10))");
                 db.execSQL("CREATE TABLE horario(idHorario char(5) NOT NULL PRIMARY KEY,horaInicio TIME, horaFin TIME)");
+
+
             }catch(SQLException e){
                 e.printStackTrace();
             }
@@ -1813,6 +1830,7 @@ public class ControlBDProyecto {
 
         return "Guardo Correctamente";
     }
+
 
 }
 

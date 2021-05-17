@@ -72,4 +72,11 @@ public class EntidadCapacitadoraInsertarActivity extends Activity {
         editCorreo.setText("");
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+      //  Intent myIntent = new Intent(this, NotaMenuActivity.class);
+      //  startActivity(myIntent);
+    }
 }
