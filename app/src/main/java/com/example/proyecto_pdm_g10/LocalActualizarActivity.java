@@ -45,6 +45,7 @@ public class LocalActualizarActivity extends Activity
         Local local= new Local();
 
         String idU = spinnerUbicacion.getSelectedItem().toString();
+
         String[] ubicacionId = idU.split(" - ");
         String idT = spinnerTipoUbicacion.getSelectedItem().toString();
         String[] tipoUbicacionId = idT.split(" - ");

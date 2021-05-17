@@ -1,119 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:stretchColumns="1"
+    android:background="@drawable/gradient">
 
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="90dp"
-        android:layout_marginLeft="90dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="42dp"
-        android:layout_marginRight="42dp"
-        android:text="@string/Usuario"
-        app:layout_constraintEnd_toStartOf="@+id/editUsuario"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout1"
-        tools:ignore="MissingConstraints" />
-
-    <EditText
-        android:id="@+id/editUsuario"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="59dp"
-        android:layout_marginRight="59dp"
-        android:inputType="text"
-        android:maxLength="7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout1"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="113dp"
-        android:layout_marginLeft="113dp"
-        android:layout_marginEnd="42dp"
-        android:layout_marginRight="42dp"
-        android:text="@string/clave"
-        app:layout_constraintBaseline_toBaselineOf="@+id/editClave"
-        app:layout_constraintEnd_toStartOf="@+id/editClave"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
-
-    <EditText
-        android:id="@+id/editClave"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="118dp"
-        android:layout_marginRight="118dp"
-        android:layout_marginBottom="50dp"
-        android:inputType="text"
-        android:maxLength="7"
-        app:layout_constraintBottom_toTopOf="@+id/botonLimpiar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        tools:ignore="MissingConstraints" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/layout_bg"
         android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints">
+        android:padding="30dp"
+        android:layout_margin="20dp">
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/Encabezado"
+            android:gravity="center"
+            android:text="@string/Iniciarsesion"
+            android:textSize="30dp"
+            android:layout_marginTop="90dp"
+             />
 
-    <Button
-        android:id="@+id/botonConsultar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="7dp"
-        android:layout_marginLeft="7dp"
-        android:layout_marginTop="7dp"
-        android:layout_marginEnd="22dp"
-        android:layout_marginRight="22dp"
-        android:onClick="consultarUsuario"
-        android:text="@string/consultar"
-        app:layout_constraintEnd_toStartOf="@+id/botonLimpiar"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/botonLimpiar" />
+                <TableRow android:gravity="center">
+                <TextView
+                    android:id="@+id/textView"
+                    android:text="@string/Usuario"
+                    android:gravity="center"
+                     />
+                <EditText
+                    android:id="@+id/editUsuario"
+                    android:layout_width="160dp"
+                    android:inputType="text"
+                    android:maxLength="7"
+                     />
 
-    <Button
-        android:id="@+id/botonLimpiar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="281dp"
-        android:onClick="limpiarTexto"
-        android:text="@string/limpiar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/botonConsultar"
-        app:layout_constraintTop_toTopOf="parent" />
+                </TableRow>
 
-    <Button
-        android:id="@+id/botonLLenar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="39dp"
-        android:onClick="LlenarBaseUsuario"
-        android:text="@string/Llenarbase"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+                <TableRow android:gravity="center">
 
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/clave"
+                        android:gravity="center"
+                        />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                    <EditText
+                        android:id="@+id/editClave"
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+
+                        android:inputType="text"
+                        android:maxLength="7"
+                        android:password="true"
+                      />
+                </TableRow>
+        <TableRow>
+            <TextView android:text="@string/opciones" />
+        </TableRow>
+        <TableRow android:gravity="center">
+            <Button
+                android:id="@+id/botonConsultar"
+                android:onClick="consultarUsuario"
+                android:text="@string/Iniciarsesion"
+                android:layout_margin="6dp"
+                android:backgroundTint="@color/boton_fondo"
+                android:textColor="@color/boton_texto"
+                />
+
+            <Button
+                android:id="@+id/botonLimpiar"
+                android:onClick="limpiarTexto"
+                android:text="@string/limpiar"
+                android:layout_margin="6dp"
+                android:backgroundTint="@color/boton_fondo"
+                android:textColor="@color/boton_texto"
+                />
+        </TableRow>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center|bottom">
+            <Button
+                android:id="@+id/botonLLenar"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="LlenarBaseUsuario"
+                android:text="@string/Llenarbase"
+                android:backgroundTint="@color/boton_fondo"
+                android:textColor="@color/boton_texto"
+                />
+        </LinearLayout>
+
+    </TableLayout>
+</TableLayout>

@@ -2,18 +2,23 @@ package com.example.proyecto_pdm_g10;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
-public class EntidadCapacitadoraActualizarActivity extends AppCompatActivity {
+public class EntidadCapacitadoraActualizarActivity extends Activity {
     ControlBDProyecto helper;
     EditText editCodigo;
     EditText editNombre;
     EditText editDescripcion;
     EditText editTelefono;
     EditText editCorreo;
+
+    RadioButton radioExterna,radioInterna;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +30,10 @@ public class EntidadCapacitadoraActualizarActivity extends AppCompatActivity {
         editDescripcion = (EditText) findViewById(R.id.editDescripcion);
         editTelefono = (EditText) findViewById(R.id.editTelefono);
         editCorreo = (EditText) findViewById(R.id.editCorreo);
+
+        radioExterna = (RadioButton) findViewById(R.id.radio_externa);
+        radioInterna = (RadioButton) findViewById(R.id.radio_interna);
+
     }
     public void actualizarEntidadCapacitadora(View v) {
         EntidadCapacitadora entidadCapacitadora = new EntidadCapacitadora();
@@ -33,7 +42,14 @@ public class EntidadCapacitadoraActualizarActivity extends AppCompatActivity {
         entidadCapacitadora.setDescripcion(editDescripcion.getText().toString());
         entidadCapacitadora.setTelefono(editTelefono.getText().toString());
         entidadCapacitadora.setCorreo(editCorreo.getText().toString());
-
+        if(radioExterna.isChecked())
+        {
+            entidadCapacitadora.setTipo("E");
+        }
+        if(radioInterna.isChecked())
+        {
+            entidadCapacitadora.setTipo("I");
+        }
         helper.abrir();
         String estado = helper.actualizar(entidadCapacitadora);
         helper.cerrar();

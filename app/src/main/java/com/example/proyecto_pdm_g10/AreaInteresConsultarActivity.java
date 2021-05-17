@@ -3,11 +3,20 @@ package com.example.proyecto_pdm_g10;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AreaInteresConsultarActivity extends Activity {
 
@@ -15,8 +24,6 @@ public class AreaInteresConsultarActivity extends Activity {
     EditText editCodigo;
     EditText editNombre;
     EditText editDescripcion;
-    ControlBDProyecto BDhelper = new ControlBDProyecto(this);
-    String idsesion;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,33 +32,49 @@ public class AreaInteresConsultarActivity extends Activity {
         editCodigo = (EditText) findViewById(R.id.editCodigo);
         editNombre = (EditText) findViewById(R.id.editNombre);
         editDescripcion = (EditText) findViewById(R.id.editDescripcion);
-        //INICIO VALIDACION DE ROL
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            idsesion = extras.getString("idsesion");
-        }
-        BDhelper.abrir();
-        Usuario usuario = BDhelper.consultarUsuario(idsesion);
-        //AQUI SE AGREGA EL CODIGO DE ACCESO
-        AccesoUsuario accesoUsuario = BDhelper.consultarAccesoUsuario(usuario.getIdUsuario(),"014");
-        BDhelper.cerrar();
-        if(accesoUsuario == null)
-        {
-            try{
-                Class<?> clase=Class.forName("com.example.proyecto_pdm_g10.AreaInteresMenuActivity");
-                Intent inte = new Intent(this,clase);
-                inte.putExtra("idsesion",idsesion);
-                this.startActivity(inte);
-            }catch(ClassNotFoundException e){
-                e.printStackTrace();
-            }
-            Toast.makeText(this, "Usted no tiene permisos para acceder a esa seccion", Toast.LENGTH_SHORT).show();
 
-        }
-        else {
-        }//FIN VERIFICACION
+        helper.abrir();
+        List<AreaInteres> listaareaInteres = helper.getAreaInteresList();
+        helper.cerrar();
 
+        if(listaareaInteres.size() > 0){
+
+            // Create the adapter to convert the array to views
+            AreaInteresAdapter adapter = new AreaInteresAdapter(this, listaareaInteres);
+            // Attach the adapter to a ListView
+            ListView listView = (ListView) findViewById(R.id.lvlItems);
+            listView.setAdapter(adapter);
+        }
+        else{
+            Toast.makeText(this, "No hay empleados en la base", Toast.LENGTH_SHORT).show();
+        }
     }
+    public class AreaInteresAdapter extends ArrayAdapter<AreaInteres> {
+        public AreaInteresAdapter(Context context, List<AreaInteres> areas) {
+            super(context, 0, areas);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            // Get the data item for this position
+            AreaInteres areaInteres = getItem(position);
+            // Check if an existing view is being reused, otherwise inflate the view
+            if (convertView == null) {
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_area_interes, parent, false);
+            }
+            // Lookup view for data population
+            TextView codigo = (TextView) convertView.findViewById(R.id.codigo);
+            TextView nombre = (TextView) convertView.findViewById(R.id.nombre);
+            TextView descipcion = (TextView) convertView.findViewById(R.id.descripcion);
+            // Populate the data into the template view using the data object
+            codigo.setText(areaInteres.getCodigo());
+            nombre.setText(areaInteres.getNombre());
+            descipcion.setText(areaInteres.getNombre());
+            // Return the completed view to render on screen
+            return convertView;
+        }
+    }
+
     public void consultarAreaInteres(View v) {
         helper.abrir();
         AreaInteres areaInteres = helper.consultarAreaInteres(editCodigo.getText().toString());

@@ -21,7 +21,7 @@ public class AreaInteresMenuActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ListView listView = getListView();
-        listView.setBackgroundColor(Color.rgb(0, 0, 255));
+
         ArrayAdapter<String> adapter = new
                 ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, menu);
         setListAdapter(adapter);
@@ -33,31 +33,6 @@ public class AreaInteresMenuActivity extends ListActivity {
             idsesion = extras.getString("idsesion");
             //The key argument here must match that used in the other activity
         }
-
-        BDhelper.abrir();
-        Usuario usuario = BDhelper.consultarUsuario(idsesion);
-        //AQUI SE AGREGA EL CODIGO DE ACCESO
-        AccesoUsuario accesoUsuario = BDhelper.consultarAccesoUsuario(usuario.getIdUsuario(),"010");
-        BDhelper.cerrar();
-        if(accesoUsuario == null)
-        {
-
-            try{
-                Class<?> clase=Class.forName("com.example.proyecto_pdm_g10.MainActivity");
-                Intent inte = new Intent(this,clase);
-                inte.putExtra("idsesion",idsesion);
-                this.startActivity(inte);
-            }catch(ClassNotFoundException e){
-                e.printStackTrace();
-            }
-            Toast.makeText(this, "Usted no tiene permisos para acceder a esa seccion", Toast.LENGTH_SHORT).show();
-
-        }
-        else
-        {
-            //tiene permisos
-            //Toast.makeText(this, "Bi", Toast.LENGTH_SHORT).show();
-        }
         //FIN VERIFICACION
 
     }
@@ -65,20 +40,40 @@ public class AreaInteresMenuActivity extends ListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id){
         super.onListItemClick(l, v, position, id);
-
-        String nombreValue=activities[position];
-
-        l.getChildAt(position).setBackgroundColor(Color.rgb(128, 128, 255));
-
-        try{
-            Class<?> clase=Class.forName("com.example.proyecto_pdm_g10."+nombreValue);
-            Intent inte = new Intent(this,clase);
-            inte.putExtra("idsesion",idsesion);
-            this.startActivity(inte);
-        }catch(ClassNotFoundException e){
-            e.printStackTrace();
+        String idopcionS = "000";
+        switch(position) {
+            case 0:  idopcionS = "011";
+                break;
+            case 1:idopcionS = "013";
+                break;
+            case 2:idopcionS = "014";
+                break;
+            case 3:idopcionS = "012";
+                break;
+            default:
+                break;
         }
-
+        //Verificacion usuario
+        BDhelper.abrir();
+        Usuario usuario = BDhelper.consultarUsuario(idsesion);
+        AccesoUsuario accesoUsuario = BDhelper.consultarAccesoUsuario(usuario.getIdUsuario(),idopcionS);
+        BDhelper.cerrar();
+        //fin verificacion
+        if(accesoUsuario == null)
+        {
+            Toast.makeText(this, "Disculpe Usted no tiene permisos para acceder a esa seccion", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            String nombreValue=activities[position];
+            try{
+                Class<?> clase=Class.forName("com.example.proyecto_pdm_g10."+nombreValue);
+                Intent inte = new Intent(this,clase);
+                inte.putExtra("idsesion",idsesion);
+                this.startActivity(inte);
+            }catch(ClassNotFoundException e){
+                e.printStackTrace();
+            }
+        }
 
     }
 }

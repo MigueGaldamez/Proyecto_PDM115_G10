@@ -29,10 +29,38 @@
         <activity android:name=".FacultadActualizarActivity" />
         <activity android:name=".FacultadEliminarActivity" />
         <activity android:name=".FacultadInsertarActivity" />
+            
+        <activity android:name=".CapacitadorConsultarActivity" />
+        <activity android:name=".CapacitadorActualizarActivity" />
+        <activity android:name=".CapacitadorEliminarActivity" />
+        <activity android:name=".CapacitadorInsertarActivity" />
+        <activity android:name=".AreaDiplomadoConsultarActivity" />
+        <activity android:name=".AreaDiplomadoActualizarActivity" />
+        <activity android:name=".AreaDiplomadoEliminarActivity" />
+        <activity android:name=".AreaDiplomadoInsertarActivity" />
+        <activity android:name=".DiplomadoConsultarActivity" />
+        <activity android:name=".DiplomadoActualizarActivity" />
+        <activity android:name=".DiplomadoEliminarActivity" />
+        <activity android:name=".DiplomadoInsertarActivity" />
+        <activity android:name=".CapacitadorMenuActivity" />
+        <activity android:name=".AreaDiplomadoMenuActivity" />
+        <activity android:name=".DiplomadoMenuActivity" />
+        <activity android:name=".EmpleadoMenuActivity" />
+        <activity android:name=".EmpleadoEliminarActivity" />
+        <activity android:name=".EmpleadoInsertarActivity" />
+        <activity android:name=".EmpleadoConsultarActivity" />
+        <activity android:name=".EmpleadoActualizarActivity" />
+
+        <activity android:name=".SolicitudMenuActivity" />
+        <activity android:name=".SolicitudConsultarActivity" />
+        <activity android:name=".SolicitudInsertarActivity" />
+        <activity android:name=".SolicitudEliminarActivity" />
+        <activity android:name=".SolicitudActualizarActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
+>>>>>>> 0870cd67481e893269dbe87038e53909d875209e
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

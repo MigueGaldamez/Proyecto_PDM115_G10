@@ -63,7 +63,7 @@
     <string name="codigo">Codigo:</string>
     <string name="nombre">Nombre:</string>
     <string name="descripcion">Descripcion:</string>
-    <string name="insertar">Insertar:</string>
+    <string name="insertar">Insertar</string>
     <string name="consultar">Consultar</string>
     <string name="actualizar">Actualizar</string>
     <string name="eliminar">Eliminar</string>
@@ -72,6 +72,61 @@
     <string name="clave">Clave:</string>
     <string name="Usuario">Usuario:</string>
     <string name="Llenarbase">Llenar Base</string>
+    <string name="idDiplomado">Codigo Diplomado:</string>
+    <string name="titulo">Titulo:</string>
+    <string name="capacidades">Capacidades:</string>
+    <string name="idAreaDiplomado">Codigo Area Diplomado:</string>
+<<<<<<< HEAD
+    <string name="idCapacitador">Codigo Capacitador:</string>
+    <string name="nombres">Nombres:</string>
+    <string name="apellidos">Apellidos</string>
+    <string name="profesion">Profesion:</string>
+    <string name="IdEntidadCapacitadora">Id Entidad Capacitadora:</string>
+    <string name="TipoEntidad">Tipo Entidad:</string>
+    <string name="Iniciarsesion">Iniciar Sesión</string>
+    <string name="InsertarEntidad">Insertar Entidad Capacitadora</string>
+    <string name="consultarEntidad">Consultar Entidad Capacitora</string>
+    <string name="eliminarEntidad">Eliminar Entidad Capacitadora</string>
+    <string name="insertarDiplomado">Insertar Diplomado</string>
+    <string name="eliminarDiplomado">Eliminar Diplomado</string>
+    <string name="consultarDiplomado">Consultar Diplomado</string>
+    <string name="actualizarDiplomado">Actualizar Diplomado</string>
+    <string name="actualizarEntidad">Actualizar Entidad Capacitadora</string>
+    <string name="insertarCapacitador">Insertar Capacitador</string>
+    <string name="eliminarCapacitador">Eliminar Capacitador</string>
+    <string name="consultarCapacitador">Consultar Capacitador</string>
+    <string name="actualizarCapacitador">Actualizar Capacitador</string>
+    <string name="insertarAreaInteres">Insertar Area Interes</string>
+    <string name="eliminarAreaInteres">Eliminar Area Interes</string>
+    <string name="consultarAreaInteres">Consultar Area Interes</string>
+    <string name="actualizarAreaInteres">Actualizar Area Interes</string>
+    <string name="insertarAreaDiplomado">Insertar Area Diplomado</string>
+    <string name="eliminarAreaDiplomado">Eliminar Area Diplomado</string>
+    <string name="consultarAreaDiplomado">Consultar Area Diplomado</string>
+    <string name="actualizarAreaDiplomado">Actualizar Area Diplomado</string>
+=======
+    <string name="idEmpleado">Codigo Empleado:</string>
+    <string name="nombreEmpleado">Nommbre Empleado:</string>
+    <string name="apellidoEmpleado">Apellido Empleado:</string>
+    <string name="profesion">Profesion:</string>
+    <string name="cargo">Cargo:</string>
+    <string name="idSolicitud">Id Solicitud:</string>
+    <string name="fechaSolicitud">Fecha:</string>
+    <string name="estadoSolicitud">Estado:</string>
+    <string name="capacitacionId">Id de la capacitacion</string>
 
+
+
+>>>>>>> abd09c053bc4896a4ef057dfed7ef1701da48609
+
+
+    <string name="register">REGISTER</string>
+    <string name="login_email_hint">Email</string>
+    <string name="login_password_hint">Password</string>
+    <string name="signup_login_hint">Already have an account? Sign In</string>
+    <string name="login_signup_hint">Don\'t have an account? Sign Up</string>
+    <string name="login_name_hint">Name</string>
+    <string name="login_mobile_number_hint">Mobile Number</string>
+    <string name="Elementos">Elementos en la Base:</string>
 
 </resources>
