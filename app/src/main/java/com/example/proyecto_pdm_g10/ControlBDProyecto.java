@@ -33,7 +33,7 @@ public class ControlBDProyecto {
 
     private static final String[]camposDia = new String[] {"idDia","nomDia","fecha"};
 
-    private static final String[]camposDia = new String[] {"idDia","nomDia","fecha"};
+
 
     private final Context context;
     private DatabaseHelper DBHelper;
