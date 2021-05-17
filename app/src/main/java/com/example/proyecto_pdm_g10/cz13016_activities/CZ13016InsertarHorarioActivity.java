@@ -174,7 +174,7 @@ public class CZ13016InsertarHorarioActivity extends AppCompatActivity {
                 regInsertados = helper.insertarHorario(horario);
                 helper.cerrar();
 
-                Toast.makeText(this, regInsertados, Toast.LENGTH_SHORT).show();
+               Toast.makeText(this, regInsertados, Toast.LENGTH_SHORT).show();
             }else
                 Toast.makeText(this, "Ingrese todos los campos", Toast.LENGTH_SHORT).show();
 
@@ -189,9 +189,14 @@ public class CZ13016InsertarHorarioActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+
+        SharedPreferences sharprefs = getPreferences(thisContex.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharprefs.edit();
+
+
         super.onBackPressed();
         if (editor != null){
-            editor.remove("thisInstanceHorario").commit();
+            editor.clear().commit();
         }
         Intent myIntent = new Intent(this,CZ13016MenuHorarioActivity.class);
         startActivity(myIntent);

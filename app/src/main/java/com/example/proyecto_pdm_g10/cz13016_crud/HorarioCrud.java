@@ -99,4 +99,47 @@ public class HorarioCrud {
 
     }
 
+    public Integer extraerHorarioPosition(String idDia){
+
+        Integer position = 0;
+
+        Cursor cursor= db.rawQuery("select * from dia",null);
+        if (cursor.moveToFirst()){
+            do {
+                Dia  dia = new Dia(cursor.getString(0),cursor.getString(1),cursor.getString(2));
+                if (idDia.equals(dia.getIdDia())){
+                    return position;
+                }
+                position++;
+            }while (cursor.moveToNext());
+        }
+        return null;
+    }
+
+    public boolean buscarHorario(Integer idHorario){
+        Cursor cursor = db.rawQuery("SELECT * FROM horario WHERE idHorario = '"+idHorario+"'",null);
+        if(cursor.moveToFirst())
+            return  true;
+
+        return false;
+
+    }
+
+    public String actualizarHorario(Horario horario){
+        if(buscarHorario(horario.getIdHorario())){
+
+            ContentValues hrio = new ContentValues();
+
+            hrio.put("horaInicio", horario.getHoraInicio());
+            hrio.put("horaFin", horario.getHoraFin());
+            hrio.put("idCapacitacion", horario.getIdCapacitacion());
+            hrio.put("idDia", horario.getIdDia());
+
+            db.update("horario", hrio, "idHorario='"+horario.getIdHorario()+"'", null);
+            return "Registro Actualizado Correctamente";
+        }else{
+            return "Registro con codigo " + horario.getIdHorario()+ " no existe";
+        }
+    }
+
 }
