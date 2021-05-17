@@ -17,8 +17,8 @@ public class CZ13016MenuHorarioActivity extends ListActivity {
 
     ListView menuHorario;
 
-    String[] menu = {"Insertar Horario", "Elininar Horario","Actualizar Horario", "Consultar Norario"};
-    String[] activities = {"CZ13016InsertarHorarioActivity","","", ""};
+    String[] menu = {"Insertar Horario", "Consultar Horario","Actualizar Horario", "Consultar Norario"};
+    String[] activities = {"CZ13016InsertarHorarioActivity","CZ13016ConsultarHorarioActivity","", ""};
 
 
     @Override

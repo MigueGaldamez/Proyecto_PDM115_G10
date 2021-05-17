@@ -85,4 +85,18 @@ public class HorarioCrud {
         return listDia;
     }
 
+    public Horario extraerHorario(Integer idHorar){
+//                db.execSQL("CREATE TABLE horario(idHorario INTEGER NOT NULL PRIMARY KEY,horaInicio CHAR(5), horaFin CHAR(5), idCapacitacion INTEGER, idDia VARCHAR(7))");
+        Horario  horario;
+
+        Cursor cursor = db.rawQuery("SELECT * FROM horario WHERE idHorario = '"+idHorar+"'",null);
+        if(cursor.moveToFirst()){
+            horario = new Horario(cursor.getInt(0),cursor.getString(1),cursor.getString(2), cursor.getInt(3), cursor.getString(4));
+            return horario;
+
+        }
+        return null;
+
+    }
+
 }

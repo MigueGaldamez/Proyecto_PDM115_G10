@@ -12,8 +12,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.proyecto_pdm_g10.AreaDiplomado;
+import com.example.proyecto_pdm_g10.ControlBDProyecto;
 import com.example.proyecto_pdm_g10.Dia;
 import com.example.proyecto_pdm_g10.R;
+import com.example.proyecto_pdm_g10.cz13016_crud.CapacitacionCrud;
 import com.example.proyecto_pdm_g10.cz13016_crud.HorarioCrud;
 import com.example.proyecto_pdm_g10.cz13016_entities.Capacitacion;
 import com.example.proyecto_pdm_g10.cz13016_entities.Horario;
@@ -105,24 +108,24 @@ public class CZ13016InsertarHorarioActivity extends AppCompatActivity {
 
     private void getEditTex() {
 
-        SharedPreferences sharprefs;
+        SharedPreferences sharprefs = getPreferences(thisContex.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharprefs.edit();
 
         if (myBundleRetornado != null){
-                    sharprefs = getPreferences(thisContex.MODE_PRIVATE);
-                    editor = sharprefs.edit();
+
 
                     editor.putString("idCap",myBundleRetornado.getString("idItem"));
-                    editor.putString("capKey",myBundleRetornado.getString("foreignKey"));
+                    editor.putInt("capKey",myBundleRetornado.getInt("foreignKey"));
                     editor.commit();
-                    getDataSave();
+                    restaurarActivity();
 
-                    Toast.makeText(this, String.valueOf( myBundleRetornado.getInt("foreignKey")), Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(this, String.valueOf( myBundleRetornado.getInt("foreignKey")), Toast.LENGTH_SHORT).show();
 
         }
 
     }
 
-    private void getDataSave(){
+    private void restaurarActivity(){
 
         SharedPreferences sharprefs = getPreferences(thisContex.MODE_PRIVATE);
 
@@ -138,7 +141,7 @@ public class CZ13016InsertarHorarioActivity extends AppCompatActivity {
 
         int position = sharprefs.getInt("idDia",0);
         idDiaSpinner.setSelection(position);
-        Toast.makeText(this, listDia.get(position).getIdDia()+"  "+listDia.get(position).getNomDia()+"  "+listDia.get(position).getFecha(), Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, listDia.get(position).getIdDia()+"  "+listDia.get(position).getNomDia()+"  "+listDia.get(position).getFecha(), Toast.LENGTH_SHORT).show();
 
     }
 
@@ -147,12 +150,13 @@ public class CZ13016InsertarHorarioActivity extends AppCompatActivity {
 
     public void guardarHorario(View view) {
 
-            SharedPreferences sharprefs = getPreferences(thisContex.MODE_PRIVATE);
+           SharedPreferences sharprefs = getPreferences(thisContex.MODE_PRIVATE);
 
-            HorarioCrud helper = new HorarioCrud(this);
+           HorarioCrud helper = new HorarioCrud(this);
 
 
-            String regInsertados = "none";
+
+        String regInsertados = "none";
             Horario horario = new Horario();
 
             if (!(idHorario.getText().toString().isEmpty() || idHoraIni.getText().toString().isEmpty() || idHoraFin.getText().toString().isEmpty() || idCapacitacion.getText().toString().isEmpty())){
@@ -160,20 +164,23 @@ public class CZ13016InsertarHorarioActivity extends AppCompatActivity {
                 horario.setIdHorario(Integer.parseInt(idHorario.getText().toString()));
                 horario.setHoraInicio(idHoraIni.getText().toString());
                 horario.setHoraFin(idHoraFin.getText().toString());
+
                 horario.setIdCapacitacion(sharprefs.getInt("capKey",0));
 
-                int position = sharprefs.getInt("idDia",0);
-                horario.setIdDia(listDia.get(position).getIdDia());
-
-
-
+                int pos = idDiaSpinner.getSelectedItemPosition();
+                horario.setIdDia(listDia.get(pos).getIdDia());
 
                 helper.abrir();
                 regInsertados = helper.insertarHorario(horario);
                 helper.cerrar();
+
                 Toast.makeText(this, regInsertados, Toast.LENGTH_SHORT).show();
             }else
                 Toast.makeText(this, "Ingrese todos los campos", Toast.LENGTH_SHORT).show();
+
+
+       // Toast.makeText(this, listDia.get(pos).getIdDia(), Toast.LENGTH_SHORT).show();
+
 
     }
 
