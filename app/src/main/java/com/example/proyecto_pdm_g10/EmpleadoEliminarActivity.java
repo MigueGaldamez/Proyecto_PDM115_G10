@@ -21,13 +21,15 @@ public class EmpleadoEliminarActivity extends AppCompatActivity {
         editIdEmpleado = (EditText) findViewById(R.id.editIdEmpleado);
 
     }
-    public void eliminarEmpleado(View v){
+
+    public void eliminarEmpleado(View v) {
         String regEliminadas;
-        Empleado empleado=new Empleado();
+        Empleado empleado = new Empleado();
         empleado.setIdEmpleado(editIdEmpleado.getText().toString());
         helper.abrir();
-        regEliminadas=helper.eliminar(empleado);
+        regEliminadas = helper.eliminar(empleado);
         helper.cerrar();
         Toast.makeText(this, regEliminadas, Toast.LENGTH_SHORT).show();
+
     }
 }
