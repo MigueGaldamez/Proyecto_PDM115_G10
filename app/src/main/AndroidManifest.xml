@@ -9,6 +9,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Proyecto_PDM_G10">
+        <activity android:name=".LocalInsertarActivity"></activity>
+        <activity android:name=".LocalEliminarActivity" />
+        <activity android:name=".LocalConsultarActivity" />
+        <activity android:name=".LocalActualizarActivity" />
+        <activity android:name=".LocalMenuActivity" />
+        <activity android:name=".TipoUbicacionActualizarActivity" />
+        <activity android:name=".TipoUbicacionConsultarActivity" />
+        <activity android:name=".TipoUbicacionEliminarActivity" />
+        <activity android:name=".TipoUbicacionInsertarActivity" />
+        <activity android:name=".TipoUbicacionMenuActivity" />
+        <activity android:name=".UbicacionMenuActivity" />
+        <activity android:name=".FacultadMenuActivity" />
+        <activity android:name=".UbicacionInsertarActivity" />
+        <activity android:name=".UbicacionEliminarActivity" />
+        <activity android:name=".UbicacionConsultarActivity" />
+        <activity android:name=".UbicacionActualizarActivity" />
+        <activity android:name=".FacultadConsultarActivity" />
+        <activity android:name=".FacultadActualizarActivity" />
+        <activity android:name=".FacultadEliminarActivity" />
+        <activity android:name=".FacultadInsertarActivity" />
+
         <activity android:name=".CapacitadorConsultarActivity" />
         <activity android:name=".CapacitadorActualizarActivity" />
         <activity android:name=".CapacitadorEliminarActivity" />
@@ -39,6 +60,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
+>>>>>>> 0870cd67481e893269dbe87038e53909d875209e
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

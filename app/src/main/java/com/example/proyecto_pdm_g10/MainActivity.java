@@ -14,10 +14,8 @@ import android.widget.Toast;
 public class MainActivity extends ListActivity {
 
     //Agregen las tablas y las activities de las tablas
-
-    String[] menu={"Tabla AreaInteres","Tabla EntidadCapacitadora","Tabla Diplomado","Tabla Area Diplomado","Tabla Capacitador", "Tabla Empleado","Tabla Solicitud"};
-    String[] activities={"AreaInteresMenuActivity","EntidadCapacitadoraMenuActivity","DiplomadoMenuActivity","AreaDiplomadoMenuActivity","CapacitadorMenuActivity","EmpleadoMenuActivity","SolicitudMenuActivity" };
-
+    String[] menu={"Tabla AreaInteres","Tabla EntidadCapacitadora", "Tabla Diplomado","Tabla Area Diplomado","Tabla Capacitador", "Tabla Empleado","Tabla Solicitud","Tabla Facultad","Tabla Ubicacion","Tabla TipoUbicacion","Tabla Local"};
+    String[] activities={"AreaInteresMenuActivity","EntidadCapacitadoraMenuActivity","DiplomadoMenuActivity","AreaDiplomadoMenuActivity","CapacitadorMenuActivity","EmpleadoMenuActivity","SolicitudMenuActivity","FacultadMenuActivity","UbicacionMenuActivity","TipoUbicacionMenuActivity","LocalMenuActivity"};
 
     ControlBDProyecto BDhelper;
     //variable de la sesion de usuario
