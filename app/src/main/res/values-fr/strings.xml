@@ -131,6 +131,10 @@
     <string name="actualizarFacultad">Actualizar Facultad</string>
     <string name="actualizarLocal">Actualizar Local</string>
 
+    <string name="idAsistenciaEmpleado">Codigo de asistencia:</string>
+    <string name="asistencia">estado</string>
+    <string name="empleadoId">codigo del empleado:</string>
+
     <!--_________________________________________________________________________________-->
 
 </resources>
