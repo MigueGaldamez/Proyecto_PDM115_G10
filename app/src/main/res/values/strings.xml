@@ -21,7 +21,7 @@
     <string name="codigo">Codigo:</string>
     <string name="nombre">Nombre:</string>
     <string name="descripcion">Descripcion:</string>
-    <string name="insertar">Insertar</string>
+    <string name="insertar">Insertar:</string>
     <string name="consultar">Consultar</string>
     <string name="actualizar">Actualizar</string>
     <string name="eliminar">Eliminar</string>
@@ -38,7 +38,7 @@
     <string name="idCapacitador">Codigo Capacitador:</string>
     <string name="nombres">Nombres:</string>
     <string name="apellidos">Apellidos</string>
-    <string name="profesion">Profesion:</string>
+
     <string name="IdEntidadCapacitadora">Id Entidad Capacitadora:</string>
     <string name="TipoEntidad">Tipo Entidad:</string>
     <string name="Iniciarsesion">Iniciar Sesión</string>
@@ -63,11 +63,20 @@
     <string name="consultarAreaDiplomado">Consultar Area Diplomado</string>
     <string name="actualizarAreaDiplomado">Actualizar Area Diplomado</string>
 
+
     <string name="idEmpleado">Codigo Empleado:</string>
     <string name="nombreEmpleado">Nommbre Empleado:</string>
     <string name="apellidoEmpleado">Apellido Empleado:</string>
+    <string name="profesion">Profesion:</string>
     <string name="cargo">Cargo:</string>
-    <string name="idSolicitud">Id Solicitud:</string>
+
+    <string name="idAsistenciaEmpleado">Codigo de asistencia:</string>
+    <string name="asistencia">estado</string>
+    <string name="empleadoId">codigo del empleado:</string>
+
+
+
+    <string name="idSolicitud">codigo de Solicitud:</string>
     <string name="fechaSolicitud">Fecha:</string>
     <string name="estadoSolicitud">Estado:</string>
     <string name="capacitacionId">Id de la capacitacion</string>
@@ -100,37 +109,10 @@
     <string name="tipoUbicacion_menu">Función a Ejecutar Tipo Ubicacion</string>
     <string name="idTipoUbicacion">ID Tipo Ubicacion</string>
     <string name="nombreTipoUbicacion">Nombre Tipo Ubicacion</string>
+    <string name="capacitacionId">codigo de capacitacion</string>
 
-    <string name="title_activity_local_menu">LocalMenuActivity</string>
-    <string name="title_activity_local_insertar">LocalInsertarActivity</string>
-    <string name="title_activity_local_eliminar">LocalEliminarActivity</string>
-    <string name="title_activity_local_actualizar">LocalActualizarActivity</string>
-    <string name="title_activity_local_consultar">LocalConsultarActivity</string>
-    <string name="local_menu">Función a Ejecutar Local</string>
-    <string name="idLocal">ID Local</string>
 
-    <string name="idNombreUbicacion">Nombre  Ubicacion</string>
 
-    <string name="idNombreTipoUbicacion">Nombre Tipo Ubicacion</string>
-    <string name="nombreLocal">Nombre Local</string>
-    <string name="InsertarUbicacion">InsertarUbicacion</string>
-    <string name="InsertarLocal">Insertar Local</string>
-    <string name="InsertarFacultad">Insertar Facultad</string>
-    <string name="InsertarTipoUbi">Insertar Tipo Ubicacion</string>
-    <string name="eliminarUbicacion">Eliminar Ubicacion</string>
-    <string name="eliminarTipoUbi">Eliminar Tipo Ubicacion</string>
-    <string name="eliminarLocal">Eliminar Local</string>
-    <string name="eliminarFacultad">Eliminar Facultad</string>
-    <string name="consultarFacultad">Consultar Facultad</string>
-    <string name="consultarLocal">Consultar Local</string>
-    <string name="consultarTipoUbi">Consultar Tipo Ubicacion</string>
-    <string name="consultarUbicacion">Consultar Ubicacion</string>
-    <string name="actualizarUbicacion">Actualizar Ubicacion</string>
-    <string name="actualizarTipoUbi">Actualizar Tipo Ubicacion</string>
-    <string name="actualizarFacultad">Actualizar Facultad</string>
-    <string name="actualizarLocal">Actualizar Local</string>
-
-    <!--_________________________________________________________________________________-->
 
 
 </resources>
