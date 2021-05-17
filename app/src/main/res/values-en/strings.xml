@@ -63,25 +63,12 @@
     <string name="codigo">Code:</string>
     <string name="nombre">Name:</string>
     <string name="descripcion">Description:</string>
-<<<<<<< HEAD
-    <string name="insertar">Insert</string>
-    <string name="consultar">Read</string>
-    <string name="actualizar">Update</string>
-    <string name="eliminar">Delete</string>
-    <string name="telefono">Telephone:</string>
-    <string name="correo">Email:</string>
-    <string name="clave">Password:</string>
-    <string name="Usuario">Username:</string>
-    <string name="Llenarbase">Fill up Database</string>
-    <string name="idDiplomado">Certificate Id:</string>
-    <string name="titulo">Title:</string>
-    <string name="capacidades">Habilities:</string>
-    <string name="idAreaDiplomado"> Certificate Area Id:</string>
+
+
     <string name="idCapacitador">Trainer Id:</string>
     <string name="apellidos">Last Names</string>
     <string name="IdEntidadCapacitadora">Training Entity Id:</string>
     <string name="nombres">Names:</string>
-    <string name="profesion">Occupation:</string>
     <string name="TipoEntidad">Entity Type:</string>
     <string name="Iniciarsesion">Log In</string>
     <string name="InsertarEntidad">Insert Training Entity</string>
@@ -104,7 +91,7 @@
     <string name="eliminarAreaDiplomado">Delete Certificate Area</string>
     <string name="consultarAreaDiplomado">Read Certificate Area</string>
     <string name="actualizarAreaDiplomado">Update Certificate Area</string>
-=======
+
     <string name="insertar">Insert:</string>
     <string name="consultar">Consultar</string>
     <string name="actualizar">Actualizar</string>
@@ -128,7 +115,6 @@
     <string name="fechaSolicitud">Fecha</string>
     <string name="estadoSolicitud">Estado</string>
     <string name="capacitacionId">ID de la capacitacion</string>
->>>>>>> abd09c053bc4896a4ef057dfed7ef1701da48609
 
 
     <string name="register">REGISTER</string>
