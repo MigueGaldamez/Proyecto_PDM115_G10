@@ -25,7 +25,7 @@ public class CapacitacionCrud {
    private Context context;
    private ControlBDProyecto control;
    private SQLiteDatabase db;
-    private ControlBDProyecto.DatabaseHelper DBHelper;
+   private ControlBDProyecto.DatabaseHelper DBHelper;
 
     public Context getContext() {
         return context;
@@ -130,6 +130,20 @@ public class CapacitacionCrud {
             }while (cursor.moveToNext());
         }
         return listCapacitador;
+    }
+
+    public List<Capacitacion> allCapacitacion(){
+        ArrayList<Capacitacion> listCapacitacion = new ArrayList<>();
+
+//Obtne el listado de areas
+        Cursor cursor= db.rawQuery("select * from capacitacion",null);
+        if (cursor.moveToFirst()){
+            do {
+                Capacitacion  capacitacion = new Capacitacion(cursor.getInt(0),cursor.getString(1),cursor.getFloat(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6));
+                listCapacitacion.add(capacitacion);
+            }while (cursor.moveToNext());
+        }
+        return listCapacitacion;
     }
 
     public String eliminarCapacitacion(Integer idCap){

@@ -153,7 +153,7 @@ public class CZ13016InsertarCapacitacion extends AppCompatActivity {
 
             cap.setIdCapacitacion(Integer.parseInt(idCapacitacion.getText().toString()));
             cap.setDescrip(idDescripcion.getText().toString());
-            cap.setPrecio(Integer.parseInt(idPrecio.getText().toString()));
+            cap.setPrecio(Float.parseFloat(idPrecio.getText().toString()));
 
             cap.setIdLocal(sharprefs.getString("localKey",""));/**/
             cap.setIdAreaDip(sharprefs.getString("areaDiKey",""));
@@ -267,7 +267,9 @@ public class CZ13016InsertarCapacitacion extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        editor.remove("thisInstance").commit();
+        if (editor != null){
+            editor.remove("thisInstance").commit();
+        }
         Intent myIntent = new Intent(this,CZ13016CapacitacionMenuActivity.class);
         startActivity(myIntent);
     }

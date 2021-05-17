@@ -14,8 +14,8 @@ import android.widget.Toast;
 public class MainActivity extends ListActivity {
 
     //Agregen las tablas y las activities de las tablas
-    String[] menu={"Tabla AreaInteres","Tabla EntidadCapacitadora", "01 Tabla Capacitacion", "Agregar Capacitor","Agreagar Area de Diplomado", "Agregar Diplomado"};
-    String[] activities={"AreaInteresMenuActivity","EntidadCapacitadoraMenuActivity", "CZ13016CapacitacionMenuActivity","CapacitadorInsertarActivity","AreaDiplomadoInsertarActivity", "DiplomadoInsertarActivity"};
+    String[] menu={"Tabla AreaInteres","Tabla EntidadCapacitadora", "01 Tabla Capacitacion", "Agregar Capacitor","Agreagar Area de Diplomado", "Agregar Diplomado","Tabala Dia", "01 Tabla Horario"};
+    String[] activities={"AreaInteresMenuActivity","EntidadCapacitadoraMenuActivity", "CZ13016CapacitacionMenuActivity","CapacitadorInsertarActivity","AreaDiplomadoInsertarActivity", "DiplomadoInsertarActivity","DiaMenuActivity","CZ13016MenuHorarioActivity"};
 
 
 

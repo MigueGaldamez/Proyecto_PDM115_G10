@@ -1,7 +1,6 @@
 package com.example.proyecto_pdm_g10.cz13016_entities;
 
 public class Capacitacion {
-    // db.execSQL("CREATE TABLE capacitacion(idCapacitacion ,descripcion VARCHAR(100),precio REAL,idLocal INTEGER, idAreasDip INTEGER, idAreaIn INTEGER, idCapacitador INTEGER);");
 private Integer idCapacitacion;
 private String descrip;
 
@@ -14,6 +13,11 @@ private String idAreaIn;
 private String idCapacitador;
 
     public Capacitacion() {
+    }
+
+    public Capacitacion(Integer idCapacitacion, String idAreaDip) {
+        this.idCapacitacion = idCapacitacion;
+        this.idAreaDip = idAreaDip;
     }
 
     public Capacitacion(Integer idCapacitacion, String descrip, float precio, String idLocal, String idAreaDip, String idAreaIn, String idCapacitador) {

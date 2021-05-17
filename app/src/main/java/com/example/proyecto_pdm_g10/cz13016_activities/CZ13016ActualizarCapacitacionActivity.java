@@ -277,7 +277,11 @@ public class CZ13016ActualizarCapacitacionActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        editor.remove("thisInstance").commit();
+
+        if (editor != null){
+            editor.remove("thisInstance").commit();
+        }
+
         Intent myIntent = new Intent(this,CZ13016CapacitacionMenuActivity.class);
         startActivity(myIntent);
     }
