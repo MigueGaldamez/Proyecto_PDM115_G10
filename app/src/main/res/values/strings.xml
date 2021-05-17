@@ -34,15 +34,23 @@
     <string name="titulo">Titulo:</string>
     <string name="capacidades">Capacidades:</string>
     <string name="idAreaDiplomado">Codigo Area Diplomado:</string>
+
     <string name="idEmpleado">Codigo Empleado:</string>
     <string name="nombreEmpleado">Nommbre Empleado:</string>
     <string name="apellidoEmpleado">Apellido Empleado:</string>
     <string name="profesion">Profesion:</string>
     <string name="cargo">Cargo:</string>
-    <string name="idSolicitud">Id Solicitud:</string>
+
+    <string name="idAsistenciaEmpleado">Codigo de asistencia:</string>
+    <string name="asistencia">estado</string>
+    <string name="empleadoId">codigo del empleado:</string>
+
+
+
+    <string name="idSolicitud">codigo de Solicitud:</string>
     <string name="fechaSolicitud">Fecha:</string>
     <string name="estadoSolicitud">Estado:</string>
-    <string name="capacitacionId">Id de la capacitacion</string>
+    <string name="capacitacionId">codigo de capacitacion</string>
 
 
 

@@ -8,6 +8,7 @@ public class Solicitud {
     private  String fechaSolicitud;
     private String estadoSolicitud;
     private String capacitacionId;
+    private String empleadoId;
 
 
 
@@ -15,11 +16,12 @@ public class Solicitud {
     public Solicitud() {
     }
 
-    public Solicitud(String idSolicitud, String fechaSolicitud, String estadoSolicitud, String  capacitacionId ) {
+    public Solicitud(String idSolicitud, String fechaSolicitud, String estadoSolicitud, String  capacitacionId, String empleadoId ) {
         this.idSolicitud = idSolicitud;
         this.fechaSolicitud = fechaSolicitud;
         this.estadoSolicitud = estadoSolicitud;
         this.capacitacionId= capacitacionId;
+        this.empleadoId= empleadoId;
 
     }
 
@@ -51,4 +53,11 @@ public class Solicitud {
         this.capacitacionId =  capacitacionId;
     }
 
+    public String getEmpleadoId() {
+        return empleadoId;
+    }
+
+    public void setEmpleadoId(String empleadoId) {
+        this.empleadoId = empleadoId;
+    }
 }

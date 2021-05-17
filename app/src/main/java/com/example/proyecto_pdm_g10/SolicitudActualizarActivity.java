@@ -14,6 +14,7 @@ public class SolicitudActualizarActivity extends Activity {
     EditText editFechaSolicitud;
     EditText editEstadoSolicitud;
     EditText editCapacitacionId;
+    EditText editEmpleadoId;
 
     ControlBDProyecto BDhelper = new ControlBDProyecto(this);
     String idsesion;
@@ -27,6 +28,7 @@ public class SolicitudActualizarActivity extends Activity {
         editFechaSolicitud = (EditText) findViewById(R.id.editFechaSolicitud);
         editEstadoSolicitud = (EditText) findViewById(R.id.editEstadoSolicitud);
         editCapacitacionId = (EditText) findViewById(R.id.editCapacitacionId);
+        editEmpleadoId = (EditText) findViewById(R.id.editEmpleadoId);
 
     }
     public void actualizarSolicitud(View v) {
@@ -35,6 +37,7 @@ public class SolicitudActualizarActivity extends Activity {
         solicitud.setFechaSolicitud(editFechaSolicitud.getText().toString());
         solicitud.setEstadoSolicitud(editEstadoSolicitud.getText().toString());
         solicitud.setCapacitacionId(editCapacitacionId.getText().toString());
+        solicitud.setEmpleadoId(editEmpleadoId.getText().toString());
 
         helper.abrir();
         String estado = helper.actualizar(solicitud);
@@ -46,6 +49,7 @@ public class SolicitudActualizarActivity extends Activity {
         editFechaSolicitud.setText("");
         editEstadoSolicitud.setText("");
         editCapacitacionId.setText("");
+        editEmpleadoId.setText("");
 
     }
 }

@@ -13,6 +13,7 @@ public class SolicitudInsertarActivity extends Activity {
     EditText editFechaSolicitud;
     EditText editEstadoSolicitud;
     EditText editCapacitacionId;
+    EditText editEmpleadoId;
 
 
     //   ControlBDProyecto BDhelper = new ControlBDProyecto(this);
@@ -26,6 +27,8 @@ public class SolicitudInsertarActivity extends Activity {
         editFechaSolicitud = (EditText) findViewById(R.id.editFechaSolicitud);
         editEstadoSolicitud = (EditText) findViewById(R.id.editEstadoSolicitud);
         editCapacitacionId = (EditText) findViewById(R.id.editCapacitacionId);
+        editEmpleadoId = (EditText) findViewById(R.id.editEmpleadoId);
+
 
     }
     public void insertarSolicitud(View v) {
@@ -33,6 +36,7 @@ public class SolicitudInsertarActivity extends Activity {
         String fechaSolicitud = editFechaSolicitud.getText().toString();
         String estadoSolicitud = editEstadoSolicitud.getText().toString();
         String capacitacionId = editCapacitacionId.getText().toString();
+        String empleadoId = editEmpleadoId.getText().toString();
 
         String regInsertados;
         Solicitud solicitud=new Solicitud();
@@ -40,6 +44,7 @@ public class SolicitudInsertarActivity extends Activity {
         solicitud.setFechaSolicitud(fechaSolicitud);
         solicitud.setEstadoSolicitud(estadoSolicitud);
         solicitud.setCapacitacionId(capacitacionId);
+        solicitud.setEmpleadoId(empleadoId);
 
         helper.abrir();
         regInsertados=helper.insertar(solicitud);
@@ -52,6 +57,7 @@ public class SolicitudInsertarActivity extends Activity {
         editFechaSolicitud.setText("");
         editEstadoSolicitud.setText("");
         editCapacitacionId.setText("");
+        editEmpleadoId.setText("");
 
     }
 

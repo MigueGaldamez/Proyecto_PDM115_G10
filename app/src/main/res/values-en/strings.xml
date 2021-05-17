@@ -40,6 +40,10 @@
     <string name="profesion">Profesion:</string>
     <string name="cargo">Cargo:</string>
 
+    <string name="idAsistenciaEmpleado">Codigo de la asistencia:</string>
+    <string name="asistencia">Estado:</string>
+    <string name="empleadoId">codigo del empleado:</string>
+
     <string name="idSolicitud">Id Solicitud:</string>
     <string name="fechaSolicitud">Fecha</string>
     <string name="estadoSolicitud">Estado</string>
