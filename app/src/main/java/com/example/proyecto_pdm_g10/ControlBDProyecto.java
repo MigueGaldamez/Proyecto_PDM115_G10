@@ -172,6 +172,46 @@ public class ControlBDProyecto {
                     listaObjeto.add(objetoList.get(i).getId()+" - "+objetoList.get(i).getNombre());
                 }
             }
+            case 4:
+            {
+                ArrayList<EntidadCapacitadora> objetoList;
+                EntidadCapacitadora entidadCapacitadora =  null;
+                objetoList = new ArrayList<EntidadCapacitadora>();
+                Cursor cursor = db.query(objeto,campos,null,null,null,null,null);
+                while (cursor.moveToNext())
+                {
+                    entidadCapacitadora = new EntidadCapacitadora();
+                    entidadCapacitadora.setCodigo(cursor.getString(0));
+                    entidadCapacitadora.setNombre(cursor.getString(1));
+                    objetoList.add(entidadCapacitadora);
+                }
+                listaObjeto = new ArrayList<String>();
+                listaObjeto.add("Seleccione");
+                for (int i=0; i<objetoList.size();i++)
+                {
+                    listaObjeto.add(objetoList.get(i).getCodigo()+" - "+objetoList.get(i).getNombre());
+                }
+            }
+            case 5:
+            {
+                ArrayList<Diplomado> objetoList;
+                Diplomado diplomado =  null;
+                objetoList = new ArrayList<Diplomado>();
+                Cursor cursor = db.query(objeto,campos,null,null,null,null,null);
+                while (cursor.moveToNext())
+                {
+                    diplomado = new Diplomado();
+                    diplomado.setIdDiplomado(cursor.getString(0));
+                    diplomado.setTitulo(cursor.getString(1));
+                    objetoList.add(diplomado);
+                }
+                listaObjeto = new ArrayList<String>();
+                listaObjeto.add("Seleccione");
+                for (int i=0; i<objetoList.size();i++)
+                {
+                    listaObjeto.add(objetoList.get(i).getIdDiplomado()+" - "+objetoList.get(i).getTitulo());
+                }
+            }
         }
     }
     public String insertar(Facultad facultad)

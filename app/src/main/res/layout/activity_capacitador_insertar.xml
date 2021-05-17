@@ -70,11 +70,13 @@
                 android:maxLength="20" />
         </TableRow>
         <TableRow android:gravity="center">
-            <TextView android:text="@string/IdEntidadCapacitadora" />
-            <EditText
+            <TextView android:text="Entidad Capacitadora: "/>
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:id="@+id/editIdEntidadCapacitadora"
-                android:inputType="text"
-                android:maxLength="100" />
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
         </TableRow>
 
         <TableRow>

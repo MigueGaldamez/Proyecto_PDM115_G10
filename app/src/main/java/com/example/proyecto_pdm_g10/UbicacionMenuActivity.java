@@ -17,7 +17,6 @@ public class UbicacionMenuActivity extends ListActivity
     {
         super.onCreate(savedInstanceState);
         ListView listView = getListView();
-        listView.setBackgroundColor(Color.rgb(64, 0, 128));
         ArrayAdapter<String> adapter = new
                 ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, menu);
         setListAdapter(adapter);
@@ -27,7 +26,6 @@ public class UbicacionMenuActivity extends ListActivity
     {
         super.onListItemClick(l, v, position, id);
         String nombreValue=activities[position];
-        l.getChildAt(position).setBackgroundColor(Color.rgb(255, 128, 0));
         try
         {
             Class<?> clase=Class.forName("com.example.proyecto_pdm_g10."+nombreValue);

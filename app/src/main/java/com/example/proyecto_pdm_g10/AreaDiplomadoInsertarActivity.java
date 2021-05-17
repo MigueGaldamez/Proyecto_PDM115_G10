@@ -6,7 +6,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 public class AreaDiplomadoInsertarActivity extends Activity {
@@ -14,7 +16,7 @@ public class AreaDiplomadoInsertarActivity extends Activity {
     EditText editIdAreaDiplomado;
     EditText editNombre;
     EditText editDescripcion;
-    EditText editIdDiplomado;
+    Spinner spinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,20 +26,27 @@ public class AreaDiplomadoInsertarActivity extends Activity {
         editIdAreaDiplomado = (EditText) findViewById(R.id.editIdAreaDiplomado);
         editNombre = (EditText) findViewById(R.id.editNombre);
         editDescripcion = (EditText) findViewById(R.id.editDescripcion);
-        editIdDiplomado = (EditText) findViewById(R.id.editIdDiplomado);
+        spinner = (Spinner)findViewById(R.id.editIdDiplomado);
+        helper.abrir();
+        String[] campos = {"idDiplomado","titulo"};
+        helper.consultarListaObjeto(5,"diplomado",campos);
+        ArrayAdapter<CharSequence> adaptador = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,helper.listaObjeto);
+        spinner.setAdapter(adaptador);
+        helper.cerrar();
     }
     public void insertarAreaDiplomado(View v) {
         String idAreaDiplomado = editIdAreaDiplomado.getText().toString();
         String nombre = editNombre.getText().toString();
         String descripcion = editDescripcion.getText().toString();
-        String idDiplomado = editIdDiplomado.getText().toString();
+        String idF = spinner.getSelectedItem().toString();
+        String[] diplomadoID = idF.split(" - ");
         String regInsertados;
 
         AreaDiplomado areaDiplomado=new AreaDiplomado();
         areaDiplomado.setIdAreaDiplomado(idAreaDiplomado);
         areaDiplomado.setNombre(nombre);
         areaDiplomado.setDescripcion(descripcion);
-        areaDiplomado.setIdDiplomado(idDiplomado);
+        areaDiplomado.setIdDiplomado(diplomadoID[0].trim());
         helper.abrir();
         regInsertados=helper.insertar(areaDiplomado);
         helper.cerrar();
@@ -45,7 +54,7 @@ public class AreaDiplomadoInsertarActivity extends Activity {
 
     }
     public void limpiarTexto(View v) {
-        editIdDiplomado.setText("");
+        editIdAreaDiplomado.setSelection(0);
         editNombre.setText("");
         editDescripcion.setText("");
         editIdAreaDiplomado.setText("");

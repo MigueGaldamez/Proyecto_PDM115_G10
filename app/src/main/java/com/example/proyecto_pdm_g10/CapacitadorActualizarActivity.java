@@ -6,7 +6,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 public class CapacitadorActualizarActivity extends Activity {
@@ -18,7 +20,7 @@ public class CapacitadorActualizarActivity extends Activity {
     EditText editTelefono;
     EditText editCorreo;
     EditText editProfesion;
-    EditText editIdEntidadCapacitadora;
+    Spinner spinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +33,14 @@ public class CapacitadorActualizarActivity extends Activity {
         editTelefono = (EditText) findViewById(R.id.editTelefono);
         editCorreo = (EditText) findViewById(R.id.editCorreo);
         editProfesion = (EditText) findViewById(R.id.editProfesion);
-        editIdEntidadCapacitadora = (EditText) findViewById(R.id.editIdEntidadCapacitadora);
+        spinner = (Spinner)findViewById(R.id.editIdEntidadCapacitadora);
+
+        helper.abrir();
+        String[] campos = {"codigo","nombre"};
+        helper.consultarListaObjeto(4,"entidadCapacitadora",campos);
+        ArrayAdapter<CharSequence> adaptador = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,helper.listaObjeto);
+        spinner.setAdapter(adaptador);
+        helper.cerrar();
     }
     public void actualizarCapacitador(View v) {
         Capacitador capacitador = new Capacitador();
@@ -41,7 +50,9 @@ public class CapacitadorActualizarActivity extends Activity {
         capacitador.setTelefono(editTelefono.getText().toString());
         capacitador.setCorreo(editCorreo.getText().toString());
         capacitador.setProfesion(editProfesion.getText().toString());
-        capacitador.setIdEntidadCapacitadora(editIdEntidadCapacitadora.getText().toString());
+        String idF = spinner.getSelectedItem().toString();
+        String[] entidadCapacitadoraId = idF.split(" - ");
+        capacitador.setIdEntidadCapacitadora(entidadCapacitadoraId[0].trim());
 
         helper.abrir();
         String estado = helper.actualizar(capacitador);
@@ -55,6 +66,6 @@ public class CapacitadorActualizarActivity extends Activity {
         editTelefono.setText("");
         editCorreo.setText("");
         editProfesion.setText("");
-        editIdEntidadCapacitadora.setText("");
+        spinner.setSelection(0);
     }
 }

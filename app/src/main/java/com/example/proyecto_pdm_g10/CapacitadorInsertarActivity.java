@@ -6,7 +6,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 public class CapacitadorInsertarActivity extends Activity {
@@ -17,7 +19,8 @@ public class CapacitadorInsertarActivity extends Activity {
     EditText editTelefono;
     EditText editCorreo;
     EditText editProfesion;
-    EditText editIdEntidadCapacitadora;
+
+    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +34,14 @@ public class CapacitadorInsertarActivity extends Activity {
         editTelefono = (EditText) findViewById(R.id.editTelefono);
         editCorreo = (EditText) findViewById(R.id.editCorreo);
         editProfesion = (EditText) findViewById(R.id.editProfesion);
-        editIdEntidadCapacitadora = (EditText) findViewById(R.id.editIdEntidadCapacitadora);
+        spinner = (Spinner)findViewById(R.id.editIdEntidadCapacitadora);
+
+        helper.abrir();
+        String[] campos = {"codigo","nombre"};
+        helper.consultarListaObjeto(4,"entidadCapacitadora",campos);
+        ArrayAdapter<CharSequence> adaptador = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,helper.listaObjeto);
+        spinner.setAdapter(adaptador);
+        helper.cerrar();
     }
     public void insertarCapacitador(View v) {
 
@@ -41,7 +51,10 @@ public class CapacitadorInsertarActivity extends Activity {
         String telefono = editTelefono.getText().toString();
         String correo = editCorreo.getText().toString();
         String profesion = editProfesion.getText().toString();
-        String idEntidadCapacitadora = editIdEntidadCapacitadora.getText().toString();
+
+        String idF = spinner.getSelectedItem().toString();
+        String[] entidadCapacitadoraId = idF.split(" - ");
+
         String regInsertados;
 
         Capacitador capacitador = new Capacitador();
@@ -51,14 +64,11 @@ public class CapacitadorInsertarActivity extends Activity {
         capacitador.setTelefono(telefono);
         capacitador.setCorreo(correo);
         capacitador.setProfesion(profesion);
-        capacitador.setIdEntidadCapacitadora(idEntidadCapacitadora);
+        capacitador.setIdEntidadCapacitadora(entidadCapacitadoraId[0].trim());
         helper.abrir();
         regInsertados=helper.insertar(capacitador);
         helper.cerrar();
         Toast.makeText(this, regInsertados, Toast.LENGTH_SHORT).show();
-
-
-
     }
     public void limpiarTexto(View v) {
         editIdCapacitador.setText("");
@@ -67,7 +77,7 @@ public class CapacitadorInsertarActivity extends Activity {
         editTelefono.setText("");
         editCorreo.setText("");
         editProfesion.setText("");
-        editIdEntidadCapacitadora.setText("");
+        spinner.setSelection(0);
     }
 
 
