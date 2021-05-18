@@ -86,40 +86,37 @@
     <string name="title_activity_facultad_eliminar">FacultadEliminarActivity</string>
     <string name="title_activity_facultad_actualizar">FacultadActualizarActivity</string>
     <string name="title_activity_facultad_consultar">FacultadConsultarActivity</string>
-    <string name="facultad_menu">Función a Ejecutar Facultad</string>
-    <string name="idFacultad">Nombre Facultad</string>
-    <string name="nombreFacultad">Nombre Facultad</string>
+    <string name="facultad_menu">Funtion to be executed School</string>
+    <string name="idFacultad">School name</string>
+    <string name="nombreFacultad">School name</string>
 
     <string name="title_activity_ubicacion_menu">UbicacionMenuActivity</string>
     <string name="title_activity_ubicacion_insertar">UbicacionInsertarActivity</string>
     <string name="title_activity_ubicacion_eliminar">UbicacionEliminarActivity</string>
     <string name="title_activity_ubicacion_actualizar">UbicacionActualizarActivity</string>
     <string name="title_activity_ubicacion_consultar">UbicacionConsultarActivity</string>
-    <string name="ubicacion_menu">Función a Ejecutar Ubicacion</string>
+    <string name="ubicacion_menu">Funtion to be executed Ubicacion</string>
     <string name="idUbicacion">ID Ubicacion</string>
-    <string name="nombre_ubicacion">Nombre Ubicacion</string>
+    <string name="nombre_ubicacion"> Ubicacion name</string>
 
     <string name="title_activity_tipoUbicacion_menu">TipoUbicacionMenuActivity</string>
     <string name="title_activity_tipoUbicacion_insertar">TipoUbicacionInsertarActivity</string>
     <string name="title_activity_tipoUbicacion_eliminar">TipoUbicacionEliminarActivity</string>
     <string name="title_activity_tipoUbicacion_actualizar">TipoUbicacionActualizarActivity</string>
     <string name="title_activity_tipoUbicacion_consultar">TipoUbicacionConsultarActivity</string>
-    <string name="tipoUbicacion_menu">Función a Ejecutar Tipo Ubicacion</string>
-    <string name="idTipoUbicacion">ID Tipo Ubicacion</string>
-    <string name="nombreTipoUbicacion">Nombre Tipo Ubicacion</string>
+    <string name="tipoUbicacion_menu">Funtion to be executed  Ubication type</string>
+    <string name="idTipoUbicacion">ID  Ubication type</string>
+    <string name="nombreTipoUbicacion">Ubication type name</string>
 
     <string name="title_activity_local_menu">LocalMenuActivity</string>
     <string name="title_activity_local_insertar">LocalInsertarActivity</string>
     <string name="title_activity_local_eliminar">LocalEliminarActivity</string>
     <string name="title_activity_local_actualizar">LocalActualizarActivity</string>
     <string name="title_activity_local_consultar">LocalConsultarActivity</string>
-    <string name="local_menu">Función a Ejecutar Local</string>
+    <string name="local_menu">Funtion to be executed Local</string>
     <string name="idLocal">ID Local</string>
 
-    <string name="idNombreUbicacion">Nombre  Ubicacion</string>
 
-    <string name="idNombreTipoUbicacion">Nombre Tipo Ubicacion</string>
-    <string name="nombreLocal">Nombre Local</string>
     <string name="InsertarUbicacion">InsertarUbicacion</string>
     <string name="InsertarLocal">Insertar Local</string>
     <string name="InsertarFacultad">Insertar Facultad</string>
@@ -136,6 +133,7 @@
     <string name="actualizarTipoUbi">Actualizar Tipo Ubicacion</string>
     <string name="actualizarFacultad">Actualizar Facultad</string>
     <string name="actualizarLocal">Actualizar Local</string>
+>>>>>>> origin/gc18090
 
     <!--_________________________________________________________________________________-->
 

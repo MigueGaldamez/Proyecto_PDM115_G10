@@ -47,11 +47,13 @@
                 android:maxLength="100" />
         </TableRow>
         <TableRow android:gravity="center">
-            <TextView android:text="@string/idDiplomado" />
-            <EditText
+            <TextView android:text="Diplomado "/>
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:id="@+id/editIdDiplomado"
-                android:inputType="text"
-                android:maxLength="5" />
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
         </TableRow>
 
         <TableRow>
