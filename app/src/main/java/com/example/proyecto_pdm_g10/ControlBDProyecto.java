@@ -1665,33 +1665,87 @@ public class ControlBDProyecto {
         final String[] VAnomUsuario = {"GC18090","PT18003","VM13068","AA15020","CZ13016"};
         final String[] VAclave = {"admin","admin","admin","admin","admin"};
         //DATOS DE OPCION USUARIO
-        final String[] VBidOpcion = {"010","011","012","013","014",
-                "020","021","022","023","024",
-                "030","031","032","033","034",
-                "040","041","042","043","044",
-                "050","051","052","053","054"};
-        final String[] VBdesOpcion = {
-                "MenuAreaInteres","AdicionAreaInteres","ModificacionAreaInteres","EliminarAreaInteres","ConsultaAreaInteres",
-                "MenuEntidadCapacitadora","AdicionEntidadCapacitadora","ModificacionEntidadCapacitadora","EliminarEntidadCapacitadora","ConsultaEntidadCapacitadora",
-                "MenuCapacitador","AdicionCapacitador","ModificacionCapacitador","EliminarCapacitador","ConsultaCapacitador",
-                "MenuDiplomado","AdicionDiplomado","ModificacionDiplomado","EliminarDiplomado","ConsultaDiplomado",
-                "MenuAreaDiplomado","AdicionAreaDiplomado","ModificacionAreaDiplomado","EliminarAreaDiplomado","ConsultaAreaDiplomado",
-        };
-        final int[] VBnumCrud = {0,1,2,3,4,0,1,2,3,4,0,1,2,3,4,0,1,2,3,4,0,1,2,3,4};
-
-        //DATOS DE ACCESO USURAIO
-        final String[] VCidOpcion = {"010","011","012","013","014",
+        final String[] VBidOpcion = {
+                "010","011","012","013","014",
                 "020","021","022","023","024",
                 "030","031","032","033","034",
                 "040","041","042","043","044",
                 "050","051","052","053","054",
+                "060","061","062","063","064",
+                "070","071","072","073","074",
+                "080","081","082","083","084",
+                "090","091","092","093","094",
+                "100","101","102","103","104",
+                "110","111","112","113","114",
+                "120","121","122","123","124",
+                "130","131","132","133","134",
+                "140","141","142","143","144",
+                "150","151","152","153","154"
+        };
+        final String[] VBdesOpcion = {
+                "MenuAreaInteres","AdicionAreaInteres","ModificacionAreaInteres","EliminarAreaInteres","ConsultaAreaInteres",
+                "MenuEntidadCapacitadora","AdicionEntidadCapacitadora","ModificacionEntidadCapacitadora","EliminarEntidadCapacitadora","ConsultaEntidadCapacitadora",
+                "MenuDiplomado","AdicionDiplomado","ModificacionDiplomado","EliminarDiplomado","ConsultaDiplomado",
+                "MenuAreaDiplomado","AdicionAreaDiplomado","ModificacionAreaDiplomado","EliminarAreaDiplomado","ConsultaAreaDiplomado",
+                "MenuCapacitador","AdicionCapacitador","ModificacionCapacitador","EliminarCapacitador","ConsultaCapacitador",
+                "MenuEmpleado","AdicionEmpleado","ModificacionEmpleado","EliminarEmpleado","ConsultaEmpleado",
+                "MenuSolicitud","AdicionSolicitud","ModificacionSolicitud","EliminarSolicitud","ConsultaSolicitud",
+                "MenuAreaFacultad","AdicionFacultad","ModificacionFacultad","EliminarFacultad","ConsultaFacultad",
+                "MenuUbicacion","AdicionUbicacion","ModificacionUbicacion","EliminarUbicacion","ConsultaUbicacion",
+                "MenuTipoUbicacion","AdicionTipoUbicacion","ModificacionTipoUbicacion","EliminarTipoUbicacion","ConsultaTipoUbicacion",
+                "MenuLocal","AdicionLocal","ModificacionLocal","EliminarLocal","ConsultaLocal",
+                "MenuAsistencia","AdicionAsistencia","ModificacionAsistencia","EliminarAsistencia","ConsultaAsistencia",
+                "MenuDia","AdicionDia","ModificacionDia","EliminarDia","ConsultaDia",
+                "MenuHorario","AdicionHorario","ModificacionHorario","EliminarHorario","ConsultaHorario",
+                "MenuCapacitacion","AdicionCapacitacion","ModificacionCapacitacion","EliminarCapacitacion","ConsultaCapacitacion",
+
+
+        };
+        final int[] VBnumCrud = {
+                0,1,2,3,4,0,1,2,3,4,0,1,2,3,4,0,1,2,3,4,0,1,2,3,4,
+                0,1,2,3,4,0,1,2,3,4,0,1,2,3,4,0,1,2,3,4,0,1,2,3,4,
+                0,1,2,3,4,0,1,2,3,4,0,1,2,3,4,0,1,2,3,4,0,1,2,3,4
+        };
+
+        //DATOS DE ACCESO USURAIO
+        final String[] VCidOpcion = {
+                //con esto se le dan todos los permisos a un usuario
+                "010","011","012","013","014",
+                "020","021","022","023","024",
+                "030","031","032","033","034",
+                "040","041","042","043","044",
+                "050","051","052","053","054",
+                "060","061","062","063","064",
+                "070","071","072","073","074",
+                "080","081","082","083","084",
+                "090","091","092","093","094",
+                "100","101","102","103","104",
+                "110","111","112","113","114",
+                "120","121","122","123","124",
+                "130","131","132","133","134",
+                "140","141","142","143","144",
+                "150","151","152","153","154",
+                //hasta aqui
                 "010","020","030","040","050"
         };
-        final String[] VCidUsuario = {"01","01","01","01","01",
+        final String[] VCidUsuario = {
+                //otorgando permisos a usuario 1
                 "01","01","01","01","01",
                 "01","01","01","01","01",
                 "01","01","01","01","01",
                 "01","01","01","01","01",
+                "01","01","01","01","01",
+                "01","01","01","01","01",
+                "01","01","01","01","01",
+                "01","01","01","01","01",
+                "01","01","01","01","01",
+                "01","01","01","01","01",
+                "01","01","01","01","01",
+                "01","01","01","01","01",
+                "01","01","01","01","01",
+                "01","01","01","01","01",
+                "01","01","01","01","01",
+                //fin
                 "02","02","02","02","02"};
 
 
@@ -1769,7 +1823,7 @@ public class ControlBDProyecto {
             insertar(usuario);
         }
         OpcionCrud opcionCrud = new OpcionCrud();
-        for(int i=0;i<25;i++){
+        for(int i=0;i<75;i++){
             opcionCrud.setIdOpcion(VBidOpcion[i]);
             opcionCrud.setDesOpcion(VBdesOpcion[i]);
             opcionCrud.setNumCrud(VBnumCrud[i]);
@@ -1777,7 +1831,7 @@ public class ControlBDProyecto {
         }
 
         AccesoUsuario accesoUsuario = new AccesoUsuario();
-        for(int i=0;i<30;i++){
+        for(int i=0;i<80;i++){
             accesoUsuario.setIdOpcion(VCidOpcion[i]);
             accesoUsuario.setIdUsuario(VCidUsuario[i]);
             insertar(accesoUsuario);

@@ -72,7 +72,7 @@
         <TableRow android:gravity="center">
             <TextView android:text="Entidad Capacitadora: "/>
             <Spinner
-                android:layout_width="wrap_content"
+                android:layout_width="155dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/editIdEntidadCapacitadora"
                 android:layout_alignParentTop="true"

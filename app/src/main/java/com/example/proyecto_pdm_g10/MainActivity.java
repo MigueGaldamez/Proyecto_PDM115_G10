@@ -53,38 +53,42 @@ public class MainActivity extends ListActivity {
             case 3:
                 idopcionS = "040";
                 break;
+            case 4:
+                idopcionS = "050";
+                break;
+            case 5:
+                idopcionS = "060";
+                break;
+            case 6:
+                idopcionS = "070";
+                break;
+            case 7:
+                idopcionS = "080";
+                break;
+            case 8:
+                idopcionS = "090";
+                break;
+            case 9:
+                idopcionS = "100";
+                break;
+            case 10:
+                idopcionS = "110";
+                break;
+            case 11:
+                idopcionS = "120";
+                break;
+            case 12:
+                idopcionS = "130";
+                break;
             case 13:
-                try {
-
-                    Class<?> clase = Class.forName("com.example.proyecto_pdm_g10.cz13016_activities.CZ13016MenuHorarioActivity"  );
-                    Intent inte = new Intent(this, clase);
-                    inte.putExtra("idsesion", idsesion);
-                    this.startActivity(inte);
-
-
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
+                idopcionS = "140";
                 break;
             case 14:
-                try {
-
-                    Class<?> clase = Class.forName("com.example.proyecto_pdm_g10.cz13016_activities.CZ13016CapacitacionMenuActivity" );
-                    Intent inte = new Intent(this, clase);
-                    inte.putExtra("idsesion", idsesion);
-                    this.startActivity(inte);
-
-
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-
+                idopcionS = "150";
                 break;
 
-            //case 4:idopcionS = "050";
-            //break;
             default:
-                //temporal
+                /*temporal
                 String nombreValue = activities[position];
 
                 try {
@@ -96,7 +100,7 @@ public class MainActivity extends ListActivity {
                     this.startActivity(inte);
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
-                }
+                }*/
                 break;
         }
         //Verificacion usuario
@@ -116,13 +120,20 @@ public class MainActivity extends ListActivity {
             Toast.makeText(this, miOpcion, Toast.LENGTH_SHORT).show();
 
             try {
-
-
-                    Class<?> clase = Class.forName("com.example.proyecto_pdm_g10." + nombreValue);
+                    Class<?> clase = null;
+                    if(idopcionS.equals("140"))
+                    {
+                        clase = Class.forName("com.example.proyecto_pdm_g10.cz13016_activities.CZ13016MenuHorarioActivity"  );
+                    }
+                    else if(idopcionS.equals("150"))
+                    {
+                         clase = Class.forName("com.example.proyecto_pdm_g10.cz13016_activities.CZ13016CapacitacionMenuActivity" );
+                    }else {
+                         clase = Class.forName("com.example.proyecto_pdm_g10." + nombreValue);
+                    }
                     Intent inte = new Intent(this, clase);
                     inte.putExtra("idsesion", idsesion);
                     this.startActivity(inte);
-
 
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
