@@ -16,7 +16,7 @@ public class ControlBDProyecto {
     private static final String[]camposOpcionCrud = new String [] {"idOpcion","desOpcion","numCrud"};
     private static final String[]camposUsuario = new String [] {"idUsuario","nomUsuario","clave"};
     private static final String[]camposAccesoUsuario = new String [] {"idOpcion","idUsuario"};
-    //____________________________________________________________________________________________________________________________________________________________________________________________________________________
+    //________________________z____________________________________________________________________________________________________________________________________________________________________________________________
     private static final String[]camposFacultad = new String [] {"id","nombre"};
     private static final String[]camposUbicacion2 = new String[] {"u.id","f.nombre"," u.nombre"};
     private static final String[]camposTipoUbicacion = new String[]{"id","nombre"};
@@ -1826,11 +1826,7 @@ public class ControlBDProyecto {
         //___________________________________________________________________________________________________________________
 
         cerrar();
-
-
         return "Guardo Correctamente";
     }
-
-
 }
 
