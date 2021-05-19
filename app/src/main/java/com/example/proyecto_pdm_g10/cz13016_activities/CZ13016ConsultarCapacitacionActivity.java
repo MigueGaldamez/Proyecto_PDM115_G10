@@ -29,6 +29,7 @@ public class CZ13016ConsultarCapacitacionActivity extends AppCompatActivity {
     EditText idAreaIn;
     EditText idCapacitador;
     EditText idDescripcion;
+    EditText asistenciaTotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public class CZ13016ConsultarCapacitacionActivity extends AppCompatActivity {
         idAreaIn = findViewById(R.id.idAreaIn);
         idCapacitador = findViewById(R.id.idCapacitador);
         idDescripcion = findViewById(R.id.idDescripcion);
-
+        asistenciaTotal = findViewById(R.id.idAsistencia);
     }
 
     public void getCapacitacionItem(View view) {
@@ -87,6 +88,8 @@ public class CZ13016ConsultarCapacitacionActivity extends AppCompatActivity {
 
                 idDescripcion.setText(capacitacion.getDescrip());
 
+                asistenciaTotal.setText(capacitacion.getAsistenciaTotal().toString());
+
 
             }else
                 Toast.makeText(this, "No se encontre ningun registro con el id "+ id, Toast.LENGTH_SHORT).show();
@@ -105,5 +108,6 @@ public class CZ13016ConsultarCapacitacionActivity extends AppCompatActivity {
         idAreaIn.setText("");
         idCapacitador.setText("");
         idDescripcion.setText("");
+        asistenciaTotal.setText("");
     }
 }

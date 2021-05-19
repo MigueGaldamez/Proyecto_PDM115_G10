@@ -63,6 +63,10 @@ public class CapacitacionCrud {
         capaci.put("idAreasDip", capacitacion.getIdAreaDip());
         capaci.put("idAreaIn", capacitacion.getIdAreaIn());
         capaci.put("idCapacitador", capacitacion.getIdCapacitador());
+        capaci.put("asistenciaTotal",0);
+
+
+
 
         contador=db.insert("capacitacion", null, capaci);
         if(contador==-1 || contador==0)
@@ -164,7 +168,16 @@ public class CapacitacionCrud {
 
         Cursor cursor = db.rawQuery("SELECT * FROM capacitacion WHERE idCapacitacion = '"+idCapacitacion+"'",null);
         if(cursor.moveToFirst()){
-            capacitacion = new Capacitacion(cursor.getInt(0),cursor.getString(1),cursor.getFloat(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6));
+            capacitacion = new
+                    Capacitacion(
+                            cursor.getInt(0),
+                            cursor.getString(1),
+                            cursor.getFloat(2),
+                            cursor.getString(3),
+                            cursor.getString(4),
+                            cursor.getString(5),
+                            cursor.getString(6),
+                            cursor.getInt(7));
             return capacitacion;
 
         }

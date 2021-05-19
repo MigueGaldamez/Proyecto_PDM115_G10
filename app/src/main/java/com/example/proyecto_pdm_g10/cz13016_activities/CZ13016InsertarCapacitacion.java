@@ -159,6 +159,7 @@ public class CZ13016InsertarCapacitacion extends AppCompatActivity {
             cap.setIdAreaDip(sharprefs.getString("areaDiKey",""));
             cap.setIdAreaIn(sharprefs.getString("areaInDiKey",""));
             cap.setIdCapacitador(sharprefs.getString("capacitorKey",""));
+
             // db.execSQL("CREATE TABLE capacitacion(idCapacitacion INTEGER NOT NULL PRIMARY KEY,descripcion VARCHAR(100),precio REAL,idLocal INTEGER, idAreasDip CHAR(5), idAreaIn VARCHAR(7), idCapacitador CHAR(5));");
             helper.abrir();
             regInsertados = helper.insertarCapacitacion(cap);

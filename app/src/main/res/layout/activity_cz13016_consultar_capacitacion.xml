@@ -173,6 +173,26 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            android:text="Asistencia Total"
+            android:layout_marginRight="10dp"/>
+
+        <EditText
+            android:id="@+id/idAsistencia"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:editable="false"
+            android:gravity="right"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
         android:layout_marginTop="10dp"

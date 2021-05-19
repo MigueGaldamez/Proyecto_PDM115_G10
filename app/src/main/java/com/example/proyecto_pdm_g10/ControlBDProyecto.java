@@ -30,7 +30,7 @@ public class ControlBDProyecto {
     private static final String[]camposSolicitud= new String[]{"idSolicitud","fechaSolicitud","estadoSolicitud","capacitacionId","empleadoId"};
     private static final String[]camposAsistenciaEmpleado= new String[]{"idAsistenciaEmpleado","asistencia","empleadoId","capacitacionId"};
 
-
+    private static final String[]camposCapacitacion = new String[]{"idCapacitacion","descripcion" ,"precio","idLocal" , "idAreasDip" , "idAreaIn" , "idCapacitador" , "asistenciaTotal"};
     private static final String[]camposDia = new String[] {"idDia","nomDia","fecha"};
 
 
@@ -70,7 +70,7 @@ public class ControlBDProyecto {
                 db.execSQL("CREATE TABLE tipoUbicacion(id VARCHAR(7) NOT NULL PRIMARY KEY,nombre VARCHAR(35));");
                 db.execSQL("CREATE TABLE local(id VARCHAR(7) NOT NULL ,idUbicacion VARCHAR(7) NOT NULL, idTipoUbicacion VARCHAR(7) NOT NULL, nombre VARCHAR(35) NOT NULL ,PRIMARY KEY(id, idUbicacion, idTipoUbicacion));");
 
-                db.execSQL("CREATE TABLE capacitacion(idCapacitacion INTEGER NOT NULL PRIMARY KEY,descripcion VARCHAR(100),precio REAL,idLocal VARCHAR(7), idAreasDip CHAR(5), idAreaIn VARCHAR(7), idCapacitador CHAR(5));");
+                db.execSQL("CREATE TABLE capacitacion(idCapacitacion INTEGER NOT NULL PRIMARY KEY,descripcion VARCHAR(100),precio REAL,idLocal VARCHAR(7), idAreasDip CHAR(5), idAreaIn VARCHAR(7), idCapacitador CHAR(5), asistenciaTotal INTEGER);");
 
 
                 db.execSQL("CREATE TABLE usuario(idUsuario CHAR(2) NOT NULL PRIMARY KEY,nomUsuario VARCHAR(30),clave CHAR(5));");
@@ -919,6 +919,16 @@ public class ControlBDProyecto {
 
         }
         else {
+            //TRIGGER 1
+            String[] id = {asistencia.getCapacitacionId()};
+            Cursor cursor3 = db.query("capacitacion", camposCapacitacion, "idCapacitacion = ?",
+                    id, null, null, null);
+            cursor3.moveToFirst();
+            ContentValues cv = new ContentValues();
+
+            cv.put("asistenciaTotal", (cursor3.getInt(7)+1));
+            db.update("capacitacion", cv, "idCapacitacion = ?", id);
+            //FIN TRIGGER 1
             regInsertados=regInsertados+contador;
         }
         return regInsertados;
@@ -947,6 +957,30 @@ public class ControlBDProyecto {
             cv.put("empleadoId", asistencia.getEmpleadoId());
             cv.put("capacitacionId", asistencia.getCapacitacionId());
 
+            //TRIGGER 2
+            Cursor cursor3 = db.query("asistenciaEmpleado", camposAsistenciaEmpleado, "idAsistenciaEmpleado = ?",
+                    id, null, null, null);
+            cursor3.moveToFirst();
+            String anterior =  cursor3.getString(3);
+            if(!anterior.equals(asistencia.getCapacitacionId()))
+            {
+                String[] id2 = {asistencia.getCapacitacionId()};
+                Cursor cursor4 = db.query("capacitacion", camposCapacitacion, "idCapacitacion = ?",
+                        id2, null, null, null);
+                cursor4.moveToFirst();
+                ContentValues cv2 = new ContentValues();
+                cv2.put("asistenciaTotal", (cursor4.getInt(7)+1));
+                db.update("capacitacion", cv2, "idCapacitacion = ?", id2);
+                // RESTAR
+                String[] id3 = {anterior};
+                Cursor cursor5 = db.query("capacitacion", camposCapacitacion, "idCapacitacion = ?",
+                        id3, null, null, null);
+                cursor5.moveToFirst();
+                ContentValues cv3 = new ContentValues();
+                cv3.put("asistenciaTotal", (cursor5.getInt(7)-1));
+                db.update("capacitacion", cv3, "idCapacitacion = ?", id3);
+            }
+            //FIN TRIGGER 2
             db.update("asistenciaEmpleado", cv, "idAsistenciaEmpleado = ?", id);
             return "Registro Actualizado Correctamente";
         }else{
