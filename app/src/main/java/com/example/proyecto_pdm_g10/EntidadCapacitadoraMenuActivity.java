@@ -12,7 +12,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 public class EntidadCapacitadoraMenuActivity extends ListActivity {
-    String[] menu={"Insertar Registro","Eliminar Registro","Consultar Registro", "Actualizar Registro"};
+    String[] menu={"Insertar Entidad Capacitadora","Eliminar Entidad Capacitadora","Consultar Entidad Capacitadora", "Actualizar Entidad Capacitadora"};
     String[] activities={"EntidadCapacitadoraInsertarActivity","EntidadCapacitadoraEliminarActivity","EntidadCapacitadoraConsultarActivity", "EntidadCapacitadoraActualizarActivity"};
 
     ControlBDProyecto BDhelper= new ControlBDProyecto(this);

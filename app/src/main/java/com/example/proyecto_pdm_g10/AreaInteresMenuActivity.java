@@ -12,7 +12,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 public class AreaInteresMenuActivity extends ListActivity {
-    String[] menu={"Insertar Registro","Eliminar Registro","Consultar Registro", "Actualizar Registro"};
+    String[] menu={"Insertar Area Interes","Eliminar Area Interes","Consultar Area Interes", "Actualizar Area Interes"};
     String[] activities={"AreaInteresInsertarActivity","AreaInteresEliminarActivity","AreaInteresConsultarActivity", "AreaInteresActualizarActivity"};
 
     ControlBDProyecto BDhelper= new ControlBDProyecto(this);

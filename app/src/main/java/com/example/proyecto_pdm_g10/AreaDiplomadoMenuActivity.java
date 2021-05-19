@@ -12,7 +12,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 public class AreaDiplomadoMenuActivity extends ListActivity {
-    String[] menu={"Insertar Registro","Eliminar Registro","Consultar Registro", "Actualizar Registro"};
+    String[] menu={"Insertar Area Diplomado","Eliminar Area Diplomado","Consultar Area Diplomado", "Actualizar Area Diplomado"};
     String[] activities={"AreaDiplomadoInsertarActivity","AreaDiplomadoEliminarActivity","AreaDiplomadoConsultarActivity", "AreaDiplomadoActualizarActivity"};
 
 
