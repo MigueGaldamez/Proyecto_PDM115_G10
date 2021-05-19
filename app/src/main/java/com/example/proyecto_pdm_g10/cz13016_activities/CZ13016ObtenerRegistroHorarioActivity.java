@@ -54,9 +54,9 @@ public class CZ13016ObtenerRegistroHorarioActivity extends AppCompatActivity {
                     myIntent.putExtras(myBundleRetorno);
                     startActivity(myIntent);
                 }else {
-                   // Intent myIntent = new Intent(cz13016ObtenerRegistroCapacitacion.this, CZ13016ActualizarCapacitacionActivity.class);
-                   // myIntent.putExtras(myBundleRetorno);
-                    //startActivity(myIntent);
+                    Intent myIntent = new Intent(CZ13016ObtenerRegistroHorarioActivity.this, CZ13016ActualizarHorarioActivity.class);
+                    myIntent.putExtras(myBundleRetorno);
+                    startActivity(myIntent);
                 }
 
             }

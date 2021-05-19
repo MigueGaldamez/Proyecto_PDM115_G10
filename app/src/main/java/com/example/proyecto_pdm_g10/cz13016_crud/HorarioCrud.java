@@ -85,4 +85,73 @@ public class HorarioCrud {
         return listDia;
     }
 
+    public Horario extraerHorario(Integer idHorar){
+//                db.execSQL("CREATE TABLE horario(idHorario INTEGER NOT NULL PRIMARY KEY,horaInicio CHAR(5), horaFin CHAR(5), idCapacitacion INTEGER, idDia VARCHAR(7))");
+        Horario  horario;
+
+        Cursor cursor = db.rawQuery("SELECT * FROM horario WHERE idHorario = '"+idHorar+"'",null);
+        if(cursor.moveToFirst()){
+            horario = new Horario(cursor.getInt(0),cursor.getString(1),cursor.getString(2), cursor.getInt(3), cursor.getString(4));
+            return horario;
+
+        }
+        return null;
+
+    }
+
+    public Integer extraerHorarioPosition(String idDia){
+
+        Integer position = 0;
+
+        Cursor cursor= db.rawQuery("select * from dia",null);
+        if (cursor.moveToFirst()){
+            do {
+                Dia  dia = new Dia(cursor.getString(0),cursor.getString(1),cursor.getString(2));
+                if (idDia.equals(dia.getIdDia())){
+                    return position;
+                }
+                position++;
+            }while (cursor.moveToNext());
+        }
+        return null;
+    }
+
+    public boolean buscarHorario(Integer idHorario){
+        Cursor cursor = db.rawQuery("SELECT * FROM horario WHERE idHorario = '"+idHorario+"'",null);
+        if(cursor.moveToFirst())
+            return  true;
+
+        return false;
+
+    }
+
+    public String actualizarHorario(Horario horario){
+        if(buscarHorario(horario.getIdHorario())){
+
+            ContentValues hrio = new ContentValues();
+
+            hrio.put("horaInicio", horario.getHoraInicio());
+            hrio.put("horaFin", horario.getHoraFin());
+            hrio.put("idCapacitacion", horario.getIdCapacitacion());
+            hrio.put("idDia", horario.getIdDia());
+
+            db.update("horario", hrio, "idHorario='"+horario.getIdHorario()+"'", null);
+            return "Registro Actualizado Correctamente";
+        }else{
+            return "Registro con codigo " + horario.getIdHorario()+ " no existe";
+        }
+    }
+
+    public String eliminarHorario(Integer idHrio){
+        String regAfectados;
+        int contador=0;
+        if (buscarHorario(idHrio)) {
+            contador+=db.delete("horario", "idHorario='"+idHrio+"'", null);
+            regAfectados = "Eliminado con exito";
+        }else
+            regAfectados = "No se encontro ningun registro";
+
+        return  regAfectados;
+    }
+
 }
