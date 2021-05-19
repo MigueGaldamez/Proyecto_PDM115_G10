@@ -26,6 +26,7 @@ public class CapacitadorConsultarActivity extends Activity {
     EditText editCorreo;
     EditText editProfesion;
     EditText editIdEntidadCapacitadora;
+    EditText editCapacitaciones;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,7 @@ public class CapacitadorConsultarActivity extends Activity {
         editCorreo = (EditText) findViewById(R.id.editCorreo);
         editProfesion = (EditText) findViewById(R.id.editProfesion);
         editIdEntidadCapacitadora = (EditText) findViewById(R.id.editIdEntidadCapacitadora);
+        editCapacitaciones = (EditText) findViewById(R.id.editCapacitaciones);
 
         helper.abrir();
         List<Capacitador> listacapacitador = helper.getCapacitadorList();
@@ -78,6 +80,7 @@ public class CapacitadorConsultarActivity extends Activity {
             TextView correo = (TextView) convertView.findViewById(R.id.correo);
             TextView profesion = (TextView) convertView.findViewById(R.id.profesion);
             TextView codigoentidad = (TextView) convertView.findViewById(R.id.identidadcapacitadora);
+            TextView capacitaciones = (TextView) convertView.findViewById(R.id.capacitaciones);
             // Populate the data into the template view using the data object
             codigo.setText(capacitador.getIdCapacitador());
             nombres.setText(capacitador.getNombres());
@@ -85,6 +88,9 @@ public class CapacitadorConsultarActivity extends Activity {
             telefono.setText(capacitador.getTelefono());
             correo.setText(capacitador.getCorreo());
             profesion.setText(capacitador.getProfesion());
+            capacitaciones.setText(capacitador.getCapacitacionesDadas().toString());
+
+
             // Return the completed view to render on screen
             codigoentidad.setText(capacitador.getIdEntidadCapacitadora());
             return convertView;
@@ -105,7 +111,7 @@ public class CapacitadorConsultarActivity extends Activity {
             editCorreo.setText(capacitador.getCorreo());
             editProfesion.setText(capacitador.getProfesion());
             editIdEntidadCapacitadora.setText(capacitador.getIdEntidadCapacitadora());
-
+            editCapacitaciones.setText(capacitador.getCapacitacionesDadas().toString());
         }
     }
     public void limpiarTexto(View v) {
@@ -116,5 +122,6 @@ public class CapacitadorConsultarActivity extends Activity {
         editCorreo.setText("");
         editProfesion.setText("");
         editIdEntidadCapacitadora.setText("");
+        editCapacitaciones.setText("");
     }
 }

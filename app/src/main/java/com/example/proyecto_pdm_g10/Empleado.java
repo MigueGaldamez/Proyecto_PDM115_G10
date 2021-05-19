@@ -6,8 +6,24 @@ public class Empleado {
     private String apellidoEmpleado;
     private String profesion;
     private String cargo;
+    private Integer solicitudes;
 
+    public Empleado(String idEmpleado, String nombreEmpleado, String apellidoEmpleado, String profesion, String cargo, Integer solicitudes) {
+        this.idEmpleado = idEmpleado;
+        this.nombreEmpleado = nombreEmpleado;
+        this.apellidoEmpleado = apellidoEmpleado;
+        this.profesion = profesion;
+        this.cargo = cargo;
+        this.solicitudes = solicitudes;
+    }
 
+    public Integer getSolicitudes() {
+        return solicitudes;
+    }
+
+    public void setSolicitudes(Integer solicitudes) {
+        this.solicitudes = solicitudes;
+    }
 
     public Empleado() {
     }

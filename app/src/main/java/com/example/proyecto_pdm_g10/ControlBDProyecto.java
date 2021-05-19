@@ -24,9 +24,9 @@ public class ControlBDProyecto {
     //________________________________________________________________________________________________________________________________________________________________________________________________________________________
     private static final String[]camposDiplomado = new String [] {"idDiplomado","titulo","descripcion","capacidades"};
     private static final String[]camposAreaDiplomado = new String [] {"idAreaDiplomado","nombre","descripcion","idDiplomado"};
-    private static final String[]camposCapacitador = new String [] {"idCapacitador","nombres","apellidos","telefono","idEntidadCapacitadora","correo","profesion"};
+    private static final String[]camposCapacitador = new String [] {"idCapacitador","nombres","apellidos","telefono","idEntidadCapacitadora","correo","profesion","capacitacionesDadas"};
 
-    private static final String[]camposEmpleado=new String[] {"idEmpleado", "nombreEmpleado","apellidoEmpleado","profesion","cargo"};
+    private static final String[]camposEmpleado=new String[] {"idEmpleado", "nombreEmpleado","apellidoEmpleado","profesion","cargo","solicitudes"};
     private static final String[]camposSolicitud= new String[]{"idSolicitud","fechaSolicitud","estadoSolicitud","capacitacionId","empleadoId"};
     private static final String[]camposAsistenciaEmpleado= new String[]{"idAsistenciaEmpleado","asistencia","empleadoId","capacitacionId"};
 
@@ -79,9 +79,9 @@ public class ControlBDProyecto {
 
                 db.execSQL("CREATE TABLE diplomado(idDiplomado CHAR(5) NOT NULL PRIMARY KEY,titulo VARCHAR(30),descripcion VARCHAR(100),capacidades VARCHAR(100));");
                 db.execSQL("CREATE TABLE areaDiplomado(idAreaDiplomado CHAR(5) NOT NULL PRIMARY KEY,nombre VARCHAR(20),descripcion VARCHAR(100),idDiplomado VARCHAR(5));");
-                db.execSQL("CREATE TABLE capacitador(idCapacitador CHAR(5) NOT NULL PRIMARY KEY,nombres VARCHAR(40),apellidos VARCHAR(40),telefono VARCHAR(20),idEntidadCapacitadora VARCHAR(6),correo VARCHAR(100),profesion VARCHAR(30));");
+                db.execSQL("CREATE TABLE capacitador(idCapacitador CHAR(5) NOT NULL PRIMARY KEY,nombres VARCHAR(40),apellidos VARCHAR(40),telefono VARCHAR(20),idEntidadCapacitadora VARCHAR(6),correo VARCHAR(100),profesion VARCHAR(30),capacitacionesDadas INTEGER);");
 
-                db.execSQL("CREATE TABLE empleado(idEmpleado CHAR(5) NOT NULL PRIMARY KEY, nombreEmpleado VARCHAR(40),apellidoEmpleado VARCHAR(40),profesion VARCHAR(20),cargo VARCHAR(20));");
+                db.execSQL("CREATE TABLE empleado(idEmpleado CHAR(5) NOT NULL PRIMARY KEY, nombreEmpleado VARCHAR(40),apellidoEmpleado VARCHAR(40),profesion VARCHAR(20),cargo VARCHAR(20),solicitudes INTEGER);");
                 db.execSQL("CREATE TABLE solicitud(idSolicitud CHAR(5) NOT NULL PRIMARY KEY, fechaSolicitud VARCHAR(40),estadoSolicitud VARCHAR(40),capacitacionId VARCHAR(10),empleadoId VARCHAR(10));");
                 db.execSQL("CREATE TABLE asistenciaEmpleado(idAsistenciaEmpleado CHAR(5) NOT NULL PRIMARY KEY, asistencia VARCHAR(40),empleadoId VARCHAR(40),capacitacionId VARCHAR(10));");
 
@@ -844,6 +844,7 @@ public class ControlBDProyecto {
         emple.put("apellidoEmpleado", empleado.getApellidoEmpleado());
         emple.put("profesion", empleado.getProfesion());
         emple.put("cargo", empleado.getCargo());
+        emple.put("solicitudes",0);
         contador=db.insert("empleado", null, emple);
 
         if(contador==-1 || contador==0)
@@ -868,6 +869,7 @@ public class ControlBDProyecto {
             empleado.setApellidoEmpleado(cursor.getString(2));
             empleado.setProfesion(cursor.getString(3));
             empleado.setCargo(cursor.getString(4));
+            empleado.setSolicitudes(cursor.getInt(5));
             return empleado;
         }else{
             return null;
@@ -1010,6 +1012,17 @@ public class ControlBDProyecto {
         soli.put("capacitacionId", solicitud.getCapacitacionId());
         soli.put("empleadoId", solicitud.getEmpleadoId());
 
+        //TRIGGER 5
+        String[] id = {solicitud.getEmpleadoId()};
+        Cursor cursor3 = db.query("empleado", camposEmpleado, "idEmpleado = ?",
+                id, null, null, null);
+        cursor3.moveToFirst();
+        ContentValues cv = new ContentValues();
+
+        cv.put("solicitudes", (cursor3.getInt(5)+1));
+        db.update("empleado", cv, "idEmpleado = ?", id);
+        //FIN TRIGGER 5
+
         contador=db.insert("solicitud", null, soli);
 
         if(contador==-1 || contador==0)
@@ -1050,6 +1063,30 @@ public class ControlBDProyecto {
             cv.put("capacitacionId", solicitud.getCapacitacionId());
             cv.put("empleadoId", solicitud.getEmpleadoId());
 
+            //TRIGGER 6
+            Cursor cursor3 = db.query("solicitud", camposSolicitud, "idSolicitud = ?",
+                    id, null, null, null);
+            cursor3.moveToFirst();
+            String anterior =  cursor3.getString(4);
+            if(!anterior.equals(solicitud.getEmpleadoId()))
+            {
+                String[] id2 = {solicitud.getEmpleadoId()};
+                Cursor cursor4 = db.query("empleado", camposEmpleado, "idEmpleado = ?",
+                        id2, null, null, null);
+                cursor4.moveToFirst();
+                ContentValues cv2 = new ContentValues();
+                cv2.put("solicitudes", (cursor4.getInt(5)+1));
+                db.update("empleado", cv2, "idEmpleado = ?", id2);
+                // RESTAR
+                String[] id3 = {anterior};
+                Cursor cursor5 = db.query("empleado", camposEmpleado, "idEmpleado = ?",
+                        id3, null, null, null);
+                cursor5.moveToFirst();
+                ContentValues cv3 = new ContentValues();
+                cv3.put("solicitudes", (cursor5.getInt(5)-1));
+                db.update("empleado", cv3, "idEmpleado = ?", id3);
+            }
+            //FIN TRIGGER 6
 
             db.update("solicitud", cv, "idSolicitud = ?", id);
             return "Registro Actualizado Correctamente";
@@ -1335,6 +1372,7 @@ public class ControlBDProyecto {
             capa.put("idEntidadCapacitadora", capacitador.getIdEntidadCapacitadora());
             capa.put("correo", capacitador.getCorreo());
             capa.put("profesion", capacitador.getProfesion());
+            capa.put("capacitacionesDadas",0);
             contador=db.insert("capacitador", null, capa);
         }
 
@@ -1360,6 +1398,7 @@ public class ControlBDProyecto {
             capacitador.setIdEntidadCapacitadora(cursor.getString(4));
             capacitador.setCorreo(cursor.getString(5));
             capacitador.setProfesion(cursor.getString(6));
+            capacitador.setCapacitacionesDadas(cursor.getInt(7));
             return capacitador;
         }else{
             return null;
@@ -1407,7 +1446,8 @@ public class ControlBDProyecto {
                 String identidadcapacitadora = cursor.getString(4);
                 String correo = cursor.getString(5);
                 String profesion = cursor.getString(6);
-                listaCapacitador.add(new Capacitador(codigo,nombres, apellidos,telefono,identidadcapacitadora,correo,profesion));
+                int capacitaciones = cursor.getInt(7);
+                listaCapacitador.add(new Capacitador(codigo,nombres, apellidos,telefono,identidadcapacitadora,correo,profesion,capacitaciones));
             }while (cursor.moveToNext());
         }
 
@@ -1817,6 +1857,7 @@ public class ControlBDProyecto {
         final String[] v5idEntidad = {"ENTCA1","ENTCA2","ENTCA3"};
         final String[] v5correo = {"gc18090@ues.edu.sv","pt18003@ues.edu.sv","PM18090@ues.edu.sv"};
         final String[] v5profesion = {"Estudiante","Ingeniero","Diseñadora"};
+        final int[] v5capacitaciones ={0,0,0};
 
         /* Llenar Facultad */
         final String[] VFid = {"1","2","3"};
@@ -1916,6 +1957,7 @@ public class ControlBDProyecto {
             capacitador.setTelefono(v5telefono[i]);
             capacitador.setApellidos(v5apellidos[i]);
             capacitador.setNombres(v5nombres[i]);
+
             insertar(capacitador);
         }
         //___________________________________________________________________________________________________________________

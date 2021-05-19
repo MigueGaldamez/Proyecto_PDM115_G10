@@ -118,4 +118,6 @@
     <string name="actualizarTipoUbi">Update Location Type</string>
     <string name="actualizarFacultad">Update Faculty</string>
     <string name="actualizarLocal">Update Local</string>
+    <string name="capacitaciones">Capacitaciones Dadas</string>
+    <string name="solicitudes">Solicitudes realizadas:</string>
 </resources>

@@ -118,4 +118,6 @@
     <string name="actualizarTipoUbi">Mettre à jour le type d\'emplacement</string>
     <string name="actualizarFacultad">Mettre à jour la faculté</string>
     <string name="actualizarLocal">Mettre à jour local</string>
+    <string name="capacitaciones">Capacitaciones Dadas</string>
+    <string name="solicitudes">Solicitudes realizadas:</string>
 </resources>

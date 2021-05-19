@@ -89,4 +89,19 @@
         android:cursorVisible="false"
         android:longClickable="false" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/solicitudes" />
+    <EditText
+        android:id="@+id/editSolicitudes"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:enabled ="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:cursorVisible="false"
+        android:longClickable="false" />
+
 </LinearLayout>
