@@ -34,12 +34,11 @@ public class ControlBDProyecto {
     private static final String[]camposDia = new String[] {"idDia","nomDia","fecha"};
 
 
-
     private final Context context;
     private DatabaseHelper DBHelper;
     private SQLiteDatabase db;
 
-    public ControlBDProyecto(Context ctx){
+    public ControlBDProyecto(Context ctx) {
         this.context = ctx;
         DBHelper = new DatabaseHelper(context);
         setDBHelper(DBHelper);
@@ -56,12 +55,14 @@ public class ControlBDProyecto {
     public static class DatabaseHelper extends SQLiteOpenHelper {
         private static final String BASE_DATOS = "capacitacion.s3db";
         private static final int VERSION = 1;
+
         public DatabaseHelper(Context context) {
             super(context, BASE_DATOS, null, VERSION);
         }
+
         @Override
         public void onCreate(SQLiteDatabase db) {
-            try{
+            try {
                 //AQUI AGREGAMOS LAS TABLAS
                 db.execSQL("CREATE TABLE areaInteres(codigo VARCHAR(7) NOT NULL PRIMARY KEY,nombre VARCHAR(30),descripcion VARCHAR(100));");
                 db.execSQL("CREATE TABLE entidadCapacitadora(codigo VARCHAR(6) NOT NULL PRIMARY KEY,nombre VARCHAR(30),descripcion VARCHAR(100),telefono VARCHAR(20),correo VARCHAR(100),tipo CHAR(1));");
@@ -90,36 +91,37 @@ public class ControlBDProyecto {
                 db.execSQL("CREATE TABLE horario(idHorario char(5) NOT NULL PRIMARY KEY,horaInicio TIME, horaFin TIME)");
 
 
-            }catch(SQLException e){
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
+
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // TODO Auto-generated method stub
         }
 
     }
-    public void abrir() throws SQLException{
+
+    public void abrir() throws SQLException {
         db = DBHelper.getWritableDatabase();
         return;
     }
-    public void cerrar(){
+
+    public void cerrar() {
         DBHelper.close();
     }
+
     public ArrayList<String> listaObjeto;
-    public void consultarListaObjeto(int tipo, String objeto, String[]campos)
-    {
-        switch (tipo)
-        {
-            case 1:
-            {
+
+    public void consultarListaObjeto(int tipo, String objeto, String[] campos) {
+        switch (tipo) {
+            case 1: {
                 ArrayList<Facultad> objetoList;
                 Facultad facultad = null;
                 objetoList = new ArrayList<Facultad>();
-                Cursor cursor = db.query(objeto,campos,null,null,null,null,null);
-                while (cursor.moveToNext())
-                {
+                Cursor cursor = db.query(objeto, campos, null, null, null, null, null);
+                while (cursor.moveToNext()) {
                     facultad = new Facultad();
                     facultad.setIdFacultad(cursor.getString(0));
                     facultad.setnombre(cursor.getString(1));
@@ -127,19 +129,16 @@ public class ControlBDProyecto {
                 }
                 listaObjeto = new ArrayList<String>();
                 listaObjeto.add("Seleccione");
-                for (int i=0; i<objetoList.size();i++)
-                {
-                    listaObjeto.add(objetoList.get(i).getIdFacultad()+" - "+objetoList.get(i).getnombre());
+                for (int i = 0; i < objetoList.size(); i++) {
+                    listaObjeto.add(objetoList.get(i).getIdFacultad() + " - " + objetoList.get(i).getnombre());
                 }
             }
-            case 2:
-            {
+            case 2: {
                 ArrayList<Ubicacion> objetoList;
-                Ubicacion ubicacion =  null;
+                Ubicacion ubicacion = null;
                 objetoList = new ArrayList<Ubicacion>();
-                Cursor cursor = db.query(objeto,campos,null,null,null,null,null);
-                while (cursor.moveToNext())
-                {
+                Cursor cursor = db.query(objeto, campos, null, null, null, null, null);
+                while (cursor.moveToNext()) {
                     ubicacion = new Ubicacion();
                     ubicacion.setIdUbicacion(cursor.getString(0));
                     ubicacion.setnombre(cursor.getString(1));
@@ -147,19 +146,16 @@ public class ControlBDProyecto {
                 }
                 listaObjeto = new ArrayList<String>();
                 listaObjeto.add("Seleccione");
-                for (int i=0; i<objetoList.size();i++)
-                {
-                    listaObjeto.add(objetoList.get(i).getIdUbicacion()+" - "+objetoList.get(i).getnombre());
+                for (int i = 0; i < objetoList.size(); i++) {
+                    listaObjeto.add(objetoList.get(i).getIdUbicacion() + " - " + objetoList.get(i).getnombre());
                 }
             }
-            case 3:
-            {
+            case 3: {
                 ArrayList<TipoUbicacion> objetoList;
-                TipoUbicacion tipoUbicacion =  null;
+                TipoUbicacion tipoUbicacion = null;
                 objetoList = new ArrayList<TipoUbicacion>();
-                Cursor cursor = db.query(objeto,campos,null,null,null,null,null);
-                while (cursor.moveToNext())
-                {
+                Cursor cursor = db.query(objeto, campos, null, null, null, null, null);
+                while (cursor.moveToNext()) {
                     tipoUbicacion = new TipoUbicacion();
                     tipoUbicacion.setId(cursor.getString(0));
                     tipoUbicacion.setNombre(cursor.getString(1));
@@ -167,9 +163,8 @@ public class ControlBDProyecto {
                 }
                 listaObjeto = new ArrayList<String>();
                 listaObjeto.add("Seleccione");
-                for (int i=0; i<objetoList.size();i++)
-                {
-                    listaObjeto.add(objetoList.get(i).getId()+" - "+objetoList.get(i).getNombre());
+                for (int i = 0; i < objetoList.size(); i++) {
+                    listaObjeto.add(objetoList.get(i).getId() + " - " + objetoList.get(i).getNombre());
                 }
             }
             case 4:
@@ -214,275 +209,237 @@ public class ControlBDProyecto {
             }
         }
     }
-    public String insertar(Facultad facultad)
-    {
-        String regInsertados="Registro Insertado Nº= ";
-        long contador=0;
+
+    public String insertar(Facultad facultad) {
+        String regInsertados = "Registro Insertado Nº= ";
+        long contador = 0;
         ContentValues facu = new ContentValues();
         facu.put("id", facultad.getIdFacultad());
         facu.put("nombre", facultad.getnombre());
-        contador=db.insert("facultad", null, facu);
-        if(contador==-1 || contador==0)
-        {
-            regInsertados= "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
-        }
-        else {
-            regInsertados=regInsertados+contador;
+        contador = db.insert("facultad", null, facu);
+        if (contador == -1 || contador == 0) {
+            regInsertados = "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
+        } else {
+            regInsertados = regInsertados + contador;
         }
         return regInsertados;
     }
-    public Facultad consultarFacultad(String id)
-    {
+
+    public Facultad consultarFacultad(String id) {
         String[] idFacultad = {id};
-        Cursor cursor  = db.query("facultad", camposFacultad, "id = ?", idFacultad, null, null, null);
-        if(cursor.moveToFirst())
-        {
+        Cursor cursor = db.query("facultad", camposFacultad, "id = ?", idFacultad, null, null, null);
+        if (cursor.moveToFirst()) {
             Facultad facultad = new Facultad();
             facultad.setIdFacultad(cursor.getString(0));
             facultad.setnombre(cursor.getString(1));
             return facultad;
-        }
-        else
-        {
+        } else {
             return null;
         }
     }
-    public String actualizar(Facultad facultad)
-    {
-        if(verificarIntegridad2(facultad, 4))
-        {
+
+    public String actualizar(Facultad facultad) {
+        if (verificarIntegridad2(facultad, 4)) {
             String[] id = {facultad.getIdFacultad()};
             ContentValues cv = new ContentValues();
             cv.put("nombre", facultad.getnombre());
             db.update("facultad", cv, "id = ?", id);
             return "Registro Actualizado Correctamente";
-        }else
-        {
+        } else {
             return "Registro con id " + facultad.getIdFacultad() + " no existe";
         }
     }
-    public String eliminar(Facultad facultad)
-    {
-        String regAfectados="filas afectadas= ";
-        int contador=0;
-        if (verificarIntegridad2(facultad,3))
-        {
-            contador+=db.delete("ubicacion", "idFacultad='"+facultad.getIdFacultad()+"'", null);
+
+    public String eliminar(Facultad facultad) {
+        String regAfectados = "filas afectadas= ";
+        int contador = 0;
+        if (verificarIntegridad2(facultad, 3)) {
+            contador += db.delete("ubicacion", "idFacultad='" + facultad.getIdFacultad() + "'", null);
         }
-        contador+=db.delete("facultad", "id='"+facultad.getIdFacultad()+"'", null);
-        regAfectados+=contador;
+        contador += db.delete("facultad", "id='" + facultad.getIdFacultad() + "'", null);
+        regAfectados += contador;
         return regAfectados;
     }
-    public String insertar(Ubicacion ubicacion)
-    {
-        String regInsertados="Registro Insertado Nº= ";
-        long contador=0;
-        if(verificarIntegridad2(ubicacion,1) && verificarIntegridad2(ubicacion,5))
-        {
+
+    public String insertar(Ubicacion ubicacion) {
+        String regInsertados = "Registro Insertado Nº= ";
+        long contador = 0;
+        if (verificarIntegridad2(ubicacion, 1) && verificarIntegridad2(ubicacion, 5)) {
             ContentValues ubicaciones = new ContentValues();
             ubicaciones.put("id", ubicacion.getIdUbicacion());
             ubicaciones.put("idFacultad", ubicacion.getIdFacultad());
             ubicaciones.put("nombre", ubicacion.getnombre());
-            contador=db.insert("ubicacion", null, ubicaciones);
+            contador = db.insert("ubicacion", null, ubicaciones);
         }
-        if(contador==-1 || contador==0)
-        {
-            regInsertados= "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
-        }
-        else
-        {
-            regInsertados=regInsertados+contador;
+        if (contador == -1 || contador == 0) {
+            regInsertados = "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
+        } else {
+            regInsertados = regInsertados + contador;
         }
         return regInsertados;
     }
-    public Ubicacion consultarUbicacion(String id)
-    {
+
+    public Ubicacion consultarUbicacion(String id) {
         String[] idUbicacion = {id};
         //select u.id, f.nombre, u.nombre from ubicacion u JOIN facultad f on u.idFacultad = f.id;
         Cursor cursor = db.query("ubicacion u JOIN facultad f on u.idFacultad = f.id", camposUbicacion2, "u.id = ?", idUbicacion, null, null, null);
-        if(cursor.moveToFirst())
-        {
+        if (cursor.moveToFirst()) {
             Ubicacion ubicacion = new Ubicacion();
             ubicacion.setIdUbicacion(cursor.getString(0));
             ubicacion.setIdFacultad(cursor.getString(1));
             ubicacion.setnombre(cursor.getString(2));
             return ubicacion;
-        }
-        else
-        {
+        } else {
             return null;
         }
     }
-    public String actualizar(Ubicacion ubicacion)
-    {
-        if(verificarIntegridad2(ubicacion, 1) && verificarIntegridad2(ubicacion,13))
-        {
+
+    public String actualizar(Ubicacion ubicacion) {
+        if (verificarIntegridad2(ubicacion, 1) && verificarIntegridad2(ubicacion, 13)) {
             String[] id = {ubicacion.getIdUbicacion()};
             ContentValues cv = new ContentValues();
             cv.put("idFacultad", ubicacion.getIdFacultad());
-            cv.put("nombre",ubicacion.getnombre());
+            cv.put("nombre", ubicacion.getnombre());
             db.update("ubicacion", cv, "id = ?", id);
             return "Registro Actualizado Correctamente";
-        }
-        else
-        {
+        } else {
             return "Registro no Existe";
         }
 
     }
-    public String eliminar(Ubicacion ubicacion)
-    {
-        String regAfectados="filas afectadas= ";
-        int contador=0;
-        String where="id='"+ubicacion.getIdUbicacion()+"'";
-        contador+=db.delete("ubicacion", where, null);
-        regAfectados+=contador;
+
+    public String eliminar(Ubicacion ubicacion) {
+        String regAfectados = "filas afectadas= ";
+        int contador = 0;
+        String where = "id='" + ubicacion.getIdUbicacion() + "'";
+        contador += db.delete("ubicacion", where, null);
+        regAfectados += contador;
         return regAfectados;
 
     }
-    public String insertar(TipoUbicacion tipoUbicacion)
-    {
-        String regInsertados="Registro Insertado Nº= ";
-        long contador=0;
+
+    public String insertar(TipoUbicacion tipoUbicacion) {
+        String regInsertados = "Registro Insertado Nº= ";
+        long contador = 0;
         ContentValues tipoU = new ContentValues();
         tipoU.put("id", tipoUbicacion.getId());
         tipoU.put("nombre", tipoUbicacion.getNombre());
-        contador=db.insert("tipoUbicacion", null, tipoU);
-        if(contador==-1 || contador==0)
-        {
-            regInsertados= "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
-        }
-        else {
-            regInsertados=regInsertados+contador;
+        contador = db.insert("tipoUbicacion", null, tipoU);
+        if (contador == -1 || contador == 0) {
+            regInsertados = "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
+        } else {
+            regInsertados = regInsertados + contador;
         }
         return regInsertados;
     }
-    public TipoUbicacion consultarTipoUbicacion(String id)
-    {
+
+    public TipoUbicacion consultarTipoUbicacion(String id) {
         String[] idTipoUbicacion = {id};
-        Cursor cursor  = db.query("tipoUbicacion", camposTipoUbicacion, "id = ?", idTipoUbicacion, null, null, null);
-        if(cursor.moveToFirst())
-        {
+        Cursor cursor = db.query("tipoUbicacion", camposTipoUbicacion, "id = ?", idTipoUbicacion, null, null, null);
+        if (cursor.moveToFirst()) {
             TipoUbicacion tipoUbicacion = new TipoUbicacion();
             tipoUbicacion.setId(cursor.getString(0));
             tipoUbicacion.setNombre(cursor.getString(1));
             return tipoUbicacion;
-        }
-        else
-        {
+        } else {
             return null;
         }
     }
-    public String actualizar(TipoUbicacion tipoUbicacion)
-    {
-        if(verificarIntegridad2(tipoUbicacion, 7))
-        {
+
+    public String actualizar(TipoUbicacion tipoUbicacion) {
+        if (verificarIntegridad2(tipoUbicacion, 7)) {
             String[] id = {tipoUbicacion.getId()};
             ContentValues cv = new ContentValues();
             cv.put("nombre", tipoUbicacion.getNombre());
             db.update("tipoUbicacion", cv, "id = ?", id);
             return "Registro Actualizado Correctamente";
-        }else
-        {
+        } else {
             return "Registro con id " + tipoUbicacion.getId() + " no existe";
         }
     }
-    public String eliminar(TipoUbicacion tipoUbicacion)
-    {
-        String regAfectados="filas afectadas= ";
-        int contador=0;
+
+    public String eliminar(TipoUbicacion tipoUbicacion) {
+        String regAfectados = "filas afectadas= ";
+        int contador = 0;
         /*if (verificarIntegridad2(tipoUbicacion,8))
         {
             contador+=db.delete("local", "idTipoUbicacion='"+tipoUbicacion.getId()+"'", null);
         }
          */
-        contador+=db.delete("tipoUbicacion", "id='"+tipoUbicacion.getId()+"'", null);
-        regAfectados+=contador;
+        contador += db.delete("tipoUbicacion", "id='" + tipoUbicacion.getId() + "'", null);
+        regAfectados += contador;
         return regAfectados;
     }
-    public String insertar(Local local)
-    {
-        String regInsertados="Registro Insertado Nº= ";
-        long contador=0;
-        if(verificarIntegridad2(local,9) && verificarIntegridad2(local,10))
-        {
+
+    public String insertar(Local local) {
+        String regInsertados = "Registro Insertado Nº= ";
+        long contador = 0;
+        if (verificarIntegridad2(local, 9) && verificarIntegridad2(local, 10)) {
             ContentValues locales = new ContentValues();
             locales.put("id", local.getIdLocal());
             locales.put("idUbicacion", local.getIdUbicacion());
             locales.put("idTipoUbicacion", local.getIdTipoUbicacion());
             locales.put("nombre", local.getNombre());
-            contador=db.insert("local", null, locales);
+            contador = db.insert("local", null, locales);
         }
-        if(contador==-1 || contador==0)
-        {
-            regInsertados= "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
-        }
-        else
-        {
-            regInsertados=regInsertados+contador;
+        if (contador == -1 || contador == 0) {
+            regInsertados = "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
+        } else {
+            regInsertados = regInsertados + contador;
         }
         return regInsertados;
     }
-    public Local consultarLocal(String id)
-    {
+
+    public Local consultarLocal(String id) {
         // select l.id, u.nombre, t.nombre, l.nombre from local l INNER JOIN ubicacion u on l.idUbicacion = u.id INNER JOIN tipoUbicacion t on l.idTipoUbicacion= t.id;
         String[] idLocal = {id};
         Cursor cursor = db.query("local l INNER JOIN ubicacion u on l.idUbicacion = u.id INNER JOIN tipoUbicacion t on l.idTipoUbicacion= t.id", camposLocal1, "l.id = ?", idLocal, null, null, null);
-        if(cursor.moveToFirst())
-        {
+        if (cursor.moveToFirst()) {
             Local local = new Local();
             local.setIdLocal(cursor.getString(0));
             local.setIdUbicacion(cursor.getString(1));
             local.setIdTipoUbicacion(cursor.getString(2));
             local.setNombre(cursor.getString(3));
             return local;
-        }
-        else
-        {
+        } else {
             return null;
         }
     }
-    public String actualizar(Local local)
-    {
-        if(verificarIntegridad2(local, 9 ) && verificarIntegridad2(local,11))
-        {
+
+    public String actualizar(Local local) {
+        if (verificarIntegridad2(local, 9) && verificarIntegridad2(local, 11)) {
             String[] id = {local.getIdLocal()};
             ContentValues cv = new ContentValues();
-            cv.put("idUbicacion",local.getIdUbicacion());
-            cv.put("idTipoUbicacion",local.getIdTipoUbicacion());
-            cv.put("nombre",local.getNombre());
+            cv.put("idUbicacion", local.getIdUbicacion());
+            cv.put("idTipoUbicacion", local.getIdTipoUbicacion());
+            cv.put("nombre", local.getNombre());
             db.update("local", cv, "id = ?", id);
             return "Registro Actualizado Correctamente";
-        }
-        else
-        {
+        } else {
             return "Registro no Existe";
         }
     }
-    public String eliminar(Local local)
-    {
-        String regAfectados="filas afectadas= ";
-        int contador=0;
-        String where="id='"+local.getIdLocal()+"'";
-        contador+=db.delete("local", where, null);
-        regAfectados+=contador;
+
+    public String eliminar(Local local) {
+        String regAfectados = "filas afectadas= ";
+        int contador = 0;
+        String where = "id='" + local.getIdLocal() + "'";
+        contador += db.delete("local", where, null);
+        regAfectados += contador;
         return regAfectados;
     }
 
-    private boolean verificarIntegridad2(Object dato, int relacion) throws SQLException
-    {
-        switch(relacion)
-        {
+    private boolean verificarIntegridad2(Object dato, int relacion) throws SQLException {
+        switch (relacion) {
             case 1: //verificar que al insertar ubicacion exista id del facultad
             {
 
-                Ubicacion ubicacion = (Ubicacion)dato;
+                Ubicacion ubicacion = (Ubicacion) dato;
                 String[] id1 = {ubicacion.getIdFacultad()};
                 //abrir();
                 Cursor cursor1 = db.query("facultad", null, "id = ?", id1, null,
                         null, null);
-                if(cursor1.moveToFirst())
-                {
+                if (cursor1.moveToFirst()) {
                     //Se encontraron datos
                     return true;
                 }
@@ -491,36 +448,32 @@ public class ControlBDProyecto {
             case 2://no sirve v:
             {
                 //verificar que al modificar ubicacion exista carnet del facultad, elcodigo de materia y el ciclo
-                Ubicacion ubicacion1 = (Ubicacion)dato;
+                Ubicacion ubicacion1 = (Ubicacion) dato;
                 String[] ids = {ubicacion1.getIdFacultad()};
                 abrir();
                 Cursor c = db.query("ubicacion", null, "idFacultad = ? ", ids, null, null, null);
-                if(c.moveToFirst())
-                {
+                if (c.moveToFirst()) {
                     //Se encontraron datos
                     return true;
                 }
                 return false;
             }
-            case 3:
-            {
-                Facultad facultad = (Facultad)dato;
-                Cursor c=db.query(true, "ubicacion", new String[] {"idFacultad" }, "idFacultad='"+facultad.getIdFacultad()+"'",null, null, null, null, null);
-                if(c.moveToFirst())
+            case 3: {
+                Facultad facultad = (Facultad) dato;
+                Cursor c = db.query(true, "ubicacion", new String[]{"idFacultad"}, "idFacultad='" + facultad.getIdFacultad() + "'", null, null, null, null, null);
+                if (c.moveToFirst())
                     return true;
                 else
                     return false;
             }
-            case 4:
-            {
+            case 4: {
                 //verificar que exista facultad
-                Facultad facultad2 = (Facultad)dato;
+                Facultad facultad2 = (Facultad) dato;
                 String[] id = {facultad2.getIdFacultad()};
                 abrir();
                 Cursor c2 = db.query("facultad", null, "id = ?", id, null, null,
                         null);
-                if(c2.moveToFirst())
-                {
+                if (c2.moveToFirst()) {
                     //Se encontro Facultad
                     return true;
                 }
@@ -528,12 +481,11 @@ public class ControlBDProyecto {
             }
             case 5://para verificar que no exista otro id de ubicacion al insertar
             {
-                Ubicacion ubicacion5 = (Ubicacion)dato;
+                Ubicacion ubicacion5 = (Ubicacion) dato;
                 String[] id = {ubicacion5.getIdUbicacion()};
                 abrir();
-                Cursor c5 = db.query("ubicacion",null,"id=?",id,null,null,null);
-                if(c5.moveToFirst())
-                {
+                Cursor c5 = db.query("ubicacion", null, "id=?", id, null, null, null);
+                if (c5.moveToFirst()) {
                     return false;
                 }
                 return true;
@@ -543,39 +495,34 @@ public class ControlBDProyecto {
                 TipoUbicacion tipoUbicacion = (TipoUbicacion) dato;
                 String[] id = {tipoUbicacion.getId()};
                 abrir();
-                Cursor c5 = db.query("tipoUbicacion",null,"id=?",id,null,null,null);
-                if(c5.moveToFirst())
-                {
+                Cursor c5 = db.query("tipoUbicacion", null, "id=?", id, null, null, null);
+                if (c5.moveToFirst()) {
                     return false;
                 }
                 return true;
             }
-            case 7:
-            {
+            case 7: {
                 //verificar que exista tipoUbicacion
-                TipoUbicacion tipoUbicacion2 = (TipoUbicacion)dato;
+                TipoUbicacion tipoUbicacion2 = (TipoUbicacion) dato;
                 String[] id = {tipoUbicacion2.getId()};
                 abrir();
                 Cursor c2 = db.query("tipoUbicacion", null, "id = ?", id, null, null,
                         null);
-                if(c2.moveToFirst())
-                {
+                if (c2.moveToFirst()) {
                     //Se encontro TipoUbicacion
                     return true;
                 }
                 return false;
             }
-            case 8:
-            {
+            case 8: {
                 TipoUbicacion tipoUbicacion3 = (TipoUbicacion) dato;
-                Cursor c=db.query(true, "local", new String[] {"idTipoUbicacion" }, "idTipoUbicacion='"+tipoUbicacion3.getId()+"'",null, null, null, null, null);
-                if(c.moveToFirst())
+                Cursor c = db.query(true, "local", new String[]{"idTipoUbicacion"}, "idTipoUbicacion='" + tipoUbicacion3.getId() + "'", null, null, null, null, null);
+                if (c.moveToFirst())
                     return true;
                 else
                     return false;
             }
-            case 9:
-            {
+            case 9: {
                 //verificar que al insertar local exista id de la ubicacion y el id de tipoUbicacion
                 Local local = (Local) dato;
                 String[] id1 = {local.getIdUbicacion()};
@@ -583,8 +530,7 @@ public class ControlBDProyecto {
                 //abrir();
                 Cursor cursor1 = db.query("ubicacion", null, "id = ?", id1, null, null, null);
                 Cursor cursor2 = db.query("tipoUbicacion", null, "id = ?", id2, null, null, null);
-                if(cursor1.moveToFirst() && cursor2.moveToFirst())
-                {
+                if (cursor1.moveToFirst() && cursor2.moveToFirst()) {
                     //Se encontraron datos
                     return true;
                 }
@@ -595,9 +541,8 @@ public class ControlBDProyecto {
                 Local local2 = (Local) dato;
                 String[] id = {local2.getIdLocal()};
                 abrir();
-                Cursor c5 = db.query("local",null,"id=?",id,null,null,null);
-                if(c5.moveToFirst())
-                {
+                Cursor c5 = db.query("local", null, "id=?", id, null, null, null);
+                if (c5.moveToFirst()) {
                     return false;
                 }
                 return true;
@@ -607,30 +552,27 @@ public class ControlBDProyecto {
                 Local local2 = (Local) dato;
                 String[] id = {local2.getIdLocal()};
                 abrir();
-                Cursor c5 = db.query("local",null,"id=?",id,null,null,null);
-                if(c5.moveToFirst())
-                {
+                Cursor c5 = db.query("local", null, "id=?", id, null, null, null);
+                if (c5.moveToFirst()) {
                     return true;
                 }
                 return false;
             }
-            case 12:
-            {
+            case 12: {
                 Ubicacion ubicacion = (Ubicacion) dato;
-                Cursor c=db.query(true, "local", new String[] {"idUbicacion" }, "idUbicacion='"+ubicacion.getIdUbicacion()+"'",null, null, null, null, null);
-                if(c.moveToFirst())
+                Cursor c = db.query(true, "local", new String[]{"idUbicacion"}, "idUbicacion='" + ubicacion.getIdUbicacion() + "'", null, null, null, null, null);
+                if (c.moveToFirst())
                     return true;
                 else
                     return false;
             }
             case 13://para verificar que si exista el id de ubicacion al insertar
             {
-                Ubicacion ubicacion5 = (Ubicacion)dato;
+                Ubicacion ubicacion5 = (Ubicacion) dato;
                 String[] id = {ubicacion5.getIdUbicacion()};
                 abrir();
-                Cursor c5 = db.query("ubicacion",null,"id=?",id,null,null,null);
-                if(c5.moveToFirst())
-                {
+                Cursor c5 = db.query("ubicacion", null, "id=?", id, null, null, null);
+                if (c5.moveToFirst()) {
                     return true;
                 }
                 return false;
@@ -652,102 +594,97 @@ public class ControlBDProyecto {
     //________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
 
-
     //Insertar USUARIOS , OPCIONESCRUD y ACCESOUSUARIO y LOGIN y VERIFICACION DE PERMISOS
-    public String insertar(Usuario usuario){
-        String regInsertados="Registro Insertado Nº= ";
-        long contador=0;
+    public String insertar(Usuario usuario) {
+        String regInsertados = "Registro Insertado Nº= ";
+        long contador = 0;
         ContentValues usu = new ContentValues();
         usu.put("idUsuario", usuario.getIdUsuario());
         usu.put("nomUsuario", usuario.getNomUsuario());
         usu.put("clave", usuario.getClave());
 
-        contador=db.insert("usuario", null, usu);
-        if(contador==-1 || contador==0)
-        {
-            regInsertados= "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
-        }
-        else {
-            regInsertados=regInsertados+contador;
+        contador = db.insert("usuario", null, usu);
+        if (contador == -1 || contador == 0) {
+            regInsertados = "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
+        } else {
+            regInsertados = regInsertados + contador;
         }
         return regInsertados;
 
     }
 
-    public String insertar(OpcionCrud opcionCrud){
-        String regInsertados="Registro Insertado Nº= ";
-        long contador=0;
+    public String insertar(OpcionCrud opcionCrud) {
+        String regInsertados = "Registro Insertado Nº= ";
+        long contador = 0;
         ContentValues opcion = new ContentValues();
         opcion.put("idOpcion", opcionCrud.getIdOpcion());
         opcion.put("desOpcion", opcionCrud.getDesOpcion());
         opcion.put("numCrud", opcionCrud.getNumCrud());
 
-        contador=db.insert("opcionCrud", null, opcion);
-        if(contador==-1 || contador==0)
-        {
-            regInsertados= "Error al Insertar , Registro Duplicado. Verificar inserción";
-        }
-        else {
-            regInsertados=regInsertados+contador;
+        contador = db.insert("opcionCrud", null, opcion);
+        if (contador == -1 || contador == 0) {
+            regInsertados = "Error al Insertar , Registro Duplicado. Verificar inserción";
+        } else {
+            regInsertados = regInsertados + contador;
         }
         return regInsertados;
 
     }
-    public String insertar(AccesoUsuario accesoUsuario){
-        String regInsertados="Registro Insertado Nº= ";
-        long contador=0;
-        if(verificarIntegridad(accesoUsuario,3))
-        {
+
+    public String insertar(AccesoUsuario accesoUsuario) {
+        String regInsertados = "Registro Insertado Nº= ";
+        long contador = 0;
+        if (verificarIntegridad(accesoUsuario, 3)) {
             ContentValues acceso = new ContentValues();
             acceso.put("idOpcion", accesoUsuario.getIdOpcion());
             acceso.put("idUsuario", accesoUsuario.getIdUsuario());
-            contador=db.insert("accesoUsuario", null, acceso);
+            contador = db.insert("accesoUsuario", null, acceso);
         }
-        if(contador==-1 || contador==0)
-        {
-            regInsertados= "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
-        }
-        else {
-            regInsertados=regInsertados+contador;
+        if (contador == -1 || contador == 0) {
+            regInsertados = "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
+        } else {
+            regInsertados = regInsertados + contador;
         }
         return regInsertados;
     }
 
-    public Usuario consultarUsuario(String idusuario, String clave){
+    public Usuario consultarUsuario(String idusuario, String clave) {
         String[] id = {idusuario, clave};
         Cursor cursor = db.query("usuario", camposUsuario, "nomUsuario = ? AND clave = ?", id, null, null, null);
-        if(cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             Usuario usu = new Usuario();
             usu.setIdUsuario(cursor.getString(0));
             usu.setNomUsuario(cursor.getString(1));
             usu.setClave(cursor.getString(2));
             return usu;
-        }else{
+        } else {
             return null;
         }
     }
-    public Usuario consultarUsuario(String idusuario){
+
+    public Usuario consultarUsuario(String idusuario) {
         String[] id = {idusuario};
         Cursor cursor = db.query("usuario", camposUsuario, "idUsuario = ?", id, null, null, null);
-        if(cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             Usuario usu = new Usuario();
             usu.setIdUsuario(cursor.getString(0));
             usu.setNomUsuario(cursor.getString(1));
             usu.setClave(cursor.getString(2));
             return usu;
-        }else{
+        } else {
             return null;
         }
     }
-    public AccesoUsuario consultarAccesoUsuario(String idusuario, String idopcion){
+
+    public AccesoUsuario consultarAccesoUsuario(String idusuario, String idopcion) {
         String[] id = {idusuario, idopcion};
         Cursor cursor = db.query("accesoUsuario", camposAccesoUsuario, "idUsuario = ? AND idOpcion = ?", id, null, null, null);
-        if(cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             AccesoUsuario acceso = new AccesoUsuario();
             acceso.setIdUsuario(cursor.getString(0));
             acceso.setIdOpcion(cursor.getString(1));
             return acceso;
-        }else{
+        } else {
             return null;
         }
     }
@@ -756,27 +693,26 @@ public class ControlBDProyecto {
     //FIN INSERTAR
 
     //Area de interes crud
-    public String insertar(AreaInteres areaInteres){
-        String regInsertados="Registro Insertado Nº= ";
-        long contador=0;
+    public String insertar(AreaInteres areaInteres) {
+        String regInsertados = "Registro Insertado Nº= ";
+        long contador = 0;
         ContentValues area = new ContentValues();
         area.put("codigo", areaInteres.getCodigo());
         area.put("nombre", areaInteres.getNombre());
         area.put("descripcion", areaInteres.getDescripcion());
 
-        contador=db.insert("areaInteres", null, area);
-        if(contador==-1 || contador==0)
-        {
-            regInsertados= "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
-        }
-        else {
-            regInsertados=regInsertados+contador;
+        contador = db.insert("areaInteres", null, area);
+        if (contador == -1 || contador == 0) {
+            regInsertados = "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
+        } else {
+            regInsertados = regInsertados + contador;
         }
         return regInsertados;
 
     }
-    public String actualizar(AreaInteres areaInteres){
-        if(verificarIntegridad(areaInteres, 1)){
+
+    public String actualizar(AreaInteres areaInteres) {
+        if (verificarIntegridad(areaInteres, 1)) {
             String[] id = {areaInteres.getCodigo()};
             ContentValues cv = new ContentValues();
             cv.put("nombre", areaInteres.getNombre());
@@ -784,49 +720,51 @@ public class ControlBDProyecto {
 
             db.update("areaInteres", cv, "codigo = ?", id);
             return "Registro Actualizado Correctamente";
-        }else{
+        } else {
             return "Registro con codigo " + areaInteres.getCodigo() + " no existe";
         }
     }
-    public String eliminar(AreaInteres areaInteres){
-        String regAfectados="filas afectadas= ";
-        int contador=0;
+
+    public String eliminar(AreaInteres areaInteres) {
+        String regAfectados = "filas afectadas= ";
+        int contador = 0;
         //Verificar si se encuentra en otra tabla
         /*if (verificarIntegridad(areaInteres,3)) {
             contador+=db.delete("ubicacion", "carnet='"+alumno.getCarnet()+"'", null);
         }*/
-        contador+=db.delete("areaInteres", "codigo='"+areaInteres.getCodigo()+"'", null);
-        regAfectados+=contador;
+        contador += db.delete("areaInteres", "codigo='" + areaInteres.getCodigo() + "'", null);
+        regAfectados += contador;
         return regAfectados;
     }
-    public AreaInteres consultarAreaInteres(String codigo){
+
+    public AreaInteres consultarAreaInteres(String codigo) {
         String[] id = {codigo};
         Cursor cursor = db.query("areaInteres", camposAreaInteres, "codigo = ?",
                 id, null, null, null);
-        if(cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             AreaInteres areaInteres = new AreaInteres();
             areaInteres.setCodigo(cursor.getString(0));
             areaInteres.setNombre(cursor.getString(1));
             areaInteres.setDescripcion(cursor.getString(2));
 
             return areaInteres;
-        }else{
+        } else {
             return null;
         }
     }
 
-    public List<AreaInteres> getAreaInteresList(){
-        String sql = " SELECT * FROM areaInteres" ;
+    public List<AreaInteres> getAreaInteresList() {
+        String sql = " SELECT * FROM areaInteres";
 
         List<AreaInteres> listaAreaInteres = new ArrayList<>();
-        Cursor cursor = db.rawQuery(sql,null);
-        if (cursor.moveToFirst()){
+        Cursor cursor = db.rawQuery(sql, null);
+        if (cursor.moveToFirst()) {
             do {
                 String codigo = cursor.getString(0);
                 String nombre = cursor.getString(1);
                 String descripcion = cursor.getString(2);
-                listaAreaInteres.add(new AreaInteres(codigo,nombre,descripcion));
-            }while (cursor.moveToNext());
+                listaAreaInteres.add(new AreaInteres(codigo, nombre, descripcion));
+            } while (cursor.moveToNext());
         }
 
         return listaAreaInteres;
@@ -835,9 +773,9 @@ public class ControlBDProyecto {
 
 
     //Inicio crud empleado
-    public String insertar(Empleado empleado){
-        String regInsertados="Registro Insertado Nº= ";
-        long contador=0;
+    public String insertar(Empleado empleado) {
+        String regInsertados = "Registro Insertado Nº= ";
+        long contador = 0;
         ContentValues emple = new ContentValues();
         emple.put("idEmpleado", empleado.getIdEmpleado());
         emple.put("nombreEmpleado", empleado.getNombreEmpleado());
@@ -847,22 +785,20 @@ public class ControlBDProyecto {
         emple.put("solicitudes",0);
         contador=db.insert("empleado", null, emple);
 
-        if(contador==-1 || contador==0)
-        {
-            regInsertados= "Error al Insertar el registro, Verificar inserción= "+ contador+" nombre= "+ empleado.getNombreEmpleado()+" apellido= "+ empleado.getApellidoEmpleado()+" Profesion= "+ empleado.getProfesion();
+        if (contador == -1 || contador == 0) {
+            regInsertados = "Error al Insertar el registro, Verificar inserción= " + contador + " nombre= " + empleado.getNombreEmpleado() + " apellido= " + empleado.getApellidoEmpleado() + " Profesion= " + empleado.getProfesion();
 
-        }
-        else {
-            regInsertados=regInsertados+contador;
+        } else {
+            regInsertados = regInsertados + contador;
         }
         return regInsertados;
     }
 
-    public Empleado consultarEmpleado(String idEmpleado){
+    public Empleado consultarEmpleado(String idEmpleado) {
         String[] id = {idEmpleado};
         Cursor cursor = db.query("empleado", camposEmpleado, "idEmpleado = ?",
                 id, null, null, null);
-        if(cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             Empleado empleado = new Empleado();
             empleado.setIdEmpleado(cursor.getString(0));
             empleado.setNombreEmpleado(cursor.getString(1));
@@ -871,12 +807,13 @@ public class ControlBDProyecto {
             empleado.setCargo(cursor.getString(4));
             empleado.setSolicitudes(cursor.getInt(5));
             return empleado;
-        }else{
+        } else {
             return null;
         }
     }
-    public String actualizar(Empleado empleado){
-        if(verificarIntegridad(empleado, 5)){
+
+    public String actualizar(Empleado empleado) {
+        if (verificarIntegridad(empleado, 5)) {
             String[] id = {empleado.getIdEmpleado()};
             ContentValues cv = new ContentValues();
             cv.put("nombreEmpleado", empleado.getNombreEmpleado());
@@ -886,38 +823,44 @@ public class ControlBDProyecto {
 
             db.update("empleado", cv, "idEmpleado = ?", id);
             return "Registro Actualizado Correctamente";
-        }else{
+        } else {
             return "Registro con codigo " + empleado.getIdEmpleado() + " no existe";
         }
     }
-    public String eliminar(Empleado empleado){
-        String regAfectados="filas afectadas= ";
-        int contador=0;
-        //Verificar si se encuentra en otra tabla
-        /*if (verificarIntegridad(areaInteres,3)) {
-            contador+=db.delete("nota", "carnet='"+alumno.getCarnet()+"'", null);
-        }*/
-        contador+=db.delete("empleado", "idEmpleado='"+empleado.getIdEmpleado()+"'", null);
-        regAfectados+=contador;
+
+    public String eliminar(Empleado empleado) {
+        String regAfectados = "filas afectadas= ";
+        int contador = 0;
+        if (verificarIntegridad(empleado, 30)) {
+            contador += db.delete("asistenciaEmpleado", "empleadoId='" + empleado.getIdEmpleado() + "'", null);
+        }
+        if (verificarIntegridad(empleado, 31)) {
+            contador += db.delete("solicitud", "empleadoId='" + empleado.getIdEmpleado() + "'", null);
+        }
+        contador += db.delete("empleado", "idEmpleado='" + empleado.getIdEmpleado() + "'", null);
+        regAfectados += contador;
         return regAfectados;
     }
+
+
     //fin crud empleado
 
     //Inicio Crud asistencia empleado
-    public String insertar(AsistenciaEmpleado asistencia){
-        String regInsertados="Registro Insertado Nº=  ";
-        long contador=0;
-        ContentValues emple = new ContentValues();
-        emple.put("idAsistenciaEmpleado", asistencia.getIdAsistenciaEmpleado());
-        emple.put("asistencia", asistencia.getAsistencia());
-        emple.put("empleadoId", asistencia.getEmpleadoId());
-        emple.put("capacitacionId", asistencia.getCapacitacionId());
-
-        contador=db.insert("asistenciaEmpleado", null, emple);
-
-        if(contador==-1 || contador==0)
-        {
-            regInsertados= "Error al Insertar el registro, Verificar inserción ";
+    public String insertar(AsistenciaEmpleado asistencia) {
+        String regInsertados = "Registro Insertado Nº=  ";
+        long contador = 0;
+        if (verificarIntegridad(asistencia, 26)) {
+            if (verificarIntegridad(asistencia, 27)) {
+                ContentValues emple = new ContentValues();
+                emple.put("idAsistenciaEmpleado", asistencia.getIdAsistenciaEmpleado());
+                emple.put("asistencia", asistencia.getAsistencia());
+                emple.put("empleadoId", asistencia.getEmpleadoId());
+                emple.put("capacitacionId", asistencia.getCapacitacionId());
+                contador = db.insert("asistenciaEmpleado", null, emple);
+            }
+        }
+        if (contador == -1 || contador == 0) {
+            regInsertados = "Error al Insertar el registro, Verificar inserción ";
 
         }
         else {
@@ -936,23 +879,24 @@ public class ControlBDProyecto {
         return regInsertados;
     }
 
-    public AsistenciaEmpleado consultarAsistenciaEmpleado(String idAsistenciaEmpleado){
+
+    public AsistenciaEmpleado consultarAsistenciaEmpleado(String idAsistenciaEmpleado) {
         String[] id = {idAsistenciaEmpleado};
         Cursor cursor = db.query("asistenciaEmpleado", camposAsistenciaEmpleado, "idAsistenciaEmpleado = ?",
                 id, null, null, null);
-        if(cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             AsistenciaEmpleado asistenciaEmpleado = new AsistenciaEmpleado();
             asistenciaEmpleado.setIdAsistenciaEmpleado(cursor.getString(0));
             asistenciaEmpleado.setAsistencia(cursor.getString(1));
             asistenciaEmpleado.setEmpleadoId(cursor.getString(2));
             asistenciaEmpleado.setCapacitacionId(cursor.getString(3));
             return asistenciaEmpleado;
-        }else{
+        } else {
             return null;
         }
     }
     public String actualizar(AsistenciaEmpleado asistencia){
-        if(verificarIntegridad(asistencia, 7)){
+        if(verificarIntegridad(asistencia, 32)){
             String[] id = {asistencia.getIdAsistenciaEmpleado()};
             ContentValues cv = new ContentValues();
             cv.put("asistencia", asistencia.getAsistencia());
@@ -989,6 +933,7 @@ public class ControlBDProyecto {
             return "Registro con codigo " + asistencia.getIdAsistenciaEmpleado() + " no existe";
         }
     }
+
     public String eliminar(AsistenciaEmpleado asistencia){
         String regAfectados="filas afectadas= ";
         int contador=0;
@@ -1001,16 +946,19 @@ public class ControlBDProyecto {
         return regAfectados;
     }
 
+
     //Inicio Crud solicitud
     public String insertar(Solicitud solicitud){
         String regInsertados="Registro Insertado Nº= ";
         long contador=0;
-        ContentValues soli = new ContentValues();
-        soli.put("idSolicitud", solicitud.getIdSolicitud());
-        soli.put("fechaSolicitud", solicitud.getFechaSolicitud());
-        soli.put("estadoSolicitud", solicitud.getEstadoSolicitud());
-        soli.put("capacitacionId", solicitud.getCapacitacionId());
-        soli.put("empleadoId", solicitud.getEmpleadoId());
+        if(verificarIntegridad(solicitud,28)) {
+            if(verificarIntegridad(solicitud,29)) {
+                ContentValues soli = new ContentValues();
+                soli.put("idSolicitud", solicitud.getIdSolicitud());
+                soli.put("fechaSolicitud", solicitud.getFechaSolicitud());
+                soli.put("estadoSolicitud", solicitud.getEstadoSolicitud());
+                soli.put("capacitacionId", solicitud.getCapacitacionId());
+                soli.put("empleadoId", solicitud.getEmpleadoId());
 
         //TRIGGER 5
         String[] id = {solicitud.getEmpleadoId()};
@@ -1024,6 +972,8 @@ public class ControlBDProyecto {
         //FIN TRIGGER 5
 
         contador=db.insert("solicitud", null, soli);
+                contador = db.insert("solicitud", null, soli);
+            }}
 
         if(contador==-1 || contador==0)
         {
@@ -1572,18 +1522,26 @@ public class ControlBDProyecto {
                 }
                 return false;
             }
-            case 6:
-            {
+            case 6: {
                 Solicitud solicitud = (Solicitud) dato;
                 String[] id = {solicitud.getIdSolicitud()};
+                String[] id2 = {solicitud.getEmpleadoId()};
+                String[] id3 = {solicitud.getCapacitacionId()};
                 abrir();
                 Cursor c2 = db.query("solicitud", null, "idSolicitud = ?", id, null, null,
                         null);
-                if (c2.moveToFirst()) {
-                    return true;
+                Cursor c1 = db.query("empleado", null, "idEmpleado = ?", id2, null, null,
+                        null);
+                Cursor c3 = db.query("capacitacion", null, "idCapacitacion = ?", id3, null, null,
+                        null);
+                if (c2.moveToFirst() && c1.moveToFirst() && c3.moveToFirst()) {
+
+                        return true;
+                    }
+                    return false;
                 }
-                return false;
-            }
+
+
 
             case 7:
             {
@@ -1723,6 +1681,114 @@ public class ControlBDProyecto {
                     return true;
                 else
                     return false;
+            }
+            case 26:
+            {
+                //verificar que al insertar AsistenciaEmpleado exista el empleado
+
+                AsistenciaEmpleado asistenciaEmpleado = (AsistenciaEmpleado) dato;
+                String[] id1 = {asistenciaEmpleado.getEmpleadoId()};
+
+                Cursor cursor1 = db.query("empleado", null, "idEmpleado = ?", id1, null,
+                        null, null);
+
+                if(cursor1.moveToFirst()){
+
+                    return true;
+                }
+                return false;
+            }
+            case 27:
+            {
+                //verificar que al insertar AsistenciaEmpleado exista una capacitacion
+
+                AsistenciaEmpleado asistenciaEmpleado = (AsistenciaEmpleado) dato;
+                String[] id1 = {asistenciaEmpleado.getCapacitacionId()};
+
+                Cursor cursor1 = db.query("capacitacion", null, "idCapacitacion = ?", id1, null,
+                        null, null);
+
+                if(cursor1.moveToFirst()){
+
+                    return true;
+                }
+                return false;
+            }
+            case 28:
+            {
+                //verificar que al insertar una Solicitud exista el empleado
+
+                Solicitud solicitud = (Solicitud) dato;
+                String[] id1 = {solicitud.getEmpleadoId()};
+
+                Cursor cursor1 = db.query("empleado", null, "idEmpleado = ?", id1, null,
+                        null, null);
+
+                if(cursor1.moveToFirst()){
+
+                    return true;
+                }
+                return false;
+            }
+            case 29:
+            {
+                //verificar que al insertar una Solicitud exista una capacitacion
+
+                Solicitud solicitud = (Solicitud) dato;
+                String[] id1 = {solicitud.getCapacitacionId()};
+
+                Cursor cursor1 = db.query("capacitacion", null, "idCapacitacion = ?", id1, null,
+                        null, null);
+
+                if(cursor1.moveToFirst()){
+
+                    return true;
+                }
+                return false;
+            }
+
+            // verificar que al borrar un empleado no este en algun asistenciaEmpleado
+            case 30:
+            {
+                Empleado empleado = (Empleado) dato;
+                Cursor c=db.query(true, "asistenciaEmpleado", new String[] {
+                                "empleadoId" }, "empleadoId='"+empleado.getIdEmpleado()+"'",null,
+                        null, null, null, null);
+                if(c.moveToFirst())
+                    return true;
+                else
+                    return false;
+            }
+            // verificar que al borrar un Empleado no este en algun Solicitud
+            case 31:
+            {
+                Empleado empleado = (Empleado) dato;
+                Cursor c=db.query(true, "solicitud", new String[] {
+                                "empleadoId" }, "empleadoId='"+empleado.getIdEmpleado()+"'",null,
+                        null, null, null, null);
+                if(c.moveToFirst())
+                    return true;
+                else
+                    return false;
+            }
+            //Verificando si existe empleado antes de actualizarlo y que exista el empleado
+            case 32:
+            {
+                AsistenciaEmpleado asistenciaEmpleado = (AsistenciaEmpleado) dato;
+                String[] id = {asistenciaEmpleado.getIdAsistenciaEmpleado()};
+                String[] id2 = {asistenciaEmpleado.getEmpleadoId()};
+                String[] id3 = {asistenciaEmpleado.getCapacitacionId()};
+                abrir();
+                Cursor c2 = db.query("asistenciaEmpleado", null, "idAsistenciaEmpleado = ?", id, null, null,
+                        null);
+                Cursor c1 = db.query("empleado", null, "idEmpleado = ?", id2, null, null,
+                        null);
+                Cursor c3 = db.query("capacitacion", null, "idCapacitacion = ?", id3, null, null,
+                        null);
+                if (c2.moveToFirst() && c1.moveToFirst()&&c3.moveToFirst()) {
+                    return true;
+                }
+                return false;
             }
 
             default:
