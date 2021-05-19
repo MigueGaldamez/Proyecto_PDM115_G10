@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:stretchColumns="1"
+    android:background="@drawable/gradient" >
+    <TableLayout
+
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/layout_bg"
+        android:orientation="vertical"
+        android:padding="30dp"
+        android:layout_margin="20dp"
+        tools:ignore="MissingConstraints">
+        <TextView
+            android:id="@+id/Encabezado"
+            android:gravity="center"
+            android:textSize="30dp"
+            android:text="@string/InsertarLocal"
+
+            />
+
+    <TableRow>
+
+        <TextView android:text="@string/idLocal"/>
+        <EditText
+            android:id="@+id/editid"
+            android:inputType="text"
+            android:maxLength="7" />
+    </TableRow>
+    <TableRow>
+        <TextView android:text="@string/nombre_ubicacion"/>
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/idUbicacion"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+    </TableRow>
+    <TableRow>
+        <TextView android:text="@string/nombreTipoUbicacion"/>
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/idTipoUbicacion"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+    </TableRow>
+    <TableRow>
+        <TextView android:text="@string/nombreLocal" />
+        <EditText
+            android:id="@+id/editNombre"
+            android:inputType="text"
+            android:maxLength="30" />
+    </TableRow>
+
+
+    <TableRow>
+        <TextView android:text="@string/opciones" />
+    </TableRow>
+
+    <TableRow>
+        <Button
+            android:onClick="insertarLocal"
+            android:text="@string/insertar"
+            android:layout_margin="6dp"
+            android:backgroundTint="@color/boton_fondo"
+            android:textColor="@color/boton_texto"/>
+        <Button
+            android:layout_width="192dp"
+            android:onClick="limpiarTexto"
+            android:text="@string/limpiar"
+            android:layout_margin="6dp"
+            android:backgroundTint="@color/boton_fondo"
+            android:textColor="@color/boton_texto"/>
+    </TableRow>
+    </TableLayout>
+</TableLayout>

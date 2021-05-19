@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:orientation="vertical"
+    tools:context=".cz13016_activities.CZ13016InsertarHorarioActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            android:text="ID Horario"
+            android:layout_marginRight="45dp"
+            />
+
+        <EditText
+            android:id="@+id/idHorario"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:inputType="number"
+            android:gravity="right"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hora de inicio"
+            />
+
+        <EditText
+            android:id="@+id/idHoraIni"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:inputType="time"
+            android:gravity="right"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hora de finalizacion"
+            />
+
+        <EditText
+            android:id="@+id/idHoraFin"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="right"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Capacitacion"
+            />
+
+        <EditText
+            android:id="@+id/idCapacitacion"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:onClick="obtenerCapacitacion"
+            android:gravity="right"
+            android:editable="false"
+
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dia de la Capacitacion"
+            />
+
+        <Spinner
+            android:id="@+id/idDiaSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="right"
+
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        >
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Incertar"
+            android:layout_marginRight="10dp"
+            android:onClick="guardarHorario"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Limpiar"
+            android:onClick="limpiarText"
+            />
+
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

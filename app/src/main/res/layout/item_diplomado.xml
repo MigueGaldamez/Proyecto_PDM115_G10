@@ -1,0 +1,59 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="20dp"
+    android:padding="10dp"
+    android:background="@drawable/borde_items">
+
+
+    <TextView
+        android:id="@+id/textcodigo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/idDiplomado"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/codigodiplomado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/idDiplomado" />
+
+    <TextView
+        android:id="@+id/textitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/titulo"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/titulo" />
+    <TextView
+        android:id="@+id/textdescripcion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/descripcion"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/descripcion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/descripcion" />
+    <TextView
+        android:id="@+id/textcapacidades"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/capacidades"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/capacidades"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/capacidades" />
+</LinearLayout>

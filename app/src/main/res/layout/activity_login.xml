@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:stretchColumns="1"
+    android:background="@drawable/gradient">
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/layout_bg"
+        android:orientation="vertical"
+        android:padding="30dp"
+        android:layout_margin="20dp">
+
+        <TextView
+            android:id="@+id/Encabezado"
+            android:gravity="center"
+            android:text="@string/Iniciarsesion"
+            android:textSize="30dp"
+            android:layout_marginTop="90dp"
+             />
+
+                <TableRow android:gravity="center">
+                <TextView
+                    android:id="@+id/textView"
+                    android:text="@string/Usuario"
+                    android:gravity="center"
+                     />
+                <EditText
+                    android:id="@+id/editUsuario"
+                    android:layout_width="160dp"
+                    android:inputType="text"
+                    android:maxLength="7"
+                     />
+
+                </TableRow>
+
+                <TableRow android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/clave"
+                        android:gravity="center"
+                        />
+
+                    <EditText
+                        android:id="@+id/editClave"
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+
+                        android:inputType="text"
+                        android:maxLength="7"
+                        android:password="true"
+                      />
+                </TableRow>
+        <TableRow>
+            <TextView android:text="@string/opciones" />
+        </TableRow>
+        <TableRow android:gravity="center">
+            <Button
+                android:id="@+id/botonConsultar"
+                android:onClick="consultarUsuario"
+                android:text="@string/Iniciarsesion"
+                android:layout_margin="6dp"
+                android:backgroundTint="@color/boton_fondo"
+                android:textColor="@color/boton_texto"
+                />
+
+            <Button
+                android:id="@+id/botonLimpiar"
+                android:onClick="limpiarTexto"
+                android:text="@string/limpiar"
+                android:layout_margin="6dp"
+                android:backgroundTint="@color/boton_fondo"
+                android:textColor="@color/boton_texto"
+                />
+        </TableRow>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center|bottom">
+            <Button
+                android:id="@+id/botonLLenar"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="LlenarBaseUsuario"
+                android:text="@string/Llenarbase"
+                android:backgroundTint="@color/boton_fondo"
+                android:textColor="@color/boton_texto"
+                />
+        </LinearLayout>
+
+    </TableLayout>
+</TableLayout>
