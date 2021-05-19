@@ -1,126 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:stretchColumns="1"
+    android:background="@drawable/gradient">
 
-    tools:context=".LoginActivity">
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/layout_bg"
+        android:orientation="vertical"
+        android:padding="30dp"
+        android:layout_margin="20dp">
 
+        <TextView
+            android:id="@+id/Encabezado"
+            android:gravity="center"
+            android:text="@string/Iniciarsesion"
+            android:textSize="30dp"
+            android:layout_marginTop="90dp"
+             />
 
-    <TextView
-        android:id="@+id/Encabezado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="116dp"
-        android:layout_marginLeft="116dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginBottom="86dp"
-        android:gravity="center"
+                <TableRow android:gravity="center">
+                <TextView
+                    android:id="@+id/textView"
+                    android:text="@string/Usuario"
+                    android:gravity="center"
+                     />
+                <EditText
+                    android:id="@+id/editUsuario"
+                    android:layout_width="160dp"
+                    android:inputType="text"
+                    android:maxLength="7"
+                     />
 
-        android:text="@string/Iniciarsesion"
-        android:textSize="30dp"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.833"
-        tools:ignore="MissingConstraints" />
+                </TableRow>
 
-    <EditText
-        android:id="@+id/editUsuario"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="85dp"
-        android:layout_marginRight="85dp"
-        android:layout_marginBottom="47dp"
-        android:inputType="text"
-        android:maxLength="7"
-        app:layout_constraintBottom_toTopOf="@+id/editClave"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        tools:ignore="MissingConstraints" />
+                <TableRow android:gravity="center">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="124dp"
-        android:layout_marginLeft="124dp"
-        android:layout_marginEnd="42dp"
-        android:layout_marginRight="42dp"
-        android:text="@string/Usuario"
-        app:layout_constraintBottom_toBottomOf="@+id/editUsuario"
-        app:layout_constraintEnd_toStartOf="@+id/editUsuario"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/clave"
+                        android:gravity="center"
+                        />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="130dp"
-        android:layout_marginLeft="130dp"
-        android:layout_marginEnd="49dp"
-        android:layout_marginRight="49dp"
-        android:layout_marginBottom="31dp"
-        android:text="@string/clave"
-        app:layout_constraintBottom_toTopOf="@+id/botonConsultar"
-        app:layout_constraintEnd_toStartOf="@+id/editClave"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
+                    <EditText
+                        android:id="@+id/editClave"
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
 
-    <EditText
-        android:id="@+id/editClave"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="85dp"
-        android:layout_marginRight="85dp"
-        android:layout_marginBottom="31dp"
-        android:inputType="text"
-        android:maxLength="7"
-        android:password="true"
-        app:layout_constraintBottom_toTopOf="@+id/botonConsultar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        tools:ignore="MissingConstraints" />
+                        android:inputType="text"
+                        android:maxLength="7"
+                        android:password="true"
+                      />
+                </TableRow>
+        <TableRow>
+            <TextView android:text="@string/opciones" />
+        </TableRow>
+        <TableRow android:gravity="center">
+            <Button
+                android:id="@+id/botonConsultar"
+                android:onClick="consultarUsuario"
+                android:text="@string/Iniciarsesion"
+                android:layout_margin="6dp"
+                android:backgroundTint="@color/boton_fondo"
+                android:textColor="@color/boton_texto"
+                />
 
-    <Button
-        android:id="@+id/botonConsultar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="26dp"
-        android:layout_marginRight="26dp"
-        android:onClick="consultarUsuario"
-        android:text="@string/Iniciarsesion"
-        app:layout_constraintBaseline_toBaselineOf="@+id/botonLimpiar"
-        app:layout_constraintEnd_toStartOf="@+id/botonLimpiar"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent" />
+            <Button
+                android:id="@+id/botonLimpiar"
+                android:onClick="limpiarTexto"
+                android:text="@string/limpiar"
+                android:layout_margin="6dp"
+                android:backgroundTint="@color/boton_fondo"
+                android:textColor="@color/boton_texto"
+                />
+        </TableRow>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center|bottom">
+            <Button
+                android:id="@+id/botonLLenar"
 
-    <Button
-        android:id="@+id/botonLimpiar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
-        android:onClick="limpiarTexto"
-        android:text="@string/limpiar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/botonConsultar"
-        app:layout_constraintTop_toTopOf="parent" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="LlenarBaseUsuario"
+                android:text="@string/Llenarbase"
+                android:backgroundTint="@color/boton_fondo"
+                android:textColor="@color/boton_texto"
+                />
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/botonLLenar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:onClick="LlenarBaseUsuario"
-        android:text="@string/Llenarbase"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </TableLayout>
+</TableLayout>

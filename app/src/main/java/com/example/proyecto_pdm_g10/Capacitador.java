@@ -8,7 +8,26 @@ public class Capacitador {
     private String idEntidadCapacitadora;
     private String correo;
     private String profesion;
+    private Integer capacitacionesDadas;
 
+    public Integer getCapacitacionesDadas() {
+        return capacitacionesDadas;
+    }
+
+    public Capacitador(String idCapacitador, String nombres, String apellidos, String telefono, String idEntidadCapacitadora, String correo, String profesion, Integer capacitacionesDadas) {
+        this.idCapacitador = idCapacitador;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.telefono = telefono;
+        this.idEntidadCapacitadora = idEntidadCapacitadora;
+        this.correo = correo;
+        this.profesion = profesion;
+        this.capacitacionesDadas = capacitacionesDadas;
+    }
+
+    public void setCapacitacionesDadas(Integer capacitacionesDadas) {
+        this.capacitacionesDadas = capacitacionesDadas;
+    }
 
     public Capacitador() {
     }

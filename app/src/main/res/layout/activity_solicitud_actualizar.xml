@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dip"
+    android:stretchColumns="1" >
+    <TableRow>
+        <TextView android:text="@string/idSolicitud" />
+        <EditText
+            android:id="@+id/editIdSolicitud"
+            android:inputType="text"
+            android:maxLength="5" />
+    </TableRow>
+    <TableRow>
+        <TextView android:text="@string/fechaSolicitud" />
+        <EditText
+            android:id="@+id/editFechaSolicitud"
+            android:inputType="text"
+            android:maxLength="30" />
+    </TableRow>
+    <TableRow>
+        <TextView android:text="@string/estadoSolicitud" />
+        <EditText
+            android:id="@+id/editEstadoSolicitud"
+            android:inputType="text"
+            android:maxLength="100" />
+    </TableRow>
+    <TableRow>
+        <TextView android:text="@string/capacitacionId" />
+        <EditText
+            android:id="@+id/editCapacitacionId"
+            android:inputType="text"
+            android:maxLength="100" />
+    </TableRow>
+    <TableRow>
+
+        <TextView android:text="Codigo del empleado" />
+        <EditText
+            android:id="@+id/editEmpleadoId"
+            android:inputType="text"
+            android:maxLength="100" />
+    </TableRow>
+
+    <TableRow>
+        <Button
+            android:onClick="actualizarSolicitud"
+            android:text="@string/actualizar" />
+    </TableRow>
+    <TableRow>
+        <Button
+            android:onClick="limpiarTexto"
+            android:text="@string/limpiar" />
+    </TableRow>
+</TableLayout>

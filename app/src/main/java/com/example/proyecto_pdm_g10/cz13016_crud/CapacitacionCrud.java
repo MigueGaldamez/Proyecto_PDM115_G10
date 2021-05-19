@@ -26,6 +26,8 @@ public class CapacitacionCrud {
    private ControlBDProyecto control;
    private SQLiteDatabase db;
    private ControlBDProyecto.DatabaseHelper DBHelper;
+    private static final String[]camposCapacitador = new String [] {"idCapacitador","nombres","apellidos","telefono","idEntidadCapacitadora","correo","profesion","capacitacionesDadas"};
+    private static final String[]camposCapacitacion = new String[]{"idCapacitacion","descripcion" ,"precio","idLocal" , "idAreasDip" , "idAreaIn" , "idCapacitador" , "asistenciaTotal"};
 
     public Context getContext() {
         return context;
@@ -63,6 +65,18 @@ public class CapacitacionCrud {
         capaci.put("idAreasDip", capacitacion.getIdAreaDip());
         capaci.put("idAreaIn", capacitacion.getIdAreaIn());
         capaci.put("idCapacitador", capacitacion.getIdCapacitador());
+        capaci.put("asistenciaTotal",0);
+
+
+        //TRIGGER 3
+        String[] id2 = {capacitacion.getIdCapacitador()};
+        Cursor cursor4 = db.query("capacitador", camposCapacitador, "idCapacitador = ?",
+                id2, null, null, null);
+        cursor4.moveToFirst();
+        ContentValues cv2 = new ContentValues();
+        cv2.put("capacitacionesDadas", (cursor4.getInt(7)+1));
+        db.update("capacitador", cv2, "idCapacitador = ?", id2);
+        //FIN TRIGGER 3
 
         contador=db.insert("capacitacion", null, capaci);
         if(contador==-1 || contador==0)
@@ -166,7 +180,16 @@ public class CapacitacionCrud {
 
         Cursor cursor = db.rawQuery("SELECT * FROM capacitacion WHERE idCapacitacion = '"+idCapacitacion+"'",null);
         if(cursor.moveToFirst()){
-            capacitacion = new Capacitacion(cursor.getInt(0),cursor.getString(1),cursor.getFloat(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6));
+            capacitacion = new
+                    Capacitacion(
+                            cursor.getInt(0),
+                            cursor.getString(1),
+                            cursor.getFloat(2),
+                            cursor.getString(3),
+                            cursor.getString(4),
+                            cursor.getString(5),
+                            cursor.getString(6),
+                            cursor.getInt(7));
             return capacitacion;
 
         }
@@ -194,6 +217,32 @@ public class CapacitacionCrud {
             capaci.put("idAreasDip", capacitacion.getIdAreaDip());
             capaci.put("idAreaIn", capacitacion.getIdAreaIn());
             capaci.put("idCapacitador", capacitacion.getIdCapacitador());
+
+            //TRIGGER 4
+            String [] id = {""+capacitacion.getIdCapacitacion()};
+            Cursor cursor3 = db.query("capacitacion", camposCapacitacion, "idCapacitacion = ?",
+                    id, null, null, null);
+            cursor3.moveToFirst();
+            String anterior =  cursor3.getString(6);
+            if(!anterior.equals(capacitacion.getIdCapacitador()))
+            {
+                String[] id2 = {capacitacion.getIdCapacitador()};
+                Cursor cursor4 = db.query("capacitador", camposCapacitador, "idCapacitador = ?",
+                        id2, null, null, null);
+                cursor4.moveToFirst();
+                ContentValues cv2 = new ContentValues();
+                cv2.put("capacitacionesDadas", (cursor4.getInt(7)+1));
+                db.update("capacitador", cv2, "idCapacitador = ?", id2);
+                // RESTAR
+                String[] id3 = {anterior};
+                Cursor cursor5 = db.query("capacitador", camposCapacitador, "idCapacitador = ?",
+                        id3, null, null, null);
+                cursor5.moveToFirst();
+                ContentValues cv3 = new ContentValues();
+                cv3.put("capacitacionesDadas", (cursor5.getInt(7)-1));
+                db.update("capacitador", cv3, "idCapacitaDor = ?", id3);
+            }
+            //FIN TRIGGER 4
 
             db.update("capacitacion", capaci, "idCapacitacion='"+capacitacion.getIdCapacitacion()+"'", null);
             return "Registro Actualizado Correctamente";

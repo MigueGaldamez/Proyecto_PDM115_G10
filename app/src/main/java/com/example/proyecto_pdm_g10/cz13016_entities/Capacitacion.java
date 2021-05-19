@@ -11,6 +11,15 @@ private String idLocal;
 private String idAreaDip;
 private String idAreaIn;
 private String idCapacitador;
+private Integer asistenciaTotal;
+
+    public Integer getAsistenciaTotal() {
+        return asistenciaTotal;
+    }
+
+    public void setAsistenciaTotal(Integer asistenciaTotal) {
+        this.asistenciaTotal = asistenciaTotal;
+    }
 
     public Capacitacion() {
     }
@@ -28,6 +37,16 @@ private String idCapacitador;
         this.idAreaDip = idAreaDip;
         this.idAreaIn = idAreaIn;
         this.idCapacitador = idCapacitador;
+    }
+    public Capacitacion(Integer idCapacitacion, String descrip, float precio, String idLocal, String idAreaDip, String idAreaIn, String idCapacitador, int asistenciaTotal) {
+        this.idCapacitacion = idCapacitacion;
+        this.descrip = descrip;
+        this.precio = precio;
+        this.idLocal = idLocal;
+        this.idAreaDip = idAreaDip;
+        this.idAreaIn = idAreaIn;
+        this.idCapacitador = idCapacitador;
+        this.asistenciaTotal=asistenciaTotal;
     }
 
     public Integer getIdCapacitacion() {

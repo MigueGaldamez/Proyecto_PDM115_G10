@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:paddingTop="10dip"
+    android:layout_height="fill_parent"
     android:stretchColumns="1"
-    android:layout_margin="30dp">
+    android:background="@drawable/gradient">
+    <TableLayout
+
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/layout_bg"
+        android:orientation="vertical"
+        android:padding="30dp"
+        android:layout_margin="20dp"
+        tools:ignore="MissingConstraints">
     <TextView
         android:id="@+id/Encabezado"
         android:textSize="30dp"
@@ -14,64 +24,72 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />
-    <TableRow>
-        <TextView android:text="@string/idCapacitador" />
-        <EditText
-            android:id="@+id/editIdCapacitador"
-            android:inputType="text"
-            android:maxLength="5" />
-    </TableRow>
-    <TableRow>
-        <TextView android:text="@string/nombres" />
-        <EditText
-            android:id="@+id/editNombres"
-            android:inputType="text"
-            android:maxLength="40" />
-    </TableRow>
-    <TableRow>
-        <TextView android:text="@string/apellidos" />
-        <EditText
-            android:id="@+id/editApellidos"
-            android:inputType="text"
-            android:maxLength="40" />
-    </TableRow>
-    <TableRow>
-        <TextView android:text="@string/telefono" />
-        <EditText
-            android:id="@+id/editTelefono"
-            android:inputType="text"
-            android:maxLength="20" />
-    </TableRow>
-    <TableRow>
-        <TextView android:text="@string/correo" />
-        <EditText
-            android:id="@+id/editCorreo"
-            android:inputType="text"
-            android:maxLength="100" />
-    </TableRow>
-    <TableRow>
-        <TextView android:text="@string/profesion" />
-        <EditText
-            android:id="@+id/editProfesion"
-            android:inputType="text"
-            android:maxLength="30" />
-    </TableRow>
-    <TableRow>
-        <TextView android:text="@string/IdEntidadCapacitadora" />
-        <EditText
-            android:id="@+id/editIdEntidadCapacitadora"
-            android:inputType="text"
-            android:maxLength="6" />
-    </TableRow>
-    <TableRow>
-        <Button
-            android:onClick="actualizarCapacitador"
-            android:text="@string/actualizar"
-            android:layout_margin="6dp"/>
+        <TableRow android:gravity="center">
+            <TextView android:text="@string/idCapacitador" />
+            <EditText
+                android:id="@+id/editIdCapacitador"
+                android:inputType="text"
+                android:maxLength="5" />
+        </TableRow>
+        <TableRow android:gravity="center">
+            <TextView android:text="@string/nombres" />
+            <EditText
+                android:id="@+id/editNombres"
+                android:inputType="text"
+                android:maxLength="40" />
+        </TableRow>
+        <TableRow>
+            <TextView android:text="@string/apellidos" />
+            <EditText
+                android:id="@+id/editApellidos"
+                android:inputType="text"
+                android:maxLength="40" />
+        </TableRow>
+        <TableRow android:gravity="center">
+            <TextView android:text="@string/telefono" />
+            <EditText
+                android:id="@+id/editTelefono"
+                android:inputType="text"
+                android:maxLength="20" />
+        </TableRow>
+        <TableRow android:gravity="center">
+            <TextView android:text="@string/correo" />
+            <EditText
+                android:id="@+id/editCorreo"
+                android:inputType="text"
+                android:maxLength="100" />
+        </TableRow>
+        <TableRow android:gravity="center">
+            <TextView android:text="@string/profesion" />
+            <EditText
+                android:id="@+id/editProfesion"
+                android:inputType="text"
+                android:maxLength="30" />
+        </TableRow>
+        <TableRow android:gravity="center">
+            <TextView android:text="Entidad Capacitadora: "/>
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/editIdEntidadCapacitadora"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+        </TableRow>
+        <TableRow android:gravity="center">
+            <Button
+                android:onClick="actualizarCapacitador"
+                android:text="@string/actualizar"
+                android:layout_margin="6dp"
+                android:backgroundTint="@color/boton_fondo"
+                android:textColor="@color/boton_texto"/>
 
-        <Button
-            android:onClick="limpiarTexto"
-            android:text="@string/limpiar"
-            android:layout_margin="6dp"/>
-    </TableRow>
+            <Button
+                android:layout_width="155dp"
+                android:onClick="limpiarTexto"
+                android:text="@string/limpiar"
+                android:layout_margin="6dp"
+                android:backgroundTint="@color/boton_fondo"
+                android:textColor="@color/boton_texto"/>
+        </TableRow>
+    </TableLayout>
 </TableLayout>

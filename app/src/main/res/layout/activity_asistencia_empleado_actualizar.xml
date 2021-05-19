@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dip"
+    android:stretchColumns="1" >
+    <TableRow>
+        <TextView android:text="@string/idAsistenciaEmpleado" />
+        <EditText
+            android:id="@+id/editIdAsistenciaEmpleado"
+            android:inputType="text"
+            android:maxLength="5" />
+    </TableRow>
+    <TableRow>
+        <TextView android:text="@string/asistencia" />
+        <EditText
+            android:id="@+id/editAsistencia"
+            android:inputType="text"
+            android:maxLength="30" />
+    </TableRow>
+    <TableRow>
+        <TextView android:text="@string/empleadoId" />
+        <EditText
+            android:id="@+id/editEmpleadoId"
+            android:inputType="text"
+            android:maxLength="100" />
+    </TableRow>
+    <TableRow>
+        <TextView android:text="@string/capacitacionId" />
+        <EditText
+            android:id="@+id/editCapacitacionId"
+            android:inputType="text"
+            android:maxLength="100" />
+    </TableRow>
+
+    <TableRow>
+        <Button
+            android:onClick="actualizarAsistenciaEmpleado"
+            android:text="@string/actualizar" />
+    </TableRow>
+    <TableRow>
+        <Button
+            android:onClick="limpiarTexto"
+            android:text="@string/limpiar" />
+    </TableRow>
+</TableLayout>

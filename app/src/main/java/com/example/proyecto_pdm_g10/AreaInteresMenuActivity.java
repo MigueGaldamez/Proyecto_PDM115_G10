@@ -12,7 +12,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 public class AreaInteresMenuActivity extends ListActivity {
-    String[] menu={"Insertar Registro","Eliminar Registro","Consultar Registro", "Actualizar Registro"};
+    String[] menu={"Insertar Area Interes","Eliminar Area Interes","Consultar Area Interes", "Actualizar Area Interes"};
     String[] activities={"AreaInteresInsertarActivity","AreaInteresEliminarActivity","AreaInteresConsultarActivity", "AreaInteresActualizarActivity"};
 
     ControlBDProyecto BDhelper= new ControlBDProyecto(this);
@@ -21,14 +21,15 @@ public class AreaInteresMenuActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ListView listView = getListView();
-        listView.setBackgroundColor(Color.rgb(0, 0, 255));
+
         ArrayAdapter<String> adapter = new
                 ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, menu);
         setListAdapter(adapter);
 
         //INICIO VALIDACION DE ROL
         Bundle extras = getIntent().getExtras();
-        if (extras != null) {
+        if (extras != null)
+        {
             idsesion = extras.getString("idsesion");
             //The key argument here must match that used in the other activity
         }

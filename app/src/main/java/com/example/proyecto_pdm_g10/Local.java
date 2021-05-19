@@ -11,7 +11,6 @@ public class Local
     {
     }
 
-
     public Local(String idLocal, String idUbicacion, String idTipoUbicacion, String nombre)
     {
         this.idLocal = idLocal;

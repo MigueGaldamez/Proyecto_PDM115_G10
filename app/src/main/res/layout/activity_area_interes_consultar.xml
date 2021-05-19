@@ -1,76 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:layout_margin="30dp">
-    <TextView
-        android:id="@+id/Encabezado"
-        android:textSize="30dp"
-        android:textStyle="italic"
-        android:text="@string/consultarAreaInteres"
-        android:gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/codigo"/>
-    <EditText
-        android:id="@+id/editCodigo"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:maxLength="7"/>
+    android:background="@drawable/gradient"
+    android:orientation="vertical">
     <LinearLayout
-        android:id="@+id/linearLayout1"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
-        <Button
-            android:id="@+id/botonConsultar"
+        android:layout_height="fill_parent"
+        android:layout_margin="20dp"
+        android:background="@drawable/layout_bg"
+        android:orientation="vertical"
+        android:padding="30dp">
+        <TextView
+            android:id="@+id/Encabezado"
+            android:textSize="30dp"
+            android:text="@string/consultarAreaInteres"
+            android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/consultar"
-            android:onClick="consultarAreaInteres"
-            android:layout_margin="6dp"/>
-        <Button
-            android:id="@+id/botonLimpiar"
+            />
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/limpiar"
-            android:onClick="limpiarTexto"
-            android:layout_margin="6dp"/>
+            android:text="@string/codigo"/>
+        <EditText
+            android:id="@+id/editCodigo"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:maxLength="7"/>
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+            <Button
+                android:id="@+id/botonConsultar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/consultar"
+                android:onClick="consultarAreaInteres"
+                android:layout_margin="6dp"
+                android:backgroundTint="@color/boton_fondo"
+                android:textColor="@color/boton_texto"/>
+            <Button
+                android:id="@+id/botonLimpiar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/limpiar"
+                android:onClick="limpiarTexto"
+                android:layout_margin="6dp"
+                android:backgroundTint="@color/boton_fondo"
+                android:textColor="@color/boton_texto"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nombre" />
+        <EditText
+            android:id="@+id/editNombre"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:enabled ="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:cursorVisible="false"
+            android:longClickable="false" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/descripcion" />
+        <EditText
+            android:id="@+id/editDescripcion"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:enabled="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:cursorVisible="false"
+            android:longClickable="false"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Elementos"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"/>
+        <ListView
+            android:id="@+id/lvlItems"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:dividerHeight="10.0sp"
+            android:divider="#FFFFFF">
+
+        </ListView>
     </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/nombre" />
-    <EditText
-        android:id="@+id/editNombre"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:enabled ="false"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:cursorVisible="false"
-        android:longClickable="false" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/descripcion" />
-    <EditText
-        android:id="@+id/editDescripcion"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:enabled="false"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:cursorVisible="false"
-        android:longClickable="false"/>
 
 </LinearLayout>

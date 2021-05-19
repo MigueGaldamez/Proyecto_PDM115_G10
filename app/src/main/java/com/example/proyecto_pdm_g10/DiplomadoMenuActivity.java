@@ -12,7 +12,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 public class DiplomadoMenuActivity extends ListActivity {
-    String[] menu={"Insertar Registro","Eliminar Registro","Consultar Registro", "Actualizar Registro"};
+    String[] menu={"Insertar Diplomado","Eliminar Diplomado","Consultar Diplomado", "Actualizar Diplomado"};
     String[] activities={"DiplomadoInsertarActivity","DiplomadoEliminarActivity","DiplomadoConsultarActivity", "DiplomadoActualizarActivity"};
 
 
@@ -22,7 +22,6 @@ public class DiplomadoMenuActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ListView listView = getListView();
-        listView.setBackgroundColor(Color.rgb(0, 0, 255));
         ArrayAdapter<String> adapter = new
                 ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, menu);
         setListAdapter(adapter);
