@@ -6,8 +6,23 @@
     android:layout_height="match_parent"
     android:padding="20dp"
     android:orientation="vertical"
+    android:background="#ffffff"
     tools:context=".cz13016_activities.CZ13016ConsultarCapacitacionActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Consultar Capacitacion"
+            android:textAlignment="center"
+            android:gravity="center_horizontal"
+            android:textSize="30dp" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,23 +32,25 @@
 
         <TextView
             android:layout_width="63dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:text="ID " />
+            android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
+            android:text=" ID " />
 
         <EditText
             android:id="@+id/idCapacitacion"
-            android:layout_width="127dp"
+            android:layout_width="107dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:inputType="number"
-            />
+            android:inputType="number" />
 
         <Button
-            android:layout_width="144dp"
-            android:layout_height="wrap_content"
+            android:layout_width="133dp"
+            android:layout_height="match_parent"
+            android:layout_margin="1dp"
+            android:background="@drawable/borde_boton"
             android:onClick="getCapacitacionItem"
-            android:text="Consultar" />
+            android:text="Consultar"
+            android:textColor="#ffffff" />
     </LinearLayout>
 
     <LinearLayout
@@ -184,6 +201,9 @@
             android:layout_height="match_parent"
             android:text="Limpiar"
             android:onClick="limpiarEdiText"
+            android:textColor="#ffffff"
+            android:layout_margin="5dp"
+            android:background="@drawable/borde_boton"
             />
 
     </LinearLayout>

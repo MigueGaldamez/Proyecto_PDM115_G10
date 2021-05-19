@@ -5,9 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
+    android:background="#ffffff"
     android:orientation="vertical"
     tools:context=".cz13016_activities.CZ13016ActualizarCapacitacionActivity">
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Actualizar Capacitacion"
+            android:textAlignment="center"
+            android:gravity="center_horizontal"
+            android:textSize="30dp" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,20 +35,22 @@
             android:layout_width="63dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
-            android:text="ID " />
+            android:text=" ID " />
 
         <EditText
             android:id="@+id/idCapacitacion"
-            android:layout_width="127dp"
+            android:layout_width="97dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:inputType="number"
-            />
+            android:inputType="number" />
 
         <Button
             android:layout_width="144dp"
             android:layout_height="wrap_content"
             android:onClick="getCapacitacionItem"
+            android:textColor="#ffffff"
+            android:background="@drawable/borde_boton"
+            android:layout_marginRight="5dp"
             android:text="Obtener" />
     </LinearLayout>
 
@@ -183,10 +201,13 @@
         >
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Actualizar Registro"
             android:onClick="actualizarCap"
+            android:textColor="#ffffff"
+            android:layout_margin="5dp"
+            android:background="@drawable/borde_boton"
             />
 
     </LinearLayout>

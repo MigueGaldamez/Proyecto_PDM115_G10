@@ -5,7 +5,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".cz13016_activities.CZ13016EliminarHorarioActivity">
+    tools:context=".cz13016_activities.CZ13016EliminarHorarioActivity"
+    android:background="#ffffff">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Eliminar Horario"
+            android:textAlignment="center"
+            android:gravity="center_horizontal"
+            android:textSize="30dp" />
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
@@ -21,5 +38,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/eliminar"
-        android:onClick="eliminarHorario"/>
+        android:onClick="eliminarHorario"
+        android:textColor="#ffffff"
+        android:layout_margin="5dp"
+        android:background="@drawable/borde_boton"
+        />
 </LinearLayout>

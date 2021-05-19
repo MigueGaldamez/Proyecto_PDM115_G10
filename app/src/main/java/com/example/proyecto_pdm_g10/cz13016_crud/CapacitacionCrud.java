@@ -90,6 +90,8 @@ public class CapacitacionCrud {
         return lisLocal;
     }
 
+
+
     public List<AreaInteres> allAreasInteres(){
         ArrayList<AreaInteres> listAreaIn = new ArrayList<>();
 
@@ -111,7 +113,7 @@ public class CapacitacionCrud {
         Cursor cursor= db.rawQuery("select * from areaDiplomado",null);
         if (cursor.moveToFirst()){
             do {
-                AreaDiplomado  areaDip = new AreaDiplomado(cursor.getString(0),cursor.getString(1));
+                AreaDiplomado  areaDip = new AreaDiplomado(cursor.getString(0),cursor.getString(1),cursor.getString(2),cursor.getString(3));
                 listAreaDip.add(areaDip);
             }while (cursor.moveToNext());
         }
@@ -235,6 +237,21 @@ public class CapacitacionCrud {
         if(cursor.moveToFirst()){
             localRetorno = new Local(cursor.getString(0),cursor.getString(1),cursor.getString(2), cursor.getString(3));
             return localRetorno;
+
+        }
+        return null;
+
+    }
+
+    public Diplomado extraerDiplomado(String primaryKey){
+
+        Diplomado diplRetorno;
+//                db.execSQL("CREATE TABLE diplomado(idDiplomado CHAR(5) NOT NULL PRIMARY KEY,titulo VARCHAR(30),descripcion VARCHAR(100),capacidades VARCHAR(100));");
+        // SELECT * FROM tabla WHERE nombre||apellido='Alonso'
+        Cursor cursor = db.rawQuery("SELECT * FROM diplomado WHERE idDiplomado = '"+primaryKey+"'",null);
+        if(cursor.moveToFirst()){
+            diplRetorno = new Diplomado(cursor.getString(0),cursor.getString(1),cursor.getString(2), cursor.getString(3));
+            return diplRetorno;
 
         }
         return null;

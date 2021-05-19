@@ -30,6 +30,7 @@ public class cz13016ObtenerRegistroCapacitacion extends AppCompatActivity {
 
     CapacitacionCrud helper;
 
+
     List<Local> listLocal;
     List<AreaInteres> listAreain;
     List<Capacitador> listCapacitador;
@@ -118,10 +119,11 @@ public class cz13016ObtenerRegistroCapacitacion extends AppCompatActivity {
                 break;
             case 2:
                 helper.abrir();
-            listAreaDip = helper.allAreaDip();
+                listAreaDip = helper.allAreaDip();
                 helper.cerrar();
 
                 for (int i=0; i<listAreaDip.size(); i++){
+                 //   listAreaDip.get(i).getIdDiplomado()
                   datoItem = listAreaDip.get(i).getNombre();
                     listItem.add(datoItem);
 
