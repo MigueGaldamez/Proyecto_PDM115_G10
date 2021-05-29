@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class Horario {
     //idHorario INTEGER NOT NULL PRIMARY KEY,horaInicio TIME, horaFin TIME, idCapacitacion INTEGER, idDia VARCHAR(7)
-    private Integer idHorario;
+    private String idHorario;
     private String horaInicio;
     private String horaFin;
     private Integer idCapacitacion;
@@ -15,7 +15,7 @@ public class Horario {
     public Horario() {
     }
 
-    public Horario(Integer idHorario, String horaInicio, String horaFin, Integer idCapacitacion, String idDia) {
+    public Horario(String idHorario, String horaInicio, String horaFin, Integer idCapacitacion, String idDia) {
         this.idHorario = idHorario;
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
@@ -23,11 +23,11 @@ public class Horario {
         this.idDia = idDia;
     }
 
-    public Integer getIdHorario() {
+    public String getIdHorario() {
         return idHorario;
     }
 
-    public void setIdHorario(Integer idHorario) {
+    public void setIdHorario(String idHorario) {
         this.idHorario = idHorario;
     }
 

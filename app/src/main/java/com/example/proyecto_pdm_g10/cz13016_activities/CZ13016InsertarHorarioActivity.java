@@ -119,7 +119,7 @@ public class CZ13016InsertarHorarioActivity extends AppCompatActivity {
                     editor.commit();
                     restaurarActivity();
 
-                   // Toast.makeText(this, String.valueOf( myBundleRetornado.getInt("foreignKey")), Toast.LENGTH_SHORT).show();
+                   Toast.makeText(this, String.valueOf( myBundleRetornado.getInt("foreignKey")), Toast.LENGTH_SHORT).show();
 
         }
 
@@ -157,17 +157,18 @@ public class CZ13016InsertarHorarioActivity extends AppCompatActivity {
 
 
         String regInsertados = "none";
+        int pos = 0;
             Horario horario = new Horario();
 
             if (!(idHorario.getText().toString().isEmpty() || idHoraIni.getText().toString().isEmpty() || idHoraFin.getText().toString().isEmpty() || idCapacitacion.getText().toString().isEmpty())){
 
-                horario.setIdHorario(Integer.parseInt(idHorario.getText().toString()));
+                horario.setIdHorario(idHorario.getText().toString());
                 horario.setHoraInicio(idHoraIni.getText().toString());
                 horario.setHoraFin(idHoraFin.getText().toString());
 
                 horario.setIdCapacitacion(sharprefs.getInt("capKey",0));
 
-                int pos = idDiaSpinner.getSelectedItemPosition();
+                pos = idDiaSpinner.getSelectedItemPosition();
                 horario.setIdDia(listDia.get(pos).getIdDia());
 
                 helper.abrir();
@@ -178,8 +179,9 @@ public class CZ13016InsertarHorarioActivity extends AppCompatActivity {
             }else
                 Toast.makeText(this, "Ingrese todos los campos", Toast.LENGTH_SHORT).show();
 
+        Toast.makeText(this, String.valueOf(horario.getIdCapacitacion()), Toast.LENGTH_SHORT).show();
 
-       // Toast.makeText(this, listDia.get(pos).getIdDia(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, listDia.get(pos).getIdDia(), Toast.LENGTH_SHORT).show();
 
 
     }

@@ -25,7 +25,7 @@ public class CZ13016EliminarHorarioActivity extends AppCompatActivity {
     public void eliminarHorario(View view) {
         HorarioCrud helper = new HorarioCrud(this);
         helper.abrir();
-        String resultado = helper.eliminarHorario(Integer.parseInt(idHora.getText().toString()));
+        String resultado = helper.eliminarHorario(idHora.getText().toString());
         helper.cerrar();
 
         Toast.makeText(this, resultado, Toast.LENGTH_SHORT).show();

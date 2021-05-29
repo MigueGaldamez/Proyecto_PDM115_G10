@@ -164,7 +164,7 @@ public class CZ13016ActualizarHorarioActivity extends AppCompatActivity {
 
         if (!(idHorario.getText().toString().isEmpty() || idHoraIni.getText().toString().isEmpty() || idHoraFin.getText().toString().isEmpty() || idCapacitacion.getText().toString().isEmpty())){
 
-            horario.setIdHorario(Integer.parseInt(idHorario.getText().toString()));
+            horario.setIdHorario(idHorario.getText().toString());
             horario.setHoraInicio(idHoraIni.getText().toString());
             horario.setHoraFin(idHoraFin.getText().toString());
 
@@ -213,7 +213,7 @@ public class CZ13016ActualizarHorarioActivity extends AppCompatActivity {
 
            HorarioCrud helper = new HorarioCrud(this);
            helper.abrir();
-           Horario horario = helper.extraerHorario(Integer.parseInt(idHorario.getText().toString()));
+           Horario horario = helper.extraerHorario(idHorario.getText().toString());
            helper.cerrar();
 
 

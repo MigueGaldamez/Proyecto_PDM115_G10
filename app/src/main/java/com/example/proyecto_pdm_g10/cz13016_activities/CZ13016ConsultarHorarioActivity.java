@@ -55,7 +55,7 @@ public class CZ13016ConsultarHorarioActivity extends AppCompatActivity {
 
 
         helper.abrir();
-        Horario horario = helper.extraerHorario(Integer.parseInt(idHorario.getText().toString()));
+        Horario horario = helper.extraerHorario(idHorario.getText().toString());
         helper.cerrar();
 
         if (horario != null){

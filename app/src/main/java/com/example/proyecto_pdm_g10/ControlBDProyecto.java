@@ -88,7 +88,7 @@ public class ControlBDProyecto {
 
 
                 db.execSQL("CREATE TABLE dia(idDia CHAR(5) NOT NULL PRIMARY KEY, nomDia VARCHAR(12),fecha VARCHAR(10))");
-                db.execSQL("CREATE TABLE horario(idHorario char(5) NOT NULL PRIMARY KEY,horaInicio TIME, horaFin TIME)");
+                db.execSQL("CREATE TABLE horario(idHorario char(5) NOT NULL PRIMARY KEY,horaInicio TIME, horaFin TIME, idCapacitacion INTEGER, idDia CHAR(5))");
 
 
             } catch (SQLException e) {
@@ -1886,7 +1886,7 @@ public class ControlBDProyecto {
                 "01","01","01","01","01",
                 "01","01","01","01","01",
                 //fin
-                "02","02","02","02","02"};
+                "01","01","01","01","01"};
 
 
 
