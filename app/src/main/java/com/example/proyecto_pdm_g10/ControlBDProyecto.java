@@ -1892,7 +1892,7 @@ public class ControlBDProyecto {
 
         //DATOS ENTIDAD CAPACITADORA
         final String[] V1codigo={"ENTCA1","ENTCA2","ENTCA3"};
-        final String[] V1nombre={"Entidad capacitadora 1","Entidad capacitadora 2","Entidad capacitadora 3"};
+        final String[] V1nombre={"Entidad 1","Entidad 2","Entidad 3"};
         final String[] V1descripcion={"Capacitadora en Ciencias de la computación","Capacitadora en Ciencias médicas","Capacitadora en Ciencias sociales"};
         final String[] V1telefono={"2235-0001","2235-0002","2235-0003"};
         final String[] V1correo={"entCa1@ues.edu.sv","entCa2@ues.edu.sv","entCa3@ues.edu.sv"};

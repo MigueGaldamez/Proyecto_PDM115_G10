@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,12 +25,18 @@ public class DiplomadoConsultarActivity extends Activity {
     EditText editDescripcion;
     EditText editCapacidades;
 
-    ControlBDProyecto BDhelper = new ControlBDProyecto(this);
-    String idsesion;
+    private final String urlLocal = "http://192.168.1.5/ServiciosWeb%20PDM/diplomado/ws_diplomado_query.php";
+    private final String urlHostingGratuito = "https://proyectopdm-g10.000webhostapp.com/diplomado/ws_diplomado_query.php";
+
+    private final String urlLocal2 = "http://192.168.1.5/ServiciosWeb%20PDM/diplomado/ws_diplomado_todo.php";
+    private final String urlHostingGratuito2 = "https://proyectopdm-g10.000webhostapp.com/diplomado/ws_diplomado_todo.php";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diplomado_consultar);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         helper = new ControlBDProyecto(this);
         editIdDiplomado = (EditText) findViewById(R.id.editIdDiplomado);
         editTitulo = (EditText) findViewById(R.id.editTitulo);
@@ -39,6 +46,7 @@ public class DiplomadoConsultarActivity extends Activity {
         helper.abrir();
         List<Diplomado> listadiplomado = helper.getDiplomadoList();
         helper.cerrar();
+        List<Diplomado> listaDiplomado_externa = ControladorServicio.obtenerListaDiplomadoExterno(urlHostingGratuito2,this);
 
         if(listadiplomado.size() > 0){
 
@@ -50,6 +58,17 @@ public class DiplomadoConsultarActivity extends Activity {
         }
         else{
             Toast.makeText(this, "No hay diplomados en la base", Toast.LENGTH_SHORT).show();
+        }
+        if(listaDiplomado_externa.size() > 0){
+
+            // Create the adapter to convert the array to views
+            DiplomadoAdapter adapter= new DiplomadoAdapter(this, listaDiplomado_externa);
+            // Attach the adapter to a ListView
+            ListView listView = (ListView) findViewById(R.id.lvlItemsExternos);
+            listView.setAdapter(adapter);
+        }
+        else{
+            Toast.makeText(this, "No hay entidades capacitadoras en la base Externa", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -92,6 +111,31 @@ public class DiplomadoConsultarActivity extends Activity {
             editCapacidades.setText(diplomado.getCapacidades());
             editDescripcion.setText(diplomado.getDescripcion());
             editTitulo.setText(diplomado.getTitulo());
+
+        }
+    }
+    public void consultarDiplomadoExterna(View v) {
+
+        String codigo = editIdDiplomado.getText().toString();
+        String url = null;
+        Diplomado diplomado=null;
+        switch (v.getId()) {
+            case R.id.btn_Local:
+                url = urlLocal+ "?id_diplomado=" + codigo;
+                diplomado=ControladorServicio.consultarDiplomadoExterno(url, this);
+                break;
+            case R.id.btn_Externo:
+                url = urlHostingGratuito+ "?id_diplomado=" + codigo;
+                diplomado=ControladorServicio.consultarDiplomadoExterno(url, this);
+                break;
+        }
+        if(diplomado == null)
+            Toast.makeText(this, "Entidad capacitadora con codigo " + editIdDiplomado.getText().toString() +
+                    " no encontrada", Toast.LENGTH_LONG).show();
+        else{
+            editTitulo.setText(diplomado.getTitulo());
+            editDescripcion.setText(diplomado.getDescripcion());
+            editCapacidades.setText(diplomado.getCapacidades());
 
         }
     }

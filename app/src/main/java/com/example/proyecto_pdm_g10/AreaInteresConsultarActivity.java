@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,10 +27,20 @@ public class AreaInteresConsultarActivity extends Activity {
     EditText editCodigo;
     EditText editNombre;
     EditText editDescripcion;
+
+    private final String urlLocal = "http://192.168.1.5/ServiciosWeb%20PDM/areaInteres/ws_areaInteres_query.php";
+    private final String urlHostingGratuito = "https://proyectopdm-g10.000webhostapp.com/areaInteres/ws_areaInteres_query.php";
+
+    private final String urlLocal2 = "http://192.168.1.5/ServiciosWeb%20PDM/areaInteres/ws_areaInteres_todo.php";
+    private final String urlHostingGratuito2 = "https://proyectopdm-g10.000webhostapp.com/areaInteres/ws_areaInteres_todo.php";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_area_interes_consultar);
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         helper = new ControlBDProyecto(this);
         editCodigo = (EditText) findViewById(R.id.editCodigo);
         editNombre = (EditText) findViewById(R.id.editNombre);
@@ -36,6 +49,7 @@ public class AreaInteresConsultarActivity extends Activity {
         helper.abrir();
         List<AreaInteres> listaareaInteres = helper.getAreaInteresList();
         helper.cerrar();
+        List<AreaInteres> listaareaInteres_externa = ControladorServicio.obtenerListAreaInteresExterno(urlHostingGratuito2,this);
 
         if(listaareaInteres.size() > 0){
 
@@ -47,6 +61,17 @@ public class AreaInteresConsultarActivity extends Activity {
         }
         else{
             Toast.makeText(this, "No hay empleados en la base", Toast.LENGTH_SHORT).show();
+        }
+        if(listaareaInteres_externa.size() > 0){
+
+            // Create the adapter to convert the array to views
+            AreaInteresAdapter adapter = new AreaInteresAdapter(this, listaareaInteres_externa);
+            // Attach the adapter to a ListView
+            ListView listView = (ListView) findViewById(R.id.lvlItemsExternos);
+            listView.setAdapter(adapter);
+        }
+        else{
+            Toast.makeText(this, "No hay empleados en la base externa", Toast.LENGTH_SHORT).show();
         }
     }
     public class AreaInteresAdapter extends ArrayAdapter<AreaInteres> {
@@ -88,6 +113,32 @@ public class AreaInteresConsultarActivity extends Activity {
 
         }
     }
+
+    public void consultarAreaInteresExterno(View v) {
+
+        String codigo = editCodigo.getText().toString();
+        String url = null;
+        AreaInteres areaInteres=null;
+        switch (v.getId()) {
+            case R.id.btn_Local:
+                url = urlLocal+ "?id_area=" + codigo;
+                areaInteres=ControladorServicio.consultarAreaInteresExterna(url, this);
+                break;
+            case R.id.btn_Externo:
+                url = urlHostingGratuito+ "?id_area=" + codigo;
+                areaInteres=ControladorServicio.consultarAreaInteresExterna(url, this);
+                break;
+        }
+        if(areaInteres == null)
+            Toast.makeText(this, "Area de interes con codigo " + editCodigo.getText().toString() +
+                    " no encontrada", Toast.LENGTH_LONG).show();
+        else{
+            editNombre.setText(areaInteres.getNombre());
+            editDescripcion.setText(areaInteres.getDescripcion());
+
+        }
+    }
+
     public void limpiarTexto(View v) {
         editCodigo.setText("");
         editNombre.setText("");

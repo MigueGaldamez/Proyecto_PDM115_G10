@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -19,10 +20,15 @@ public class EntidadCapacitadoraActualizarActivity extends Activity {
     EditText editCorreo;
 
     RadioButton radioExterna,radioInterna;
+    private final String urlLocal = "http://192.168.1.5/ServiciosWeb%20PDM/entidadCapacitadora/ws_entidadCapacitadora_update.php";
+    private final String urlHostingGratuito = "https://proyectopdm-g10.000webhostapp.com/entidadCapacitadora/ws_entidadCapacitadora_update.php";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entidad_capacitadora_actualizar);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
         helper = new ControlBDProyecto(this);
         editCodigo = (EditText) findViewById(R.id.editCodigo);
@@ -54,6 +60,36 @@ public class EntidadCapacitadoraActualizarActivity extends Activity {
         String estado = helper.actualizar(entidadCapacitadora);
         helper.cerrar();
         Toast.makeText(this, estado, Toast.LENGTH_SHORT).show();
+    }
+    public void actualizarEntidadCapacitadoraExterno(View v)
+    {
+        String codigo = editCodigo.getText().toString();
+        String nombre = editNombre.getText().toString();
+        String descripcion = editDescripcion.getText().toString();
+        String telefono = editTelefono.getText().toString();
+        String correo = editCorreo.getText().toString();
+        String tipo = "";
+        if(radioExterna.isChecked())
+        {
+            tipo="E";
+        }
+        if(radioInterna.isChecked())
+        {
+            tipo ="I";
+        }
+        String url = null;
+        switch (v.getId()) {
+            case R.id.btn_Local:
+                url = urlLocal+ "?id_entidad=" + codigo + "&nombre_entidad="
+                        + nombre + "&descripcion=" + descripcion +"&telefono="+telefono+"&correo="+correo+"&tipo="+tipo;
+                ControladorServicio.ejecutarConsulta(url, this);
+                break;
+            case R.id.btn_Externo:
+                url = urlHostingGratuito+ "?id_entidad=" + codigo + "&nombre_entidad="
+                        + nombre + "&descripcion=" + descripcion +"&telefono="+telefono+"&correo="+correo+"&tipo="+tipo;
+                ControladorServicio.ejecutarConsulta(url, this);
+                break;
+        }
     }
     public void limpiarTexto(View v) {
         editCodigo.setText("");

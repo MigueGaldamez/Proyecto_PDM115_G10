@@ -59,7 +59,7 @@
             <EditText
                 android:id="@+id/editCorreo"
                 android:inputType="text"
-                android:maxLength="100" />
+                android:maxLength="600" />
         </TableRow>
 
         <TableRow android:gravity="center">
@@ -75,6 +75,24 @@
                 android:layout_width="155dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/editIdEntidadCapacitadora"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+        </TableRow>
+        <TableRow android:gravity="center">
+            <TextView android:text="Entidad Capacitadora Externa: "/>
+            <Spinner
+                android:layout_width="155dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/editIdEntidadCapacitadora_externa"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+        </TableRow>
+        <TableRow android:gravity="center">
+            <TextView android:text="Entidad CapacitadoraBDLocal: "/>
+            <Spinner
+                android:layout_width="155dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/editIdEntidadCapacitadora_local"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true" />
         </TableRow>
@@ -95,6 +113,27 @@
                 android:layout_width="155dp"
                 android:onClick="limpiarTexto"
                 android:text="@string/limpiar"
+                android:layout_margin="6dp"
+                android:backgroundTint="@color/boton_fondo"
+                android:textColor="@color/boton_texto"/>
+        </TableRow>
+        <TableRow>
+            <TextView android:text="@string/opcionesWS" />
+        </TableRow>
+        <TableRow android:gravity="center">
+            <Button android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/btn_Local"
+                android:text="@string/servicio_PHPlocal"
+                android:onClick="insertarCapacitadorExterno"
+                android:layout_margin="6dp"
+                android:backgroundTint="@color/boton_fondo"
+                android:textColor="@color/boton_texto"/>
+            <Button android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/btn_Externo"
+                android:text="@string/servicio_PHPexterno"
+                android:onClick="insertarCapacitadorExterno"
                 android:layout_margin="6dp"
                 android:backgroundTint="@color/boton_fondo"
                 android:textColor="@color/boton_texto"/>

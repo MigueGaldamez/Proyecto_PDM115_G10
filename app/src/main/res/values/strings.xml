@@ -120,4 +120,8 @@
     <string name="actualizarLocal">Actualizar Local</string>
     <string name="capacitaciones">Capacitaciones Dadas</string>
     <string name="solicitudes">Solicitudes realizadas:</string>
+    <string name="servicio_PHPexterno">Servicio Externo</string>
+    <string name="servicio_PHPlocal">Servicio Local</string>
+    <string name="opcionesWS">Opciones Web services</string>
+    <string name="ElementosExternos">Elementos en la base Externa</string>
 </resources>

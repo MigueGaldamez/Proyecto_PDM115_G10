@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,13 +28,17 @@ public class CapacitadorConsultarActivity extends Activity {
     EditText editProfesion;
     EditText editIdEntidadCapacitadora;
     EditText editCapacitaciones;
+    private final String urlLocal = "http://192.168.1.5/ServiciosWeb%20PDM/capacitador/ws_capacitador_query.php";
+    private final String urlHostingGratuito = "https://proyectopdm-g10.000webhostapp.com/capacitador/ws_capacitador_query.php";
 
+    private final String urlLocal2 = "http://192.168.1.5/ServiciosWeb%20PDM/capacitador/ws_capacitador_todo.php";
+    private final String urlHostingGratuito2 = "https://proyectopdm-g10.000webhostapp.com/capacitador/ws_capacitador_todo.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_capacitador_consultar);
-        helper = new ControlBDProyecto(this);
-        editIdCapacitador = (EditText) findViewById(R.id.editIdCapacitador);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();helper = new ControlBDProyecto(this);
+        StrictMode.setThreadPolicy(policy);editIdCapacitador = (EditText) findViewById(R.id.editIdCapacitador);
         editNombres = (EditText) findViewById(R.id.editNombres);
         editApellidos = (EditText) findViewById(R.id.editApellidos);
         editTelefono = (EditText) findViewById(R.id.editTelefono);
@@ -45,7 +50,7 @@ public class CapacitadorConsultarActivity extends Activity {
         helper.abrir();
         List<Capacitador> listacapacitador = helper.getCapacitadorList();
         helper.cerrar();
-
+        List<Capacitador> listaCapacitador_externa = ControladorServicio.obtenerListaCapacitadorExterno(urlHostingGratuito2,this);
         if(listacapacitador.size() > 0){
 
             // Create the adapter to convert the array to views
@@ -57,6 +62,18 @@ public class CapacitadorConsultarActivity extends Activity {
         else{
             Toast.makeText(this, "No hay Areas de diplomados en la base", Toast.LENGTH_SHORT).show();
         }
+        if(listaCapacitador_externa.size() > 0){
+
+            // Create the adapter to convert the array to views
+            CapacitadorAdapter adapter= new CapacitadorAdapter(this, listaCapacitador_externa);
+            // Attach the adapter to a ListView
+            ListView listView = (ListView) findViewById(R.id.lvlItemsExternos);
+            listView.setAdapter(adapter);
+        }
+        else{
+            Toast.makeText(this, "No hay empleados en la base externa", Toast.LENGTH_SHORT).show();
+        }
+
     }
     public class CapacitadorAdapter extends ArrayAdapter<Capacitador> {
         public CapacitadorAdapter(Context context, List<Capacitador> capacitadors) {
@@ -112,6 +129,35 @@ public class CapacitadorConsultarActivity extends Activity {
             editProfesion.setText(capacitador.getProfesion());
             editIdEntidadCapacitadora.setText(capacitador.getIdEntidadCapacitadora());
             editCapacitaciones.setText(capacitador.getCapacitacionesDadas().toString());
+        }
+    }
+    public void consultarCapacitadorExterno(View v) {
+
+        String codigo = editIdCapacitador.getText().toString();
+        String url = null;
+        Capacitador capacitador=null;
+        switch (v.getId()) {
+            case R.id.btn_Local:
+                url = urlLocal+ "?id_capacitador=" + codigo;
+                capacitador=ControladorServicio.consultarCapacitadorExterno(url, this);
+                break;
+            case R.id.btn_Externo:
+                url = urlHostingGratuito+ "?id_capacitador=" + codigo;
+                capacitador=ControladorServicio.consultarCapacitadorExterno(url, this);
+                break;
+        }
+        if(capacitador == null)
+            Toast.makeText(this, "Capacitador con codigo " + editIdCapacitador.getText().toString() +
+                    " no encontrada", Toast.LENGTH_LONG).show();
+        else{
+            editNombres.setText(capacitador.getNombres());
+            editApellidos.setText(capacitador.getApellidos());
+            editTelefono.setText(capacitador.getTelefono());
+            editCorreo.setText(capacitador.getCorreo());
+            editProfesion.setText(capacitador.getProfesion());
+            editIdEntidadCapacitadora.setText(capacitador.getIdEntidadCapacitadora());
+            editCapacitaciones.setText(capacitador.getCapacitacionesDadas().toString());
+
         }
     }
     public void limpiarTexto(View v) {

@@ -48,7 +48,7 @@
 
 
         <TableRow>
-            <TextView android:text="@string/opciones" />
+            <TextView android:text= "@string/opciones" />
         </TableRow>
 
         <TableRow android:gravity="center">
@@ -62,6 +62,27 @@
                 android:layout_width="192dp"
                 android:onClick="limpiarTexto"
                 android:text="@string/limpiar"
+                android:layout_margin="6dp"
+                android:backgroundTint="@color/boton_fondo"
+                android:textColor="@color/boton_texto"/>
+        </TableRow>
+        <TableRow>
+            <TextView android:text="@string/opcionesWS" />
+        </TableRow>
+        <TableRow android:gravity="center">
+            <Button android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/btn_Local"
+                android:text="@string/servicio_PHPlocal"
+                android:onClick="insertarAreaInteresExterno"
+                android:layout_margin="6dp"
+                android:backgroundTint="@color/boton_fondo"
+                android:textColor="@color/boton_texto"/>
+            <Button android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/btn_Externo"
+                android:text="@string/servicio_PHPexterno"
+                android:onClick="insertarAreaInteresExterno"
                 android:layout_margin="6dp"
                 android:backgroundTint="@color/boton_fondo"
                 android:textColor="@color/boton_texto"/>
