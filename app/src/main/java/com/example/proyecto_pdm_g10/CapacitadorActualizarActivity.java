@@ -23,7 +23,8 @@ public class CapacitadorActualizarActivity extends Activity {
     EditText editTelefono;
     EditText editCorreo;
     EditText editProfesion;
-    Spinner spinner,spinnerExterno;
+    Spinner spinner,spinnerExterno,spinnerLocal;
+
 
     private final String urlLocal = "http://192.168.1.5/ServiciosWeb%20PDM/capacitador/ws_capacitador_update.php";
     private final String urlHostingGratuito = "https://proyectopdm-g10.000webhostapp.com/capacitador/ws_capacitador_update.php";
@@ -47,6 +48,7 @@ public class CapacitadorActualizarActivity extends Activity {
         editProfesion = (EditText) findViewById(R.id.editProfesion);
         spinner = (Spinner)findViewById(R.id.editIdEntidadCapacitadora);
         spinnerExterno = (Spinner)findViewById(R.id.editIdEntidadCapacitadora_externa);
+        spinnerLocal = (Spinner)findViewById(R.id.editIdEntidadCapacitadora_local);
 
         helper.abrir();
         String[] campos = {"codigo","nombre"};
@@ -57,6 +59,16 @@ public class CapacitadorActualizarActivity extends Activity {
         ArrayList<String> listaObjeto_externo =ControladorServicio.consultarListaObjeto_Externo(1,urlHostingGratuito2,this);
         ArrayAdapter<CharSequence> adaptador2 = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,listaObjeto_externo);
         spinnerExterno.setAdapter(adaptador2);
+        try{
+            ArrayList<String> listaObjeto_Local =ControladorServicio.consultarListaObjeto_Externo(1,urlLocal2,this);
+            ArrayAdapter<CharSequence> adaptador3 = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, listaObjeto_Local);
+            spinnerLocal.setAdapter(adaptador3);
+
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(this, "Error; "+e, Toast.LENGTH_SHORT).show();
+        }
     }
     public void actualizarCapacitador(View v) {
         Capacitador capacitador = new Capacitador();
@@ -89,13 +101,13 @@ public class CapacitadorActualizarActivity extends Activity {
         String[] entidadCapacitadoraId_E = idFE.split(" - ");
 
         //PARA EL LOCAL
-        /*String idF = spinner.getSelectedItem().toString();
-        String[] entidadCapacitadoraId = idF.split(" - ");*/
+        String idF = spinnerLocal.getSelectedItem().toString();
+        String[] entidadCapacitadoraId = idF.split(" - ");
         //profesion=Estudiante&telefono=73356798&correo=migue.galdamez@hotmail.com
         String url = null;
         switch (v.getId()) {
             case R.id.btn_Local:
-                url = urlLocal+ "?id_capacitador=" + idCapacitador + "&id_entidad=" + entidadCapacitadoraId_E[0].trim() + "&nombres="
+                url = urlLocal+ "?id_capacitador=" + idCapacitador + "&id_entidad=" + entidadCapacitadoraId[0].trim() + "&nombres="
                         + nombres +"&apellidos="+apellidos+"&profesion="+profesion+"&telefono="+telefono + "&correo="+correo;
                 ControladorServicio.ejecutarConsulta(url, this);
                 break;

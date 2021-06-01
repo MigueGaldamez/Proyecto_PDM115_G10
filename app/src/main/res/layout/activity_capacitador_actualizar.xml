@@ -85,6 +85,15 @@
                 android:layout_centerHorizontal="true" />
         </TableRow>
         <TableRow android:gravity="center">
+            <TextView android:text="Entidad CapacitadoraBDLocal: "/>
+            <Spinner
+                android:layout_width="155dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/editIdEntidadCapacitadora_local"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+        </TableRow>
+        <TableRow android:gravity="center">
             <Button
                 android:onClick="actualizarCapacitador"
                 android:text="@string/actualizar"

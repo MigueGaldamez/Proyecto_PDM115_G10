@@ -84,7 +84,8 @@ public class ControladorServicio {
     }
     //INICIO
     public static void ejecutarConsulta(String peticion, Context ctx) {
-        String json = obtenerRespuestaPeticion(peticion, ctx);
+        String peticion2 = peticion.replaceAll(" ","%20");
+        String json = obtenerRespuestaPeticion(peticion2, ctx);
         try {
             JSONObject resultado = new JSONObject(json);
             //Toast.makeText(ctx, "Registro ingresado"+ resultado.getJSONArray("resultado").toString(), Toast.LENGTH_LONG).show();
@@ -106,8 +107,8 @@ public class ControladorServicio {
             JSONObject resultado = new JSONObject(json);
             //Toast.makeText(ctx, "Registro ingresado"+ resultado.getJSONArray("resultado").toString(), Toast.LENGTH_LONG).show();
             //int respuesta = resultado.getInt("resultado");
-            areaInteres.setNombre(resultado.getString("ID_AREA_INTERES"));
-            areaInteres.setCodigo(resultado.getString("NOMBREAREA"));
+            areaInteres.setCodigo(resultado.getString("ID_AREA_INTERES"));
+            areaInteres.setNombre(resultado.getString("NOMBREAREA"));
             areaInteres.setDescripcion(resultado.getString("DESCRIPCIONAREA"));
             if (!areaInteres.getNombre().equals(""))
                 Toast.makeText(ctx, "Consulta Ejecutada con exito", Toast.LENGTH_LONG)
@@ -130,8 +131,8 @@ public class ControladorServicio {
 
                 JSONObject obj = areasJSON.getJSONObject(i);
                 AreaInteres areaInteres = new AreaInteres();
-                areaInteres.setNombre(obj.getString("ID_AREA_INTERES"));
-                areaInteres.setCodigo(obj.getString("NOMBREAREA"));
+                areaInteres.setCodigo(obj.getString("ID_AREA_INTERES"));
+                areaInteres.setNombre(obj.getString("NOMBREAREA"));
                 areaInteres.setDescripcion(obj.getString("DESCRIPCIONAREA"));
                 listaAreaInteres.add(areaInteres);
             }

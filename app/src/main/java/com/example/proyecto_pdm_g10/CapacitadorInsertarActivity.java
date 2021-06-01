@@ -111,13 +111,13 @@ public class CapacitadorInsertarActivity extends Activity {
         String[] entidadCapacitadoraId_E = idFE.split(" - ");
 
         //PARA EL LOCAL
-        /*String idF = spinner.getSelectedItem().toString();
-        String[] entidadCapacitadoraId = idF.split(" - ");*/
+        String idF = spinnerLocal.getSelectedItem().toString();
+        String[] entidadCapacitadoraId = idF.split(" - ");
         //profesion=Estudiante&telefono=73356798&correo=migue.galdamez@hotmail.com
         String url = null;
         switch (v.getId()) {
             case R.id.btn_Local:
-                url = urlLocal+ "?id_capacitador=" + idCapacitador + "&id_entidad=" + entidadCapacitadoraId_E[0].trim() + "&nombres="
+                url = urlLocal+ "?id_capacitador=" + idCapacitador + "&id_entidad=" + entidadCapacitadoraId[0].trim() + "&nombres="
                         + nombres +"&apellidos="+apellidos+"&profesion="+profesion+"&telefono="+telefono + "&correo="+correo;
                 ControladorServicio.ejecutarConsulta(url, this);
                 break;
